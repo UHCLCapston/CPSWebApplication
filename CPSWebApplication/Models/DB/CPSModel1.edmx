@@ -1,0 +1,149 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="c533317sp04prakhyanModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="APPUser">
+          <Key>
+            <PropertyRef Name="UHCLEmail" />
+          </Key>
+          <Property Name="UHCLEmail" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="UHCLEmailPassword" Type="varchar" MaxLength="100" />
+          <Property Name="UserRole" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="APPUserProfile">
+          <Key>
+            <PropertyRef Name="UHCLID" />
+          </Key>
+          <Property Name="UHCLID" Type="int" Nullable="false" />
+          <Property Name="UHCLIDPassword" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="200" />
+          <Property Name="LastName" Type="varchar" MaxLength="200" />
+          <Property Name="ContactNumber" Type="varchar" MaxLength="100" />
+          <Property Name="UHCLEmail" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="UHCLEmailPassword" Type="varchar" MaxLength="100" />
+          <Property Name="UserAddress" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <Association Name="FK__APPUserPr__UHCLE__1B0907CE">
+          <End Role="APPUser" Type="Self.APPUser" Multiplicity="1" />
+          <End Role="APPUserProfile" Type="Self.APPUserProfile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="APPUser">
+              <PropertyRef Name="UHCLEmail" />
+            </Principal>
+            <Dependent Role="APPUserProfile">
+              <PropertyRef Name="UHCLEmail" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="c533317sp04prakhyanModelStoreContainer">
+          <EntitySet Name="APPUser" EntityType="Self.APPUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="APPUserProfile" EntityType="Self.APPUserProfile" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__APPUserPr__UHCLE__1B0907CE" Association="Self.FK__APPUserPr__UHCLE__1B0907CE">
+            <End Role="APPUser" EntitySet="APPUser" />
+            <End Role="APPUserProfile" EntitySet="APPUserProfile" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="c533317sp04prakhyanModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="APPUser">
+          <Key>
+            <PropertyRef Name="UHCLEmail" />
+          </Key>
+          <Property Name="UHCLEmail" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UHCLEmailPassword" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="UserRole" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="APPUserProfiles" Relationship="Self.FK__APPUserPr__UHCLE__1B0907CE" FromRole="APPUser" ToRole="APPUserProfile" />
+        </EntityType>
+        <EntityType Name="APPUserProfile">
+          <Key>
+            <PropertyRef Name="UHCLID" />
+          </Key>
+          <Property Name="UHCLID" Type="Int32" Nullable="false" />
+          <Property Name="UHCLIDPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="ContactNumber" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="UHCLEmail" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UHCLEmailPassword" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="UserAddress" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="APPUser" Relationship="Self.FK__APPUserPr__UHCLE__1B0907CE" FromRole="APPUserProfile" ToRole="APPUser" />
+        </EntityType>
+        <Association Name="FK__APPUserPr__UHCLE__1B0907CE">
+          <End Role="APPUser" Type="Self.APPUser" Multiplicity="1" />
+          <End Role="APPUserProfile" Type="Self.APPUserProfile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="APPUser">
+              <PropertyRef Name="UHCLEmail" />
+            </Principal>
+            <Dependent Role="APPUserProfile">
+              <PropertyRef Name="UHCLEmail" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EserviceDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="APPUsers" EntityType="Self.APPUser" />
+          <EntitySet Name="APPUserProfiles" EntityType="Self.APPUserProfile" />
+          <AssociationSet Name="FK__APPUserPr__UHCLE__1B0907CE" Association="Self.FK__APPUserPr__UHCLE__1B0907CE">
+            <End Role="APPUser" EntitySet="APPUsers" />
+            <End Role="APPUserProfile" EntitySet="APPUserProfiles" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="c533317sp04prakhyanModelStoreContainer" CdmEntityContainer="EserviceDBEntities">
+          <EntitySetMapping Name="APPUsers">
+            <EntityTypeMapping TypeName="c533317sp04prakhyanModel.APPUser">
+              <MappingFragment StoreEntitySet="APPUser">
+                <ScalarProperty Name="UHCLEmail" ColumnName="UHCLEmail" />
+                <ScalarProperty Name="UHCLEmailPassword" ColumnName="UHCLEmailPassword" />
+                <ScalarProperty Name="UserRole" ColumnName="UserRole" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="APPUserProfiles">
+            <EntityTypeMapping TypeName="c533317sp04prakhyanModel.APPUserProfile">
+              <MappingFragment StoreEntitySet="APPUserProfile">
+                <ScalarProperty Name="UHCLID" ColumnName="UHCLID" />
+                <ScalarProperty Name="UHCLIDPassword" ColumnName="UHCLIDPassword" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="ContactNumber" ColumnName="ContactNumber" />
+                <ScalarProperty Name="UHCLEmail" ColumnName="UHCLEmail" />
+                <ScalarProperty Name="UHCLEmailPassword" ColumnName="UHCLEmailPassword" />
+                <ScalarProperty Name="UserAddress" ColumnName="UserAddress" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

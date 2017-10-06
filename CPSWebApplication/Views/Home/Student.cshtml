@@ -1,0 +1,11 @@
+﻿@model CPSWebApplication.Models.ViewModel.UserModel
+
+@{
+    ViewBag.Title = "Student";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>@Model.FirstName</h2>
+
+<h2>Welcome to Student Portal</h2>
+
+<div>@Html.ActionLink("LogOut","LogOut","Account")</div>

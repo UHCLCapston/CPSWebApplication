@@ -1,0 +1,17 @@
+﻿@model CPSWebApplication.Models.ViewModel.UserModel
+
+@{
+    ViewBag.Title = "AcademicAdvisor";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>@Model.FirstName</h2>
+<h2>Welcome to AcademicAdvisor Portal </h2>
+@using(Html.BeginForm("Create", "AcadAdv"))
+{
+    <div class="form-group">
+
+    </div>
+}
+
+
+<div>@Html.ActionLink("LogOut", "LogOut", "Account")</div>
