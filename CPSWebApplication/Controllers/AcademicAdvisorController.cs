@@ -9,9 +9,36 @@ namespace CPSWebApplication.Controllers
     public class AcademicAdvisorController : Controller
     {
         // GET: AcademicAdvisor
-        public ActionResult Index()
+        public ActionResult UpdateCPS()
         {
             return View();
         }
+
+
+        public ActionResult ViewCurrentCPS()
+        {
+            return View();
+        }
+
+        public ActionResult FinalizeCPS()
+        {
+            return View();
+        }
+
+        public ActionResult Notify()
+        {
+            return View();
+        }
+
+        public ActionResult CheckAppointments()
+        {
+            return View();
+        }
+        public ActionResult ViewHistory()
+        {
+            return View();
+        }
+
+
     }
 }
