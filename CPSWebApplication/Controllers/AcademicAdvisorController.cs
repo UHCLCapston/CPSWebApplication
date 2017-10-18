@@ -3,41 +3,45 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using CPSWebApplication.Models.ViewModel;
+using CPSWebApplication.Models.EntityManager;
 
 namespace CPSWebApplication.Controllers
 {
     public class AcademicAdvisorController : Controller
     {
         // GET: AcademicAdvisor
-        public ActionResult UpdateCPS()
+
+        public ActionResult DesignCPS() {
+            return View();
+        }
+
+
+
+        public ActionResult GenerateCPS()
+        {
+            return View();
+        }
+
+        public ActionResult ModifyCPS()
         {
             return View();
         }
 
 
-        public ActionResult ViewCurrentCPS()
-        {
-            return View();
-        }
 
         public ActionResult FinalizeCPS()
         {
             return View();
         }
 
-        public ActionResult Notify()
+        public ActionResult AduitCPS()
         {
             return View();
         }
 
-        public ActionResult CheckAppointments()
-        {
-            return View();
-        }
-        public ActionResult ViewHistory()
-        {
-            return View();
-        }
+      
+
 
 
     }

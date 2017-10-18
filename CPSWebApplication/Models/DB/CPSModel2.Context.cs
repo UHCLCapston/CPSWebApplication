@@ -13,10 +13,10 @@ namespace CPSWebApplication.Models.DB
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class eserviceEntities2 : DbContext
+    public partial class CPSCreationEntities : DbContext
     {
-        public eserviceEntities2()
-            : base("name=eserviceEntities2")
+        public CPSCreationEntities()
+            : base("name=CPSCreationEntities")
         {
         }
     
@@ -25,9 +25,11 @@ namespace CPSWebApplication.Models.DB
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<APPUser> APPUsers { get; set; }
-        public virtual DbSet<APPUserProfile> APPUserProfiles { get; set; }
-
-        public System.Data.Entity.DbSet<CPSWebApplication.Models.ViewModel.UserLoginView> UserLoginViews { get; set; }
+        public virtual DbSet<Catalog16_17> Catalog16_17 { get; set; }
+        public virtual DbSet<CSCI_Courses> CSCI_Courses { get; set; }
+        public virtual DbSet<DMST_Courses> DMST_Courses { get; set; }
+        public virtual DbSet<SENG_Courses> SENG_Courses { get; set; }
+        public virtual DbSet<StudentDetail> StudentDetails { get; set; }
+        public virtual DbSet<SWEN_Courses> SWEN_Courses { get; set; }
     }
 }

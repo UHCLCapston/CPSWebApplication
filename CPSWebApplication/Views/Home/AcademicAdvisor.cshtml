@@ -6,10 +6,23 @@
 }
 <h2>@Model.FirstName</h2>
 <h2>Welcome to AcademicAdvisor Portal </h2>
-@using(Html.BeginForm("Create", "AcadAdv"))
-{
-    <div class="form-group">
 
+@using (Html.BeginForm("Create", "AcadAdv"))
+{
+    <div>
+        <div>
+            <button type="button" class="btn btn-default" onclick="window.location = ('@Url.Action("DesignCPS","AcademicAdvisor")')">Design CPS</button>
+        </div>
+        <br /><br />
+        <div>
+            <button type="button" class="btn btn-default" onclick="window.location = ('@Url.Action("GenerateCPS","AcademicAdvisor")')">Generate CPS</button>
+            <button type="button" class="btn btn-default" onclick="window.location = ('@Url.Action("ModifyCPS","AcademicAdvisor")')">Modify CPS</button>
+        </div>
+        <br /><br />
+        <div>
+            <button type="button" class="btn btn-default" onclick="window.location = ('@Url.Action("FinalizeCPS","AcademicAdvisor")')">Finalize CPS</button>
+            <button type="button" class="btn btn-default" onclick="window.location = ('@Url.Action("AduitCPS","AcademicAdvisor")')">Audit CPS</button>
+        </div>
     </div>
 }
 

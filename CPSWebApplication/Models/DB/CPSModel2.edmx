@@ -1,0 +1,262 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="c533317sp04prakhyanModel1.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Catalog16_17">
+          <Key>
+            <PropertyRef Name="Course" />
+          </Key>
+          <Property Name="Course" Type="varchar" MaxLength="70" Nullable="false" />
+          <Property Name="SWEN" Type="varchar" MaxLength="40" />
+          <Property Name="CSCI" Type="varchar" MaxLength="40" />
+          <Property Name="SENG" Type="varchar" MaxLength="40" />
+        </EntityType>
+        <EntityType Name="CSCI_Courses">
+          <Key>
+            <PropertyRef Name="Course" />
+          </Key>
+          <Property Name="Course" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CourseName" Type="varchar" MaxLength="70" />
+          <Property Name="CourseLevel" Type="varchar" MaxLength="50" />
+          <Property Name="CreditHrs" Type="int" />
+          <Property Name="UnderSpecialization" Type="varchar" MaxLength="70" />
+        </EntityType>
+        <EntityType Name="DMST_Courses">
+          <Key>
+            <PropertyRef Name="Course" />
+          </Key>
+          <Property Name="Course" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CourseName" Type="varchar" MaxLength="70" />
+          <Property Name="CourseLevel" Type="varchar" MaxLength="50" />
+          <Property Name="CreditHrs" Type="int" />
+          <Property Name="UnderSpecialization" Type="varchar" MaxLength="70" />
+        </EntityType>
+        <EntityType Name="SENG_Courses">
+          <Key>
+            <PropertyRef Name="Course" />
+          </Key>
+          <Property Name="Course" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CourseName" Type="varchar" MaxLength="70" />
+          <Property Name="CourseLevel" Type="varchar" MaxLength="50" />
+          <Property Name="CreditHrs" Type="int" />
+          <Property Name="UnderSpecialization" Type="varchar" MaxLength="70" />
+        </EntityType>
+        <EntityType Name="StudentDetails">
+          <Key>
+            <PropertyRef Name="studentID" />
+          </Key>
+          <Property Name="firstName" Type="varchar" MaxLength="50" />
+          <Property Name="lastName" Type="varchar" MaxLength="50" />
+          <Property Name="studentID" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="UHCLEmail" Type="varchar" MaxLength="30" />
+          <Property Name="admittedSemester" Type="varchar" MaxLength="20" />
+          <Property Name="currentSemester" Type="varchar" MaxLength="20" />
+          <Property Name="majorName" Type="varchar" MaxLength="40" />
+          <Property Name="CGPA" Type="varchar" MaxLength="10" />
+          <Property Name="enrolledCoursesAndSemesters" Type="varchar" MaxLength="200" />
+          <Property Name="completedCoursesAndGrades" Type="varchar" MaxLength="200" />
+          <Property Name="ProgramCompletionType" Type="varchar" MaxLength="50" />
+          <Property Name="AssignedFoundation" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="SWEN_Courses">
+          <Key>
+            <PropertyRef Name="Course" />
+          </Key>
+          <Property Name="Course" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CourseName" Type="varchar" MaxLength="70" />
+          <Property Name="CourseLevel" Type="varchar" MaxLength="50" />
+          <Property Name="CreditHrs" Type="int" />
+          <Property Name="UnderSpecialization" Type="varchar" MaxLength="70" />
+        </EntityType>
+        <EntityContainer Name="c533317sp04prakhyanModel1StoreContainer">
+          <EntitySet Name="Catalog16_17" EntityType="Self.Catalog16_17" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CSCI_Courses" EntityType="Self.CSCI_Courses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DMST_Courses" EntityType="Self.DMST_Courses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SENG_Courses" EntityType="Self.SENG_Courses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StudentDetails" EntityType="Self.StudentDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SWEN_Courses" EntityType="Self.SWEN_Courses" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="c533317sp04prakhyanModel1" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Catalog16_17">
+          <Key>
+            <PropertyRef Name="Course" />
+          </Key>
+          <Property Name="Course" Type="String" MaxLength="70" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SWEN" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="CSCI" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="SENG" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="CSCI_Courses">
+          <Key>
+            <PropertyRef Name="Course" />
+          </Key>
+          <Property Name="Course" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CourseName" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+          <Property Name="CourseLevel" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreditHrs" Type="Int32" />
+          <Property Name="UnderSpecialization" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="DMST_Courses">
+          <Key>
+            <PropertyRef Name="Course" />
+          </Key>
+          <Property Name="Course" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CourseName" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+          <Property Name="CourseLevel" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreditHrs" Type="Int32" />
+          <Property Name="UnderSpecialization" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="SENG_Courses">
+          <Key>
+            <PropertyRef Name="Course" />
+          </Key>
+          <Property Name="Course" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CourseName" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+          <Property Name="CourseLevel" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreditHrs" Type="Int32" />
+          <Property Name="UnderSpecialization" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="StudentDetail">
+          <Key>
+            <PropertyRef Name="studentID" />
+          </Key>
+          <Property Name="firstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="lastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="studentID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UHCLEmail" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="admittedSemester" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="currentSemester" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="majorName" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="CGPA" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="enrolledCoursesAndSemesters" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="completedCoursesAndGrades" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="ProgramCompletionType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AssignedFoundation" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="SWEN_Courses">
+          <Key>
+            <PropertyRef Name="Course" />
+          </Key>
+          <Property Name="Course" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CourseName" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+          <Property Name="CourseLevel" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreditHrs" Type="Int32" />
+          <Property Name="UnderSpecialization" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityContainer Name="CPSCreationEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Catalog16_17" EntityType="Self.Catalog16_17" />
+          <EntitySet Name="CSCI_Courses" EntityType="Self.CSCI_Courses" />
+          <EntitySet Name="DMST_Courses" EntityType="Self.DMST_Courses" />
+          <EntitySet Name="SENG_Courses" EntityType="Self.SENG_Courses" />
+          <EntitySet Name="StudentDetails" EntityType="Self.StudentDetail" />
+          <EntitySet Name="SWEN_Courses" EntityType="Self.SWEN_Courses" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="c533317sp04prakhyanModel1StoreContainer" CdmEntityContainer="CPSCreationEntities">
+          <EntitySetMapping Name="Catalog16_17">
+            <EntityTypeMapping TypeName="c533317sp04prakhyanModel1.Catalog16_17">
+              <MappingFragment StoreEntitySet="Catalog16_17">
+                <ScalarProperty Name="Course" ColumnName="Course" />
+                <ScalarProperty Name="SWEN" ColumnName="SWEN" />
+                <ScalarProperty Name="CSCI" ColumnName="CSCI" />
+                <ScalarProperty Name="SENG" ColumnName="SENG" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CSCI_Courses">
+            <EntityTypeMapping TypeName="c533317sp04prakhyanModel1.CSCI_Courses">
+              <MappingFragment StoreEntitySet="CSCI_Courses">
+                <ScalarProperty Name="Course" ColumnName="Course" />
+                <ScalarProperty Name="CourseName" ColumnName="CourseName" />
+                <ScalarProperty Name="CourseLevel" ColumnName="CourseLevel" />
+                <ScalarProperty Name="CreditHrs" ColumnName="CreditHrs" />
+                <ScalarProperty Name="UnderSpecialization" ColumnName="UnderSpecialization" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DMST_Courses">
+            <EntityTypeMapping TypeName="c533317sp04prakhyanModel1.DMST_Courses">
+              <MappingFragment StoreEntitySet="DMST_Courses">
+                <ScalarProperty Name="Course" ColumnName="Course" />
+                <ScalarProperty Name="CourseName" ColumnName="CourseName" />
+                <ScalarProperty Name="CourseLevel" ColumnName="CourseLevel" />
+                <ScalarProperty Name="CreditHrs" ColumnName="CreditHrs" />
+                <ScalarProperty Name="UnderSpecialization" ColumnName="UnderSpecialization" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SENG_Courses">
+            <EntityTypeMapping TypeName="c533317sp04prakhyanModel1.SENG_Courses">
+              <MappingFragment StoreEntitySet="SENG_Courses">
+                <ScalarProperty Name="Course" ColumnName="Course" />
+                <ScalarProperty Name="CourseName" ColumnName="CourseName" />
+                <ScalarProperty Name="CourseLevel" ColumnName="CourseLevel" />
+                <ScalarProperty Name="CreditHrs" ColumnName="CreditHrs" />
+                <ScalarProperty Name="UnderSpecialization" ColumnName="UnderSpecialization" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StudentDetails">
+            <EntityTypeMapping TypeName="c533317sp04prakhyanModel1.StudentDetail">
+              <MappingFragment StoreEntitySet="StudentDetails">
+                <ScalarProperty Name="firstName" ColumnName="firstName" />
+                <ScalarProperty Name="lastName" ColumnName="lastName" />
+                <ScalarProperty Name="studentID" ColumnName="studentID" />
+                <ScalarProperty Name="UHCLEmail" ColumnName="UHCLEmail" />
+                <ScalarProperty Name="admittedSemester" ColumnName="admittedSemester" />
+                <ScalarProperty Name="currentSemester" ColumnName="currentSemester" />
+                <ScalarProperty Name="majorName" ColumnName="majorName" />
+                <ScalarProperty Name="CGPA" ColumnName="CGPA" />
+                <ScalarProperty Name="enrolledCoursesAndSemesters" ColumnName="enrolledCoursesAndSemesters" />
+                <ScalarProperty Name="completedCoursesAndGrades" ColumnName="completedCoursesAndGrades" />
+                <ScalarProperty Name="ProgramCompletionType" ColumnName="ProgramCompletionType" />
+                <ScalarProperty Name="AssignedFoundation" ColumnName="AssignedFoundation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SWEN_Courses">
+            <EntityTypeMapping TypeName="c533317sp04prakhyanModel1.SWEN_Courses">
+              <MappingFragment StoreEntitySet="SWEN_Courses">
+                <ScalarProperty Name="Course" ColumnName="Course" />
+                <ScalarProperty Name="CourseName" ColumnName="CourseName" />
+                <ScalarProperty Name="CourseLevel" ColumnName="CourseLevel" />
+                <ScalarProperty Name="CreditHrs" ColumnName="CreditHrs" />
+                <ScalarProperty Name="UnderSpecialization" ColumnName="UnderSpecialization" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
