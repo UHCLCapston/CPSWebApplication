@@ -15,5 +15,11 @@ namespace CPSWebApplication.Models.ViewModel
         public string CSCI { get; set; }
         public string SENG { get; set; }
 
+        public string Subject { get; set; }
+        public string Catalog { get; set; }
+        public string LongTitle { get; set; }
+        public String CreditHrs { get; set; }
+
+
     }
 }

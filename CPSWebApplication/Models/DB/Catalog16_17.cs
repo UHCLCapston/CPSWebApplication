@@ -18,5 +18,9 @@ namespace CPSWebApplication.Models.DB
         public string SWEN { get; set; }
         public string CSCI { get; set; }
         public string SENG { get; set; }
+        public string Subject { get; set; }
+        public string Catalog { get; set; }
+        public string LongTitle { get; set; }
+        public string creditHrs { get; set; }
     }
 }

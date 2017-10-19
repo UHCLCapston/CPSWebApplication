@@ -309,6 +309,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AcademicAdvisorController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\DesignCPSController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -370,9 +371,9 @@
     <Compile Include="Models\EntityManager\CPSDesignManager.cs" />
     <Compile Include="Models\EntityManager\UserManager.cs" />
     <Compile Include="Models\ViewModel\Catelog.cs" />
-    <Compile Include="Models\ViewModel\CSCI_Courses.cs" />
+    <Compile Include="Models\ViewModel\Course.cs" />
+    <Compile Include="Models\ViewModel\DesignCPSViewModel.cs" />
     <Compile Include="Models\ViewModel\StudentDetails.cs" />
-    <Compile Include="Models\ViewModel\SWEN_Courses.cs" />
     <Compile Include="Models\ViewModel\UserLoginView.cs" />
     <Compile Include="Models\ViewModel\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -464,11 +465,11 @@
     <Content Include="Views\AcademicAdvisor\ModifyCPS.cshtml" />
     <Content Include="Views\AcademicAdvisor\FinalizeCPS.cshtml" />
     <Content Include="Views\AcademicAdvisor\AduitCPS.cshtml" />
-    <Content Include="Views\AcademicAdvisor\DesignCPS.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Default\" />
+    <Folder Include="Views\DesignCPS\" />
     <Folder Include="Views\FacultyAdvisor\" />
     <Folder Include="Views\Student\" />
   </ItemGroup>

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="c533317sp04prakhyanModel1.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="c533317sp04prakhyanModel1.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Catalog16_17">
           <Key>
             <PropertyRef Name="Course" />
@@ -13,6 +13,10 @@
           <Property Name="SWEN" Type="varchar" MaxLength="40" />
           <Property Name="CSCI" Type="varchar" MaxLength="40" />
           <Property Name="SENG" Type="varchar" MaxLength="40" />
+          <Property Name="Subject" Type="varchar" MaxLength="20" />
+          <Property Name="Catalog" Type="varchar" MaxLength="20" />
+          <Property Name="LongTitle" Type="varchar" MaxLength="50" />
+          <Property Name="creditHrs" Type="varchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="CSCI_Courses">
           <Key>
@@ -79,8 +83,7 @@
           <EntitySet Name="StudentDetails" EntityType="Self.StudentDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SWEN_Courses" EntityType="Self.SWEN_Courses" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="c533317sp04prakhyanModel1" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -92,6 +95,10 @@
           <Property Name="SWEN" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
           <Property Name="CSCI" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
           <Property Name="SENG" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="Subject" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Catalog" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="LongTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="creditHrs" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="CSCI_Courses">
           <Key>
@@ -167,6 +174,10 @@
           <EntitySetMapping Name="Catalog16_17">
             <EntityTypeMapping TypeName="c533317sp04prakhyanModel1.Catalog16_17">
               <MappingFragment StoreEntitySet="Catalog16_17">
+                <ScalarProperty Name="creditHrs" ColumnName="creditHrs" />
+                <ScalarProperty Name="LongTitle" ColumnName="LongTitle" />
+                <ScalarProperty Name="Catalog" ColumnName="Catalog" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
                 <ScalarProperty Name="Course" ColumnName="Course" />
                 <ScalarProperty Name="SWEN" ColumnName="SWEN" />
                 <ScalarProperty Name="CSCI" ColumnName="CSCI" />
