@@ -465,11 +465,12 @@
     <Content Include="Views\AcademicAdvisor\ModifyCPS.cshtml" />
     <Content Include="Views\AcademicAdvisor\FinalizeCPS.cshtml" />
     <Content Include="Views\AcademicAdvisor\AduitCPS.cshtml" />
+    <Content Include="Views\AcademicAdvisor\DesignCPS.cshtml" />
+    <Content Include="Views\DesignCPS\StudentCPSDesign.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Default\" />
-    <Folder Include="Views\DesignCPS\" />
     <Folder Include="Views\FacultyAdvisor\" />
     <Folder Include="Views\Student\" />
   </ItemGroup>

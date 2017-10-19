@@ -16,29 +16,16 @@ namespace CPSWebApplication.Controllers
             return View();
         }
 
-
+        [HttpPost]
         public ActionResult DesignCPS(DesignCPSViewModel mdl) {
 
 
             CPSDesignManager mg = new CPSDesignManager();
-            DesignCPSViewModel v = new DesignCPSViewModel();
             
+            string studentId = mdl.searchId;
+        
+            return RedirectToAction("StudentCPSDesign", "DesignCPS", new { id = Convert.ToInt32(studentId) });
 
-            string id = mdl.searchId;
-            if (ModelState.IsValid) {
-                if (!mg.doesStudentExist(id))
-                {
-                    return RedirectToAction("", "");
-                }
-            }
-                string mjr = mg.getStudentMajor(id.ToString());
-                string ctlg = mg.catalogNeedsTofollow(id.ToString());
-
-                v.CoreClassesList = mg.getListCoreCourses(mjr, ctlg);
-                v.FoundationClassesList = mg.getListFoundation(mjr, ctlg);
-           
-
-            return View(v);
 
         }
 

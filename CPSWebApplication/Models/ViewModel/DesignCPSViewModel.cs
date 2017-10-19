@@ -8,18 +8,16 @@ namespace CPSWebApplication.Models.ViewModel
 {
     public class DesignCPSViewModel
     {
+        
+        public string lastName { get; set; }
+        public string majorName { get; set; }
+        public string academicYear { get; set; }
+
         [Required]
-        [Display(Name = "Enter Student ID to Design CPS")]
+        [Display(Name = "Student ID")]
         public string searchId { get; set; }
-
-       
-
-        [Required]
-        [Display(Name = "Select the foundation classes to assign student")]
         public List<Course> FoundationClassesList { get; set; }
 
-        [Required]
-        [Display(Name = "Make sure below core classes")]
         public List<Course> CoreClassesList { get; set; }
 
         public DesignCPSViewModel()

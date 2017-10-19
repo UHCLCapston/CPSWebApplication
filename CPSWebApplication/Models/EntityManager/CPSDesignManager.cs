@@ -56,7 +56,7 @@ namespace CPSWebApplication.Models.EntityManager
                 var student = db.StudentDetails.Where(o => o.studentID.ToLower().Equals(studentId));
                 if (student.Any())
                 {
-                    string admittedSem = student.FirstOrDefault().admittedSemester)
+                    string admittedSem = student.FirstOrDefault().admittedSemester;
                    if (admittedSem.Equals("Fall16") || admittedSem.Equals("Spring17") || admittedSem.Equals("Summer17"))
                     {
                         strCatalog = "Catalog16_17";
@@ -266,12 +266,26 @@ namespace CPSWebApplication.Models.EntityManager
             }
         }
 
-        public void updateStudentDetails()
+        public void updateStudentDetails(List<Course>assignedCoreClasses )
         {
+
 
         }
 
+        public string getStudentLastName(string id)
+        {
+            using (CPSCreationEntities db = new CPSCreationEntities())
+            {
+                var student = db.StudentDetails.Where(o => o.studentID.ToLower().Equals(id));
+                if (student.Any())
+                {
+                   return  student.FirstOrDefault().lastName;
+                }
 
+            }
+
+            return "";
+        }
 
     }
 }
