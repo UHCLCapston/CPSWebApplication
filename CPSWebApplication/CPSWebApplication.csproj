@@ -468,6 +468,7 @@
     <Content Include="Views\AcademicAdvisor\AduitCPS.cshtml" />
     <Content Include="Views\AcademicAdvisor\DesignCPS.cshtml" />
     <Content Include="Views\DesignCPS\StudentCPSDesign.cshtml" />
+    <Content Include="Views\AcademicAdvisor\GenerateCPSView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

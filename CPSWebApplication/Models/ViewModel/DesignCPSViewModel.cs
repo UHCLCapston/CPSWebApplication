@@ -8,9 +8,23 @@ namespace CPSWebApplication.Models.ViewModel
 {
     public class DesignCPSViewModel
     {
+
+        [Required]
+        [Display(Name = "Student ID")]
         public string firstName { get; set; }
+
+
+        [Required]
+        [Display(Name = "Last Name")]
         public string lastName { get; set; }
+
+
+        [Required]
+        [Display(Name = "Major Name")]
         public string majorName { get; set; }
+
+        [Required]
+        [Display(Name = "Academic Year")]
         public string academicYear { get; set; }
 
         [Required]

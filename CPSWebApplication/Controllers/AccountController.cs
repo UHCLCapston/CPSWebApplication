@@ -64,6 +64,8 @@ namespace CPSWebApplication.Controllers
         public ActionResult LogOut()
         {
             FormsAuthentication.SignOut();
+            Session["UserID"] = null;
+            Session["UserName"] = null;
             return RedirectToAction("LogIn", "Account");
         }
     }// end of class
