@@ -35,16 +35,21 @@ namespace CPSWebApplication.Controllers
 
                         FormsAuthentication.SetAuthCookie(uLV.UHCLEmail, false);
                         int uhclId = userManager.GetUserUHCLID(uLV.UHCLEmail);
+                        String fullName = userManager.GetUserFullNamebyId(uhclId);
+
+                        Session["UserID"] = uhclId.ToString();
+                       Session["UserName"] = fullName.ToString();
 
                         if (role.Equals("Student"))
-                        {
+                        { 
                             return RedirectToAction("Student", "Home", new {id = uhclId});
                         }
                         else if (role.Equals("AcademicAdvisor"))
                         {
                             return RedirectToAction("AcademicAdvisor", "Home", new { id = uhclId });
                         }
-                        else if (role.Equals("FacultyAdvisor")) {
+                        else if (role.Equals("FacultyAdvisor"))
+                        {
                             return RedirectToAction("Faculty", "Home", new { id = uhclId });
                         }
                         else

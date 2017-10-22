@@ -118,7 +118,6 @@ namespace CPSWebApplication.Models.EntityManager
 
             return list;
         }
-
         public List<Course> getListCoreCourses(string major, string catalog)
         {
             List<Course> list = new List<Course>();
@@ -147,6 +146,38 @@ namespace CPSWebApplication.Models.EntityManager
 
             return list;
         }
+
+        public List<Course> getListElectiveCourses(string major, string catalog)
+        {
+            List<Course> list = new List<Course>();
+
+            if (catalog.Equals("Catalog16_17"))
+            {
+                if (major.Equals("SWEN"))
+                {
+                    list = getAllElectiveDetailsForSWEN();
+                }
+                else if (major.Equals("CSCI"))
+                {
+
+                }
+                else if (major.Equals("SENG"))
+                {
+
+                }
+
+
+            }
+            else if (catalog.Equals("Catalog17_18"))
+            {
+
+            }
+
+            return list;
+        }
+
+
+
         public List<string> getAllFoundationSWEN()
         {
             using (CPSCreationEntities db = new CPSCreationEntities())
@@ -266,11 +297,30 @@ namespace CPSWebApplication.Models.EntityManager
             }
         }
 
-        public void updateStudentDetails(List<Course>assignedCoreClasses )
+        public void updateStudentDetails(string studentId, List<Course>assignedFoundationClasses )
         {
+            string cShtName;
+            List<string> list = new List<string>();
 
+            foreach (Course c in assignedFoundationClasses)
+            {
+                cShtName = c.CourseShortName;
+                list.Add(cShtName);
+            }
 
-        }
+            string foundationsString = string.Join(",", list.ToArray());
+
+            using (CPSCreationEntities db = new CPSCreationEntities())
+            {
+                var result = db.StudentDetails.SingleOrDefault(b => b.studentID ==studentId);
+                if (result != null)
+                {
+                    result.AssignedFoundation = foundationsString;
+                    db.SaveChanges();
+                }
+            }
+
+        }//end of updateStudentDetails
 
         public string getStudentLastName(string id)
         {

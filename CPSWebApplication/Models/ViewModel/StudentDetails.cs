@@ -24,8 +24,10 @@ namespace CPSWebApplication.Models.ViewModel
         public string programCompletionType { get; set; }
         public string assignedFoundation { get; set; }
 
-
-
-
+        public StudentDetails(string studentID, string assignedFoundation)
+        {
+            StudentID = studentID;
+            this.assignedFoundation = assignedFoundation;
+        }
     }
 }

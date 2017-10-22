@@ -13,13 +13,18 @@ namespace CPSWebApplication.Controllers
         // GET: AcademicAdvisor
         public ActionResult DesignCPS()
         {
+            string id;
+            if (Session["UserID"] != null)
+            {
+                id = Session["UserName"].ToString();
+            }
             return View();
         }
 
         [HttpPost]
         public ActionResult DesignCPS(DesignCPSViewModel mdl) {
 
-
+           // string userID = TempData["UserID"].ToString(); 
             CPSDesignManager mg = new CPSDesignManager();
             
             string studentId = mdl.searchId;
@@ -33,8 +38,28 @@ namespace CPSWebApplication.Controllers
 
         public ActionResult GenerateCPS()
         {
+            string id;
+            if (Session["UserID"] != null)
+            {
+                id = Session["UserName"].ToString();
+            }
+
             return View();
         }
+
+        [HttpPost]
+        public ActionResult GenerateCPS(DesignCPSViewModel mdl)
+        {
+            string studentId = mdl.searchId;
+
+            GenerateCPSManager gm = new GenerateCPSManager();
+
+            DesignCPSViewModel vm = gm.getModelForGenerateCPS(studentId);
+
+
+            return View(vm);
+        }
+
 
         public ActionResult ModifyCPS()
         {

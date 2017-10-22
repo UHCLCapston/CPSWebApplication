@@ -369,6 +369,7 @@
       <DependentUpon>CPSModel2.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EntityManager\CPSDesignManager.cs" />
+    <Compile Include="Models\EntityManager\GenerateCPSManager.cs" />
     <Compile Include="Models\EntityManager\UserManager.cs" />
     <Compile Include="Models\ViewModel\Catelog.cs" />
     <Compile Include="Models\ViewModel\Course.cs" />
@@ -472,6 +473,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Views\Default\" />
     <Folder Include="Views\FacultyAdvisor\" />
+    <Folder Include="Views\GenerateCPS\" />
     <Folder Include="Views\Student\" />
   </ItemGroup>
   <ItemGroup>

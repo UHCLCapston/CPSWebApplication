@@ -162,7 +162,7 @@
           <EntitySet Name="CSCI_Courses" EntityType="Self.CSCI_Courses" />
           <EntitySet Name="DMST_Courses" EntityType="Self.DMST_Courses" />
           <EntitySet Name="SENG_Courses" EntityType="Self.SENG_Courses" />
-          <EntitySet Name="StudentDetails" EntityType="Self.StudentDetail" />
+          <EntitySet Name="StudentDetails" EntityType="c533317sp04prakhyanModel1.StudentDetail" />
           <EntitySet Name="SWEN_Courses" EntityType="Self.SWEN_Courses" />
         </EntityContainer>
       </Schema>

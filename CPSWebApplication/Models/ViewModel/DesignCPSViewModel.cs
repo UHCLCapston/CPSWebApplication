@@ -8,7 +8,7 @@ namespace CPSWebApplication.Models.ViewModel
 {
     public class DesignCPSViewModel
     {
-        
+        public string firstName { get; set; }
         public string lastName { get; set; }
         public string majorName { get; set; }
         public string academicYear { get; set; }
@@ -19,6 +19,10 @@ namespace CPSWebApplication.Models.ViewModel
         public List<Course> FoundationClassesList { get; set; }
 
         public List<Course> CoreClassesList { get; set; }
+
+        public string Message { get; set; }
+
+        public List<Course> ElectiveClassesList { get; set; }
 
         public DesignCPSViewModel()
         {

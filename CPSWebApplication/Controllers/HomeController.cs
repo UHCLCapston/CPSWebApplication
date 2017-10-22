@@ -35,9 +35,13 @@ namespace CPSWebApplication.Controllers
 
         public ActionResult AcademicAdvisor(int id)
         {
+            if (Session["UserID"] != null)
+            {
+                UserModel user1 = userManager.GetUserNameByID(id);
+                return View(user1);
+            }
             UserModel user = userManager.GetUserNameByID(id);
             return View(user);
-
         }
 
         public ActionResult Faculty(int id)
@@ -50,6 +54,7 @@ namespace CPSWebApplication.Controllers
         {
             UserModel user = userManager.GetUserNameByID(id);
             return View(user);
+            
         }
     }
 }

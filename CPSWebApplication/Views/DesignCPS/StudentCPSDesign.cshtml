@@ -3,24 +3,72 @@
 @{
     ViewBag.Title = "StudentCPSDesign";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
 }
 
 <h2>StudentCPSDesign</h2>
+<p> @Session["UserName"].ToString() You are welcome on designing student page</p>
 
-<h4>@Model.lastName</h4>
-@using (Html.BeginForm())
+@using (Html.BeginForm("StudentCPSDesignTest", "DesignCPS", FormMethod.Post))
 {
     <div>
-        <div><h6>@Model.majorName</h6>
-        <h6>@Model.academicYear</h6>
+        @Html.LabelFor(model => model.lastName, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.lastName, new { @class = "form-control", @readonly = "readonly" })
         </div>
-        <br /><br />
-        <div>
-           
+        @Html.LabelFor(model => model.majorName, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.majorName, new { @class = "form-control", @readonly = "readonly" })
         </div>
-        <br /><br />
-        <div>
-            <button type="submit" class="btn btn-default" onclick="window.location = ('@Url.Action("","")')">Save</button>
+        @Html.LabelFor(model => model.academicYear, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.academicYear, new { @class = "form-control", @readonly = "readonly" })
         </div>
     </div>
-}
+    <div class="form-group" style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">
+        <h4>Foundation Courses:</h4>
+
+
+        @for (int i = 0; i < Model.FoundationClassesList.Count(); i++)
+        {
+            <div style="padding-left:5px">
+
+                @Html.CheckBoxFor(x => x.FoundationClassesList[i].IsSelected)
+                @Model.FoundationClassesList[i].CourseShortName
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                @Model.FoundationClassesList[i].CourseFullName
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+            </div>
+
+
+            //If you need to hide any values and get them in your post
+            //  @Html.HiddenFor(x => x.FoundationClassesList[i].Id)
+            //  @Html.HiddenFor(x => x.FoundationClassesList[i].)
+        }
+
+
+    </div>
+    <div style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">
+        <h4>Core Courses:</h4>
+        @for (int i = 0; i < Model.CoreClassesList.Count(); i++)
+        {
+            <div style="padding-left:5px">
+                @Model.CoreClassesList[i].CourseShortName
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                @Model.CoreClassesList[i].CourseFullName
+
+            </div>
+        }
+        <br /><br />
+
+        <div>
+           
+            <button name="action" value="save" type="submit" class="btn btn-default" onclick="window.location = ('@Url.Action("","")')">Save</button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button name="action" value="back" type="submit" class="btn btn-default" onclick="window.location = ('@Url.Action("","")')">Back</button>
+
+            <a href="javascript:window.print()">Click to Print This Page</a>
+        </div>
+    </div>
+}   <div>@Html.ActionLink("LogOut", "LogOut", "Account")</div>

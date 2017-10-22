@@ -3,11 +3,18 @@
 @{
     ViewBag.Title = "DesignCPS";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
 }
 
 <h2>DesignCPS</h2>
 <br />
 <br />
+
+<p> @Session["UserName"].ToString() Let's Start design</p>
+    
+
+@if (TempData["Message"] != null)
+{<div>@TempData["Message"]</div>}
 
 @using (Html.BeginForm())
 {
@@ -21,7 +28,6 @@
             <br />
         </div>
         </div>
-
-
-
 }
+<div>@Html.ActionLink("LogOut", "LogOut", "Account")</div>
+
