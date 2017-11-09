@@ -12,12 +12,13 @@ namespace CPSWebApplication.Models.DB
     using System;
     using System.Collections.Generic;
     
-    public partial class CSCI_Courses
+    public partial class FacultyDetail
     {
-        public string Course { get; set; }
-        public string CourseName { get; set; }
-        public string CourseLevel { get; set; }
-        public Nullable<int> CreditHrs { get; set; }
-        public string UnderSpecialization { get; set; }
+        public string FacultyId { get; set; }
+        public string First_Name { get; set; }
+        public string Last_Name { get; set; }
+        public string Departments { get; set; }
+        public string AdvisorDepartment { get; set; }
+        public string AdvisingStudentList { get; set; }
     }
 }

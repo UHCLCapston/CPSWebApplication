@@ -29,9 +29,19 @@
             @Html.TextBoxFor(model => model.academicYear, new { @class = "form-control", @readonly = "readonly" })
         </div>
     </div>
+    <br/>
+
+    <div class="form-group" style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">
+        <h4>Assign Faculty Advisor to Student:</h4>
+        @Html.LabelFor(model => model.assignedFaculty, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(m => m.assignedFaculty, new SelectList(Model.DfacultiesList))
+         </div>
+     </div>
+    <br/>
+
     <div class="form-group" style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">
         <h4>Foundation Courses:</h4>
-
         <table id="cphMainContent_dgvUsers" class="table table-hover table-striped"
                cellspacing="0" style="border-collapse:collapse;">
             <tbody>
@@ -56,8 +66,6 @@
                 }
             </tbody>
         </table>
-
-
     </div>
     <div style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">
         <h4>Core Courses:</h4>
@@ -82,8 +90,8 @@
                 </tbody>
             </table>
             <br />
-            <br />
         <div>
+            
             @if (TempData["Message"] != null)
             {<div style="color: #1e83ca;">@TempData["Message"]</div>}
 

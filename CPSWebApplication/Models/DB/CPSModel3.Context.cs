@@ -13,10 +13,10 @@ namespace CPSWebApplication.Models.DB
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class CPSCreationEntities : DbContext
+    public partial class capf17gswen4Entities : DbContext
     {
-        public CPSCreationEntities()
-            : base("name=CPSCreationEntities")
+        public capf17gswen4Entities()
+            : base("name=capf17gswen4Entities")
         {
         }
     
@@ -25,8 +25,6 @@ namespace CPSWebApplication.Models.DB
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Catalog16_17> Catalog16_17 { get; set; }
-        public virtual DbSet<StudentDetail> StudentDetails { get; set; }
-        public virtual DbSet<FacultyDetail> FacultyDetails { get; set; }
+        public virtual DbSet<CPS> CPS { get; set; }
     }
 }

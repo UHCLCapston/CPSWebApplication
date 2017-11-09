@@ -310,7 +310,10 @@
     <Compile Include="Controllers\AcademicAdvisorController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\DesignCPSController.cs" />
+    <Compile Include="Controllers\FacultyAdvisorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\SecretoryController.cs" />
+    <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -322,6 +325,9 @@
     </Compile>
     <Compile Include="Models\DB\Catalog16_17.cs">
       <DependentUpon>CPSModel2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DB\CPS.cs">
+      <DependentUpon>CPSModel3.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DB\CPSModel1.Context.cs">
       <AutoGen>True</AutoGen>
@@ -353,27 +359,36 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CPSModel2.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\DB\CSCI_Courses.cs">
-      <DependentUpon>CPSModel2.tt</DependentUpon>
+    <Compile Include="Models\DB\CPSModel3.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CPSModel3.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DB\DMST_Courses.cs">
-      <DependentUpon>CPSModel2.tt</DependentUpon>
+    <Compile Include="Models\DB\CPSModel3.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CPSModel3.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DB\SENG_Courses.cs">
+    <Compile Include="Models\DB\CPSModel3.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CPSModel3.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DB\FacultyDetail.cs">
       <DependentUpon>CPSModel2.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DB\StudentDetail.cs">
       <DependentUpon>CPSModel2.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DB\SWEN_Courses.cs">
-      <DependentUpon>CPSModel2.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\EntityManager\CPSDesignManager.cs" />
+    <Compile Include="Models\EntityManager\CPSDraftToFinalManager.cs" />
     <Compile Include="Models\EntityManager\GenerateCPSManager.cs" />
     <Compile Include="Models\EntityManager\UserManager.cs" />
     <Compile Include="Models\ViewModel\Catelog.cs" />
     <Compile Include="Models\ViewModel\Course.cs" />
+    <Compile Include="Models\ViewModel\CPS.cs" />
     <Compile Include="Models\ViewModel\DesignCPSViewModel.cs" />
+    <Compile Include="Models\ViewModel\FacultyDetails.cs" />
     <Compile Include="Models\ViewModel\StudentDetails.cs" />
     <Compile Include="Models\ViewModel\UserLoginView.cs" />
     <Compile Include="Models\ViewModel\UserModel.cs" />
@@ -409,6 +424,16 @@
       <DependentUpon>CPSModel2.edmx</DependentUpon>
       <LastGenOutput>CPSModel2.cs</LastGenOutput>
     </Content>
+    <Content Include="Models\DB\CPSModel3.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>CPSModel3.edmx</DependentUpon>
+      <LastGenOutput>CPSModel3.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\DB\CPSModel3.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>CPSModel3.edmx</DependentUpon>
+      <LastGenOutput>CPSModel3.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
@@ -428,6 +453,13 @@
     </EntityDeploy>
     <Content Include="Models\DB\CPSModel2.edmx.diagram">
       <DependentUpon>CPSModel2.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Models\DB\CPSModel3.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>CPSModel3.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\DB\CPSModel3.edmx.diagram">
+      <DependentUpon>CPSModel3.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -475,6 +507,7 @@
     <Folder Include="Views\Default\" />
     <Folder Include="Views\FacultyAdvisor\" />
     <Folder Include="Views\GenerateCPS\" />
+    <Folder Include="Views\Secretory\" />
     <Folder Include="Views\Student\" />
   </ItemGroup>
   <ItemGroup>

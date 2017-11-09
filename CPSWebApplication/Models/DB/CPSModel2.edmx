@@ -18,35 +18,16 @@
           <Property Name="LongTitle" Type="varchar" MaxLength="50" />
           <Property Name="creditHrs" Type="varchar" MaxLength="10" />
         </EntityType>
-        <EntityType Name="CSCI_Courses">
+        <EntityType Name="FacultyDetails">
           <Key>
-            <PropertyRef Name="Course" />
+            <PropertyRef Name="FacultyId" />
           </Key>
-          <Property Name="Course" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="CourseName" Type="varchar" MaxLength="70" />
-          <Property Name="CourseLevel" Type="varchar" MaxLength="50" />
-          <Property Name="CreditHrs" Type="int" />
-          <Property Name="UnderSpecialization" Type="varchar" MaxLength="70" />
-        </EntityType>
-        <EntityType Name="DMST_Courses">
-          <Key>
-            <PropertyRef Name="Course" />
-          </Key>
-          <Property Name="Course" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="CourseName" Type="varchar" MaxLength="70" />
-          <Property Name="CourseLevel" Type="varchar" MaxLength="50" />
-          <Property Name="CreditHrs" Type="int" />
-          <Property Name="UnderSpecialization" Type="varchar" MaxLength="70" />
-        </EntityType>
-        <EntityType Name="SENG_Courses">
-          <Key>
-            <PropertyRef Name="Course" />
-          </Key>
-          <Property Name="Course" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="CourseName" Type="varchar" MaxLength="70" />
-          <Property Name="CourseLevel" Type="varchar" MaxLength="50" />
-          <Property Name="CreditHrs" Type="int" />
-          <Property Name="UnderSpecialization" Type="varchar" MaxLength="70" />
+          <Property Name="FacultyId" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="First Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Last Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Departments" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="AdvisorDepartment" Type="varchar" MaxLength="50" />
+          <Property Name="AdvisingStudentList" Type="varchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="StudentDetails">
           <Key>
@@ -64,24 +45,13 @@
           <Property Name="completedCoursesAndGrades" Type="varchar" MaxLength="200" />
           <Property Name="ProgramCompletionType" Type="varchar" MaxLength="50" />
           <Property Name="AssignedFoundation" Type="varchar" MaxLength="200" />
-        </EntityType>
-        <EntityType Name="SWEN_Courses">
-          <Key>
-            <PropertyRef Name="Course" />
-          </Key>
-          <Property Name="Course" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="CourseName" Type="varchar" MaxLength="70" />
-          <Property Name="CourseLevel" Type="varchar" MaxLength="50" />
-          <Property Name="CreditHrs" Type="int" />
-          <Property Name="UnderSpecialization" Type="varchar" MaxLength="70" />
+          <Property Name="AssignedFacultyAdvisor" Type="varchar" MaxLength="200" />
+          <Property Name="AssignedAcademicAdvisor" Type="varchar" MaxLength="200" />
         </EntityType>
         <EntityContainer Name="c533317sp04prakhyanModel1StoreContainer">
           <EntitySet Name="Catalog16_17" EntityType="Self.Catalog16_17" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="CSCI_Courses" EntityType="Self.CSCI_Courses" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="DMST_Courses" EntityType="Self.DMST_Courses" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="SENG_Courses" EntityType="Self.SENG_Courses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FacultyDetails" EntityType="Self.FacultyDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StudentDetails" EntityType="Self.StudentDetails" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="SWEN_Courses" EntityType="Self.SWEN_Courses" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -100,36 +70,6 @@
           <Property Name="LongTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="creditHrs" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="CSCI_Courses">
-          <Key>
-            <PropertyRef Name="Course" />
-          </Key>
-          <Property Name="Course" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="CourseName" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
-          <Property Name="CourseLevel" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="CreditHrs" Type="Int32" />
-          <Property Name="UnderSpecialization" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="DMST_Courses">
-          <Key>
-            <PropertyRef Name="Course" />
-          </Key>
-          <Property Name="Course" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="CourseName" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
-          <Property Name="CourseLevel" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="CreditHrs" Type="Int32" />
-          <Property Name="UnderSpecialization" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="SENG_Courses">
-          <Key>
-            <PropertyRef Name="Course" />
-          </Key>
-          <Property Name="Course" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="CourseName" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
-          <Property Name="CourseLevel" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="CreditHrs" Type="Int32" />
-          <Property Name="UnderSpecialization" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
-        </EntityType>
         <EntityType Name="StudentDetail">
           <Key>
             <PropertyRef Name="studentID" />
@@ -146,25 +86,25 @@
           <Property Name="completedCoursesAndGrades" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="ProgramCompletionType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="AssignedFoundation" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="SWEN_Courses">
-          <Key>
-            <PropertyRef Name="Course" />
-          </Key>
-          <Property Name="Course" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="CourseName" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
-          <Property Name="CourseLevel" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="CreditHrs" Type="Int32" />
-          <Property Name="UnderSpecialization" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+          <Property Name="AssignedFacultyAdvisor" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="AssignedAcademicAdvisor" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityContainer Name="CPSCreationEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Catalog16_17" EntityType="Self.Catalog16_17" />
-          <EntitySet Name="CSCI_Courses" EntityType="Self.CSCI_Courses" />
-          <EntitySet Name="DMST_Courses" EntityType="Self.DMST_Courses" />
-          <EntitySet Name="SENG_Courses" EntityType="Self.SENG_Courses" />
           <EntitySet Name="StudentDetails" EntityType="c533317sp04prakhyanModel1.StudentDetail" />
-          <EntitySet Name="SWEN_Courses" EntityType="Self.SWEN_Courses" />
+          <EntitySet Name="FacultyDetails" EntityType="c533317sp04prakhyanModel1.FacultyDetail" />
         </EntityContainer>
+        <EntityType Name="FacultyDetail">
+          <Key>
+            <PropertyRef Name="FacultyId" />
+          </Key>
+          <Property Name="FacultyId" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="First_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Last_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Departments" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AdvisorDepartment" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AdvisingStudentList" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -185,42 +125,11 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="CSCI_Courses">
-            <EntityTypeMapping TypeName="c533317sp04prakhyanModel1.CSCI_Courses">
-              <MappingFragment StoreEntitySet="CSCI_Courses">
-                <ScalarProperty Name="Course" ColumnName="Course" />
-                <ScalarProperty Name="CourseName" ColumnName="CourseName" />
-                <ScalarProperty Name="CourseLevel" ColumnName="CourseLevel" />
-                <ScalarProperty Name="CreditHrs" ColumnName="CreditHrs" />
-                <ScalarProperty Name="UnderSpecialization" ColumnName="UnderSpecialization" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="DMST_Courses">
-            <EntityTypeMapping TypeName="c533317sp04prakhyanModel1.DMST_Courses">
-              <MappingFragment StoreEntitySet="DMST_Courses">
-                <ScalarProperty Name="Course" ColumnName="Course" />
-                <ScalarProperty Name="CourseName" ColumnName="CourseName" />
-                <ScalarProperty Name="CourseLevel" ColumnName="CourseLevel" />
-                <ScalarProperty Name="CreditHrs" ColumnName="CreditHrs" />
-                <ScalarProperty Name="UnderSpecialization" ColumnName="UnderSpecialization" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="SENG_Courses">
-            <EntityTypeMapping TypeName="c533317sp04prakhyanModel1.SENG_Courses">
-              <MappingFragment StoreEntitySet="SENG_Courses">
-                <ScalarProperty Name="Course" ColumnName="Course" />
-                <ScalarProperty Name="CourseName" ColumnName="CourseName" />
-                <ScalarProperty Name="CourseLevel" ColumnName="CourseLevel" />
-                <ScalarProperty Name="CreditHrs" ColumnName="CreditHrs" />
-                <ScalarProperty Name="UnderSpecialization" ColumnName="UnderSpecialization" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="StudentDetails">
             <EntityTypeMapping TypeName="c533317sp04prakhyanModel1.StudentDetail">
               <MappingFragment StoreEntitySet="StudentDetails">
+                <ScalarProperty Name="AssignedAcademicAdvisor" ColumnName="AssignedAcademicAdvisor" />
+                <ScalarProperty Name="AssignedFacultyAdvisor" ColumnName="AssignedFacultyAdvisor" />
                 <ScalarProperty Name="firstName" ColumnName="firstName" />
                 <ScalarProperty Name="lastName" ColumnName="lastName" />
                 <ScalarProperty Name="studentID" ColumnName="studentID" />
@@ -236,14 +145,15 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="SWEN_Courses">
-            <EntityTypeMapping TypeName="c533317sp04prakhyanModel1.SWEN_Courses">
-              <MappingFragment StoreEntitySet="SWEN_Courses">
-                <ScalarProperty Name="Course" ColumnName="Course" />
-                <ScalarProperty Name="CourseName" ColumnName="CourseName" />
-                <ScalarProperty Name="CourseLevel" ColumnName="CourseLevel" />
-                <ScalarProperty Name="CreditHrs" ColumnName="CreditHrs" />
-                <ScalarProperty Name="UnderSpecialization" ColumnName="UnderSpecialization" />
+          <EntitySetMapping Name="FacultyDetails">
+            <EntityTypeMapping TypeName="c533317sp04prakhyanModel1.FacultyDetail">
+              <MappingFragment StoreEntitySet="FacultyDetails">
+                <ScalarProperty Name="AdvisingStudentList" ColumnName="AdvisingStudentList" />
+                <ScalarProperty Name="AdvisorDepartment" ColumnName="AdvisorDepartment" />
+                <ScalarProperty Name="Departments" ColumnName="Departments" />
+                <ScalarProperty Name="Last_Name" ColumnName="Last Name" />
+                <ScalarProperty Name="First_Name" ColumnName="First Name" />
+                <ScalarProperty Name="FacultyId" ColumnName="FacultyId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

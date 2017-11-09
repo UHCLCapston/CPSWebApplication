@@ -13,11 +13,9 @@ namespace CPSWebApplication.Models.ViewModel
         [Display(Name = "Student ID")]
         public string firstName { get; set; }
 
-
         [Required]
         [Display(Name = "Last Name")]
         public string lastName { get; set; }
-
 
         [Required]
         [Display(Name = "Major Name")]
@@ -37,6 +35,12 @@ namespace CPSWebApplication.Models.ViewModel
         public string Message { get; set; }
 
         public List<Course> ElectiveClassesList { get; set; }
+
+        [Required]
+        [Display(Name = "Faculty Advisor" )]
+        public string assignedFaculty { get; set; }
+
+        public List<String> DfacultiesList { get; set; }
 
         public DesignCPSViewModel()
         {

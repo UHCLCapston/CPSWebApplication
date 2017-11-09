@@ -12,21 +12,23 @@ namespace CPSWebApplication.Models.DB
     using System;
     using System.Collections.Generic;
     
-    public partial class StudentDetail
+    public partial class CPS
     {
-        public string firstName { get; set; }
-        public string lastName { get; set; }
-        public string studentID { get; set; }
-        public string UHCLEmail { get; set; }
-        public string admittedSemester { get; set; }
-        public string currentSemester { get; set; }
-        public string majorName { get; set; }
-        public string CGPA { get; set; }
-        public string enrolledCoursesAndSemesters { get; set; }
-        public string completedCoursesAndGrades { get; set; }
+        public string StudentID { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Academic_Year { get; set; }
+        public string Major { get; set; }
+        public string CoreCourseDetails { get; set; }
+        public string ElectiveCourseDetails { get; set; }
         public string ProgramCompletionType { get; set; }
-        public string AssignedFoundation { get; set; }
         public string AssignedFacultyAdvisor { get; set; }
         public string AssignedAcademicAdvisor { get; set; }
+        public string IsDraft { get; set; }
+        public string IsFinalised { get; set; }
+        public string IsActive { get; set; }
+        public string IsAudited { get; set; }
+        public string LastFinalizeDate { get; set; }
+        public string LastDraftDate { get; set; }
     }
 }

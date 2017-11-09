@@ -22,8 +22,9 @@ namespace CPSWebApplication.Controllers
         {
             bool flag = false;
             CPSDesignManager mg = new CPSDesignManager();
+            DesignCPSViewModel viewM=  mg.getModelForDesignCPSToView(id);
 
-            string  mjr = mg.getStudentMajor(id.ToString());
+            /*string  mjr = mg.getStudentMajor(id.ToString());
             string ctlg = mg.catalogNeedsTofollow(id.ToString());
             
             string lastName = mg.getStudentLastName(id.ToString());
@@ -37,16 +38,17 @@ namespace CPSWebApplication.Controllers
             v.FoundationClassesList = fclist;
             v.CoreClassesList = mg.getListCoreCourses(mjr, ctlg);
             ctlg = Regex.Replace(ctlg, "^Catalog", "Academic Year");
-            v.academicYear = ctlg;
+            v.academicYear = ctlg;*/
 
             TempData["StudentID"] = id.ToString();
-            TempData["foundationList"] = fclist;
+            TempData["foundationList"] = viewM.FoundationClassesList;
             if(Session["UserID"] != null)
             {
                 flag = true;
             }
             
-            return View(v);
+                 //return View(v);
+            return View(viewM);
         }
 
 
@@ -59,11 +61,14 @@ namespace CPSWebApplication.Controllers
             string stId = TempData["StudentID"].ToString();
 
             List<Course> fc = mdl.FoundationClassesList;
+            string facultyName = mdl.assignedFaculty;
+
 
             List<Course> assignedCourses = new List<Course>();
             CPSDesignManager mgr = new CPSDesignManager();
             
             List<int> listIndex = new List<int>();
+
 
 
             switch (action)
@@ -89,7 +94,8 @@ namespace CPSWebApplication.Controllers
 
                     if (saveOnChanges)
                     {
-                        mgr.updateStudentDetails(stId, assignedCourses);
+                        mgr.updateStudentDetails(stId,assignedCourses,facultyName);
+                        mgr.updateFacultyDetails(stId, facultyName);
                         TempData["Message"] = "Profile Updated Successfully, Start with another.";
                     }
 

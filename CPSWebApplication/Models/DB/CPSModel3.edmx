@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="cpsFinalEntities.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CPS">
+          <Key>
+            <PropertyRef Name="StudentID" />
+          </Key>
+          <Property Name="StudentID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Academic Year" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Major" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CoreCourseDetails" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ElectiveCourseDetails" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ProgramCompletionType" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="AssignedFacultyAdvisor" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="AssignedAcademicAdvisor" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsDraft" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsFinalised" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsActive" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsAudited" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastFinalizeDate" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastDraftDate" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="cpsFinalEntitiesStoreContainer">
+          <EntitySet Name="CPS" EntityType="Self.CPS" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="cpsFinalEntities" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CPS">
+          <Key>
+            <PropertyRef Name="StudentID" />
+          </Key>
+          <Property Name="StudentID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Academic_Year" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Major" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CoreCourseDetails" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ElectiveCourseDetails" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProgramCompletionType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AssignedFacultyAdvisor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AssignedAcademicAdvisor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IsDraft" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IsFinalised" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IsActive" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IsAudited" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastFinalizeDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastDraftDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="capf17gswen4Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CPS" EntityType="cpsFinalEntities.CPS" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="cpsFinalEntitiesStoreContainer" CdmEntityContainer="capf17gswen4Entities">
+          <EntitySetMapping Name="CPS">
+            <EntityTypeMapping TypeName="cpsFinalEntities.CPS">
+              <MappingFragment StoreEntitySet="CPS">
+                <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Academic_Year" ColumnName="Academic Year" />
+                <ScalarProperty Name="Major" ColumnName="Major" />
+                <ScalarProperty Name="CoreCourseDetails" ColumnName="CoreCourseDetails" />
+                <ScalarProperty Name="ElectiveCourseDetails" ColumnName="ElectiveCourseDetails" />
+                <ScalarProperty Name="ProgramCompletionType" ColumnName="ProgramCompletionType" />
+                <ScalarProperty Name="AssignedFacultyAdvisor" ColumnName="AssignedFacultyAdvisor" />
+                <ScalarProperty Name="AssignedAcademicAdvisor" ColumnName="AssignedAcademicAdvisor" />
+                <ScalarProperty Name="IsDraft" ColumnName="IsDraft" />
+                <ScalarProperty Name="IsFinalised" ColumnName="IsFinalised" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IsAudited" ColumnName="IsAudited" />
+                <ScalarProperty Name="LastFinalizeDate" ColumnName="LastFinalizeDate" />
+                <ScalarProperty Name="LastDraftDate" ColumnName="LastDraftDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -30,11 +30,7 @@ namespace CPSWebApplication.Controllers
             string studentId = mdl.searchId;
         
             return RedirectToAction("StudentCPSDesign", "DesignCPS", new { id = Convert.ToInt32(studentId) });
-
-
         }
-
-
 
         public ActionResult GenerateCPS()
         {
@@ -76,16 +72,11 @@ namespace CPSWebApplication.Controllers
             return View(vm);
         }
 
-
-
-
         public ActionResult ModifyCPS()
         {
             return View();
         }
-
-
-
+        
         public ActionResult FinalizeCPS()
         {
             return View();
@@ -95,10 +86,6 @@ namespace CPSWebApplication.Controllers
         {
             return View();
         }
-
-      
-
-
 
     }
 }

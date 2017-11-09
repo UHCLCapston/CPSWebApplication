@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using CPSWebApplication.Models.ViewModel;
 using CPSWebApplication.Models.DB;
+using System.Text.RegularExpressions;
 
 namespace CPSWebApplication.Models.EntityManager
 {
@@ -175,9 +176,7 @@ namespace CPSWebApplication.Models.EntityManager
 
             return list;
         }
-
-
-
+        
         public List<string> getAllFoundationSWEN()
         {
             using (CPSCreationEntities db = new CPSCreationEntities())
@@ -297,7 +296,7 @@ namespace CPSWebApplication.Models.EntityManager
             }
         }
 
-        public void updateStudentDetails(string studentId, List<Course>assignedFoundationClasses )
+        public void updateStudentDetails(string studentId, List<Course>assignedFoundationClasses, string facultyAd )
         {
             string cShtName;
             List<string> list = new List<string>();
@@ -316,11 +315,31 @@ namespace CPSWebApplication.Models.EntityManager
                 if (result != null)
                 {
                     result.AssignedFoundation = foundationsString;
+                    result.AssignedFacultyAdvisor = facultyAd;
                     db.SaveChanges();
                 }
             }
 
         }//end of updateStudentDetails
+
+
+        public void updateFacultyDetails(string studentId, string facultyName)
+        {
+            string firstNameFaculty = "";
+            string[] words = facultyName.Split(' ');
+            firstNameFaculty = words[0];
+            string studentListStr = studentId + ",";
+
+            using (CPSCreationEntities db = new CPSCreationEntities())
+            {
+                var result = db.FacultyDetails.SingleOrDefault(b => b.First_Name == firstNameFaculty);
+                if (result != null)
+                {
+                    result.AdvisingStudentList = studentListStr;
+                    db.SaveChanges();
+                }
+            }
+        }
 
         public string getStudentLastName(string id)
         {
@@ -335,6 +354,55 @@ namespace CPSWebApplication.Models.EntityManager
             }
 
             return "";
+        }
+
+
+        public List<string> getAllFacultyAdvisorForDepartment (string major)
+        {
+            List<String> list = new List<string>();
+            String str = "";
+
+            using (CPSCreationEntities db = new CPSCreationEntities())
+            {
+                var results = db.FacultyDetails.Where(p => p.AdvisorDepartment.Contains(major)).Select(p => new FacultyDetails
+                {
+                    FirstName = p.First_Name,
+                    LastName = p.Last_Name,
+                    FacultyId = p.FacultyId,
+                }).ToList();
+
+                foreach(FacultyDetails f in results)
+                {
+                    str = f.FirstName + " " + f.LastName;
+                    list.Add(str);
+                }
+                return list;
+            }
+
+        }
+
+        public DesignCPSViewModel getModelForDesignCPSToView(int id)
+        {
+            CPSDesignManager mg = new CPSDesignManager();
+
+            string mjr = mg.getStudentMajor(id.ToString());
+            string ctlg = mg.catalogNeedsTofollow(id.ToString());
+
+            string lastName = mg.getStudentLastName(id.ToString());
+
+            DesignCPSViewModel v = new DesignCPSViewModel();
+            v.searchId = id.ToString();
+            v.lastName = lastName;
+            v.majorName = mjr;
+
+            List<Course> fclist = mg.getListFoundation(mjr, ctlg);
+            v.FoundationClassesList = fclist;
+            v.CoreClassesList = mg.getListCoreCourses(mjr, ctlg);
+            ctlg = Regex.Replace(ctlg, "^Catalog", "Academic Year");
+            v.academicYear = ctlg;
+            v.DfacultiesList = mg.getAllFacultyAdvisorForDepartment(mjr);
+
+            return v;
         }
 
     }
