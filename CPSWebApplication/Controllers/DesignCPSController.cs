@@ -23,31 +23,12 @@ namespace CPSWebApplication.Controllers
             bool flag = false;
             CPSDesignManager mg = new CPSDesignManager();
             DesignCPSViewModel viewM=  mg.getModelForDesignCPSToView(id);
-
-            /*string  mjr = mg.getStudentMajor(id.ToString());
-            string ctlg = mg.catalogNeedsTofollow(id.ToString());
-            
-            string lastName = mg.getStudentLastName(id.ToString());
-
-            DesignCPSViewModel v = new DesignCPSViewModel();
-            v.searchId = id.ToString();
-            v.lastName = lastName;
-            v.majorName = mjr;
-        
-            List<Course> fclist = mg.getListFoundation(mjr, ctlg);
-            v.FoundationClassesList = fclist;
-            v.CoreClassesList = mg.getListCoreCourses(mjr, ctlg);
-            ctlg = Regex.Replace(ctlg, "^Catalog", "Academic Year");
-            v.academicYear = ctlg;*/
-
             TempData["StudentID"] = id.ToString();
             TempData["foundationList"] = viewM.FoundationClassesList;
             if(Session["UserID"] != null)
             {
                 flag = true;
             }
-            
-                 //return View(v);
             return View(viewM);
         }
 
