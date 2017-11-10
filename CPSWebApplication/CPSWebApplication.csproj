@@ -501,11 +501,12 @@
     <Content Include="Views\AcademicAdvisor\DesignCPS.cshtml" />
     <Content Include="Views\DesignCPS\StudentCPSDesign.cshtml" />
     <Content Include="Views\AcademicAdvisor\GenerateCPSView.cshtml" />
+    <Content Include="Views\FacultyAdvisor\GenerateModifyDraftCPS.cshtml" />
+    <Content Include="Views\FacultyAdvisor\ViewBlanckCPS.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Default\" />
-    <Folder Include="Views\FacultyAdvisor\" />
     <Folder Include="Views\GenerateCPS\" />
     <Folder Include="Views\Secretory\" />
     <Folder Include="Views\Student\" />

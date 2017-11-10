@@ -30,5 +30,8 @@ namespace CPSWebApplication.Models.DB
         public string IsAudited { get; set; }
         public string LastFinalizeDate { get; set; }
         public string LastDraftDate { get; set; }
+        public string FoundationCourseDeatils { get; set; }
+        public string IsBlankCreated { get; set; }
+        public string BlankCreatedDate { get; set; }
     }
 }

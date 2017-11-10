@@ -25,6 +25,9 @@ namespace CPSWebApplication.Controllers
             DesignCPSViewModel viewM=  mg.getModelForDesignCPSToView(id);
             TempData["StudentID"] = id.ToString();
             TempData["foundationList"] = viewM.FoundationClassesList;
+            TempData["AcademicYear"] = viewM.academicYear;
+            TempData["CoreCourses"] = viewM.CoreClassesList;
+            TempData["ElectiveCourses"] = viewM.ElectiveClassesList;
             if(Session["UserID"] != null)
             {
                 flag = true;
@@ -39,18 +42,19 @@ namespace CPSWebApplication.Controllers
         {
             bool saveOnChanges = false;
             List<Course> fclist = (List<Course>)TempData["foundationList"];
+
+            List<Course> ccList = (List<Course>)TempData["CoreCourses"];
+            List<Course> ecList = (List<Course>)TempData["ElectiveCourses"];
+
+            string acYear = TempData["AcademicYear"].ToString();
             string stId = TempData["StudentID"].ToString();
 
             List<Course> fc = mdl.FoundationClassesList;
             string facultyName = mdl.assignedFaculty;
-
-
             List<Course> assignedCourses = new List<Course>();
             CPSDesignManager mgr = new CPSDesignManager();
-            
+            CPSDraftToFinalManager cpsmgr = new CPSDraftToFinalManager();
             List<int> listIndex = new List<int>();
-
-
 
             switch (action)
             {
@@ -66,23 +70,28 @@ namespace CPSWebApplication.Controllers
                         count = count + 1;
                     }
 
-                    foreach (int i in listIndex)
+                    if (listIndex.Count > 0)
                     {
-                        Course course = fclist.ElementAt(i);
-                        assignedCourses.Add(course);
-                        saveOnChanges = true;
+                        foreach (int i in listIndex)
+                        {
+                            Course course = fclist.ElementAt(i);
+                            assignedCourses.Add(course);
+                            saveOnChanges = true;
+                        }
                     }
+                    else {
+                        assignedCourses = null;
+                        saveOnChanges = true;
 
+                    }
                     if (saveOnChanges)
                     {
                         mgr.updateStudentDetails(stId,assignedCourses,facultyName);
                         mgr.updateFacultyDetails(stId, facultyName);
+                        cpsmgr.insertNewBlanckCPSToCPSDB(stId,ccList,acYear);
                         TempData["Message"] = "Profile Updated Successfully, Start with another.";
                     }
-
                     return RedirectToAction("DesignCPS", "AcademicAdvisor");
-
-
                 case "back":
                     return RedirectToAction("AcademicAdvisor", "Home", new { id =Convert.ToInt32(Session["UserID"]) });
 

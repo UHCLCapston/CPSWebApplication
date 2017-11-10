@@ -300,26 +300,29 @@ namespace CPSWebApplication.Models.EntityManager
         {
             string cShtName;
             List<string> list = new List<string>();
-
-            foreach (Course c in assignedFoundationClasses)
+            string foundationsString = "";
+            if (assignedFoundationClasses != null)
             {
-                cShtName = c.CourseShortName;
-                list.Add(cShtName);
-            }
-
-            string foundationsString = string.Join(",", list.ToArray());
-
-            using (CPSCreationEntities db = new CPSCreationEntities())
-            {
-                var result = db.StudentDetails.SingleOrDefault(b => b.studentID ==studentId);
-                if (result != null)
+                foreach (Course c in assignedFoundationClasses)
                 {
-                    result.AssignedFoundation = foundationsString;
-                    result.AssignedFacultyAdvisor = facultyAd;
-                    db.SaveChanges();
+                    cShtName = c.CourseShortName;
+                    list.Add(cShtName);
                 }
-            }
 
+                foundationsString = string.Join(",", list.ToArray());
+            }
+            
+                using (CPSCreationEntities db = new CPSCreationEntities())
+                {
+                    var result = db.StudentDetails.SingleOrDefault(b => b.studentID == studentId);
+                    if (result != null)
+                    {
+                        result.AssignedFoundation = foundationsString;
+                        result.AssignedFacultyAdvisor = facultyAd;
+                        db.SaveChanges();
+                    }
+                }
+            
         }//end of updateStudentDetails
 
 

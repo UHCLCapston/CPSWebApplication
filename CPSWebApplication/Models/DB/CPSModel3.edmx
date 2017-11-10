@@ -12,19 +12,22 @@
           <Property Name="StudentID" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Academic Year" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Academic Year" Type="nchar" MaxLength="50" Nullable="false" />
           <Property Name="Major" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="CoreCourseDetails" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="ElectiveCourseDetails" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="ProgramCompletionType" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FoundationCourseDeatils" Type="nvarchar(max)" />
+          <Property Name="CoreCourseDetails" Type="nvarchar(max)" />
+          <Property Name="ElectiveCourseDetails" Type="nvarchar(max)" />
+          <Property Name="ProgramCompletionType" Type="nvarchar" MaxLength="50" />
           <Property Name="AssignedFacultyAdvisor" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="AssignedAcademicAdvisor" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="IsDraft" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="IsFinalised" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="IsActive" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="IsAudited" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="LastFinalizeDate" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="LastDraftDate" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="AssignedAcademicAdvisor" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsDraft" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsFinalised" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsActive" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsAudited" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastFinalizeDate" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastDraftDate" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsBlankCreated" Type="nvarchar" MaxLength="50" />
+          <Property Name="BlankCreatedDate" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityContainer Name="cpsFinalEntitiesStoreContainer">
           <EntitySet Name="CPS" EntityType="Self.CPS" Schema="dbo" store:Type="Tables" />
@@ -40,19 +43,22 @@
           <Property Name="StudentID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Academic_Year" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Academic_Year" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="Major" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="CoreCourseDetails" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ElectiveCourseDetails" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ProgramCompletionType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CoreCourseDetails" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ElectiveCourseDetails" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ProgramCompletionType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="AssignedFacultyAdvisor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="AssignedAcademicAdvisor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="IsDraft" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="IsFinalised" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="IsActive" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="IsAudited" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="LastFinalizeDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="LastDraftDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AssignedAcademicAdvisor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsDraft" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsFinalised" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsAudited" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastFinalizeDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastDraftDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FoundationCourseDeatils" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsBlankCreated" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BlankCreatedDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityContainer Name="capf17gswen4Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="CPS" EntityType="cpsFinalEntities.CPS" />
@@ -66,6 +72,9 @@
           <EntitySetMapping Name="CPS">
             <EntityTypeMapping TypeName="cpsFinalEntities.CPS">
               <MappingFragment StoreEntitySet="CPS">
+                <ScalarProperty Name="BlankCreatedDate" ColumnName="BlankCreatedDate" />
+                <ScalarProperty Name="IsBlankCreated" ColumnName="IsBlankCreated" />
+                <ScalarProperty Name="FoundationCourseDeatils" ColumnName="FoundationCourseDeatils" />
                 <ScalarProperty Name="StudentID" ColumnName="StudentID" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />

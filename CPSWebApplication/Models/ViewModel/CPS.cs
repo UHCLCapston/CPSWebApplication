@@ -28,5 +28,19 @@ namespace CPSWebApplication.Models.ViewModel
         public string LastFinalizeDate { get; set; }
         public string LastDraftDate { get; set; }
 
+        public string IsBlankCreated { get; set; }
+        public string blankCreatedDate{ get; set; }
+
+        public CPS(string firstName, string lastName, string studentID, string academicYear, string major, string coreCourseDetails, string assignedFoundationCourseDetails, string assignedFacultyAdvioser)
+        {
+            FirstName = firstName;
+            LastName = lastName;
+            StudentID = studentID;
+            AcademicYear = academicYear;
+            Major = major;
+            CoreCourseDetails = coreCourseDetails;
+            AssignedFoundationCourseDetails = assignedFoundationCourseDetails;
+            AssignedFacultyAdvioser = assignedFacultyAdvioser;
+        }
     }
 }
