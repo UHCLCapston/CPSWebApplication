@@ -6,3 +6,20 @@
 <h2>@Model.FirstName</h2>
 <h2>Welcome to Faculty Portal</h2>
 
+@using (Html.BeginForm("Create", "AcadAdv"))
+{
+    <div>
+        <div>
+            <button type="button" class="btn btn-default" onclick="window.location = ('@Url.Action("GenerateCPS","AcademicAdvisor")')">View Blank CPS</button>
+        </div>
+        <br /><br />
+        <div>
+            <button type="button" class="btn btn-default" onclick="window.location = ('@Url.Action("CreateDraftCPS","FacultyAdvisor")')">Create Draft CPS</button>
+        </div>
+        <br /><br />
+        <div>
+            <button type="button" class="btn btn-default" onclick="window.location = ('@Url.Action("FinalizeCPS","AcademicAdvisor")')">View Fianl CPS</button>
+        </div>
+    </div>
+}
+

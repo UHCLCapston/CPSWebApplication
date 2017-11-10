@@ -338,7 +338,13 @@ namespace CPSWebApplication.Models.EntityManager
                 var result = db.FacultyDetails.SingleOrDefault(b => b.First_Name == firstNameFaculty);
                 if (result != null)
                 {
-                    result.AdvisingStudentList = studentListStr;
+                    if (result.AdvisingStudentList.Contains(studentListStr)) {
+                        result.AdvisingStudentList = result.AdvisingStudentList;
+                    }
+                    else
+                    {
+                        result.AdvisingStudentList += studentListStr;
+                    }
                     db.SaveChanges();
                 }
             }

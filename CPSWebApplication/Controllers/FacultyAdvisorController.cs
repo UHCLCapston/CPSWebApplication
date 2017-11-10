@@ -18,29 +18,35 @@ namespace CPSWebApplication.Controllers
             {
                 id = Session["UserName"].ToString();
             }
-            return View();
 
+            return View();
         }
 
-        public ActionResult GenerateModifyDraftCPS()
+        public ActionResult CreateDraftCPS()
         {
             string id;
+            string userId = Session["UserID"].ToString();
             if (Session["UserID"] != null)
             {
                 id = Session["UserName"].ToString();
             }
-            return View();
+            CPSDraftToFinalManager mgr = new CPSDraftToFinalManager();
+            DesignCPSViewModel mdl = new DesignCPSViewModel();
+
+            List<CPS> listStudentCPSWork = mgr.getListBlackCPSUnderFacultyAdvioser(userId);
+            mdl.cpsList = listStudentCPSWork;
+
+            return View(mdl);
         }
 
-        public ActionResult ViewDraftCPS()
+        [HttpPost]
+        public ActionResult CreateDraftCPS(CPS mdl)
         {
-            string id;
-            if (Session["UserID"] != null)
-            {
-                id = Session["UserName"].ToString();
-            }
-            return View();
+            string studentId = mdl.StudentID;
+
+            return RedirectToAction("StudentCPSDesign", "DesignCPS", new { id = Convert.ToInt32(studentId) });
         }
+
 
         public ActionResult ViewFinalCPS()
         {

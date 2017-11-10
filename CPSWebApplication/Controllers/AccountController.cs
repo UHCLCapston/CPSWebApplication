@@ -38,7 +38,10 @@ namespace CPSWebApplication.Controllers
                         String fullName = userManager.GetUserFullNamebyId(uhclId);
 
                         Session["UserID"] = uhclId.ToString();
-                       Session["UserName"] = fullName.ToString();
+                        Session["UserName"] = fullName.ToString();
+                        Session["Role"] = role.ToString();
+
+
 
                         if (role.Equals("Student"))
                         { 
@@ -66,6 +69,8 @@ namespace CPSWebApplication.Controllers
             FormsAuthentication.SignOut();
             Session["UserID"] = null;
             Session["UserName"] = null;
+            Session["Role"] = null;
+
             return RedirectToAction("LogIn", "Account");
         }
     }// end of class

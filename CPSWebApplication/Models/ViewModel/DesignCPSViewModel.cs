@@ -42,6 +42,8 @@ namespace CPSWebApplication.Models.ViewModel
 
         public List<String> DfacultiesList { get; set; }
 
+        public List<CPS> cpsList { get; set; }
+
         public DesignCPSViewModel()
         {
         }

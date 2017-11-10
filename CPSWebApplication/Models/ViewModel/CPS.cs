@@ -42,5 +42,15 @@ namespace CPSWebApplication.Models.ViewModel
             AssignedFoundationCourseDetails = assignedFoundationCourseDetails;
             AssignedFacultyAdvioser = assignedFacultyAdvioser;
         }
+
+        public CPS(string firstName, string lastName, string studentID, string lastDraftDate, string blankCreatedDate)
+        {
+            FirstName = firstName;
+            LastName = lastName;
+            StudentID = studentID;
+            LastDraftDate = lastDraftDate;
+            this.blankCreatedDate = blankCreatedDate;
+        }
+
     }
 }
