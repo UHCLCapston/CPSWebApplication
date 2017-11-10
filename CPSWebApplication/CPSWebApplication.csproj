@@ -540,11 +540,11 @@
     <Content Include="Views\FacultyAdvisor\ViewBlanckCPS.cshtml" />
     <Content Include="Views\FacultyAdvisor\CreateDraftCPS.cshtml" />
     <Content Include="Views\FacultyAdvisor\ViewFinalCPS.cshtml" />
+    <Content Include="Views\DRAFTCPS\GenerateDraftCPS.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Default\" />
-    <Folder Include="Views\DRAFTCPS\" />
     <Folder Include="Views\GenerateCPS\" />
     <Folder Include="Views\Secretory\" />
     <Folder Include="Views\Student\" />

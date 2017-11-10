@@ -13,17 +13,26 @@ namespace CPSWebApplication.Controllers
         // GET: DRAFTCPS
         public ActionResult GenerateDraftCPS()
         {
-            return View();
+            string userName;
+            if (Session["UserID"] != null)
+            {
+                userName = Session["UserName"].ToString();
+            }
+           return View();
         }
 
-        [HttpPost]
+        [HttpGet]
         public ActionResult GenerateDraftCPS(int id)
         {
-            return View();
+            string userName;
+            CPSDraftToFinalManager mgr = new CPSDraftToFinalManager();
+            if (Session["UserID"] != null)
+            {
+                userName = Session["UserName"].ToString();
+            }
+            DesignCPSViewModel model = mgr.getDraftCPSModelToShow(id.ToString());
+            return View(model);
         }
-
-
-
 
     }
 }

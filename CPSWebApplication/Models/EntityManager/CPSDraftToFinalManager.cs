@@ -99,7 +99,6 @@ namespace CPSWebApplication.Models.EntityManager
 
                 return null;
         }
-
         public List<ViewModel.CPS> getListBlackCPSUnderFacultyAdvioser(string id)
         {
             UserManager mgr = new UserManager();
@@ -119,5 +118,24 @@ namespace CPSWebApplication.Models.EntityManager
                 return results;
             }
         }
-    }
-}
+
+
+
+        public void getStudentCPS(String studentId)
+        {
+
+        }
+        public DesignCPSViewModel getDraftCPSModelToShow(string id)
+        {
+            CPSDesignManager mgr = new CPSDesignManager();
+
+            //completeion optionlist
+
+            return null;
+        }
+
+
+
+    }//end of class
+
+}//end of namespace

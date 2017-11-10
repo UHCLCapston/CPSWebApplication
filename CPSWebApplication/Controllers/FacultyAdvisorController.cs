@@ -35,6 +35,7 @@ namespace CPSWebApplication.Controllers
 
             List<CPS> listStudentCPSWork = mgr.getListBlackCPSUnderFacultyAdvioser(userId);
             mdl.cpsList = listStudentCPSWork;
+            TempData["StudentList"] = listStudentCPSWork;
 
             return View(mdl);
         }
@@ -42,9 +43,22 @@ namespace CPSWebApplication.Controllers
         [HttpPost]
         public ActionResult CreateDraftCPS(DesignCPSViewModel mdl)
         {
+            Boolean flag = false;
             string studentId = mdl.searchId;
-
-            return RedirectToAction("GenerateDraftCPS", "DraftCPSController", new { id = Convert.ToInt32(studentId) });
+            List<CPS> studentlist = (List<CPS>)TempData["StudentList"];
+            foreach(CPS c in studentlist)
+            {
+                if (studentId.Equals(c.StudentID)) {
+                    flag = true;
+                    break;
+                }
+            }
+            if (flag)
+            {
+                return RedirectToAction("GenerateDraftCPS", "DraftCPS", new { id = Convert.ToInt32(studentId) });
+            }
+            TempData["Message"] = "Student is not in your list";
+            return RedirectToAction("CreateDraftCPS", "FacultyAdvisor");
         }
 
 
