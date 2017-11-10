@@ -16,6 +16,7 @@ namespace CPSWebApplication.Models.EntityManager
         {
             using(EserviceDBEntities db = new EserviceDBEntities())
             {
+                
                 return db.APPUsers.Where(o => o.UHCLEmail.Equals(username)).Any();
             }
         }
@@ -102,6 +103,24 @@ namespace CPSWebApplication.Models.EntityManager
                     return null;
             }
         }
+
+
+
+        public string GetFacultyNameByID(string id)
+        {
+            using (CPSCreationEntities db = new CPSCreationEntities())
+            {
+                var res = db.FacultyDetails.Where(o => o.FacultyId.Equals(id));
+                if (res.Any())
+                {
+                    return res.SingleOrDefault().First_Name + " " + res.SingleOrDefault().Last_Name;
+                }
+                else
+                    return null;
+            }
+        }
+
+
         public string getUserPassword(string username)
         {
             using (EserviceDBEntities db = new EserviceDBEntities())

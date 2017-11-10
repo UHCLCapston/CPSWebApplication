@@ -29,7 +29,10 @@ namespace CPSWebApplication.Models.ViewModel
         public string LastDraftDate { get; set; }
 
         public string IsBlankCreated { get; set; }
-        public string blankCreatedDate{ get; set; }
+        public string BlankCreatedDate{ get; set; }
+
+        public CPS() {
+        }
 
         public CPS(string firstName, string lastName, string studentID, string academicYear, string major, string coreCourseDetails, string assignedFoundationCourseDetails, string assignedFacultyAdvioser)
         {
@@ -49,7 +52,7 @@ namespace CPSWebApplication.Models.ViewModel
             LastName = lastName;
             StudentID = studentID;
             LastDraftDate = lastDraftDate;
-            this.blankCreatedDate = blankCreatedDate;
+            this.BlankCreatedDate = blankCreatedDate;
         }
 
     }

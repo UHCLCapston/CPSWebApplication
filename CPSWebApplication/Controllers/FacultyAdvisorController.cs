@@ -40,11 +40,11 @@ namespace CPSWebApplication.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreateDraftCPS(CPS mdl)
+        public ActionResult CreateDraftCPS(DesignCPSViewModel mdl)
         {
-            string studentId = mdl.StudentID;
+            string studentId = mdl.searchId;
 
-            return RedirectToAction("StudentCPSDesign", "DesignCPS", new { id = Convert.ToInt32(studentId) });
+            return RedirectToAction("GenerateDraftCPS", "DraftCPSController", new { id = Convert.ToInt32(studentId) });
         }
 
 

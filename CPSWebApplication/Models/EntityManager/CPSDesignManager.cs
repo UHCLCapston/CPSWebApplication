@@ -66,8 +66,6 @@ namespace CPSWebApplication.Models.EntityManager
                     {
                         strCatalog = "Catalog17_18";
                     }
-
-
                 }
             }
 
@@ -107,10 +105,9 @@ namespace CPSWebApplication.Models.EntityManager
                     list = getAllFoundationDetailsCSCI();
                 }
                 else if (major.Equals("SENG")) {
+                    list = getAllFoundationDetailsSENG();
 
-                } 
-
-
+                }
             }
             else if (catalog.Equals("Catalog17_18"))
             {
@@ -119,6 +116,12 @@ namespace CPSWebApplication.Models.EntityManager
 
             return list;
         }
+
+        private List<Course> getAllFoundationDetailsSENG()
+        {
+            throw new NotImplementedException();
+        }
+
         public List<Course> getListCoreCourses(string major, string catalog)
         {
             List<Course> list = new List<Course>();
@@ -131,11 +134,12 @@ namespace CPSWebApplication.Models.EntityManager
                 }
                 else if (major.Equals("CSCI"))
                 {
-                   
+                    list = getAllCoreDetaisForCSCI();
+
                 }
                 else if (major.Equals("SENG"))
                 {
-
+                    list = getAllCoreDetaisForSENG();
                 }
 
 
@@ -146,6 +150,16 @@ namespace CPSWebApplication.Models.EntityManager
             }
 
             return list;
+        }
+
+        private List<Course> getAllCoreDetaisForSENG()
+        {
+            throw new NotImplementedException();
+        }
+
+        private List<Course> getAllCoreDetaisForCSCI()
+        {
+            throw new NotImplementedException();
         }
 
         public List<Course> getListElectiveCourses(string major, string catalog)
@@ -160,10 +174,12 @@ namespace CPSWebApplication.Models.EntityManager
                 }
                 else if (major.Equals("CSCI"))
                 {
+                    list = getAllElectiveDetailsForCSCI();
 
                 }
                 else if (major.Equals("SENG"))
                 {
+                    list = getAllElectiveDetailsForSENG();
 
                 }
 
@@ -176,10 +192,20 @@ namespace CPSWebApplication.Models.EntityManager
 
             return list;
         }
-        
+
+        private List<Course> getAllElectiveDetailsForSENG()
+        {
+            throw new NotImplementedException();
+        }
+
+        private List<Course> getAllElectiveDetailsForCSCI()
+        {
+            throw new NotImplementedException();
+        }
+
         public List<string> getAllFoundationSWEN()
         {
-            using (CPSCreationEntities db = new CPSCreationEntities())
+           /* using (CPSCreationEntities db = new CPSCreationEntities())
             {
                 var results = db.Catalog16_17.Where(p => p.SWEN.Contains("F")).Select(p => new
                 {
@@ -188,13 +214,25 @@ namespace CPSWebApplication.Models.EntityManager
                 }).Cast<string>().ToList(); ;
 
                 return results;
+            }*/
+
+            using (c533317sp04prakhyanEntities db = new c533317sp04prakhyanEntities())
+            {
+                var results = db.AcademicCatalog16_17.Where(p => p.SWEN.Contains("F")).Select(p => new
+                {
+                    p.Course
+
+                }).Cast<string>().ToList(); 
+
+                return results;
             }
+
         }
 
         public List<Course> getAllFoundationDetailsSWEN()
         {
 
-            using (CPSCreationEntities db = new CPSCreationEntities())
+          /*  using (CPSCreationEntities db = new CPSCreationEntities())
             {
                 var results = db.Catalog16_17.Where(p => p.SWEN.Contains("F")).Select(p => new Course
                 {
@@ -207,13 +245,31 @@ namespace CPSWebApplication.Models.EntityManager
                 }).ToList(); ;
 
                 return results;
+            }*/
+
+
+            using (c533317sp04prakhyanEntities db = new c533317sp04prakhyanEntities())
+            {
+                var results = db.AcademicCatalog16_17.Where(p => p.SWEN.Contains("F")).Select(p => new Course
+                {
+                    CourseShortName = p.Course,
+                    CourseFullName = p.Long_Title,
+                    CourseSubject = p.Dept,
+                    Courselevel = p.Course_No,
+                    CreditHrs = p.Credit_Hr
+
+                }).ToList(); ;
+
+                return results;
             }
+
+
         }
 
         public List<Course> getAllFoundationDetailsCSCI()
         {
 
-            using (CPSCreationEntities db = new CPSCreationEntities())
+          /*  using (CPSCreationEntities db = new CPSCreationEntities())
             {
                 var results = db.Catalog16_17.Where(p => p.CSCI.Contains("F")).Select(p => new Course
                 {
@@ -226,7 +282,24 @@ namespace CPSWebApplication.Models.EntityManager
                 }).ToList(); ;
 
                 return results;
+            }*/
+
+            using (c533317sp04prakhyanEntities db = new c533317sp04prakhyanEntities())
+            {
+                var results = db.AcademicCatalog16_17.Where(p => p.CSCI.Contains("F")).Select(p => new Course
+                {
+                    CourseShortName = p.Course,
+                    CourseFullName = p.Long_Title,
+                    CourseSubject = p.Dept,
+                    Courselevel = p.Course_No,
+                    CreditHrs = p.Credit_Hr
+
+                }).ToList(); ;
+
+                return results;
             }
+
+
         }
 
         public List<string> getAllFoundationCSCI()
@@ -236,38 +309,65 @@ namespace CPSWebApplication.Models.EntityManager
 
         public List<String> getAllCoreForSWEN()
         {
-            using (CPSCreationEntities db = new CPSCreationEntities())
+            /* using (CPSCreationEntities db = new CPSCreationEntities())
+             {
+                 var results = db.Catalog16_17.Where(p => p.SWEN.Contains("C")).Select(p => new
+                 {
+                     p.Course
+                 }).Cast<string>().ToList(); ;
+
+                 return results;
+             }*/
+            using (c533317sp04prakhyanEntities db = new c533317sp04prakhyanEntities())
             {
-                var results = db.Catalog16_17.Where(p => p.SWEN.Contains("C")).Select(p => new
+                var results = db.AcademicCatalog16_17.Where(p => p.SWEN.Contains("C")).Select(p => new
                 {
                     p.Course
                 }).Cast<string>().ToList(); ;
 
                 return results;
             }
+
         }
 
         public List<Course> getAllCoreDetaisForSWEN()
         {
-            using (CPSCreationEntities db = new CPSCreationEntities())
+            /* using (CPSCreationEntities db = new CPSCreationEntities())
+             {
+                 var results = db.Catalog16_17.Where(p => p.SWEN.Contains("C")).Select(p => new Course
+                 {
+                     CourseShortName = p.Course,
+                     CourseFullName = p.LongTitle,
+                     CourseSubject = p.Subject,
+                     Courselevel = p.Catalog,
+                     CreditHrs = p.creditHrs
+
+                 }).ToList(); 
+
+                 return results;
+             }*/
+            using (c533317sp04prakhyanEntities db = new c533317sp04prakhyanEntities())
             {
-                var results = db.Catalog16_17.Where(p => p.SWEN.Contains("C")).Select(p => new Course
+                var results = db.AcademicCatalog16_17.Where(p => p.SWEN.Contains("C")).Select(p => new Course
                 {
                     CourseShortName = p.Course,
-                    CourseFullName = p.LongTitle,
-                    CourseSubject = p.Subject,
-                    Courselevel = p.Catalog,
-                    CreditHrs = p.creditHrs
+                    CourseFullName = p.Long_Title,
+                    CourseSubject = p.Dept,
+                    Courselevel = p.Course_No,
+                    CreditHrs = p.Credit_Hr
 
-                }).ToList(); 
+                }).ToList();
 
                 return results;
             }
+
+
+
         }
 
         public List<String> getAllElectiveForSWEN()
         {
-            using (CPSCreationEntities db = new CPSCreationEntities())
+          /*  using (CPSCreationEntities db = new CPSCreationEntities())
             {
                 var results = db.Catalog16_17.Where(p => p.SWEN.Contains("E")).Select(p => new
                 {
@@ -275,12 +375,23 @@ namespace CPSWebApplication.Models.EntityManager
                 }).Cast<string>().ToList(); ;
 
                 return results;
+            }*/
+
+            using (c533317sp04prakhyanEntities db = new c533317sp04prakhyanEntities())
+            {
+                var results = db.AcademicCatalog16_17.Where(p => p.SWEN.Contains("E")).Select(p => new
+                {
+                    p.Course
+                }).Cast<string>().ToList(); ;
+
+                return results;
             }
+
         }
 
         public List<Course> getAllElectiveDetailsForSWEN()
         {
-            using (CPSCreationEntities db = new CPSCreationEntities())
+           /* using (CPSCreationEntities db = new CPSCreationEntities())
             {
                 var results = db.Catalog16_17.Where(p => p.SWEN.Contains("E")).Select(p => new Course
                 {
@@ -294,6 +405,23 @@ namespace CPSWebApplication.Models.EntityManager
 
                 return results;
             }
+            */
+            using (c533317sp04prakhyanEntities db = new c533317sp04prakhyanEntities())
+            {
+                var results = db.AcademicCatalog16_17.Where(p => p.SWEN.Contains("E")).Select(p => new Course
+                {
+                    CourseShortName = p.Course,
+                    CourseFullName = p.Long_Title,
+                    CourseSubject = p.Dept,
+                    Courselevel = p.Course_No,
+                    CreditHrs = p.Credit_Hr
+
+                }).ToList();
+
+                return results;
+            }
+
+
         }
 
         public void updateStudentDetails(string studentId, List<Course>assignedFoundationClasses, string facultyAd )
@@ -325,7 +453,6 @@ namespace CPSWebApplication.Models.EntityManager
             
         }//end of updateStudentDetails
 
-
         public void updateFacultyDetails(string studentId, string facultyName)
         {
             string firstNameFaculty = "";
@@ -335,15 +462,30 @@ namespace CPSWebApplication.Models.EntityManager
 
             using (CPSCreationEntities db = new CPSCreationEntities())
             {
+                Boolean flag = false;
                 var result = db.FacultyDetails.SingleOrDefault(b => b.First_Name == firstNameFaculty);
                 if (result != null)
                 {
-                    if (result.AdvisingStudentList.Contains(studentListStr)) {
-                        result.AdvisingStudentList = result.AdvisingStudentList;
+                    var check = result.AdvisingStudentList;
+                    if(check != null)
+                    {
+                       flag= true;
+                    }
+
+                    if (flag)
+                    {
+                        if (result.AdvisingStudentList.Contains(studentListStr))
+                        {
+                            result.AdvisingStudentList = result.AdvisingStudentList;
+                        }
+                        else
+                        {
+                            result.AdvisingStudentList += studentListStr;
+                        }
                     }
                     else
                     {
-                        result.AdvisingStudentList += studentListStr;
+                        result.AdvisingStudentList = studentListStr;
                     }
                     db.SaveChanges();
                 }
@@ -364,7 +506,6 @@ namespace CPSWebApplication.Models.EntityManager
 
             return "";
         }
-
 
         public List<string> getAllFacultyAdvisorForDepartment (string major)
         {

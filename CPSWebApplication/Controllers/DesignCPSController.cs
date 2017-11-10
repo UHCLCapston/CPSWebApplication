@@ -87,7 +87,7 @@ namespace CPSWebApplication.Controllers
                     if (saveOnChanges)
                     {
                         mgr.updateStudentDetails(stId,assignedCourses,facultyName);
-                        mgr.updateFacultyDetails(stId, facultyName);
+                       // mgr.updateFacultyDetails(stId, facultyName);
                         cpsmgr.insertNewBlanckCPSToCPSDB(stId,ccList,acYear);
                         TempData["Message"] = "Profile Updated Successfully, Start with another.";
                     }

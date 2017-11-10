@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="CatalogDB.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AcademicCatalog16-17">
+          <Key>
+            <PropertyRef Name="Course" />
+          </Key>
+          <Property Name="Course" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Dept" Type="nvarchar" MaxLength="255" />
+          <Property Name="Course_No" Type="nvarchar" MaxLength="255" />
+          <Property Name="Long Title" Type="nvarchar" MaxLength="255" />
+          <Property Name="Credit_Hr" Type="nvarchar" MaxLength="53" />
+          <Property Name="SWEN" Type="nvarchar" MaxLength="255" />
+          <Property Name="CSCI" Type="nvarchar" MaxLength="255" />
+          <Property Name="SENG" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityContainer Name="CatalogDBStoreContainer">
+          <EntitySet Name="AcademicCatalog16-17" EntityType="Self.AcademicCatalog16-17" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CatalogDB" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AcademicCatalog16_17">
+          <Key>
+            <PropertyRef Name="Course" />
+          </Key>
+          <Property Name="Course" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Dept" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Course_No" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Long_Title" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Credit_Hr" Type="String" MaxLength="53" FixedLength="false" Unicode="true" />
+          <Property Name="SWEN" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CSCI" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="SENG" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="c533317sp04prakhyanEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AcademicCatalog16_17" EntityType="Self.AcademicCatalog16_17" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CatalogDBStoreContainer" CdmEntityContainer="c533317sp04prakhyanEntities">
+          <EntitySetMapping Name="AcademicCatalog16_17">
+            <EntityTypeMapping TypeName="CatalogDB.AcademicCatalog16_17">
+              <MappingFragment StoreEntitySet="AcademicCatalog16-17">
+                <ScalarProperty Name="Course" ColumnName="Course" />
+                <ScalarProperty Name="Dept" ColumnName="Dept" />
+                <ScalarProperty Name="Course_No" ColumnName="Course_No" />
+                <ScalarProperty Name="Long_Title" ColumnName="Long Title" />
+                <ScalarProperty Name="Credit_Hr" ColumnName="Credit_Hr" />
+                <ScalarProperty Name="SWEN" ColumnName="SWEN" />
+                <ScalarProperty Name="CSCI" ColumnName="CSCI" />
+                <ScalarProperty Name="SENG" ColumnName="SENG" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -32,9 +32,7 @@ namespace CPSWebApplication.Controllers
             CPSDesignManager mg = new CPSDesignManager();
             
             string studentId = mdl.searchId;
-
-
-        
+       
             return RedirectToAction("StudentCPSDesign", "DesignCPS", new { id = Convert.ToInt32(studentId) });
         }
 

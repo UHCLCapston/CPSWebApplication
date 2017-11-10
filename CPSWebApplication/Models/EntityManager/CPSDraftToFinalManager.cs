@@ -14,11 +14,13 @@ namespace CPSWebApplication.Models.EntityManager
         public void insertNewBlanckCPSToCPSDB(string studentId, List<Course>clist,  string year)
         {
             string cName = "";
+          //  string cRegisered = "";
+          //  string grade = "";                      /// need to be develop for exist student
        
             List<String> str = new List<string>();
                 foreach (Course c in clist)
                {
-                cName = c.CourseShortName;
+                cName = c.CourseShortName;   
                 str.Add(cName);
                }
             string cListStr = String.Join(",",str);
@@ -32,12 +34,28 @@ namespace CPSWebApplication.Models.EntityManager
                 if (result != null)
                 {
 
-                   /* if ((result.FirstOrDefault().StudentID).Equals(cps.StudentID))
+                    var info = result.SingleOrDefault(b => b.StudentID == studentId); ;
+                    if (info != null)
                     {
+                        info.FirstName = cps.FirstName;
+                        info.LastName = cps.LastName;
+                        info.FoundationCourseDeatils = cps.AssignedFoundationCourseDetails;
+                        info.AssignedFacultyAdvisor = cps.AssignedFacultyAdvioser;
+                        info.FoundationCourseDeatils = cps.AssignedFoundationCourseDetails;
+                        info.CoreCourseDetails = cps.CoreCourseDetails;
+                        info.Academic_Year = cps.AcademicYear;
+                        info.Major = cps.Major;
+                        info.IsDraft = "No";
+                        info.IsActive = "Yes";
+                        info.IsAudited = "No";
+                        info.IsBlankCreated = "Yes";
+                        info.IsFinalised = "No";
+                        info.BlankCreatedDate = dateTime;
+                        db.SaveChanges();
 
                     }
                     else
-                    { }*/
+                    {
                         DB.CPS cpsDb = new DB.CPS();
                         cpsDb.FirstName = cps.FirstName;
                         cpsDb.LastName = cps.LastName;
@@ -54,7 +72,7 @@ namespace CPSWebApplication.Models.EntityManager
                         cpsDb.CoreCourseDetails = cps.CoreCourseDetails;
                         cpsDb.BlankCreatedDate = dateTime;
                         db.CPS.Add(cpsDb);
-                    
+                    }
                     db.SaveChanges();
                 }
 
@@ -84,44 +102,22 @@ namespace CPSWebApplication.Models.EntityManager
 
         public List<ViewModel.CPS> getListBlackCPSUnderFacultyAdvioser(string id)
         {
-            String strStudentIdlist="";
-            List<String> studentIds = new List<String>();
-            List<ViewModel.CPS> list = new List<ViewModel.CPS>();
-
-            using (CPSCreationEntities db = new CPSCreationEntities())
+            UserManager mgr = new UserManager();
+            string  name =mgr.GetFacultyNameByID(id);
+            using (capf17gswen4Entities db = new capf17gswen4Entities())
             {
-                var info = db.FacultyDetails.Where(o => o.FacultyId.ToLower().Equals(id));
-                if (info.Any())
-                {
-                    strStudentIdlist = info.FirstOrDefault().AdvisingStudentList;
-                }
 
+                 var results = db.CPS.Where(p => p.AssignedFacultyAdvisor.Contains(name)).Select(p => new ViewModel.CPS
+                 {
+                    FirstName = p.FirstName,
+                    LastName = p.LastName,
+                    StudentID = p.StudentID,
+                    BlankCreatedDate = p.BlankCreatedDate,
+                    LastDraftDate = p.LastDraftDate
+
+                }).ToList();
+                return results;
             }
-
-            studentIds = strStudentIdlist.Split(',').ToList<String>();
-            foreach(string i in studentIds)
-            {
-                using (capf17gswen4Entities db = new capf17gswen4Entities())
-                {
-                    var info = db.CPS.Where(o => o.StudentID.ToLower().Equals(i));
-                    if (info.Any())
-                    {
-                        string fName = info.FirstOrDefault().FirstName;
-                        string lName = info.FirstOrDefault().LastName;
-                        string stId = info.FirstOrDefault().StudentID;
-                        string dateBCreated = info.FirstOrDefault().BlankCreatedDate;
-                        string dateDraftLast = info.FirstOrDefault().LastDraftDate;
-
-                        ViewModel.CPS cps = new ViewModel.CPS(fName, lName, stId, dateBCreated, dateDraftLast);
-                        list.Add(cps);
-                    }
-                }
-            }
-
-            return list;
         }
-
-
-
     }
 }

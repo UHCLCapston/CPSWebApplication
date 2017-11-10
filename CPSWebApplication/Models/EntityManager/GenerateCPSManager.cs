@@ -13,8 +13,6 @@ namespace CPSWebApplication.Models.EntityManager
     public class GenerateCPSManager
     {
 
-        public   static string CATALOG16_17 = "catalog16_17";
-
         public List<Course> getAssignedFoundationCourses (string studentId, string ctlg, string mjr)
         {
            var result = "";
@@ -106,17 +104,17 @@ namespace CPSWebApplication.Models.EntityManager
             if (ctlg.Equals("Catalog16_17")) {
                 if (mjr.Equals("SWEN"))
                 {
-                    using (CPSCreationEntities db = new CPSCreationEntities())
+                    using (c533317sp04prakhyanEntities db = new c533317sp04prakhyanEntities())
                     {
-                        var course = db.Catalog16_17.Where(o => o.Course.ToLower().Equals(csname));
+                        var course = db.AcademicCatalog16_17.Where(o => o.Course.ToLower().Equals(csname));
                         if (course.Any())
                         {
                             string csShortName = course.FirstOrDefault().Course;
-                            string csLongName = course.FirstOrDefault().LongTitle;
-                            string csCredits = course.FirstOrDefault().creditHrs;
+                            string csLongName = course.FirstOrDefault().Long_Title;
+                            string csCredits = course.FirstOrDefault().Credit_Hr;
                             string csType = course.FirstOrDefault().SWEN;
-                            string csSubject = course.FirstOrDefault().Subject;
-                            string csCatalog = course.FirstOrDefault().Catalog;
+                            string csSubject = course.FirstOrDefault().Dept;
+                            string csCatalog = course.FirstOrDefault().Course_No;
 
                             crs = new Course(csShortName, csLongName, csSubject, csCatalog, csCredits, csType);
                         }
