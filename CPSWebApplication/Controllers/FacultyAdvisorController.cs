@@ -22,6 +22,14 @@ namespace CPSWebApplication.Controllers
             return View();
         }
 
+        [HttpPost]
+        public ActionResult ViewBlanckCPS(DesignCPSViewModel mdl)
+        {
+            string studentId = mdl.searchId;
+
+            return RedirectToAction("GenerateBlanckCPSView", "FacultyAdvisor", new { id = Convert.ToInt32(studentId) });
+        }
+
         public ActionResult CreateDraftCPS()
         {
             string id;
@@ -61,6 +69,22 @@ namespace CPSWebApplication.Controllers
             return RedirectToAction("CreateDraftCPS", "FacultyAdvisor");
         }
 
+        [HttpGet]
+        public ActionResult GenerateBlanckCPSView(int id)
+        {
+            bool flag = false;
+            string studentId = id.ToString();
+
+            GenerateCPSManager gm = new GenerateCPSManager();
+            DesignCPSViewModel vm = gm.getModelForGenerateCPS(studentId);
+
+            if (Session["UserID"] != null)
+            {
+                flag = true;
+            }
+
+            return View(vm);
+        }
 
         public ActionResult ViewFinalCPS()
         {

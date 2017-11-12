@@ -431,6 +431,27 @@ namespace CPSWebApplication.Models.EntityManager
 
         }
 
+        public List<string> getElectiveWholeNameListWithDepartment(string mjr,string ctlg)
+        {
+            List<String> list = new List<string>();
+            List<Course> ec = getListElectiveCourses(mjr, ctlg);
+            foreach (Course c in ec) {
+                list.Add(c.CourseShortName + " " + c.CourseFullName);
+            }
+            return list;
+        }
+
+        public List<Course> getCourseElectiveWholeNameListWithDepartment(string mjr, string ctlg)
+        {
+            List<Course> ec = getListElectiveCourses(mjr, ctlg);
+            foreach (Course c in ec)
+            {
+                c.CourseWholeName = (c.CourseShortName + " " + c.CourseFullName);
+            }
+            return ec;
+        }
+
+
         public List<Course> getAllCoreDetaisForSWEN()
         {
             /* using (CPSCreationEntities db = new CPSCreationEntities())
@@ -607,7 +628,20 @@ namespace CPSWebApplication.Models.EntityManager
 
             return "";
         }
+        public string getStudentFirstName(string id)
+        {
+            using (CPSCreationEntities db = new CPSCreationEntities())
+            {
+                var student = db.StudentDetails.Where(o => o.studentID.ToLower().Equals(id));
+                if (student.Any())
+                {
+                    return student.FirstOrDefault().firstName;
+                }
 
+            }
+
+            return "";
+        }
         public List<string> getAllFacultyAdvisorForDepartment (string major)
         {
             List<String> list = new List<string>();
@@ -635,7 +669,6 @@ namespace CPSWebApplication.Models.EntityManager
         public DesignCPSViewModel getModelForDesignCPSToView(int id)
         {
             CPSDesignManager mg = new CPSDesignManager();
-
             string mjr = mg.getStudentMajor(id.ToString());
             string ctlg = mg.catalogNeedsTofollow(id.ToString());
 
@@ -645,6 +678,8 @@ namespace CPSWebApplication.Models.EntityManager
             v.searchId = id.ToString();
             v.lastName = lastName;
             v.majorName = mjr;
+            v.firstName = mg.getStudentFirstName(id.ToString());
+
 
             List<Course> fclist = mg.getListFoundation(mjr, ctlg);
             v.FoundationClassesList = fclist;

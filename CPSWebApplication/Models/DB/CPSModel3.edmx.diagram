@@ -6,7 +6,8 @@
     <edmx:Diagrams>
       <Diagram DiagramId="29779e472c99400baea4f4bed9e6b267" Name="Diagram1">
         <EntityTypeShape EntityType="cpsFinalEntities.CPS" Width="3.375" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="cpsFinalEntities.CPSDesignOption" Width="1.5" PointX="5.375" PointY="0.75" />
+        <EntityTypeShape EntityType="cpsFinalEntities.CPSDesignOption" Width="1.5" PointX="4.75" PointY="0.75" />
+        <EntityTypeShape EntityType="cpsFinalEntities.DraftCPS" Width="2.625" PointX="6.875" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

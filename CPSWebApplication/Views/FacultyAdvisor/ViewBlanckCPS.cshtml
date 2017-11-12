@@ -1,4 +1,5 @@
-﻿
+﻿@model CPSWebApplication.Models.ViewModel.DesignCPSViewModel
+
 @{
     ViewBag.Title = "ViewBlanckCPS";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -6,3 +7,21 @@
 
 <h2>ViewBlanckCPS</h2>
 
+<p> @Session["UserName"].ToString() Want to see Blanck CPS</p>
+
+
+@using (Html.BeginForm("ViewBlanckCPS", "FacultyAdvisor", FormMethod.Post))
+{
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.searchId, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.searchId, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.searchId, "", new { @class = "text-danger" })
+            <br />
+            <button type="submit" name="action" value="ProcessForm1" class="btn btn-default" onclick="window.location = ('@Url.Action("GenerateCPSView","AcademicAdvisor")')">Submit </button>
+            <br />
+        </div>
+    </div>
+}
+<button type="button" class="btn btn-default" onclick="window.location = ('@Url.Action("Faculty", "Home", new { id = Convert.ToInt32(@Session["UserID"]) })')">BACK TO HOME </button>

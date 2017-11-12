@@ -56,5 +56,13 @@ namespace CPSWebApplication.Controllers
             return View(user);
             
         }
+
+        public ActionResult Secretary(int id)
+        {
+            UserModel user = userManager.GetUserNameByID(id);
+            return View(user);
+
+        }
+
     }
 }

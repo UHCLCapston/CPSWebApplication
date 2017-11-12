@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CPSWebApplication.Models
+namespace CPSWebApplication.Models.DB
 {
     using System;
     using System.Collections.Generic;
@@ -21,5 +21,6 @@ namespace CPSWebApplication.Models
         public string OtherElectiveCrdites { get; set; }
         public string CoreClassCredits { get; set; }
         public string TotalCredits { get; set; }
+        public string ElectiveSubjectWithLevelOptions { get; set; }
     }
 }

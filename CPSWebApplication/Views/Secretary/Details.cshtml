@@ -1,0 +1,105 @@
+﻿@model CPSWebApplication.Models.DB.CPS
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>CPS</h4>
+    <hr />
+    <dl class="dl-horizontal ">
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Academic_Year)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Academic_Year)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Major)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Major)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CoreCourseDetails)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CoreCourseDetails)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ElectiveCourseDetails)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ElectiveCourseDetails)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProgramCompletionType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProgramCompletionType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AssignedFacultyAdvisor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AssignedFacultyAdvisor)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AssignedAcademicAdvisor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AssignedAcademicAdvisor)
+        </dd>
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FoundationCourseDeatils)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FoundationCourseDeatils)
+        </dd>
+
+
+
+    </dl>
+</div>
+<p>
+
+    @Html.ActionLink("Back to List", "StudentList")
+    <a href="javascript:window.print()" class="btn btn-success ">
+        <span class="glyphicon glyphicon-print"></span> Print
+    </a>
+</p>
+

@@ -78,8 +78,6 @@ namespace CPSWebApplication.Models.EntityManager
 
             }
 
-
-
         }
         public ViewModel.CPS getBlanckCPSData(string studentId, string cListstr, string year )
         {
@@ -99,6 +97,110 @@ namespace CPSWebApplication.Models.EntityManager
 
                 return null;
         }
+
+        public void insertUpdateNewDraftCPSToCPSDB(DesignCPSViewModel draftModel)
+        {
+            string str = "";
+            List<Course> fc = draftModel.FoundationClassesList;
+            List<Course> cc = draftModel.CoreClassesList;
+            List<Course> ec = draftModel.ElectiveClassesList;
+            List<string> fcstr = new List<string>();
+            List<string> ccstr = new List<string>();
+            List<string> ecstr = new List<string>();
+
+            string fcListStr = "";
+            string ccListStr = "";
+            string ecListStr = "";
+
+            if(fc.Count> 0 || fc != null) { 
+                foreach (Course c in fc)
+                {
+                    str = c.CourseShortName + "," + c.EnrolledSemester + "," + c.GradesRecieved;
+                    fcstr.Add(str);
+
+                }
+            fcListStr = String.Join(":", fcstr);
+            }
+
+
+            foreach (Course c in ec)
+            {
+                str= c.CourseShortName + "," + c.CourseSubjectWithRubric + "," + c.EnrolledSemester + "," + c.GradesRecieved;
+                ecstr.Add(str);
+            }
+         
+            foreach(Course c in cc)
+            {
+                str = c.CourseShortName + "," + c.EnrolledSemester + "," + c.GradesRecieved;
+                ccstr.Add(str);
+            }
+
+            ccListStr = String.Join(":", ccstr);
+            ecListStr = String.Join(":", ecstr);
+
+            var time = DateTime.Now;
+            string dateTime = time.ToString("yyyy, MM, dd, hh, mm, ss");
+
+            using (capf17gswen4Entities db = new capf17gswen4Entities())
+            {
+                var result = db.DraftCPS;
+                if (result != null)
+                {
+
+                    var info = result.SingleOrDefault(b => b.StudentID == draftModel.searchId);
+                    if (info != null)
+                    {
+                        info.StudentID = draftModel.searchId;
+                        info.FirstName = draftModel.firstName;
+                        info.LastName = draftModel.lastName;
+                        info.AssignedFacultyAdvisor = draftModel.assignedFaculty;
+                        info.Academic_Year = draftModel.academicYear;
+                        info.Major = draftModel.majorName;
+                        info.ProgramCompletionType = draftModel.programCompletionOption;
+                        
+                        info.FoundationCourseDeatils = fcListStr;
+                        info.ElectiveCourseDetails = ecListStr;
+                        info.CoreCourseDetails = ccListStr;
+                       
+                        info.IsDraft = "Yes";
+                        info.IsActive = "Yes";
+                        info.IsAudited = "No";
+                        info.IsBlankCreated = "Yes";
+                        info.IsFinalised = "No";
+                        info.LastDraftDate = dateTime;
+                        db.SaveChanges();
+
+                    }
+                    else
+                    {
+                        DB.DraftCPS cps = new DB.DraftCPS();
+                        cps.StudentID = draftModel.searchId;
+                        cps.FirstName = draftModel.firstName;
+                        cps.LastName = draftModel.lastName;
+                        cps.AssignedFacultyAdvisor = draftModel.assignedFaculty;
+                        cps.Academic_Year = draftModel.academicYear;
+                        cps.Major = draftModel.majorName;
+                        cps.ProgramCompletionType = draftModel.programCompletionOption;
+
+                        cps.FoundationCourseDeatils = fcListStr;
+                        cps.ElectiveCourseDetails = ecListStr;
+                        cps.CoreCourseDetails = ccListStr;
+
+                        cps.IsDraft = "Yes";
+                        cps.IsActive = "Yes";
+                        cps.IsAudited = "No";
+                        cps.IsBlankCreated = "Yes";
+                        cps.IsFinalised = "No";
+                        cps.LastDraftDate = dateTime;
+
+                        db.DraftCPS.Add(cps);
+                    }
+                    db.SaveChanges();
+                }
+
+            }
+        }
+
         public List<ViewModel.CPS> getListBlackCPSUnderFacultyAdvioser(string id)
         {
             UserManager mgr = new UserManager();
@@ -125,13 +227,12 @@ namespace CPSWebApplication.Models.EntityManager
                 var result = db.CPS.SingleOrDefault(b => b.StudentID == studentId);
                 if (result != null)
                 {
-                    cps= new ViewModel.CPS(result.StudentID, result.LastName, result.FirstName, result.Academic_Year, result.Major, result.FoundationCourseDeatils,result.CoreCourseDetails,result.ElectiveCourseDetails,result.AssignedFacultyAdvisor);
+                    cps= new ViewModel.CPS(result.FirstName, result.LastName, result.StudentID, result.Academic_Year, result.Major, result.CoreCourseDetails,result.ElectiveCourseDetails,result.FoundationCourseDeatils,result.AssignedFacultyAdvisor);
                     return cps;
                 }
                 return null;
             }
         }
-
         public List<String> getOptions(string option)
         {
             using (capf17gswen4Entities db = new capf17gswen4Entities())
@@ -175,7 +276,6 @@ namespace CPSWebApplication.Models.EntityManager
 
             return semlist;
         }
-
         public List<List<string>> getAllListWithOptionForSelection(string major, string ctlg)
         {
             List<List<string>> lists = new List<List<string>>();
@@ -184,6 +284,7 @@ namespace CPSWebApplication.Models.EntityManager
             List<string> credithrsOption = new List<string>();
             List<string> gradeOptions = new List<string>();
             List<string> levelOption = new List<string>();
+            List<string> levelGroupOption = new List<string>();
 
             
             levelOption = getOptions("courselevels");
@@ -191,17 +292,17 @@ namespace CPSWebApplication.Models.EntityManager
             credithrsOption = getOptions("creditHrs");
             gradeOptions = getOptions("gradesOption");
             prgCompletionType = getOptions("programComptionType");
-
+            levelGroupOption = getOptions("courseLevelGroup");
 
             lists.Add(levelOption);
             lists.Add(semOptions);
             lists.Add(credithrsOption);
             lists.Add(gradeOptions);
             lists.Add(prgCompletionType);
+            lists.Add(levelGroupOption);
             return lists;
 
         }
-
         public Course getProgramCompletionCourse(string major, string completionType, string ctlg) {
 
             GenerateCPSManager mgr = new GenerateCPSManager();
@@ -223,7 +324,6 @@ namespace CPSWebApplication.Models.EntityManager
             }
             return crs;
         } 
-
         public string getNumberOfElectivesAsPerCompletionType (string completionType, string major)
         {
             if (major.Equals("SWEN"))
@@ -247,8 +347,6 @@ namespace CPSWebApplication.Models.EntityManager
             }
             return null;
         }
-
-
         public DesignCPSViewModel getBlanckCPSToViewFromCPS(string id)
         {
             DesignCPSViewModel mdl = new DesignCPSViewModel();
@@ -289,8 +387,7 @@ namespace CPSWebApplication.Models.EntityManager
             return mdl;
 
         }
-
-            public DesignCPSViewModel getDraftCPSModelToShow(string id)
+        public DesignCPSViewModel getDraftCPSModelToShow(string id)
         {
             DesignCPSViewModel mdl = new DesignCPSViewModel();
 
@@ -328,16 +425,45 @@ namespace CPSWebApplication.Models.EntityManager
             mdl.CourseGradeList = selectionLists[3];
             mdl.ProgramCompletionOptionList = selectionLists[4];
 
+            List<string> levelGroup = selectionLists[5];
+            List<string> departments = dmgr.getElectiveSubjectForMajor(mjr, ctlg);
+            mdl.LevelGroupOption = levelGroup;
+            string completionType = "Capston";
+            mdl.CourseSubjectLevelRubricSelectionOption = getCourseRubricCreatedOptions(mjr ,completionType);
+
             mdl.DepartmentListForElective= dmgr.getElectiveSubjectForMajor(mjr, ctlg);
             mdl.ElectiveClassesList = dmgr.getListElectiveCourses(mjr, ctlg);
+            mdl.countElectives = 7;
+
+            mdl.ElectiveClassesList = dmgr.getCourseElectiveWholeNameListWithDepartment(mjr,ctlg);
+            mdl.CourseWholeNameListForElective = dmgr.getElectiveWholeNameListWithDepartment(mjr,ctlg);
+
 
             //mdl.DepartmentListForElective =dmgr.getElectiveWholeNameListWithDepartmentAndLevel(subject, level);
 
 
-            return mdl;
+            return mdl; 
         }
+        private List<string> getCourseRubricCreatedOptions(string mjr, string type)
+        {
+            string str = "";
+            if (mjr.Equals("SWEN"))
+            {
+                using (capf17gswen41Entities db = new capf17gswen41Entities())
+                {
+                    var result = db.SWENCompletions.SingleOrDefault(b => b.CompletionType == type);
+                    if (result != null)
+                    {
+                        str= result.ElectiveSubjectWithLevelOptions;
+                    }
 
-       
+                    return str.Split(',').ToList<string>();
+                }
+
+            }
+
+            return null;
+        }
     }//end of class
 
 }//end of namespace

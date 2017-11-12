@@ -10,7 +10,7 @@ namespace CPSWebApplication.Models.ViewModel
     {
 
         [Required]
-        [Display(Name = "Student ID")]
+        [Display(Name = "First Name")]
         public string firstName { get; set; }
 
         [Required]
@@ -55,6 +55,11 @@ namespace CPSWebApplication.Models.ViewModel
 
         public List<String> CourseGradeList { get; set; }
         public List<String> CourseSemesterList { get; set; }
+
+        public List<String> LevelGroupOption { get; set; }
+
+        public List<String> CourseSubjectLevelRubricSelectionOption { get; set; }
+
         public string programCompletionOption { get; set; }
 
         public string ElectiveSubject { get; set; }
@@ -64,6 +69,7 @@ namespace CPSWebApplication.Models.ViewModel
         public string ElectiveSemester { get; set; }
         public string ElectiveGrade { get; set; }
 
+        public int countElectives { get; set; }
 
         //To show studentList with cps
         public List<CPS> cpsList { get; set; }

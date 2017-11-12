@@ -55,8 +55,13 @@ namespace CPSWebApplication.Controllers
                         {
                             return RedirectToAction("Faculty", "Home", new { id = uhclId });
                         }
+                        else if (role.Equals("Secretary"))
+                        {
+                            return RedirectToAction("Secretary", "Home", new { id = uhclId });
+                        }
+
                         else
-                        return RedirectToAction("Welcome", "Home");
+                            return RedirectToAction("Welcome", "Home");
                     }
                 }
             }

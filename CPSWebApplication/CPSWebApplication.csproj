@@ -313,7 +313,7 @@
     <Compile Include="Controllers\DraftCPSController.cs" />
     <Compile Include="Controllers\FacultyAdvisorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\SecretoryController.cs" />
+    <Compile Include="Controllers\SecretaryController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -381,6 +381,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CPSModel3.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\DB\DraftCPS.cs">
+      <DependentUpon>CPSModel3.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\DB\FacultyDetail.cs">
       <DependentUpon>CPSModel2.tt</DependentUpon>
     </Compile>
@@ -406,22 +409,22 @@
     <Compile Include="Models\EntityManager\CPSDraftToFinalManager.cs" />
     <Compile Include="Models\EntityManager\GenerateCPSManager.cs" />
     <Compile Include="Models\EntityManager\UserManager.cs" />
-    <Compile Include="Models\Model5.Context.cs">
+    <Compile Include="Models\DB\Model5.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Model5.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Model5.cs">
+    <Compile Include="Models\DB\Model5.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Model5.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Model5.Designer.cs">
+    <Compile Include="Models\DB\Model5.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Model5.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\SWENCompletion.cs">
+    <Compile Include="Models\DB\SWENCompletion.cs">
       <DependentUpon>Model5.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ViewModel\Catelog.cs" />
@@ -484,12 +487,12 @@
       <DependentUpon>CPSModel4.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\Model5.Context.tt">
+    <Content Include="Models\DB\Model5.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model5.edmx</DependentUpon>
       <LastGenOutput>Model5.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\Model5.tt">
+    <Content Include="Models\DB\Model5.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model5.edmx</DependentUpon>
       <LastGenOutput>Model5.cs</LastGenOutput>
@@ -528,11 +531,11 @@
     <Content Include="Models\DB\CPSModel4.edmx.diagram">
       <DependentUpon>CPSModel4.edmx</DependentUpon>
     </Content>
-    <EntityDeploy Include="Models\Model5.edmx">
+    <EntityDeploy Include="Models\DB\Model5.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Model5.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\Model5.edmx.diagram">
+    <Content Include="Models\DB\Model5.edmx.diagram">
       <DependentUpon>Model5.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.2.1.intellisense.js" />
@@ -583,6 +586,10 @@
     <Content Include="Views\FacultyAdvisor\CreateDraftCPS.cshtml" />
     <Content Include="Views\FacultyAdvisor\ViewFinalCPS.cshtml" />
     <Content Include="Views\DRAFTCPS\GenerateDraftCPS.cshtml" />
+    <Content Include="Views\FacultyAdvisor\GenerateBlanckCPSView.cshtml" />
+    <Content Include="Views\Home\Secretary.cshtml" />
+    <Content Include="Views\Secretary\Details.cshtml" />
+    <Content Include="Views\Secretary\StudentList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -22,6 +22,7 @@ namespace CPSWebApplication.Models.ViewModel
         public string CourseWholeName { get; set; }
         public string CourseLevelXXXType { get; set; }
 
+        public string CourseSubjectWithRubric { get; set; }
         public Course()
         {}
 

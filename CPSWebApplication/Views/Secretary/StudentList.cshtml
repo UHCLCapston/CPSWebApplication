@@ -1,0 +1,68 @@
+﻿@model IEnumerable<CPSWebApplication.Models.DB.CPS>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>List of students</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.StudentID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Academic_Year)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Major)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.AssignedFacultyAdvisor)
+        </th>
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.StudentID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Academic_Year)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Major)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.AssignedFacultyAdvisor)
+            </td>
+            <td>
+
+                @Html.ActionLink("Details", "Details", new { id = item.StudentID }) |
+
+            </td>
+        </tr>
+    }
+
+
+</table>
+<button type="button" class="btn btn-default" onclick="window.location = ('@Url.Action("Secretary", "Home", new { id = Convert.ToInt32(@Session["UserID"]) })')">BACK TO HOME </button>

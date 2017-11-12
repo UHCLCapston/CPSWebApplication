@@ -36,9 +36,34 @@
           <Property Name="Option" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Data" Type="varchar" MaxLength="100" />
         </EntityType>
+        <EntityType Name="DraftCPS">
+          <Key>
+            <PropertyRef Name="StudentID" />
+          </Key>
+          <Property Name="StudentID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Academic Year" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="Major" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FoundationCourseDeatils" Type="nvarchar(max)" />
+          <Property Name="CoreCourseDetails" Type="nvarchar(max)" />
+          <Property Name="ElectiveCourseDetails" Type="nvarchar(max)" />
+          <Property Name="ProgramCompletionType" Type="nvarchar" MaxLength="50" />
+          <Property Name="AssignedFacultyAdvisor" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="AssignedAcademicAdvisor" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsDraft" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsFinalised" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsActive" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsAudited" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastFinalizeDate" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastDraftDate" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsBlankCreated" Type="nvarchar" MaxLength="50" />
+          <Property Name="BlankCreatedDate" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityContainer Name="cpsFinalEntitiesStoreContainer">
           <EntitySet Name="CPS" EntityType="Self.CPS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CPSDesignOption" EntityType="Self.CPSDesignOption" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DraftCPS" EntityType="Self.DraftCPS" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -71,6 +96,7 @@
         <EntityContainer Name="capf17gswen4Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="CPS" EntityType="cpsFinalEntities.CPS" />
           <EntitySet Name="CPSDesignOptions" EntityType="cpsFinalEntities.CPSDesignOption" />
+          <EntitySet Name="DraftCPS" EntityType="cpsFinalEntities.DraftCPS" />
         </EntityContainer>
         <EntityType Name="CPSDesignOption">
           <Key>
@@ -78,6 +104,30 @@
           </Key>
           <Property Name="Option" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Data" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="DraftCPS">
+          <Key>
+            <PropertyRef Name="StudentID" />
+          </Key>
+          <Property Name="StudentID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Academic_Year" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="Major" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FoundationCourseDeatils" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CoreCourseDetails" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ElectiveCourseDetails" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ProgramCompletionType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AssignedFacultyAdvisor" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AssignedAcademicAdvisor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsDraft" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsFinalised" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsAudited" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastFinalizeDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastDraftDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsBlankCreated" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BlankCreatedDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -115,6 +165,31 @@
               <MappingFragment StoreEntitySet="CPSDesignOption">
                 <ScalarProperty Name="Data" ColumnName="Data" />
                 <ScalarProperty Name="Option" ColumnName="Option" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DraftCPS">
+            <EntityTypeMapping TypeName="cpsFinalEntities.DraftCPS">
+              <MappingFragment StoreEntitySet="DraftCPS">
+                <ScalarProperty Name="BlankCreatedDate" ColumnName="BlankCreatedDate" />
+                <ScalarProperty Name="IsBlankCreated" ColumnName="IsBlankCreated" />
+                <ScalarProperty Name="LastDraftDate" ColumnName="LastDraftDate" />
+                <ScalarProperty Name="LastFinalizeDate" ColumnName="LastFinalizeDate" />
+                <ScalarProperty Name="IsAudited" ColumnName="IsAudited" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IsFinalised" ColumnName="IsFinalised" />
+                <ScalarProperty Name="IsDraft" ColumnName="IsDraft" />
+                <ScalarProperty Name="AssignedAcademicAdvisor" ColumnName="AssignedAcademicAdvisor" />
+                <ScalarProperty Name="AssignedFacultyAdvisor" ColumnName="AssignedFacultyAdvisor" />
+                <ScalarProperty Name="ProgramCompletionType" ColumnName="ProgramCompletionType" />
+                <ScalarProperty Name="ElectiveCourseDetails" ColumnName="ElectiveCourseDetails" />
+                <ScalarProperty Name="CoreCourseDetails" ColumnName="CoreCourseDetails" />
+                <ScalarProperty Name="FoundationCourseDeatils" ColumnName="FoundationCourseDeatils" />
+                <ScalarProperty Name="Major" ColumnName="Major" />
+                <ScalarProperty Name="Academic_Year" ColumnName="Academic Year" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="StudentID" ColumnName="StudentID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

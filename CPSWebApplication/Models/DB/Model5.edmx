@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="capf17gswen41Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="capf17gswen41Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="SWENCompletion">
           <Key>
             <PropertyRef Name="CompletionType" />
@@ -16,12 +16,12 @@
           <Property Name="OtherElectiveCrdites" Type="varchar" MaxLength="10" />
           <Property Name="CoreClassCredits" Type="varchar" MaxLength="10" />
           <Property Name="TotalCredits" Type="varchar" MaxLength="10" />
+          <Property Name="ElectiveSubjectWithLevelOptions" Type="varchar" MaxLength="120" />
         </EntityType>
         <EntityContainer Name="capf17gswen41ModelStoreContainer">
           <EntitySet Name="SWENCompletion" EntityType="Self.SWENCompletion" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="capf17gswen41Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -36,6 +36,7 @@
           <Property Name="OtherElectiveCrdites" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="CoreClassCredits" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="TotalCredits" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ElectiveSubjectWithLevelOptions" Type="String" MaxLength="120" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityContainer Name="capf17gswen41Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="SWENCompletions" EntityType="Self.SWENCompletion" />
@@ -49,6 +50,7 @@
           <EntitySetMapping Name="SWENCompletions">
             <EntityTypeMapping TypeName="capf17gswen41Model.SWENCompletion">
               <MappingFragment StoreEntitySet="SWENCompletion">
+                <ScalarProperty Name="ElectiveSubjectWithLevelOptions" ColumnName="ElectiveSubjectWithLevelOptions" />
                 <ScalarProperty Name="CompletionType" ColumnName="CompletionType" />
                 <ScalarProperty Name="OtherElective" ColumnName="OtherElective" />
                 <ScalarProperty Name="CompletionCourse" ColumnName="CompletionCourse" />

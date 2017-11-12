@@ -387,6 +387,7 @@ namespace CPSWebApplication.Models.EntityManager
 
             vmodel.searchId = studentId;
             vmodel.lastName = mg.getStudentLastName(studentId);
+            vmodel.firstName = mg.getStudentFirstName(studentId);
             vmodel.majorName = mj;
 
             List<Course> assignedFC = getAssignedFoundationCourses(studentId,ct,mj);

@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CPSWebApplication.Models
+namespace CPSWebApplication.Models.DB
 {
     using System;
     using System.Data.Entity;

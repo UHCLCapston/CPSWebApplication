@@ -27,5 +27,6 @@ namespace CPSWebApplication.Models.DB
     
         public virtual DbSet<CPS> CPS { get; set; }
         public virtual DbSet<CPSDesignOption> CPSDesignOptions { get; set; }
+        public virtual DbSet<DraftCPS> DraftCPS { get; set; }
     }
 }

@@ -6,7 +6,7 @@
 }
 
 <h2>GenerateCPS</h2>
-<p> @Session["UserName"].ToString() Want to see CPS</p>
+<p> @Session["UserName"].ToString() Want to see Blanck CPS</p>
 
 
 @using (Html.BeginForm("GenerateCPS", "AcademicAdvisor", FormMethod.Post))
@@ -18,9 +18,9 @@
             @Html.EditorFor(model => model.searchId, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.searchId, "", new { @class = "text-danger" })
             <br />
-            <button type="submit" name="action" value="ProcessForm1"class="btn btn-default" onclick="window.location = ('@Url.Action("GenerateCPSView","AcademicAdvisor")')">Submit </button>
+            <button type="submit" name="action" value="ProcessForm1"class="btn btn-default" onclick="window.location = ('@Url.Action("GenerateBlanckCPSView","FacultyAdvisor")')">Submit </button>
             <br />
         </div>
     </div>
 }
-<button type="button" class="btn btn-default" onclick="window.location = ('@Url.Action("AcademicAdvisor", "Home", new { id = Convert.ToInt32(@Session["UserID"]) })')">BACK TO HOME </button>
+<button type="button" class="btn btn-default" onclick="window.location = ('@Url.Action("Faculty", "Home", new { id = Convert.ToInt32(@Session["UserID"]) })')">BACK TO HOME </button>

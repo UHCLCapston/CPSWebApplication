@@ -11,6 +11,7 @@ namespace CPSWebApplication.Controllers
     public class DraftCPSController : Controller
     {
         // GET: DRAFTCPS
+
         public ActionResult GenerateDraftCPS()
         {
             string userName;
@@ -18,8 +19,11 @@ namespace CPSWebApplication.Controllers
             {
                 userName = Session["UserName"].ToString();
             }
-           return View();
+            return View();
         }
+
+
+   
 
         [HttpGet]
         public ActionResult GenerateDraftCPS(int id)
@@ -31,9 +35,120 @@ namespace CPSWebApplication.Controllers
                 userName = Session["UserName"].ToString();
             }
             DesignCPSViewModel model = mgr.getDraftCPSModelToShow(id.ToString());
+            TempData["Model"] = model;
             return View(model);
         }
 
+        [HttpPost]
+        public ActionResult SaveGeneratedDraftCPS(DesignCPSViewModel mdl, string action)
+        {
+            string userName;
+            if (Session["UserID"] != null)
+            {
+                userName = Session["UserName"].ToString();
+            }
+            DesignCPSViewModel tempDataModel = (DesignCPSViewModel)TempData["Model"];
+            DesignCPSViewModel draftModel = new DesignCPSViewModel();
+
+            draftModel.academicYear = tempDataModel.academicYear;
+            draftModel.searchId = tempDataModel.searchId;
+            draftModel.firstName = tempDataModel.firstName;
+            draftModel.lastName= tempDataModel.lastName;
+            draftModel.majorName = tempDataModel.majorName;
+            draftModel.assignedFaculty = tempDataModel.assignedFaculty;
+            draftModel.programCompletionOption = mdl.programCompletionOption;
+
+            List<Course> fcShown = tempDataModel.FoundationClassesList;
+            List<Course> ccShown = tempDataModel.CoreClassesList;
+            List<Course> ecSn = tempDataModel.ElectiveClassesList;
+            List<String> ecShown = tempDataModel.CourseWholeNameListForElective;
+
+            List<Course> fc = mdl.FoundationClassesList;
+            List<Course> cc = mdl.CoreClassesList;
+            List<Course> ec = mdl.ElectiveClassesList;
+
+            List<Course> ecNewList = new List<Course>();
+            Course ecNewCourse = new Course();
+
+            CPSDraftToFinalManager cpsmgr = new CPSDraftToFinalManager();
+   
+            switch (action)
+            {
+                case "save":
+
+                    if(fcShown.Count > 0) {
+                    foreach (Course c in fc)
+                        {
+                            int i = fc.IndexOf(c);
+                            fcShown[i].EnrolledSemester = c.EnrolledSemester;
+                            fcShown[i].GradesRecieved = c.GradesRecieved;
+                        }
+
+                    }
+                    foreach (Course c in cc)
+                    {
+                        int i = cc.IndexOf(c);
+                        ccShown[i].EnrolledSemester = c.EnrolledSemester;
+                        ccShown[i].GradesRecieved = c.GradesRecieved;
+                    }
+
+
+                    
+                    foreach (Course c in ec)
+                    {
+                        string cname = c.CourseWholeName;
+                        ecNewCourse = getCourseByWholeName(cname,ecSn);
+                        ecNewCourse.EnrolledSemester = c.EnrolledSemester;
+                        ecNewCourse.GradesRecieved = c.GradesRecieved;
+                        ecNewCourse.CourseSubjectWithRubric = c.CourseSubjectWithRubric;
+                        ecNewList.Add(ecNewCourse);
+                    }
+
+                    draftModel.FoundationClassesList = fcShown;
+                    draftModel.ElectiveClassesList = ecNewList;
+                    draftModel.CoreClassesList = ccShown;
+
+                    cpsmgr.insertUpdateNewDraftCPSToCPSDB(draftModel);
+                    TempData["Message"] = "Profile Updated Successfully, Start with another.";
+                    
+                    return RedirectToAction("CreateDraftCPS", "FacultyAdvisor");
+                    
+                case "back":
+                    return RedirectToAction("Faculty", "Home", new { id = Convert.ToInt32(Session["UserID"]) });
+            }
+
+            return View();
+        }
+
+
+        public Course getCourseByWholeName(string wholename, List<Course> ECList )
+        {
+            foreach(Course c in ECList)
+            {
+                if (wholename.Equals(c.CourseWholeName))
+                {
+                    return c;
+                } 
+            }
+            return null;
+        }
+        /*
+        public ActionResult GeneateDraftCPSReload(DesignCPSViewModel mdl, string action)
+        {
+           DesignCPSViewModel previousView = (DesignCPSViewModel)TempData["Model"];
+            string mjr = "SWEN";
+            CPSDraftToFinalManager mgr = new CPSDraftToFinalManager();
+            string type = mdl.programCompletionOption;
+
+            string TotalNumberElectives = mgr.getNumberOfElectivesAsPerCompletionType(type, mjr);
+            if (action.Equals("change"))
+            {
+                previousView.programCompletionOption = type;
+                previousView.countElectives = Convert.ToInt32(TotalNumberElectives);
+            }
+            return View(previousView);
+
+        }
         public ActionResult generateNumberOfElectives(string strType)
         {
             string mjr = "SWEN";
@@ -46,6 +161,13 @@ namespace CPSWebApplication.Controllers
 
             return View();
         }
+        public ActionResult generateElectiveListForSelectedSubject(string subject)
+        {
+
+            return View();
+        }*/
+
+
 
     }
 }
