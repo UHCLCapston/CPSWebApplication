@@ -7,16 +7,16 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CPSWebApplication.Models.DB
+namespace CPSWebApplication.Models
 {
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class capf17gswen4Entities : DbContext
+    public partial class capf17gswen41Entities : DbContext
     {
-        public capf17gswen4Entities()
-            : base("name=capf17gswen4Entities")
+        public capf17gswen41Entities()
+            : base("name=capf17gswen41Entities")
         {
         }
     
@@ -25,7 +25,6 @@ namespace CPSWebApplication.Models.DB
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<CPS> CPS { get; set; }
-        public virtual DbSet<CPSDesignOption> CPSDesignOptions { get; set; }
+        public virtual DbSet<SWENCompletion> SWENCompletions { get; set; }
     }
 }

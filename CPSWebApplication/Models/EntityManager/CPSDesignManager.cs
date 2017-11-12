@@ -72,6 +72,59 @@ namespace CPSWebApplication.Models.EntityManager
             return strCatalog;
         }
 
+
+        public List<string> getElectiveSubjectForMajor(string major, string catalog)
+        {
+            List<string> list = new List<string>();
+
+            if (catalog.Equals("Catalog16_17"))
+            {
+                if (major.Equals("SWEN"))
+                {
+                    list = getElectiveSubjectsForSWEN();
+                }
+                else if (major.Equals("CSCI"))
+                {
+                    list = getElectiveSubjectsForCSCI();
+
+                }
+                else if (major.Equals("SENG"))
+                {
+                    list = getElectiveSubjectsForSENG();
+                }
+                return list;
+            }
+            return null;
+        }
+
+        private List<string> getElectiveSubjectsForSENG()
+        {
+            using (c533317sp04prakhyanEntities db = new c533317sp04prakhyanEntities())
+            {
+                var results = db.AcademicCatalog16_17.Where(j => j.SENG == "E").Select(c => c.Dept).Distinct().ToList();
+                return results;
+            }
+
+        }
+
+        private List<string> getElectiveSubjectsForCSCI()
+        {
+            using (c533317sp04prakhyanEntities db = new c533317sp04prakhyanEntities())
+            {
+                var results = db.AcademicCatalog16_17.Where(j => j.CSCI == "E").Select(c => c.Dept).Distinct().ToList();
+                return results;
+            }
+        }
+
+        private List<string> getElectiveSubjectsForSWEN()
+        {
+            using (c533317sp04prakhyanEntities db = new c533317sp04prakhyanEntities())
+            {
+                var results = db.AcademicCatalog16_17.Where(j => j.SWEN == "E").Select(c => c.Dept).Distinct().ToList();
+                return results;
+            }
+        }
+
         public string getStudentMajor(string studentId)
         {
 
@@ -301,6 +354,54 @@ namespace CPSWebApplication.Models.EntityManager
 
 
         }
+
+        public  List<Course> getElectiveListWithDepartmentAndLevel(string subject, string level)
+        {
+
+            string firstNumber = level.Substring(level.Length - 3);
+            using (c533317sp04prakhyanEntities db = new c533317sp04prakhyanEntities())
+            {
+                var results = db.AcademicCatalog16_17.Where(p => p.Dept.Contains(subject) && p.Course_No.StartsWith(firstNumber) ).Select(p => new Course
+                {
+                    CourseShortName = p.Course,
+                    CourseFullName = p.Long_Title,
+                    CourseSubject = p.Dept,
+                    Courselevel = p.Course_No,
+                    CreditHrs = p.Credit_Hr
+
+                }).ToList();
+
+                return results;
+            }
+
+        }
+        public List<string> getElectiveWholeNameListWithDepartmentAndLevel(string subject, string level)
+        {
+            string str = "";
+            List<String> list = new List<string>();
+            string firstNumber = level.Substring(level.Length - 3);
+            using (c533317sp04prakhyanEntities db = new c533317sp04prakhyanEntities())
+            {
+                var results = db.AcademicCatalog16_17.Where(p => p.Dept.Contains(subject) && p.Course_No.StartsWith(firstNumber)).Select(p => new Course
+                {
+                    CourseShortName = p.Course,
+                    CourseFullName = p.Long_Title,
+                    CourseSubject = p.Dept,
+                    Courselevel = p.Course_No,
+                    CreditHrs = p.Credit_Hr
+
+                }).ToList();
+
+                foreach(Course c in results)
+                {
+                    list.Add(c.CourseShortName + " " + c.CourseFullName);
+                }
+                return list;
+            }
+
+        }
+
+
 
         public List<string> getAllFoundationCSCI()
         {

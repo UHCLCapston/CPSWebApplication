@@ -66,8 +66,8 @@ namespace CPSWebApplication.Controllers
             string studentId = id.ToString();
 
             GenerateCPSManager gm = new GenerateCPSManager();
-
             DesignCPSViewModel vm = gm.getModelForGenerateCPS(studentId);
+            
             if (Session["UserID"] != null)
             {
                 flag = true;

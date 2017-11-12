@@ -34,5 +34,18 @@ namespace CPSWebApplication.Controllers
             return View(model);
         }
 
+        public ActionResult generateNumberOfElectives(string strType)
+        {
+            string mjr = "SWEN";
+            CPSDraftToFinalManager mgr = new CPSDraftToFinalManager();
+            string TotalNumberElectives = mgr.getNumberOfElectivesAsPerCompletionType(strType, mjr);
+
+            return Json(TotalNumberElectives, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult generateElectiveListForSelectedOption(string subject, string level) {
+
+            return View();
+        }
+
     }
 }

@@ -42,6 +42,30 @@ namespace CPSWebApplication.Models.ViewModel
 
         public List<String> DfacultiesList { get; set; }
 
+        public List<String> ProgramCompletionOptionList { get; set; }
+
+        public List<String> DepartmentListForElective { get; set; }
+        public List<String> CourseLevelSelectionListForElective { get; set; }
+
+        public List<String> CourseShortNameListForElective { get; set; }
+
+        public List<String> CourseLongTitleListForElective { get; set; }
+        public List<String> CourseWholeNameListForElective { get; set; }
+        public List<String> CourseCreditHrsListForElective { get; set; }
+
+        public List<String> CourseGradeList { get; set; }
+        public List<String> CourseSemesterList { get; set; }
+        public string programCompletionOption { get; set; }
+
+        public string ElectiveSubject { get; set; }
+        public string ElectiveLevel { get; set; }
+        public string ElectiveWholeName { get; set; }
+        public string ElectiveCreditHrs { get; set; }
+        public string ElectiveSemester { get; set; }
+        public string ElectiveGrade { get; set; }
+
+
+        //To show studentList with cps
         public List<CPS> cpsList { get; set; }
 
         public DesignCPSViewModel()

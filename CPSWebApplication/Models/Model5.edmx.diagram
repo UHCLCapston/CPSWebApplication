@@ -4,9 +4,8 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="29779e472c99400baea4f4bed9e6b267" Name="Diagram1">
-        <EntityTypeShape EntityType="cpsFinalEntities.CPS" Width="3.375" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="cpsFinalEntities.CPSDesignOption" Width="1.5" PointX="5.375" PointY="0.75" />
+      <Diagram DiagramId="57da5f649e0449dbb0b325d46dd40aad" Name="Diagram1">
+        <EntityTypeShape EntityType="capf17gswen41Model.SWENCompletion" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

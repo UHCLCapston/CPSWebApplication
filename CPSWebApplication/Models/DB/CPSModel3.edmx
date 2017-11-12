@@ -29,8 +29,16 @@
           <Property Name="IsBlankCreated" Type="nvarchar" MaxLength="50" />
           <Property Name="BlankCreatedDate" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="CPSDesignOption">
+          <Key>
+            <PropertyRef Name="Option" />
+          </Key>
+          <Property Name="Option" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Data" Type="varchar" MaxLength="100" />
+        </EntityType>
         <EntityContainer Name="cpsFinalEntitiesStoreContainer">
           <EntitySet Name="CPS" EntityType="Self.CPS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CPSDesignOption" EntityType="Self.CPSDesignOption" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -62,7 +70,15 @@
         </EntityType>
         <EntityContainer Name="capf17gswen4Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="CPS" EntityType="cpsFinalEntities.CPS" />
+          <EntitySet Name="CPSDesignOptions" EntityType="cpsFinalEntities.CPSDesignOption" />
         </EntityContainer>
+        <EntityType Name="CPSDesignOption">
+          <Key>
+            <PropertyRef Name="Option" />
+          </Key>
+          <Property Name="Option" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Data" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -91,6 +107,14 @@
                 <ScalarProperty Name="IsAudited" ColumnName="IsAudited" />
                 <ScalarProperty Name="LastFinalizeDate" ColumnName="LastFinalizeDate" />
                 <ScalarProperty Name="LastDraftDate" ColumnName="LastDraftDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CPSDesignOptions">
+            <EntityTypeMapping TypeName="cpsFinalEntities.CPSDesignOption">
+              <MappingFragment StoreEntitySet="CPSDesignOption">
+                <ScalarProperty Name="Data" ColumnName="Data" />
+                <ScalarProperty Name="Option" ColumnName="Option" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -7,25 +7,23 @@ namespace CPSWebApplication.Models.ViewModel
 {
     public class Course : IEquatable<Course>
     {
-
         public string CourseShortName { get; set; }
         public string CourseFullName { get; set; }
-
         public string CourseSubject { get; set; }
         public string Courselevel { get; set; }
-
         public string CreditHrs { get; set; }
-
         public string CourseType { get; set; }
         public string EnrolledSemester { get; set; }
-
         public bool IsSelected { get; set; }
         public string GradesRecieved { get; set; }
+        public bool Is4xxxLevelCourse { get; set; }
+        public bool Is5xxxLevelCourse { get; set; }
+        public bool Is6xxxLevelCourse { get; set; }
+        public string CourseWholeName { get; set; }
+        public string CourseLevelXXXType { get; set; }
 
         public Course()
-        {
-
-        }
+        {}
 
         public Course(string courseShortName, string courseFullName, string courseSubject, string courselevel, string creditHrs)
         {
@@ -52,7 +50,6 @@ namespace CPSWebApplication.Models.ViewModel
             GradesRecieved = gradesRecieved;
         }
 
-        
         public override bool Equals(object obj)
         {
             return Equals(obj as Course);

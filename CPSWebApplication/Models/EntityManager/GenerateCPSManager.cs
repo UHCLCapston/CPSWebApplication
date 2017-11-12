@@ -118,17 +118,46 @@ namespace CPSWebApplication.Models.EntityManager
 
                             crs = new Course(csShortName, csLongName, csSubject, csCatalog, csCredits, csType);
                         }
-                        
-
                     }
                     return crs;
                 }
                 else if(mjr.Equals("CSCI"))
                 {
+                    using (c533317sp04prakhyanEntities db = new c533317sp04prakhyanEntities())
+                    {
+                        var course = db.AcademicCatalog16_17.Where(o => o.Course.ToLower().Equals(csname));
+                        if (course.Any())
+                        {
+                            string csShortName = course.FirstOrDefault().Course;
+                            string csLongName = course.FirstOrDefault().Long_Title;
+                            string csCredits = course.FirstOrDefault().Credit_Hr;
+                            string csType = course.FirstOrDefault().CSCI;
+                            string csSubject = course.FirstOrDefault().Dept;
+                            string csCatalog = course.FirstOrDefault().Course_No;
 
-                }else if (mjr.Equals("SENG"))
+                            crs = new Course(csShortName, csLongName, csSubject, csCatalog, csCredits, csType);
+                        }
+                    }
+                    return crs;
+                }
+                else if (mjr.Equals("SENG"))
                 {
+                    using (c533317sp04prakhyanEntities db = new c533317sp04prakhyanEntities())
+                    {
+                        var course = db.AcademicCatalog16_17.Where(o => o.Course.ToLower().Equals(csname));
+                        if (course.Any())
+                        {
+                            string csShortName = course.FirstOrDefault().Course;
+                            string csLongName = course.FirstOrDefault().Long_Title;
+                            string csCredits = course.FirstOrDefault().Credit_Hr;
+                            string csType = course.FirstOrDefault().SENG;
+                            string csSubject = course.FirstOrDefault().Dept;
+                            string csCatalog = course.FirstOrDefault().Course_No;
 
+                            crs = new Course(csShortName, csLongName, csSubject, csCatalog, csCredits, csType);
+                        }
+                    }
+                    return crs;
                 }
 
             }

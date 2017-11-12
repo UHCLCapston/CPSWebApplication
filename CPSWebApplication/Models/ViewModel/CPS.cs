@@ -55,5 +55,9 @@ namespace CPSWebApplication.Models.ViewModel
             this.BlankCreatedDate = blankCreatedDate;
         }
 
+        public CPS(string firstName, string lastName, string studentID, string academicYear, string major, string coreCourseDetails, string electiveCourseDetails, string assignedFoundationCourseDetails, string assignedFacultyAdvioser) : this(firstName, lastName, studentID, academicYear, major, coreCourseDetails, electiveCourseDetails, assignedFoundationCourseDetails)
+        {
+            AssignedFacultyAdvioser = assignedFacultyAdvioser;
+        }
     }
 }
