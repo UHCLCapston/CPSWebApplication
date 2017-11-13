@@ -76,6 +76,49 @@ namespace CPSWebApplication.Controllers
             return View(vm);
         }
 
+        [HttpPost]
+        public ActionResult ViewDraftCPS(DesignCPSViewModel mdl)
+        {
+
+            string studentId = mdl.searchId;
+
+            return RedirectToAction("GenerateViewDraftCPS", "AcademicAdvisor", new { id = Convert.ToInt32(studentId) });
+        }
+
+        [HttpGet]
+        public ActionResult ViewDraftCPS()
+        {
+            string id;
+            if (Session["UserID"] != null)
+            {
+                id = Session["UserName"].ToString();
+            }
+
+            return View();
+        }
+        [HttpGet]
+        public ActionResult GenerateViewDraftCPS(int id)
+        {
+            bool flag = false;
+            string studentId = id.ToString();
+
+            CPSDraftToFinalManager mgr = new CPSDraftToFinalManager();
+            DesignCPSViewModel vm = mgr.getModelForGenerateDraftCPS(studentId);
+
+            if (Session["UserID"] != null)
+            {
+                flag = true;
+            }
+
+            return View(vm);
+        }
+        [HttpPost]
+        public ActionResult GenerateViewDraftCPS()
+        {
+            return View();
+        }
+
+
         public ActionResult ModifyCPS()
         {
             return View();

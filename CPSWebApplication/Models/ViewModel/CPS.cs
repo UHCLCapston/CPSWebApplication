@@ -9,6 +9,10 @@ namespace CPSWebApplication.Models.ViewModel
 {
     public class CPS
     {
+        private string academic_Year;
+        private string foundationCourseDeatils;
+        private string assignedFacultyAdvisor;
+
         [Key]
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -34,6 +38,11 @@ namespace CPSWebApplication.Models.ViewModel
         public CPS() {
         }
 
+        public CPS(string firstName, string lastName, string studentID, string academicYear, string major, string coreCourseDetails, string electiveCourseDetails, string assignedFoundationCourseDetails, string assignedFacultyAdvioser) : this(firstName, lastName, studentID, academicYear, major, coreCourseDetails, electiveCourseDetails, assignedFoundationCourseDetails)
+        {
+            AssignedFacultyAdvioser = assignedFacultyAdvioser;
+        }
+
         public CPS(string firstName, string lastName, string studentID, string academicYear, string major, string coreCourseDetails, string assignedFoundationCourseDetails, string assignedFacultyAdvioser)
         {
             FirstName = firstName;
@@ -55,9 +64,24 @@ namespace CPSWebApplication.Models.ViewModel
             this.BlankCreatedDate = blankCreatedDate;
         }
 
-        public CPS(string firstName, string lastName, string studentID, string academicYear, string major, string coreCourseDetails, string electiveCourseDetails, string assignedFoundationCourseDetails, string assignedFacultyAdvioser) : this(firstName, lastName, studentID, academicYear, major, coreCourseDetails, electiveCourseDetails, assignedFoundationCourseDetails)
+        public CPS(string firstName, string lastName, string studentID, string academicYear, string major, string coreCourseDetails, string electiveCourseDetails, string assignedFoundationCourseDetails, string assignedFacultyAdvioser, string programCompletionType) : this(firstName, lastName, studentID, academicYear, major, coreCourseDetails, electiveCourseDetails, assignedFoundationCourseDetails)
         {
             AssignedFacultyAdvioser = assignedFacultyAdvioser;
+        }
+
+        public CPS(string firstName, string lastName, string studentID, string academic_Year, string major, string coreCourseDetails, string electiveCourseDetails, string foundationCourseDeatils, string assignedFacultyAdvisor, string programCompletionType, string lastDraftDate)
+        {
+            FirstName = firstName;
+            LastName = lastName;
+            StudentID = studentID;
+            this.academic_Year = academic_Year;
+            Major = major;
+            CoreCourseDetails = coreCourseDetails;
+            ElectiveCourseDetails = electiveCourseDetails;
+            this.foundationCourseDeatils = foundationCourseDeatils;
+            this.assignedFacultyAdvisor = assignedFacultyAdvisor;
+            ProgramCompletionType = programCompletionType;
+            LastDraftDate = lastDraftDate;
         }
     }
 }

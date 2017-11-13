@@ -590,6 +590,8 @@
     <Content Include="Views\Home\Secretary.cshtml" />
     <Content Include="Views\Secretary\Details.cshtml" />
     <Content Include="Views\Secretary\StudentList.cshtml" />
+    <Content Include="Views\AcademicAdvisor\ViewDraftCPS.cshtml" />
+    <Content Include="Views\AcademicAdvisor\GenerateViewDraftCPS.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

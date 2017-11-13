@@ -79,6 +79,103 @@ namespace CPSWebApplication.Models.EntityManager
             }
 
         }
+
+
+        public ViewModel.CPS getStudentDraftCPS(string studentId)
+        {
+            ViewModel.CPS cps;
+            using (capf17gswen4Entities db = new capf17gswen4Entities())
+            {
+                var result = db.DraftCPS.SingleOrDefault(b => b.StudentID == studentId);
+                if (result != null)
+                {
+                    cps = new ViewModel.CPS(result.FirstName, result.LastName, result.StudentID, result.Academic_Year, result.Major, result.CoreCourseDetails, result.ElectiveCourseDetails, result.FoundationCourseDeatils, result.AssignedFacultyAdvisor,result.ProgramCompletionType,result.LastDraftDate);
+                    return cps;
+                }
+                return null;
+            }
+        }
+
+        public List<Course> retriveCourseList(string listStr, String ctlg, String mjr)
+        {
+            List<string> deatillist = listStr.Split(':').ToList<String>();
+            List<string> courseDeatilList = new List<string>();
+            List<Course> newListCourse = new List<Course>();
+            CPSDesignManager mgr = new CPSDesignManager();
+            GenerateCPSManager cmgr = new GenerateCPSManager();
+
+            Course course = new Course();
+            if(deatillist.Count > 0) { 
+                foreach (String str in deatillist)
+                {
+                    courseDeatilList = str.Split(',').ToList<String>();
+                    if(courseDeatilList.Count > 0)
+                    {
+                        if(courseDeatilList.Count > 3)
+                        {
+                            string csName = courseDeatilList[0];
+                            string rubric = courseDeatilList[1];
+                            string semester = courseDeatilList[2];
+                            string grade = courseDeatilList[3];
+                            course = cmgr.getCourseDetailUsingCourseShortName(csName, ctlg, mjr);
+                            course.EnrolledSemester = semester;
+                            course.CourseSubjectWithRubric = rubric;
+                            course.GradesRecieved = grade;
+                        }
+                        else
+                        {
+                            string csName = courseDeatilList[0];
+                            string semester = courseDeatilList[1];
+                            string grade = courseDeatilList[2];
+                            course = cmgr.getCourseDetailUsingCourseShortName(csName, ctlg, mjr);
+                            course.EnrolledSemester = semester;
+                            course.GradesRecieved = grade;
+                        }
+                    }
+                    newListCourse.Add(course);
+                }
+            }
+
+            return newListCourse;
+        }
+
+        public  DesignCPSViewModel getModelForGenerateDraftCPS(string studentId)
+        {
+            DesignCPSViewModel mdl = new DesignCPSViewModel();
+
+            CPSDesignManager dmgr = new CPSDesignManager();
+            GenerateCPSManager gmgr = new GenerateCPSManager();
+            ViewModel.CPS cps = getStudentDraftCPS(studentId);
+
+            string ctlg = cps.AcademicYear.Replace("Academic Year", "Catalog").Trim();
+            string mjr = cps.Major;
+            List<Course> lsFC = new List<Course>();
+            List<Course> lsCC = new List<Course>();
+            List<Course> lsEC = new List<Course>();
+
+            string lsFCstr = cps.AssignedFoundationCourseDetails;
+            string lsCSstr = cps.CoreCourseDetails;
+            string lsEEstr = cps.ElectiveCourseDetails;
+
+            lsFC = retriveCourseList(lsFCstr,ctlg,mjr);
+            lsCC = retriveCourseList(lsFCstr,ctlg,mjr);
+            lsEC= retriveCourseList(lsFCstr,ctlg,mjr);
+
+            mdl.firstName = cps.FirstName;
+            mdl.lastName = cps.LastName;
+            mdl.searchId = cps.StudentID;
+            mdl.majorName = cps.Major;
+            mdl.academicYear = cps.AcademicYear;
+            mdl.assignedFaculty = cps.AssignedFacultyAdvioser;
+            mdl.programCompletionOption = cps.ProgramCompletionType;
+
+            mdl.FoundationClassesList = lsFC;
+            mdl.CoreClassesList = lsCC;
+            mdl.ElectiveClassesList = lsEC;
+
+            return mdl;
+        }
+
         public ViewModel.CPS getBlanckCPSData(string studentId, string cListstr, string year )
         {
         
@@ -363,7 +460,6 @@ namespace CPSWebApplication.Models.EntityManager
 
             lsFC = gmgr.getAssignedFoundationCourses(id, ctlg, mjr);
             lsCC = dmgr.getListCoreCourses(mjr, ctlg);
-            lsEC = dmgr.getListElectiveCourses(mjr, ctlg);
 
             mdl.firstName = cps.FirstName;
             mdl.lastName = cps.LastName;
@@ -373,17 +469,9 @@ namespace CPSWebApplication.Models.EntityManager
             mdl.assignedFaculty = cps.AssignedFacultyAdvioser;
             mdl.FoundationClassesList = lsFC;
             mdl.CoreClassesList = lsCC;
-            mdl.ElectiveClassesList = lsEC;
+           
 
-            mdl.firstName = cps.FirstName;
-            mdl.lastName = cps.LastName;
-            mdl.searchId = cps.StudentID;
-            mdl.majorName = cps.Major;
-            mdl.academicYear = cps.AcademicYear;
-            mdl.assignedFaculty = cps.AssignedFacultyAdvioser;
-            mdl.FoundationClassesList = lsFC;
-            mdl.CoreClassesList = lsCC;
-            mdl.ElectiveClassesList = lsEC;
+           
             return mdl;
 
         }
