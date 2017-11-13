@@ -9,10 +9,7 @@ namespace CPSWebApplication.Models.ViewModel
 {
     public class CPS
     {
-        private string academic_Year;
-        private string foundationCourseDeatils;
-        private string assignedFacultyAdvisor;
-
+       
         [Key]
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -74,12 +71,12 @@ namespace CPSWebApplication.Models.ViewModel
             FirstName = firstName;
             LastName = lastName;
             StudentID = studentID;
-            this.academic_Year = academic_Year;
+            AcademicYear = academic_Year;
             Major = major;
             CoreCourseDetails = coreCourseDetails;
             ElectiveCourseDetails = electiveCourseDetails;
-            this.foundationCourseDeatils = foundationCourseDeatils;
-            this.assignedFacultyAdvisor = assignedFacultyAdvisor;
+            AssignedFoundationCourseDetails = foundationCourseDeatils;
+            AssignedFacultyAdvioser = assignedFacultyAdvisor;
             ProgramCompletionType = programCompletionType;
             LastDraftDate = lastDraftDate;
         }

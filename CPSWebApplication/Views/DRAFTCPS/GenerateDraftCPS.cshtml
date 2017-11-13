@@ -92,19 +92,19 @@
                             <th scope="col">Enrolling Semester</th>
                             <th scope="col">Grade</th>
                         </tr>
-                        @if (Model.FoundationClassesList != null)
-                {
+              @if (Model.FoundationClassesList.Count >0)
+                  {
                     for (int i = 0; i < Model.FoundationClassesList.Count(); i++)
                     {
                                 <tr class="cursor-pointer">
                                     <td>@Model.FoundationClassesList[i].CourseShortName</td>
                                     <td>@Model.FoundationClassesList[i].CourseFullName</td>
                                     <td>@Model.FoundationClassesList[i].CreditHrs</td>
-                                    <td>@Html.DropDownListFor(m => m.FoundationClassesList[i].EnrolledSemester, new SelectList(Model.CourseSemesterList))</td>
+                                    <td>@Html.DropDownListFor(m => m.FoundationClassesList[i].EnrolledSemester, new SelectList(Model.CourseSemesterList), new { @class = "form-control" })</td>
                                     <td>@Html.DropDownListFor(m => m.FoundationClassesList[i].GradesRecieved, new SelectList(Model.CourseGradeList), new { @class = "form-control" })</td>
                                 </tr>
-                            }
-                        }
+                    }
+               }
                     </tbody>
                 </table>
             </div>
@@ -139,7 +139,6 @@
             <div style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">
                 <h4>Elective Courses:</h4>
                 <div class="form-group" style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">
-                    <h4>Select Program Completion Option:</h4>
                     @Html.LabelFor(model => model.programCompletionOption, new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
                         @Html.DropDownListFor(m => m.programCompletionOption, new SelectList(Model.ProgramCompletionOptionList), new { @class = "form-control" })

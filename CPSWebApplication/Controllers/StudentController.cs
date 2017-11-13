@@ -11,11 +11,13 @@ namespace CPSWebApplication.Controllers
         // GET: Student
         public ActionResult ViewBlankCPS()
         {
-            string id;
+            string username;
             if (Session["UserID"] != null)
             {
-                id = Session["UserName"].ToString();
+                username = Session["UserName"].ToString();
             }
+            string id = Session["UserId"].ToString();
+
             return View();
         }
 

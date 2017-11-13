@@ -69,6 +69,10 @@ namespace CPSWebApplication.Controllers
 
             List<Course> ecNewList = new List<Course>();
             Course ecNewCourse = new Course();
+            List<Course> ccNewList = new List<Course>();
+            Course ccNewCourse = new Course();
+            List<Course> fcNewList = new List<Course>();
+            Course fcNewCourse = new Course();
 
             CPSDraftToFinalManager cpsmgr = new CPSDraftToFinalManager();
    
@@ -79,17 +83,21 @@ namespace CPSWebApplication.Controllers
                     if(fcShown.Count > 0) {
                     foreach (Course c in fc)
                         {
-                            int i = fc.IndexOf(c);
-                            fcShown[i].EnrolledSemester = c.EnrolledSemester;
-                            fcShown[i].GradesRecieved = c.GradesRecieved;
+                            int i = fc.IndexOf(c);                           
+                            fcNewCourse = fcShown[i];
+                            fcNewCourse.EnrolledSemester = c.EnrolledSemester;
+                            fcNewCourse.GradesRecieved = c.GradesRecieved;
+                            fcNewList.Add(fcNewCourse);
                         }
 
                     }
                     foreach (Course c in cc)
                     {
                         int i = cc.IndexOf(c);
-                        ccShown[i].EnrolledSemester = c.EnrolledSemester;
-                        ccShown[i].GradesRecieved = c.GradesRecieved;
+                        ccNewCourse = ccShown[i];
+                        ccNewCourse.EnrolledSemester = c.EnrolledSemester;
+                        ccNewCourse.GradesRecieved = c.GradesRecieved;
+                        ccNewList.Add(ccNewCourse);
                     }
 
 
@@ -104,9 +112,9 @@ namespace CPSWebApplication.Controllers
                         ecNewList.Add(ecNewCourse);
                     }
 
-                    draftModel.FoundationClassesList = fcShown;
+                    draftModel.FoundationClassesList = fcNewList;
                     draftModel.ElectiveClassesList = ecNewList;
-                    draftModel.CoreClassesList = ccShown;
+                    draftModel.CoreClassesList = ccNewList;
 
                     cpsmgr.insertUpdateNewDraftCPSToCPSDB(draftModel);
                     TempData["Message"] = "Profile Updated Successfully, Start with another.";

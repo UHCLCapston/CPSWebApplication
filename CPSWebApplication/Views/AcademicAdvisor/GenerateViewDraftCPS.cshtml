@@ -20,7 +20,7 @@ p>@Session["UserName"].ToString() Want to see Draft CPS</p>
                     @Html.LabelFor(model => model.academicYear, new { @class = "control-label col-md-2" })
                 </td>
                 <td>
-                    <div class="col-md-10">
+                    <div class="col-md-20">
                         @Html.TextBoxFor(model => model.academicYear, new { @class = "form-control", @readonly = "readonly" })
                     </div>
                 </td>
@@ -123,6 +123,12 @@ p>@Session["UserName"].ToString() Want to see Draft CPS</p>
 
             <div style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">
                 <h4>Elective Courses:</h4>
+                <div class="form-group" style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">
+                    @Html.LabelFor(model => model.programCompletionOption, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.programCompletionOption, new { @class = "form-control", @readonly = "readonly" })
+                    </div>
+                </div>
                 <table id="cphMainContent_dgvUsers" class="table table-hover table-striped"
                        cellspacing="0" style="border-collapse:collapse;">
                     <tbody>
@@ -151,7 +157,13 @@ p>@Session["UserName"].ToString() Want to see Draft CPS</p>
                         </tbody>
                     </table>
                     <br />
-                </div>
+                  <div>
+                    @Html.LabelFor(model => model.assignedFaculty, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.assignedFaculty, new { @class = "form-control", @readonly = "readonly" })
+                    </div>
+                  </div>
+               </div>
 
                 <div>
                     <button type="button" class="btn btn-default" onclick="window.location = ('@Url.Action("AcademicAdvisor", "Home", new { id = Convert.ToInt32(@Session["UserID"]) })')">BACK TO HOME </button>

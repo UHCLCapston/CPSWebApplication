@@ -19,9 +19,6 @@ namespace CPSWebApplication.Controllers
                 id = Session["UserName"].ToString();
             }
 
-
-
-
             return View();
         }
 

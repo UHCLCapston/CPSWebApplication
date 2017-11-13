@@ -98,13 +98,14 @@ namespace CPSWebApplication.Models.EntityManager
 
         public List<Course> retriveCourseList(string listStr, String ctlg, String mjr)
         {
-            List<string> deatillist = listStr.Split(':').ToList<String>();
-            List<string> courseDeatilList = new List<string>();
             List<Course> newListCourse = new List<Course>();
             CPSDesignManager mgr = new CPSDesignManager();
             GenerateCPSManager cmgr = new GenerateCPSManager();
-
             Course course = new Course();
+
+            if (!listStr.Equals("") ) { 
+            List<string> deatillist = listStr.Split(':').ToList<String>();
+            List<string> courseDeatilList = new List<string>();  
             if(deatillist.Count > 0) { 
                 foreach (String str in deatillist)
                 {
@@ -135,7 +136,7 @@ namespace CPSWebApplication.Models.EntityManager
                     newListCourse.Add(course);
                 }
             }
-
+           }
             return newListCourse;
         }
 
@@ -158,8 +159,8 @@ namespace CPSWebApplication.Models.EntityManager
             string lsEEstr = cps.ElectiveCourseDetails;
 
             lsFC = retriveCourseList(lsFCstr,ctlg,mjr);
-            lsCC = retriveCourseList(lsFCstr,ctlg,mjr);
-            lsEC= retriveCourseList(lsFCstr,ctlg,mjr);
+            lsCC = retriveCourseList(lsCSstr,ctlg,mjr);
+            lsEC= retriveCourseList(lsEEstr,ctlg,mjr);
 
             mdl.firstName = cps.FirstName;
             mdl.lastName = cps.LastName;
