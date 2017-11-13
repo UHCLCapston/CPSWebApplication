@@ -78,9 +78,6 @@ namespace CPSWebApplication.Controllers
             // GenerateCPSManager gm = new GenerateCPSManager();
             //DesignCPSViewModel vm = gm.getModelForGenerateCPS(studentId);
             CPSDraftToFinalManager mgr = new CPSDraftToFinalManager();
-
-            
-
             DesignCPSViewModel vm = mgr.getBlanckCPSToViewFromCPS(studentId);
 
             if (Session["UserID"] != null)

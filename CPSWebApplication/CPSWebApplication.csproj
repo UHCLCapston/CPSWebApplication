@@ -592,13 +592,14 @@
     <Content Include="Views\Secretary\StudentList.cshtml" />
     <Content Include="Views\AcademicAdvisor\ViewDraftCPS.cshtml" />
     <Content Include="Views\AcademicAdvisor\GenerateViewDraftCPS.cshtml" />
+    <Content Include="Views\Student\ViewBlankCPS.cshtml" />
+    <Content Include="Views\Student\ViewDraftCPS.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Default\" />
     <Folder Include="Views\GenerateCPS\" />
     <Folder Include="Views\Secretory\" />
-    <Folder Include="Views\Student\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
