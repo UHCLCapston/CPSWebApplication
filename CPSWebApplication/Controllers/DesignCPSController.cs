@@ -23,7 +23,7 @@ namespace CPSWebApplication.Controllers
             bool flag = false;
             CPSDesignManager mg = new CPSDesignManager();
             DesignCPSViewModel viewM=  mg.getModelForDesignCPSToView(id);
-            TempData["StudentID"] = id.ToString();
+            TempData["StudentID"] = id.ToString().Trim();
             TempData["foundationList"] = viewM.FoundationClassesList;
             TempData["AcademicYear"] = viewM.academicYear;
             TempData["CoreCourses"] = viewM.CoreClassesList;

@@ -79,8 +79,6 @@ namespace CPSWebApplication.Models.EntityManager
             }
 
         }
-
-
         public ViewModel.CPS getStudentDraftCPS(string studentId)
         {
             ViewModel.CPS cps;
@@ -96,6 +94,21 @@ namespace CPSWebApplication.Models.EntityManager
             }
         }
 
+        public int getMinCountForCourseDetailList(List<string> list)
+        {
+            int count=0;
+            int mincount = 0;
+            List<int> counts = new List<int>();
+            foreach (string str in list)
+            {
+                count = str.Split(',').ToList<string>().Count();
+                counts.Add(count);
+            }
+            counts.Sort();
+            mincount = counts[0];
+
+            return mincount;
+        }
         public List<Course> retriveCourseList(string listStr, String ctlg, String mjr)
         {
             List<Course> newListCourse = new List<Course>();
@@ -105,14 +118,16 @@ namespace CPSWebApplication.Models.EntityManager
 
             if (!listStr.Equals("") ) { 
             List<string> deatillist = listStr.Split(':').ToList<String>();
-            List<string> courseDeatilList = new List<string>();  
-            if(deatillist.Count > 0) { 
-                foreach (String str in deatillist)
+            List<string> courseDeatilList = new List<string>();
+
+            if(deatillist.Count > 0) {
+               int minCount = getMinCountForCourseDetailList(deatillist);
+                    foreach (String str in deatillist)
                 {
                     courseDeatilList = str.Split(',').ToList<String>();
-                    if(courseDeatilList.Count > 0)
+                    if(courseDeatilList.Count > 0 && minCount.Equals(4))
                     {
-                        if(courseDeatilList.Count > 3)
+                        if(courseDeatilList.Count.Equals(3))
                         {
                             string csName = courseDeatilList[0];
                             string rubric = courseDeatilList[1];
@@ -123,7 +138,7 @@ namespace CPSWebApplication.Models.EntityManager
                             course.CourseSubjectWithRubric = rubric;
                             course.GradesRecieved = grade;
                         }
-                        else
+                        else if(courseDeatilList.Count.Equals(2))
                         {
                             string csName = courseDeatilList[0];
                             string semester = courseDeatilList[1];
@@ -132,14 +147,33 @@ namespace CPSWebApplication.Models.EntityManager
                             course.EnrolledSemester = semester;
                             course.GradesRecieved = grade;
                         }
-                    }
+                          
+                    }else if(courseDeatilList.Count > 0)
+                        {
+                            if (courseDeatilList.Count.Equals(3))
+                            {
+                                string csName = courseDeatilList[0];
+                                string rubric = courseDeatilList[1];
+                                string semester = courseDeatilList[2];
+                                course = cmgr.getCourseDetailUsingCourseShortName(csName, ctlg, mjr);
+                                course.EnrolledSemester = semester;
+                                course.CourseSubjectWithRubric = rubric;
+                            }
+                            else if (courseDeatilList.Count.Equals(2))
+                            {
+                                string csName = courseDeatilList[0];
+                                string semester = courseDeatilList[1];
+                                course = cmgr.getCourseDetailUsingCourseShortName(csName, ctlg, mjr);
+                                course.EnrolledSemester = semester;
+                            }
+                        }
                     newListCourse.Add(course);
                 }
             }
+                
            }
             return newListCourse;
         }
-
         public  DesignCPSViewModel getModelForGenerateDraftCPS(string studentId)
         {
             DesignCPSViewModel mdl = new DesignCPSViewModel();
@@ -176,7 +210,6 @@ namespace CPSWebApplication.Models.EntityManager
 
             return mdl;
         }
-
         public ViewModel.CPS getBlanckCPSData(string studentId, string cListstr, string year )
         {
         
@@ -195,8 +228,7 @@ namespace CPSWebApplication.Models.EntityManager
 
                 return null;
         }
-
-        public void insertUpdateNewDraftCPSToCPSDB(DesignCPSViewModel draftModel)
+        public void insertUpdateNewDraftCPSToCPSDB(DesignCPSViewModel draftModel, bool AllowAcademic)
         {
             string str = "";
             List<Course> fc = draftModel.FoundationClassesList;
@@ -213,23 +245,21 @@ namespace CPSWebApplication.Models.EntityManager
             if(fc.Count> 0 || fc != null) { 
                 foreach (Course c in fc)
                 {
-                    str = c.CourseShortName + "," + c.EnrolledSemester + "," + c.GradesRecieved;
+                    str = c.CourseShortName + "," + c.EnrolledSemester;
                     fcstr.Add(str);
 
                 }
             fcListStr = String.Join(":", fcstr);
             }
-
-
             foreach (Course c in ec)
             {
-                str= c.CourseShortName + "," + c.CourseSubjectWithRubric + "," + c.EnrolledSemester + "," + c.GradesRecieved;
+                str= c.CourseShortName + "," + c.CourseSubjectWithRubric + "," + c.EnrolledSemester;
                 ecstr.Add(str);
             }
          
             foreach(Course c in cc)
             {
-                str = c.CourseShortName + "," + c.EnrolledSemester + "," + c.GradesRecieved;
+                str = c.CourseShortName + "," + c.EnrolledSemester;
                 ccstr.Add(str);
             }
 
@@ -263,6 +293,13 @@ namespace CPSWebApplication.Models.EntityManager
                         info.IsDraft = "Yes";
                         info.IsActive = "Yes";
                         info.IsAudited = "No";
+                        if (AllowAcademic)
+                        {
+                            info.NeedAudit = "Yes";
+                        }
+                        else {
+                            info.NeedAudit = "No";
+                        }
                         info.IsBlankCreated = "Yes";
                         info.IsFinalised = "No";
                         info.LastDraftDate = dateTime;
@@ -290,6 +327,14 @@ namespace CPSWebApplication.Models.EntityManager
                         cps.IsBlankCreated = "Yes";
                         cps.IsFinalised = "No";
                         cps.LastDraftDate = dateTime;
+                        if (AllowAcademic)
+                        {
+                            info.NeedAudit = "Yes";
+                        }
+                        else
+                        {
+                            info.NeedAudit = "No";
+                        }
 
                         db.DraftCPS.Add(cps);
                     }
@@ -298,7 +343,6 @@ namespace CPSWebApplication.Models.EntityManager
 
             }
         }
-
         public List<ViewModel.CPS> getListBlackCPSUnderFacultyAdvioser(string id)
         {
             UserManager mgr = new UserManager();
@@ -365,11 +409,11 @@ namespace CPSWebApplication.Models.EntityManager
             foreach(string i in list)
             {
                 jstr = i + arr[0];
-                semlist.Add(jstr);
+                semlist.Add(jstr.Trim());
                 jstr = i + arr[1];
-                semlist.Add(jstr);
+                semlist.Add(jstr.Trim());
                 jstr = i + (Convert.ToInt32(arr[1]) + 1).ToString();
-                semlist.Add(jstr);
+                semlist.Add(jstr.Trim());
             }
 
             return semlist;
@@ -383,8 +427,7 @@ namespace CPSWebApplication.Models.EntityManager
             List<string> gradeOptions = new List<string>();
             List<string> levelOption = new List<string>();
             List<string> levelGroupOption = new List<string>();
-
-            
+     
             levelOption = getOptions("courselevels");
             semOptions = getSemesterOptions("semesters",ctlg);
             credithrsOption = getOptions("creditHrs");
@@ -470,12 +513,94 @@ namespace CPSWebApplication.Models.EntityManager
             mdl.assignedFaculty = cps.AssignedFacultyAdvioser;
             mdl.FoundationClassesList = lsFC;
             mdl.CoreClassesList = lsCC;
-           
-
-           
+         
             return mdl;
 
         }
+
+        public bool DraftCPSExists(string id)
+        {
+            using (capf17gswen4Entities db = new capf17gswen4Entities())
+            {
+                var result = db.DraftCPS.SingleOrDefault(b => b.StudentID == id);
+                if (result != null)
+                {
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            }
+            
+        }
+
+        public DesignCPSViewModel getAlreadyCreatedDraftCPSToShow(string id)
+        {
+            ViewModel.CPS draft = new ViewModel.CPS();
+            DesignCPSViewModel model = new DesignCPSViewModel();
+            CPSDesignManager dmgr = new CPSDesignManager();
+            GenerateCPSManager gmgr = new GenerateCPSManager();
+            using (capf17gswen4Entities db = new capf17gswen4Entities())
+            {
+                var result = db.DraftCPS.SingleOrDefault(b => b.StudentID == id);
+                if (result != null)
+                {
+                    draft = new ViewModel.CPS(result.FirstName,result.LastName, result.StudentID, result.Academic_Year, result.Major, result.CoreCourseDetails, result.ElectiveCourseDetails, result.FoundationCourseDeatils, result.AssignedFacultyAdvisor,result.ProgramCompletionType,result.LastDraftDate);
+                }
+                else
+                {
+                    draft = null;
+                }
+            }
+            model.searchId = draft.StudentID;
+            model.firstName = draft.FirstName;
+            model.lastName = draft.LastName;
+            model.academicYear = draft.AcademicYear;
+            model.majorName = draft.Major;
+            model.programCompletionOption = draft.ProgramCompletionType;
+            model.assignedFaculty = draft.AssignedFacultyAdvioser;
+
+            string ctlg = draft.AcademicYear.Replace("Academic Year", "Catalog").Trim();
+            string mjr = draft.Major.Trim();
+            string fcListStr = draft.AssignedFoundationCourseDetails;
+            string ccListStr = draft.CoreCourseDetails;
+            string ecListStr = draft.ElectiveCourseDetails;
+
+            List<Course> fcList = retriveCourseList(fcListStr, ctlg, mjr);
+            List<Course> ccList = retriveCourseList(ccListStr, ctlg, mjr);
+            List<Course> ecList = retriveCourseList(ecListStr, ctlg, mjr);
+
+            model.FoundationClassesList = fcList;
+            model.CoreClassesList = ccList;
+            model.ElectiveClassesList = dmgr.getCourseElectiveWholeNameListWithDepartment(mjr, ctlg);
+
+            if (model.programCompletionOption.Equals("Thesis"))
+            {
+                model.ThesisElectiveClassesList = ecList;
+            }
+            else
+            {
+                model.CapstonElectiveClassesList = ecList;
+            }
+
+            model.ElectiveCreditHrs = "3";
+            List<List<string>> selectionLists = getAllListWithOptionForSelection(mjr, ctlg);
+            model.CourseSemesterList = selectionLists[1];
+            model.CourseSemesterList.Insert(0, "-select-");
+            model.ProgramCompletionOptionList = selectionLists[4];
+            model.countElectivesCapston = Convert.ToInt32(getNumberOfElectivesAsPerCompletionType("Capston", mjr));
+            model.countElectivesThesis = Convert.ToInt32(getNumberOfElectivesAsPerCompletionType("Thesis", mjr));
+
+            model.ThesisCourse = getThesisCourse(mjr, ctlg);
+            model.CapstonCourse = getCapstonCourse(mjr, ctlg);
+
+            model.ClassesForCapstonNormal = getClassesForCapstonNormal(mjr, ctlg, model.countElectivesCapston);
+            model.ClassesForThesisNormal = getClassesForThesisNormal(mjr, ctlg, model.countElectivesThesis);
+
+
+            return model;
+        }
+
         public DesignCPSViewModel getDraftCPSModelToShow(string id)
         {
             DesignCPSViewModel mdl = new DesignCPSViewModel();
@@ -505,11 +630,11 @@ namespace CPSWebApplication.Models.EntityManager
             mdl.assignedFaculty = cps.AssignedFacultyAdvioser;
             mdl.FoundationClassesList = lsFC;
             mdl.CoreClassesList = lsCC;
-            mdl.ElectiveClassesList = lsEC;
 
             List<List<string>> selectionLists =getAllListWithOptionForSelection(mjr,ctlg);
             mdl.CourseLevelSelectionListForElective = selectionLists[0];
             mdl.CourseSemesterList = selectionLists[1];
+            mdl.CourseSemesterList.Insert(0, "-select-");
             mdl.CourseCreditHrsListForElective = selectionLists[2];
             mdl.CourseGradeList = selectionLists[3];
             mdl.ProgramCompletionOptionList = selectionLists[4];
@@ -517,41 +642,273 @@ namespace CPSWebApplication.Models.EntityManager
             List<string> levelGroup = selectionLists[5];
             List<string> departments = dmgr.getElectiveSubjectForMajor(mjr, ctlg);
             mdl.LevelGroupOption = levelGroup;
-            string completionType = "Capston";
-            mdl.CourseSubjectLevelRubricSelectionOption = getCourseRubricCreatedOptions(mjr ,completionType);
+           // string completionType = "Capston";
+          //  mdl.CourseSubjectLevelRubricSelectionOption = getCourseRubricCreatedOptions(mjr ,completionType);
+            //mdl.CourseSubjectLevelRubricSelectionOption.Insert(0, "---Select---");
 
             mdl.DepartmentListForElective= dmgr.getElectiveSubjectForMajor(mjr, ctlg);
-            mdl.ElectiveClassesList = dmgr.getListElectiveCourses(mjr, ctlg);
             mdl.countElectives = 7;
-
+            mdl.countElectivesCapston = Convert.ToInt32(getNumberOfElectivesAsPerCompletionType("Capston", mjr));
+            mdl.countElectivesThesis = Convert.ToInt32(getNumberOfElectivesAsPerCompletionType("Thesis", mjr)); 
+            mdl.ElectiveCreditHrs = "3";
             mdl.ElectiveClassesList = dmgr.getCourseElectiveWholeNameListWithDepartment(mjr,ctlg);
             mdl.CourseWholeNameListForElective = dmgr.getElectiveWholeNameListWithDepartment(mjr,ctlg);
+            mdl.CourseWholeNameListForElective.Insert(0, "---Select---");
 
+            mdl.ThesisCourse = getThesisCourse(mjr, ctlg);
+            mdl.CapstonCourse = getCapstonCourse(mjr, ctlg);
 
-            //mdl.DepartmentListForElective =dmgr.getElectiveWholeNameListWithDepartmentAndLevel(subject, level);
+            mdl.ClassesForCapstonNormal = getClassesForCapstonNormal(mjr, ctlg, mdl.countElectivesCapston); 
+            mdl.ClassesForThesisNormal = getClassesForThesisNormal(mjr, ctlg, mdl.countElectivesThesis);
 
-
+            // mdl.ClassesForThesisSpecial = getClassesForThesisSpecial(mjr, ctlg, mdl.countElectivesThesis);
+            // mdl.ClassesForCapstonSpecial = getClassesForCapstonSpecial(mjr, ctlg, mdl.countElectivesCapston);
             return mdl; 
         }
-        private List<string> getCourseRubricCreatedOptions(string mjr, string type)
+       
+        private List<RubricClasses> getClassesForThesisSpecial(string mjr, string ctlg, int count)
+        {
+            List<RubricClasses> list = new List<RubricClasses>();
+            List<string> rubricList = getCourseRubricCreatedOptions(mjr, "Thesis","Special");
+            foreach (string r in rubricList)
+            {
+                List<string> wcList = new List<string>();
+                List<Course> clist = getCoursesbyUsingSubjectAndRubric(r.Trim());
+                foreach (Course c in clist)
+                {
+                    string name = c.CourseWholeName;
+                    wcList.Add(name);
+                }
+                wcList.Insert(0, "---Select---");
+                RubricClasses rbc = new RubricClasses(r, wcList);
+                list.Add(rbc);
+            }
+
+            return list;
+        }
+
+        private List<RubricClasses> getClassesForThesisNormal(string mjr, string ctlg, int count)
+        {
+            List<RubricClasses> list = new List<RubricClasses>();
+            List<string> rubricList = getCourseRubricCreatedOptions(mjr, "Thesis","Normal");
+
+            foreach (string r in rubricList)
+            {
+                List<string> wcList = new List<string>();
+                List<Course> clist = getCoursesbyUsingSubjectAndRubric(r.Trim());
+                foreach(Course c in clist)
+                {
+                    string name =c.CourseWholeName;
+                    wcList.Add(name);
+                }
+                wcList.Insert(0, "---Select---");
+                RubricClasses rbc = new RubricClasses(r, wcList);
+              list.Add(rbc);
+            }
+
+            return list;
+        }
+
+        private List<RubricClasses> getClassesForCapstonSpecial(string mjr, string ctlg,int count)
+        {
+            List<RubricClasses> list = new List<RubricClasses>();
+            List<string> rubricList = getCourseRubricCreatedOptions(mjr, "Capston ", "Normal");
+
+            foreach (string r in rubricList)
+            {
+                List<string> wcList = new List<string>();
+                List<Course> clist = getCoursesbyUsingSubjectAndRubric(r.Trim());
+                foreach (Course c in clist)
+                {
+                    string name = c.CourseWholeName;
+                    wcList.Add(name);
+                }
+                wcList.Insert(0, "---Select---");
+                RubricClasses rbc = new RubricClasses(r, wcList);
+                list.Add(rbc);
+            }
+
+            return list;
+        }
+
+        private List<RubricClasses> getClassesForCapstonNormal(string mjr, string ctlg,int count)
+        {
+            List<RubricClasses> list = new List<RubricClasses>();
+            List<string> rubricList = getCourseRubricCreatedOptions(mjr, "Capston", "Normal");
+
+            foreach (string r in rubricList)
+            {
+                List<string> wcList = new List<string>();
+
+                List<Course> clist = getCoursesbyUsingSubjectAndRubric(r.Trim());
+                foreach (Course c in clist)
+                {
+                    string name = c.CourseWholeName;
+                    wcList.Add(name);
+                }
+                wcList.Insert(0, "---Select---");
+                RubricClasses rbc = new RubricClasses(r, wcList);
+                list.Add(rbc);
+            }
+
+            return list;
+        }
+        
+        public List<Course> getCoursesbyUsingSubjectAndRubric(string subRub)
+        {
+            List<Course> list = new List<Course>();
+            if (subRub.Equals("SENG/CSCI/SWEN 5x3x-6x3x"))
+            {
+                using (c533317sp04prakhyanEntities db = new c533317sp04prakhyanEntities())
+                {
+                    var results = db.AcademicCatalog16_17.Where(p => (p.Dept.Equals("SENG") || p.Dept.Equals("CSCI") || p.Dept.Equals("SWEN")) && (p.SWEN.Equals("E"))&& (p.Course_No.StartsWith("5") || p.Course_No.StartsWith("6"))).Select(p => new Course{
+                       CourseShortName = p.Course,
+                       CourseFullName = p.Long_Title 
+                    }).ToList<Course>();
+                    if (results != null)
+                    {
+                        foreach (Course c in results)
+                        {
+                            list.Add(new Course(c.CourseShortName,c.CourseShortName + " " + c.CourseFullName));
+                        }
+                    }
+                    return list;
+
+                }
+            }
+            else if(subRub.Equals("SENG/CSCI/SWEN 4x3x-6x3x"))
+            {
+                using (c533317sp04prakhyanEntities db = new c533317sp04prakhyanEntities())
+                {
+                    var results = db.AcademicCatalog16_17.Where(p => (p.Dept.Equals("SENG") || p.Dept.Equals("CSCI") || p.Dept.Equals("SWEN")) && (p.SWEN.Equals("E")) && (p.Course_No.StartsWith("4") ||p.Course_No.StartsWith("5")|| p.Course_No.StartsWith("6"))).Select(p => new Course
+                    {
+                        CourseShortName = p.Course,
+                        CourseFullName = p.Long_Title
+                    }).ToList<Course>();
+                    if (results != null)
+                    {
+                        foreach (Course c in results)
+                        {
+                            list.Add(new Course(c.CourseShortName, c.CourseShortName + " " + c.CourseFullName));
+                        }
+                    }
+                    return list;
+
+                }
+            }
+            else if (subRub.Equals("SWEN Technical Elective"))
+            {
+                using (c533317sp04prakhyanEntities db = new c533317sp04prakhyanEntities())
+                {
+                    var results = db.AcademicCatalog16_17.Where(p =>( p.Dept.Equals("SWEN")) && (p.SWEN.Equals("E")) && (p.Course_No.StartsWith("5") || p.Course_No.StartsWith("6"))).Select(p => new Course
+                    {
+                        CourseShortName = p.Course,
+                        CourseFullName = p.Long_Title
+                    }).ToList<Course>();
+                    if (results != null)
+                    {
+                        foreach (Course c in results)
+                        {
+                            list.Add(new Course(c.CourseShortName, c.CourseShortName + " " + c.CourseFullName));
+                        }
+                    }
+                    return list;
+
+                }
+            }
+            else if (subRub.Equals("SWEN/DMST/SENG 5x3x-6x3x"))
+            {
+                using (c533317sp04prakhyanEntities db = new c533317sp04prakhyanEntities())
+                {
+                    var results = db.AcademicCatalog16_17.Where(p => (p.Dept.Equals("SENG") || p.Dept.Equals("DMST") || p.Dept.Equals("SWEN")) && (p.SWEN.Equals("E")) && (p.Course_No.StartsWith("5") || p.Course_No.StartsWith("6"))).Select(p => new Course
+                    {
+                        CourseShortName = p.Course,
+                        CourseFullName = p.Long_Title
+                    }).ToList<Course>();
+                    if (results != null)
+                    {
+                        foreach (Course c in results)
+                        {
+                            list.Add(new Course(c.CourseShortName, c.CourseShortName + " " + c.CourseFullName));
+                        }
+                    }
+                    return list;
+
+                }
+            }
+
+            return list;
+        }
+
+        private List<string> getCourseRubricCreatedOptions(string mjr, string type, string spcl)
         {
             string str = "";
             if (mjr.Equals("SWEN"))
             {
-                using (capf17gswen41Entities db = new capf17gswen41Entities())
-                {
-                    var result = db.SWENCompletions.SingleOrDefault(b => b.CompletionType == type);
-                    if (result != null)
+                if (spcl.Equals("Special"))
+               { 
+                    using (capf17gswen41Entities db = new capf17gswen41Entities())
                     {
-                        str= result.ElectiveSubjectWithLevelOptions;
-                    }
+                        var result = db.SWENCompletions.SingleOrDefault(b => b.CompletionType == type);
+                        if (result != null)
+                        {
+                            str= result.ElectiveSubjectWithLevelSpecialOptions;
+                        }
 
-                    return str.Split(',').ToList<string>();
+                        return str.Split(',').ToList<string>();
+                    }
+               }
+                else
+                {
+                    using (capf17gswen41Entities db = new capf17gswen41Entities())
+                    {
+                        var result = db.SWENCompletions.SingleOrDefault(b => b.CompletionType == type);
+                        if (result != null)
+                        {
+                            str = result.ElectiveSubjectWithLevelOptions;
+                        }
+
+                        return str.Split(',').ToList<string>();
+                    }
                 }
 
             }
 
             return null;
+        }
+
+        private List<Course> getThesisCourse(string mjr, string ctlg)
+        {
+            string courseShtName = "";
+            GenerateCPSManager cmgr = new GenerateCPSManager();
+            List<Course> list = new List<Course>(); 
+            using (capf17gswen41Entities db = new capf17gswen41Entities())
+            {
+                var result = db.SWENCompletions.SingleOrDefault(b => b.CompletionType == "Thesis");
+                if (result != null)
+                {
+                    courseShtName = result.CompletionCourse;
+                }
+              list.Add( cmgr.getCourseDetailUsingCourseShortName(courseShtName, ctlg, mjr));
+              list.Add(cmgr.getCourseDetailUsingCourseShortName(courseShtName, ctlg, mjr));
+            }
+            return list;
+        }
+
+        private Course getCapstonCourse(string mjr, string ctlg)
+        {
+            string courseShtName = "";
+            GenerateCPSManager cmgr = new GenerateCPSManager();
+            using (capf17gswen41Entities db = new capf17gswen41Entities())
+            {
+                var result = db.SWENCompletions.SingleOrDefault(b => b.CompletionType == "Capston");
+                if (result != null)
+                {
+                    courseShtName = result.CompletionCourse;
+                }
+              return  cmgr.getCourseDetailUsingCourseShortName(courseShtName, ctlg, mjr);
+            }
+           
         }
     }//end of class
 

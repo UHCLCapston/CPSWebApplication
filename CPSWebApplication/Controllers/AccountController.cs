@@ -13,6 +13,10 @@ namespace CPSWebApplication.Controllers
     {
         public ActionResult LogIn()
         {
+            FormsAuthentication.SignOut();
+            Session["UserID"] = null;
+            Session["UserName"] = null;
+            Session["Role"] = null;
             return View();
         }
 
@@ -67,6 +71,34 @@ namespace CPSWebApplication.Controllers
             }
             return View(uLV);
         }//
+
+        public ActionResult HomePage(int id)
+        {
+            UserManager userManager = new UserManager();
+            UserModel user = new UserModel();
+            String role = userManager.getUserRoleById(id);
+
+            if (role.Equals("Student"))
+            {
+                return RedirectToAction("Student", "Home", new { id = id });
+            }
+            else if (role.Equals("AcademicAdvisor"))
+            {
+                return RedirectToAction("AcademicAdvisor", "Home", new { id = id });
+            }
+            else if (role.Equals("FacultyAdvisor"))
+            {
+                return RedirectToAction("Faculty", "Home", new { id = id });
+            }
+            else if (role.Equals("Secretary"))
+            {
+                return RedirectToAction("Secretary", "Home", new { id = id });
+            }
+
+            else
+                return RedirectToAction("Login", "Account");
+
+        }
 
         [Authorize]
         public ActionResult LogOut()

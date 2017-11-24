@@ -36,6 +36,11 @@ namespace CPSWebApplication.Models.ViewModel
 
         public List<Course> ElectiveClassesList { get; set; }
 
+        public List<Course> CapstonElectiveClassesList { get; set; }
+
+        public List<Course> ThesisElectiveClassesList { get; set; }
+
+
         [Required]
         [Display(Name = "Faculty Advisor" )]
         public string assignedFaculty { get; set; }
@@ -51,6 +56,7 @@ namespace CPSWebApplication.Models.ViewModel
 
         public List<String> CourseLongTitleListForElective { get; set; }
         public List<String> CourseWholeNameListForElective { get; set; }
+        public List<List<String>> ListOFCourseWholeNameListElective { get; set; }
         public List<String> CourseCreditHrsListForElective { get; set; }
 
         public List<String> CourseGradeList { get; set; }
@@ -70,6 +76,18 @@ namespace CPSWebApplication.Models.ViewModel
         public string ElectiveGrade { get; set; }
 
         public int countElectives { get; set; }
+
+        public int countElectivesCapston { get; set; }
+
+        public int countElectivesThesis { get; set; }
+
+        public Course CapstonCourse { get; set; }
+        public List<Course> ThesisCourse { get; set; }
+
+        public List<RubricClasses> ClassesForCapstonNormal { get; set; }
+        public List<RubricClasses> ClassesForThesisNormal { get; set; }
+        public List<RubricClasses> ClassesForCapstonSpecial { get; set; }
+        public List<RubricClasses> ClassesForThesisSpecial { get; set; }
 
         //To show studentList with cps
         public List<CPS> cpsList { get; set; }

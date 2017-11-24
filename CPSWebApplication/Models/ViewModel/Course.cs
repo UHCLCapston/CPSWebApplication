@@ -25,7 +25,12 @@ namespace CPSWebApplication.Models.ViewModel
         public string CourseSubjectWithRubric { get; set; }
         public Course()
         {}
+        public Course(string courseShortName, string courseWholeName)
+        {
+            CourseShortName = courseShortName;
+            CourseWholeName = courseWholeName;
 
+        }
         public Course(string courseShortName, string courseFullName, string courseSubject, string courselevel, string creditHrs)
         {
             CourseShortName = courseShortName;

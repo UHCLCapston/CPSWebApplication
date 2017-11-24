@@ -1,11 +1,14 @@
 ﻿<!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <script src="~/Scripts/jquery-1.8.2.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.8.24.min.js"></script>
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -24,10 +27,13 @@
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                     @if (Session["UserName"] != null)
                     {
+                        <li></li>
                         <li>
                             <a>@Html.Label("Hello " + Session["UserName"].ToString() + " !")</a>
                         </li>
+                        <li></li>
                         <li>@Html.ActionLink("LogOut", "LogOut", "Account")</li>
+
                     }
                     else
                     {

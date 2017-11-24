@@ -691,5 +691,9 @@ namespace CPSWebApplication.Models.EntityManager
             return v;
         }
 
+        internal List<Course> getThesisCourse(string mjr, string ctlg)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

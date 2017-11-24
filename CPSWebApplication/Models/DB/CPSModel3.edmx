@@ -23,6 +23,7 @@
           <Property Name="IsDraft" Type="nvarchar" MaxLength="50" />
           <Property Name="IsFinalised" Type="nvarchar" MaxLength="50" />
           <Property Name="IsActive" Type="nvarchar" MaxLength="50" />
+          <Property Name="NeedToAudit" Type="nvarchar" MaxLength="50" />
           <Property Name="IsAudited" Type="nvarchar" MaxLength="50" />
           <Property Name="LastFinalizeDate" Type="nvarchar" MaxLength="50" />
           <Property Name="LastDraftDate" Type="nvarchar" MaxLength="50" />
@@ -54,6 +55,7 @@
           <Property Name="IsDraft" Type="nvarchar" MaxLength="50" />
           <Property Name="IsFinalised" Type="nvarchar" MaxLength="50" />
           <Property Name="IsActive" Type="nvarchar" MaxLength="50" />
+          <Property Name="NeedAudit" Type="nvarchar" MaxLength="50" />
           <Property Name="IsAudited" Type="nvarchar" MaxLength="50" />
           <Property Name="LastFinalizeDate" Type="nvarchar" MaxLength="50" />
           <Property Name="LastDraftDate" Type="nvarchar" MaxLength="50" />
@@ -92,6 +94,7 @@
           <Property Name="FoundationCourseDeatils" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="IsBlankCreated" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="BlankCreatedDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NeedToAudit" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityContainer Name="capf17gswen4Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="CPS" EntityType="cpsFinalEntities.CPS" />
@@ -128,6 +131,7 @@
           <Property Name="LastDraftDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="IsBlankCreated" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="BlankCreatedDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NeedAudit" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -138,6 +142,7 @@
           <EntitySetMapping Name="CPS">
             <EntityTypeMapping TypeName="cpsFinalEntities.CPS">
               <MappingFragment StoreEntitySet="CPS">
+                <ScalarProperty Name="NeedToAudit" ColumnName="NeedToAudit" />
                 <ScalarProperty Name="BlankCreatedDate" ColumnName="BlankCreatedDate" />
                 <ScalarProperty Name="IsBlankCreated" ColumnName="IsBlankCreated" />
                 <ScalarProperty Name="FoundationCourseDeatils" ColumnName="FoundationCourseDeatils" />
@@ -171,6 +176,7 @@
           <EntitySetMapping Name="DraftCPS">
             <EntityTypeMapping TypeName="cpsFinalEntities.DraftCPS">
               <MappingFragment StoreEntitySet="DraftCPS">
+                <ScalarProperty Name="NeedAudit" ColumnName="NeedAudit" />
                 <ScalarProperty Name="BlankCreatedDate" ColumnName="BlankCreatedDate" />
                 <ScalarProperty Name="IsBlankCreated" ColumnName="IsBlankCreated" />
                 <ScalarProperty Name="LastDraftDate" ColumnName="LastDraftDate" />

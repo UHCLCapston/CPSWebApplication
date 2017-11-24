@@ -117,8 +117,11 @@ namespace CPSWebApplication.Models.EntityManager
                             string csCatalog = course.FirstOrDefault().Course_No;
 
                             crs = new Course(csShortName, csLongName, csSubject, csCatalog, csCredits, csType);
+                            crs.CourseWholeName = csShortName + " " + csLongName;
                         }
                     }
+
+                  
                     return crs;
                 }
                 else if(mjr.Equals("CSCI"))

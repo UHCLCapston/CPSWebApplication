@@ -22,5 +22,6 @@ namespace CPSWebApplication.Models.DB
         public string CoreClassCredits { get; set; }
         public string TotalCredits { get; set; }
         public string ElectiveSubjectWithLevelOptions { get; set; }
+        public string ElectiveSubjectWithLevelSpecialOptions { get; set; }
     }
 }

@@ -33,5 +33,6 @@ namespace CPSWebApplication.Models.DB
         public string FoundationCourseDeatils { get; set; }
         public string IsBlankCreated { get; set; }
         public string BlankCreatedDate { get; set; }
+        public string NeedToAudit { get; set; }
     }
 }

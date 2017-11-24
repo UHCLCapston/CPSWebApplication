@@ -432,6 +432,7 @@
     <Compile Include="Models\ViewModel\CPS.cs" />
     <Compile Include="Models\ViewModel\DesignCPSViewModel.cs" />
     <Compile Include="Models\ViewModel\FacultyDetails.cs" />
+    <Compile Include="Models\ViewModel\RubricClasses.cs" />
     <Compile Include="Models\ViewModel\StudentDetails.cs" />
     <Compile Include="Models\ViewModel\UserLoginView.cs" />
     <Compile Include="Models\ViewModel\UserModel.cs" />

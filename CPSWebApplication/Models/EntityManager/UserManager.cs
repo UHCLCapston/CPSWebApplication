@@ -34,7 +34,31 @@ namespace CPSWebApplication.Models.EntityManager
                     return String.Empty;
             }
         }//end getuserrole
+        public string getUserRoleById(int id)
+        {
+            string uId = id.ToString();
+            string username = " ";
+            using (EserviceDBEntities db = new EserviceDBEntities())
+            {
+                var user = db.APPUserProfiles.Where(o => o.UHCLID.Equals(uId));
+                if (user.Any())
+                {
+                    username= user.FirstOrDefault().UHCLEmail;
+                }
+               
+            }
 
+            using (EserviceDBEntities db = new EserviceDBEntities())
+            {
+                var user = db.APPUsers.Where(o => o.UHCLEmail.ToLower().Equals(username));
+                if (user.Any())
+                {
+                    return user.FirstOrDefault().UserRole;
+                }
+                else
+                    return String.Empty;
+            }
+        }//end getuserrole
         public string GetUserFirstName (string username)
         {
             using (EserviceDBEntities db = new EserviceDBEntities())

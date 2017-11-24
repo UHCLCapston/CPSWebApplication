@@ -129,33 +129,52 @@ p>@Session["UserName"].ToString() Want to see Draft CPS</p>
                         @Html.TextBoxFor(model => model.programCompletionOption, new { @class = "form-control", @readonly = "readonly" })
                     </div>
                 </div>
-                <table id="cphMainContent_dgvUsers" class="table table-hover table-striped"
-                       cellspacing="0" style="border-collapse:collapse;">
-                    <tbody>
-                        <tr>
-                            <th scope="col">Course</th>
-                            <th scope="col">Long Title</th>
-                            <th scope="col">Subject And Level</th>
-                            <th scope="col">Credits</th>
-                            <th scope="col">EnrolledSemester</th>
-                            <th scope="col">Grade</th>
-                            @if (Model.ElectiveClassesList != null)
-                            {
-                                for (int i = 0; i < Model.ElectiveClassesList.Count(); i++)
-                                {
-                                <tr class="cursor-pointer">
-                                    <td>@Model.ElectiveClassesList[i].CourseShortName </td>
-                                    <td>@Model.ElectiveClassesList[i].CourseFullName</td>
-                                    <td>@Model.ElectiveClassesList[i].CourseSubjectWithRubric</td>
-                                    <td>@Model.ElectiveClassesList[i].CreditHrs</td>
-                                    <td>@Model.ElectiveClassesList[i].EnrolledSemester</td>
-                                    <td>@Model.ElectiveClassesList[i].GradesRecieved</td>
 
-                                </tr>
+                <!--Div 1 for Capstone-->
+                <div id="capston">
+                    <table id="cphMainContent_dgvUsers" class="table table-hover table-striped"
+                           cellspacing="0" style="border-collapse:collapse;">
+                        <tbody>
+                            <tr>
+                                <th scope="col">Course</th>
+                                <th scope="col">Long Title</th>
+                                <th scope="col">Subject And Level</th>
+                                <th scope="col">Credits</th>
+                                <th scope="col">EnrolledSemester</th>
+                                <th scope="col">Grade</th>
+                                @if (Model.ElectiveClassesList != null)
+                                {
+                                    for (int i = 0; i < Model.ElectiveClassesList.Count(); i++)
+                                    {
+                                    <tr class="cursor-pointer">
+                                        <td>@Model.ElectiveClassesList[i].CourseShortName </td>
+                                        <td>@Model.ElectiveClassesList[i].CourseFullName</td>
+                                        <td>@Model.ElectiveClassesList[i].CourseSubjectWithRubric</td>
+                                        <td>@Model.ElectiveClassesList[i].CreditHrs</td>
+                                        <td>@Model.ElectiveClassesList[i].EnrolledSemester</td>
+                                        <td>@Model.ElectiveClassesList[i].GradesRecieved</td>
+
+                                    </tr>
+                                    }
                                 }
-                            }
-                        </tbody>
-                    </table>
+                            </tbody>
+                        </table>
+                            <div>
+                                <!--<capston></capston>-->
+                            </div>
+
+                    </div>
+
+                <!--Div 2 for Thesis-->
+                <div id="thesis">
+                    <table></table>
+                    <!--<Thesis></Thesis>-->
+                </div>
+
+         </div>
+
+
+
                     <br />
                   <div>
                     @Html.LabelFor(model => model.assignedFaculty, new { @class = "control-label col-md-2" })
@@ -163,7 +182,7 @@ p>@Session["UserName"].ToString() Want to see Draft CPS</p>
                         @Html.TextBoxFor(model => model.assignedFaculty, new { @class = "form-control", @readonly = "readonly" })
                     </div>
                   </div>
-               </div>
+              
 
                 <div>
                     <button type="button" class="btn btn-default" onclick="window.location = ('@Url.Action("AcademicAdvisor", "Home", new { id = Convert.ToInt32(@Session["UserID"]) })')">BACK TO HOME </button>
