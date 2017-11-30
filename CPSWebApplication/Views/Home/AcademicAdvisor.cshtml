@@ -4,25 +4,24 @@
     ViewBag.Title = "AcademicAdvisor";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<h2>@Model.FirstName</h2>
-<h2>Welcome to AcademicAdvisor Portal </h2>
+<h2 class="text-hide">@Model.FirstName</h2>
+<h2>Welcome to Academic Advisor Portal </h2>
 
 @using (Html.BeginForm("Create", "AcadAdv"))
 {
     <div>
         <div>
-            <button type="button" class="btn btn-default" onclick="window.location = ('@Url.Action("DesignCPS","AcademicAdvisor")')">Design CPS</button>
-            <button type="button" class="btn btn-default" onclick="window.location = ('@Url.Action("GenerateCPS","AcademicAdvisor")')">View Blanck CPS</button>
+            <button type="button" class="btn btn-default" onclick="window.location = ('@Url.Action("DesignCPS","AcademicAdvisor")')"><img src="https://newcdn.iconfinder.com/data/icons/startup-management/325/Project_management_Project_Brief-256.png" class="img-responsive" width="140" />Design CPS</button>
+            &nbsp;&nbsp;<button type="button" class="btn btn-default" onclick="window.location = ('@Url.Action("GenerateCPS","AcademicAdvisor")')"><img src="https://newcdn.iconfinder.com/data/icons/startup-management/325/Project_management_Daily_Log-256.png" class="img-responsive" width="140" />Generate CPS</button>
+            &nbsp;&nbsp;<button type="button" class="btn btn-default" onclick="window.location = ('@Url.Action("ModifyCPS","AcademicAdvisor")')"><img src="https://cdn2.iconfinder.com/data/icons/startup-management/325/Project_management_Project_Mandate-512.png" class="img-responsive" width="140" />Modify CPS</button>
         </div>
-        <br /><br />
+        <br />
         <div>
-            <button type="button" class="btn btn-default" onclick="window.location = ('@Url.Action("ViewDraftCPS","AcademicAdvisor")')">View Draft CPS</button>
-            <button type="button" class="btn btn-default" onclick="window.location = ('@Url.Action("ModifyCPS","AcademicAdvisor")')">Audit and Modify CPS</button>
+            <button type="button" class="btn btn-default" onclick="window.location = ('@Url.Action("FinalizeCPS","AcademicAdvisor")')"><img src="https://newcdn.iconfinder.com/data/icons/startup-management/325/Project_management_Work_Package-256.png" class="img-responsive" width="140" />Finalize CPS</button>
+            &nbsp;&nbsp;<button type="button" class="btn btn-default" onclick="window.location = ('@Url.Action("AduitCPS","AcademicAdvisor")')"><img src="https://cdn2.iconfinder.com/data/icons/startup-management/325/Project_management_Risk_Register-512.png" class="img-responsive" width="140" />Audit CPS</button>
+            &nbsp;&nbsp;<button type="button" class="btn btn-default" onclick="window.location = ('@Url.Action("AduitCPS","AcademicAdvisor")')"><img src="https://newcdn.iconfinder.com/data/icons/startup-management/325/Project_management_Management_Strategy-256.png" class="img-responsive" width="140" />Design New Catalog</button>
         </div>
-        <br /><br />
-        <div>
-            <button type="button" class="btn btn-default" onclick="window.location = ('@Url.Action("FinalizeCPS","AcademicAdvisor")')">Finalize CPS</button>
-        </div>
+
     </div>
 }
 

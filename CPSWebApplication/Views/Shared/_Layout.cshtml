@@ -29,12 +29,29 @@
                 <ul class="nav navbar-nav pull-right ">
                     @if (Session["UserName"] != null)
                     {
-                        
+                 
                         <li>
                             <a>@Html.Label("Hello " + Session["UserName"].ToString() + " !")</a>
                         </li>
-                        <li></li>
+                        <!--switch (Session["Role"])
+                        {
+                            case "AcademicAdvisor":
+                                <li>@Html.ActionLink("Home", "AcademicAdvisor", "Home")</li>
+                                break;
+                            case "FacultyAdvisor":
+                                <li>@Html.ActionLink("Home", "Faculty", "Home")</li>
+                                break;
+                            case "Student":
+                                <li>@Html.ActionLink("Home", "Student", "Home")</li>
+                                break;
+                            case "Secretary":
+                                <li>@Html.ActionLink("Home", "Secretary", "Home")</li>
+                                break;
+
+                        }-->
+
                         <li>@Html.ActionLink("Log Out", "LogOut", "Account")</li>
+                       
 
                     }
                     else
