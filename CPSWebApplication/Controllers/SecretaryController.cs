@@ -7,6 +7,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using CPSWebApplication.Models.DB;
+using CPSWebApplication.Models.ViewModel;
+using CPSWebApplication.Models.EntityManager;
 
 namespace CPSWebApplication.Controllers
 {
@@ -21,21 +23,29 @@ namespace CPSWebApplication.Controllers
         }
 
         // GET: Secretary/Details/5
+        [HttpGet]
         public ActionResult Details(string id)
         {
-            if (id == null)
+            bool flag = false;
+            string studentId = id.ToString();
+
+            CPSDraftToFinalManager mgr = new CPSDraftToFinalManager();
+            DesignCPSViewModel vm = mgr.getModelForGenerateDraftCPS(studentId);
+
+            if (Session["UserID"] != null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                flag = true;
             }
-            CPS cPS = db.CPS.Find(id);
-            if (cPS == null)
-            {
-                return HttpNotFound();
-            }
-            return View(cPS);
+
+            return View(vm);
+        }
+        [HttpPost]
+        public ActionResult Details()
+        {
+            return View();
         }
 
-      
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
