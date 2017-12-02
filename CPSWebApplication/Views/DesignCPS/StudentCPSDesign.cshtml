@@ -8,6 +8,8 @@
 
 <h2>StudentCPSDesign</h2>
 <p> @Session["UserName"].ToString() You are welcome on designing student page</p>
+@if (TempData["Message"] != null)
+{<div style="color: #1e83ca;">@TempData["Message"]</div>}
 
 @using (Html.BeginForm("StudentCPSDesignTest", "DesignCPS", FormMethod.Post))
 {
@@ -126,7 +128,9 @@
             @if (TempData["Message"] != null)
             {<div style="color: #1e83ca;">@TempData["Message"]</div>}
 
-            <button name="action" value="save" type="submit" class="btn btn-success" onclick="window.location = ('@Url.Action("","")')">Save</button>
+            <button name="action" value="saveAsDraft" type="submit" class="btn btn-success" onclick="window.location = ('@Url.Action("","")')">Save</button>
+
+            <button name="action" value="save" type="submit" class="btn btn-success" onclick="window.location = ('@Url.Action("","")')">Submit</button>
 
             <button name="action" value="back" type="submit" class="btn btn-success" onclick="window.location = ('@Url.Action("","")')">Back to Home</button>
 

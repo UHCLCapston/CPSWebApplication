@@ -1,17 +1,17 @@
 ﻿@model CPSWebApplication.Models.ViewModel.DesignCPSViewModel
 
 @{
-    ViewBag.Title = "GenerateDraftCPS";
+    ViewBag.Title = "MakeAuditCPS";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+<h2>MakeAuditCPS</h2>
 <script src="~/Scripts/jquery-3.2.1.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
-
-<h2>GenerateDraftCPS</h2>
 @if (TempData["Message"] != null)
 {<div style="color: #1e83ca;">@TempData["Message"]</div>}
 
-@using (Html.BeginForm("SaveGeneratedDraftCPS", "DraftCPS"))
+@using (Html.BeginForm("SaveChangesOnAuditCPS", "AuditCPS"))
 {
     <table id="cphMainContent_dgvUsers" class="table table-hover table-striped"
            cellspacing="0" style="border-collapse:collapse;">
@@ -34,7 +34,7 @@
                     </div>
                 </td>
             </tr>
-            <tr>  
+            <tr>
                 <td>
                     @Html.LabelFor(model => model.lastName, new { @class = "control-label col-md-2" })
                 </td>
@@ -59,36 +59,37 @@
                         @Html.TextBoxFor(model => model.searchId, new { @class = "form-control", @readonly = "readonly" })
                     </div>
                 </td>
-            </tr>          
+            </tr>
         </tbody>
     </table>
-             <div class="form-group" style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">
-                <h4>Foundation Courses:</h4>
-                <table id="cphMainContent_dgvUsers" class="table table-hover table-striped"
-                       cellspacing="0" style="border-collapse:collapse;">
-                    <tbody>
-                        <tr>
-                            <th scope="col">Course</th>
-                            <th scope="col">Long Title</th>
-                            <th scope="col">Credits</th>
-                            <th scope="col">Enrolling Semester</th>
-                            <th scope="col">Grade</th>
+    <div class="form-group" style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">
+        <h4>Foundation Courses:</h4>
+        <table id="cphMainContent_dgvUsers" class="table table-hover table-striped"
+               cellspacing="0" style="border-collapse:collapse;">
+            <tbody>
+                <tr>
+                    <th scope="col">Course</th>
+                    <th scope="col">Long Title</th>
+                    <th scope="col">Credits</th>
+                    <th scope="col">Enrolling Semester</th>
+                    <th scope="col">Grade</th>
+                </tr>
+                @if (Model.FoundationClassesList.Count > 0)
+                {
+                    for (int i = 0; i < Model.FoundationClassesList.Count(); i++)
+                    {
+                        <tr class="cursor-pointer">
+                            <td>@Model.FoundationClassesList[i].CourseShortName</td>
+                            <td>@Model.FoundationClassesList[i].CourseFullName</td>
+                            <td>@Model.FoundationClassesList[i].CreditHrs</td>
+                            <td>@Html.DropDownListFor(m => m.FoundationClassesList[i].EnrolledSemester, new SelectList(Model.CourseSemesterList, Model.FoundationClassesList[i].EnrolledSemester), new { @class = "form-control" })</td>
+                            <td>@Html.DropDownListFor(m => m.FoundationClassesList[i].GradesRecieved, new SelectList(Model.CourseGradeList, Model.FoundationClassesList[i].GradesRecieved), new { @class = "form-control" })</td>
                         </tr>
-              @if (Model.FoundationClassesList.Count > 0)
-              {
-                  for (int i = 0; i < Model.FoundationClassesList.Count(); i++)
-                  {
-                                <tr class="cursor-pointer">
-                                    <td>@Model.FoundationClassesList[i].CourseShortName</td>
-                                    <td>@Model.FoundationClassesList[i].CourseFullName</td>
-                                    <td>@Model.FoundationClassesList[i].CreditHrs</td>
-                                    <td>@Html.DropDownListFor(m => m.FoundationClassesList[i].EnrolledSemester, new SelectList(Model.CourseSemesterList,Model.FoundationClassesList[i].EnrolledSemester), new { @class = "form-control" })</td>
-                                </tr>
-                  }
-              }
-                    </tbody>
-                </table>
-            </div>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
             <div style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">
                 <h4>Core Courses:</h4>
                 <table id="cphMainContent_dgvUsers" class="table table-hover table-striped"
@@ -98,7 +99,7 @@
                             <th scope="col">Course</th>
                             <th scope="col">Long Title</th>
                             <th scope="col">Credits</th>
-                            <th scope="col">Enrolling Semester</th>
+                            <th scope="col">EnrollingSemester</th>
                             <th scope="col">Grade</th>
                         </tr>
                         @for (int i = 0; i < Model.CoreClassesList.Count(); i++)
@@ -108,6 +109,7 @@
                                 <td>@Model.CoreClassesList[i].CourseFullName</td>
                                 <td>@Model.CoreClassesList[i].CreditHrs</td>
                                 <td>@Html.DropDownListFor(m => m.CoreClassesList[i].EnrolledSemester, new SelectList(Model.CourseSemesterList, Model.CoreClassesList[i].EnrolledSemester), new { @class = "form-control" })</td>
+                                <td>@Html.DropDownListFor(m => m.CoreClassesList[i].GradesRecieved, new SelectList(Model.CourseGradeList, Model.CoreClassesList[i].GradesRecieved), new { @class = "form-control" })</td>
                             </tr>
                         }
                     </tbody>
@@ -118,23 +120,23 @@
 
             <div style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">
                 <h4>Elective Courses:</h4>
-             <div class="form-group" style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">
-                 @Html.LabelFor(model => model.programCompletionOption, new { @class = "control-label col-md-2" })  <text>&nbsp;&nbsp;</text>
-                  <table>
-                    <tbody>
-                       <tr>
-                          <td>
-                             @Html.RadioButtonFor(s => s.programCompletionOption, "Capstone", new { onCLick = "ShowOption(this)" })@Model.ProgramCompletionOptionList[0]
-                          </td>
-                          <td>
-                             @Html.RadioButtonFor(s => s.programCompletionOption, "Thesis", new { onCLick = "ShowOption(this)" })@Model.ProgramCompletionOptionList[1]
-                         </td>
-                      </tr>
-                 </tbody>
-              </table>
-              
-           </div>
-          </div>
+                <div class="form-group" style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">
+                    @Html.LabelFor(model => model.programCompletionOption, new { @class = "control-label col-md-2" })  <text>&nbsp;&nbsp;</text>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    @Html.RadioButtonFor(s => s.programCompletionOption, "Capstone", new { onCLick = "ShowOption(this)" })@Model.ProgramCompletionOptionList[0]
+                                </td>
+                                <td>
+                                    @Html.RadioButtonFor(s => s.programCompletionOption, "Thesis", new { onCLick = "ShowOption(this)" })@Model.ProgramCompletionOptionList[1]
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
             <script type="text/javascript">
 
                 $('#Capston').hide();
@@ -150,7 +152,7 @@
                     }
                     else if (setdRad == "Thesis") {
                         $('#Thesis').show();
-                    }                 
+                    }
                 }
 
 
@@ -165,26 +167,26 @@
                 function FillWholeCourseList(subRub) {
                     var subRub = subRub.value;
                     var procemessage = "<option value='0'> Please wait...</option>";
-                        $("#courseWholeNameList").html(procemessage).show();
-                        var url = "/DraftCPS/GetLoadCourseBySubjectRubric/";
+                    $("#courseWholeNameList").html(procemessage).show();
+                    var url = "/DraftCPS/GetLoadCourseBySubjectRubric/";
 
-                        $.ajax({
-                            url: url,
-                            data: { subRub: subRub },
-                            cache: false,
-                            type: "POST",
-                            success: function (data) {
-                                var markup = "<option value='0'>Select Subject</option>";
-                                for (var x = 0; x < data.length; x++) {
-                                    markup += "<option value=" + data[x].Value + ">" + data[x].Text + "</option>";
-                                }
-                                $("#courseWholeNameList").html(markup).show();
-                            },
-                            error: function (reponse) {
-                                alert("error : " + reponse);
+                    $.ajax({
+                        url: url,
+                        data: { subRub: subRub },
+                        cache: false,
+                        type: "POST",
+                        success: function (data) {
+                            var markup = "<option value='0'>Select Subject</option>";
+                            for (var x = 0; x < data.length; x++) {
+                                markup += "<option value=" + data[x].Value + ">" + data[x].Text + "</option>";
                             }
-                        });
-                    
+                            $("#courseWholeNameList").html(markup).show();
+                        },
+                        error: function (reponse) {
+                            alert("error : " + reponse);
+                        }
+                    });
+
                 }
             </script>
 
@@ -195,24 +197,24 @@
                         showSubtext: true
                     });
                 });
-                </script>
-                
-                <div id="Capston" style="display: none;" >
+            </script>
+
+                <div id="Capston" style="display: none;">
                     <table class="table table-hover table-striped" cellspacing="0" style="border-collapse:collapse;">
                         <tbody>
                             <tr>
-                                <th scope="col">Course Subject and Level</th>
+                                <th scope="col">CourseSubject And Level</th>
                                 <th scope="col">Course Whole Name</th>
                                 <th scope="col">Credits</th>
-                                <th scope="col">Enrolling Semester</th>
+                                <th scope="col">EnrollingSemester</th>
                                 <th scope="col">Grade</th>
                             </tr>
                             @for (int i = 0; i < Model.countElectivesCapston; i++)
                             {
-                                <tr class="cursor-pointer">                         
+                                <tr class="cursor-pointer">
                                     @if (Model.ClassesForCapstonNormal.Count > 0)
                                     {
-                                        if (Model.CapstonElectiveClassesList !=null)
+                                        if (Model.CapstonElectiveClassesList != null)
                                         {
                                             <td>@Html.DropDownListFor(m => m.CapstonElectiveClassesList[i].CourseWholeName, new SelectList(Model.ClassesForCapstonNormal[i].classes, Model.CapstonElectiveClassesList[i].CourseWholeName), new { @class = "form-control selectpicker", @id = "courseWholeNameList", @Value = Model.ElectiveWholeName, data_show_subtext = "true", data_live_search = "true" })</td>
                                         }
@@ -225,11 +227,19 @@
                                     <td>@Model.ElectiveCreditHrs</td>
                                     @if (Model.CapstonElectiveClassesList != null)
                                     {
-                                    <td>@Html.DropDownListFor(m => m.CapstonElectiveClassesList[i].EnrolledSemester, new SelectList(Model.CourseSemesterList, Model.CapstonElectiveClassesList[i].EnrolledSemester), new { @class = "form-control" })</td>
+                                        <td>@Html.DropDownListFor(m => m.CapstonElectiveClassesList[i].EnrolledSemester, new SelectList(Model.CourseSemesterList, Model.CapstonElectiveClassesList[i].EnrolledSemester), new { @class = "form-control" })</td>
                                     }
                                     else
                                     {
-                                    <td>@Html.DropDownListFor(m => m.CapstonElectiveClassesList[i].EnrolledSemester, new SelectList(Model.CourseSemesterList), new { @class = "form-control" })</td>
+                                        <td>@Html.DropDownListFor(m => m.CapstonElectiveClassesList[i].EnrolledSemester, new SelectList(Model.CourseSemesterList), new { @class = "form-control" })</td>
+                                    }
+                                    @if (Model.CapstonElectiveClassesList[i].GradesRecieved != null)
+                                    {
+                                        <td>@Html.DropDownListFor(m => m.CapstonElectiveClassesList[i].GradesRecieved, new SelectList(Model.CourseGradeList, Model.CapstonElectiveClassesList[i].GradesRecieved), new { @class = "form-control" })</td>
+                                    }
+                                    else
+                                    {
+                                        <td>@Html.DropDownListFor(m => m.CapstonElectiveClassesList[i].GradesRecieved, new SelectList(Model.CourseGradeList), new { @class = "form-control" })</td>
                                     }
                                 </tr>
                             }
@@ -257,7 +267,7 @@
                         </table>
                     </div>
                 </div>
-              
+
                 <div id="Thesis" style="display: none;">
                     <table class="table table-hover table-striped" cellspacing="0" style="border-collapse:collapse;">
                         <tbody>
@@ -275,23 +285,23 @@
                                     {
                                         if (Model.ThesisElectiveClassesList != null)
                                         {
-                                        <td>@Html.DropDownListFor(m => m.ThesisElectiveClassesList[i].CourseWholeName, new SelectList(Model.ClassesForThesisNormal[i].classes, Model.ThesisElectiveClassesList[i].CourseWholeName), new { @class = "form-control selectpicker", @id = "courseWholeNameList", @Value = Model.ElectiveWholeName, data_show_subtext = "true", data_live_search = "true" })</td>
+                                            <td>@Html.DropDownListFor(m => m.ThesisElectiveClassesList[i].CourseWholeName, new SelectList(Model.ClassesForThesisNormal[i].classes, Model.ThesisElectiveClassesList[i].CourseWholeName), new { @class = "form-control selectpicker", @id = "courseWholeNameList", @Value = Model.ElectiveWholeName, data_show_subtext = "true", data_live_search = "true" })</td>
                                         }
                                         else
                                         {
-                                         <td>@Html.DropDownListFor(m => m.ThesisElectiveClassesList[i].CourseWholeName, new SelectList(Model.ClassesForThesisNormal[i].classes), new { @class = "form-control selectpicker", @id = "courseWholeNameList", @Value = Model.ElectiveWholeName, data_show_subtext = "true", data_live_search = "true" })</td>
+                                            <td>@Html.DropDownListFor(m => m.ThesisElectiveClassesList[i].CourseWholeName, new SelectList(Model.ClassesForThesisNormal[i].classes), new { @class = "form-control selectpicker", @id = "courseWholeNameList", @Value = Model.ElectiveWholeName, data_show_subtext = "true", data_live_search = "true" })</td>
                                         }
 
                                     }
                                     <td>@Model.ClassesForThesisNormal[i].rubric</td>
                                     <td>@Model.ElectiveCreditHrs</td>
-                                    @if (Model.ThesisElectiveClassesList !=  null)
+                                    @if (Model.ThesisElectiveClassesList != null)
                                     {
-                                    <td>@Html.DropDownListFor(m => m.ThesisElectiveClassesList[i].EnrolledSemester, new SelectList(Model.CourseSemesterList, Model.ThesisElectiveClassesList[i].EnrolledSemester), new { @class = "form-control" })</td>
+                                        <td>@Html.DropDownListFor(m => m.ThesisElectiveClassesList[i].EnrolledSemester, new SelectList(Model.CourseSemesterList, Model.ThesisElectiveClassesList[i].EnrolledSemester), new { @class = "form-control" })</td>
                                     }
                                     else
                                     {
-                                    <td>@Html.DropDownListFor(m => m.ThesisElectiveClassesList[i].EnrolledSemester, new SelectList(Model.CourseSemesterList), new { @class = "form-control" })</td>
+                                        <td>@Html.DropDownListFor(m => m.ThesisElectiveClassesList[i].EnrolledSemester, new SelectList(Model.CourseSemesterList), new { @class = "form-control" })</td>
                                     }
                                 </tr>
                             }
@@ -331,16 +341,19 @@
                         @Html.TextBoxFor(model => model.assignedFaculty, new { @class = "form-control", @readonly = "readonly" })
                     </div>
                 </div>
+
                 <br />
 
                 <button name="action" value="saveDraft" type="submit" formmethod="post" class="btn btn-success" onclick="window.location = ('@Url.Action("Save","DraftCPS")')">Save</button>
 
-                <button name="action" value="save" type="submit" formmethod="post" class="btn btn-success" onclick="window.location = ('@Url.Action("SaveGeneratedDraftCPS","DraftCPS")')">Submit</button>
+                <button name="action" value="save" type="submit" formmethod="post" class="btn btn-success" onclick="window.location = ('@Url.Action("SaveGeneratedDraftCPS","DraftCPS")')">Submit to Finalize</button>
 
                 <button name="action" value="back" type="submit" class="btn btn-success" onclick="window.location = ('@Url.Action("","")')">Back To Home</button>
 
                 <a href="javascript:window.print()" class="btn btn-success btn-lg">
                     <span class="glyphicon glyphicon-print"></span> Print
                 </a>
-  }
+}
+
+
 

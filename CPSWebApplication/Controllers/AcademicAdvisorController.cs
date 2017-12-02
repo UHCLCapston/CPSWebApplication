@@ -56,7 +56,7 @@ namespace CPSWebApplication.Controllers
         {
             return View();
         }
-       [HttpGet]
+        [HttpGet]
         public ActionResult GenerateCPSView(int id)
         {
             bool flag = false;
@@ -114,19 +114,25 @@ namespace CPSWebApplication.Controllers
         {
             return View();
         }
-
-
-        public ActionResult ModifyCPS()
+        public ActionResult AuditCPS()
         {
+            string id;
+            if (Session["UserID"] != null)
+            {
+                id = Session["UserName"].ToString();
+            }
             return View();
         }
-        
+        [HttpPost]
+        public ActionResult AuditCPS(DesignCPSViewModel mdl)
+        {
+            CPSDesignManager mg = new CPSDesignManager();
+
+            string studentId = mdl.searchId;
+
+            return RedirectToAction("MakeAuditCPS", "AuditCPS", new { id = Convert.ToInt32(studentId) });
+        }
         public ActionResult FinalizeCPS()
-        {
-            return View();
-        }
-
-        public ActionResult AduitCPS()
         {
             return View();
         }

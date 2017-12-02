@@ -309,9 +309,11 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AcademicAdvisorController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AuditCPSController.cs" />
     <Compile Include="Controllers\DesignCPSController.cs" />
     <Compile Include="Controllers\DraftCPSController.cs" />
     <Compile Include="Controllers\FacultyAdvisorController.cs" />
+    <Compile Include="Controllers\FinalCPSController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SecretaryController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
@@ -428,6 +430,7 @@
       <DependentUpon>Model5.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ViewModel\Catelog.cs" />
+    <Compile Include="Models\ViewModel\ClassConstants.cs" />
     <Compile Include="Models\ViewModel\Course.cs" />
     <Compile Include="Models\ViewModel\CPS.cs" />
     <Compile Include="Models\ViewModel\DesignCPSViewModel.cs" />
@@ -577,9 +580,8 @@
     <Content Include="Views\Home\Student.cshtml" />
     <Content Include="Views\Account\LogOut.cshtml" />
     <Content Include="Views\AcademicAdvisor\GenerateCPS.cshtml" />
-    <Content Include="Views\AcademicAdvisor\ModifyCPS.cshtml" />
     <Content Include="Views\AcademicAdvisor\FinalizeCPS.cshtml" />
-    <Content Include="Views\AcademicAdvisor\AduitCPS.cshtml" />
+    <Content Include="Views\AcademicAdvisor\AuditCPS.cshtml" />
     <Content Include="Views\AcademicAdvisor\DesignCPS.cshtml" />
     <Content Include="Views\DesignCPS\StudentCPSDesign.cshtml" />
     <Content Include="Views\AcademicAdvisor\GenerateCPSView.cshtml" />
@@ -595,10 +597,12 @@
     <Content Include="Views\AcademicAdvisor\GenerateViewDraftCPS.cshtml" />
     <Content Include="Views\Student\ViewBlankCPS.cshtml" />
     <Content Include="Views\Student\ViewDraftCPS.cshtml" />
+    <Content Include="Views\AuditCPS\MakeAuditCPS.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Default\" />
+    <Folder Include="Views\FinalCPS\" />
     <Folder Include="Views\GenerateCPS\" />
     <Folder Include="Views\Secretory\" />
   </ItemGroup>

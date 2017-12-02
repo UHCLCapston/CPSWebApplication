@@ -55,43 +55,52 @@ namespace CPSWebApplication.Controllers
             CPSDesignManager mgr = new CPSDesignManager();
             CPSDraftToFinalManager cpsmgr = new CPSDraftToFinalManager();
             List<int> listIndex = new List<int>();
+            int count = 0;
+            foreach (Course c in fc)
+            {
+                if (c.IsSelected)
+                {
+                    int i = fc.IndexOf(c);
+                    listIndex.Add(count);
+                }
+                count = count + 1;
+            }
 
+            if (listIndex.Count > 0)
+            {
+                foreach (int i in listIndex)
+                {
+                    Course course = fclist.ElementAt(i);
+                    assignedCourses.Add(course);
+                    saveOnChanges = true;
+                }
+            }
+            else
+            {
+                assignedCourses = null;
+                saveOnChanges = true;
+
+            }
             switch (action)
             {
-                case "save":
-                    int count = 0;
-                    foreach (Course c in fc)
-                    {
-                        if (c.IsSelected)
-                        {
-                            int i= fc.IndexOf(c);
-                            listIndex.Add(count);
-                        }
-                        count = count + 1;
-                    }
-
-                    if (listIndex.Count > 0)
-                    {
-                        foreach (int i in listIndex)
-                        {
-                            Course course = fclist.ElementAt(i);
-                            assignedCourses.Add(course);
-                            saveOnChanges = true;
-                        }
-                    }
-                    else {
-                        assignedCourses = null;
-                        saveOnChanges = true;
-
-                    }
+                case "save":               
                     if (saveOnChanges)
                     {
                         mgr.updateStudentDetails(stId,assignedCourses,facultyName);
-                       // mgr.updateFacultyDetails(stId, facultyName);
                         cpsmgr.insertNewBlanckCPSToCPSDB(stId,ccList,ecList,acYear);
-                        TempData["Message"] = "Profile Updated Successfully, Start with another.";
+                        TempData["Message"] = "Blank CPS Design Created Successfully, Start with another.";
                     }
                     return RedirectToAction("DesignCPS", "AcademicAdvisor");
+
+                case "saveAsDraft":
+                    if (saveOnChanges)
+                    {
+                        mgr.updateStudentDetails(stId, assignedCourses, facultyName);
+                    }
+                    TempData["Message"] = "Blank CPS saved successfully";
+
+                    return RedirectToAction("StudentCPSDesign", "DesignCPS",Convert.ToInt32(stId));
+
                 case "back":
                     return RedirectToAction("AcademicAdvisor", "Home", new { id =Convert.ToInt32(Session["UserID"]) });
 

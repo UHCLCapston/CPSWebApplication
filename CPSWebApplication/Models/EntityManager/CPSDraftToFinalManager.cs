@@ -534,8 +534,33 @@ namespace CPSWebApplication.Models.EntityManager
             
         }
 
+        public bool AuditingNeeded(string id)
+        {
+            using (capf17gswen4Entities db = new capf17gswen4Entities())
+            {
+                var result = db.DraftCPS.SingleOrDefault(b => b.StudentID == id);
+                if (result != null)
+                {
+                    string str = result.NeedAudit;
+                    if (str.Equals("Yes"))
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                   
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
         public DesignCPSViewModel getAlreadyCreatedDraftCPSToShow(string id)
         {
+            const string CAPSTONE = "Capston";
             ViewModel.CPS draft = new ViewModel.CPS();
             DesignCPSViewModel model = new DesignCPSViewModel();
             CPSDesignManager dmgr = new CPSDesignManager();
@@ -587,8 +612,9 @@ namespace CPSWebApplication.Models.EntityManager
             List<List<string>> selectionLists = getAllListWithOptionForSelection(mjr, ctlg);
             model.CourseSemesterList = selectionLists[1];
             model.CourseSemesterList.Insert(0, "-select-");
+            model.CourseGradeList = selectionLists[3];
             model.ProgramCompletionOptionList = selectionLists[4];
-            model.countElectivesCapston = Convert.ToInt32(getNumberOfElectivesAsPerCompletionType("Capston", mjr));
+            model.countElectivesCapston = Convert.ToInt32(getNumberOfElectivesAsPerCompletionType(CAPSTONE, mjr));
             model.countElectivesThesis = Convert.ToInt32(getNumberOfElectivesAsPerCompletionType("Thesis", mjr));
 
             model.ThesisCourse = getThesisCourse(mjr, ctlg);
@@ -661,7 +687,7 @@ namespace CPSWebApplication.Models.EntityManager
             mdl.ClassesForCapstonNormal = getClassesForCapstonNormal(mjr, ctlg, mdl.countElectivesCapston); 
             mdl.ClassesForThesisNormal = getClassesForThesisNormal(mjr, ctlg, mdl.countElectivesThesis);
 
-            // mdl.ClassesForThesisSpecial = getClassesForThesisSpecial(mjr, ctlg, mdl.countElectivesThesis);
+            mdl.ClassesForThesisSpecial = getClassesForThesisSpecial(mjr, ctlg, mdl.countElectivesThesis);
             // mdl.ClassesForCapstonSpecial = getClassesForCapstonSpecial(mjr, ctlg, mdl.countElectivesCapston);
             return mdl; 
         }
