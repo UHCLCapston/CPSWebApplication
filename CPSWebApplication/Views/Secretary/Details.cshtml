@@ -6,17 +6,12 @@
 }
 
 <h2>CPS</h2>
-
-<p>@Session["UserName"].ToString() Want to see Draft CPS</p>
-
-
-@using (Html.BeginForm("GenerateViewDraftCPS", "AcademicAdvisor"))
+<p class="text-hide">@Session["UserName"].ToString() Want to see Draft CPS</p>
+@using (Html.BeginForm("", ""))
 {
     <div class="row">
         <div class="col-xs-10">
             <table class="table" style="margin: 0;">
-               <!-- <table id="cphMainContent_dgvUsers" class="table table-hover table-striped"
-                       cellspacing="0" style="border-collapse:collapse;">-->
                     <tbody>
                         <tr>
                             <td>
@@ -69,138 +64,95 @@
             </div>
         </div>
         <div class="form-group" style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">
-    <h4>Foundation Courses:</h4>
-    <div class="row">
-        <div class="col-xs-10">
-            <table class="table" style="margin: 0;">
-                <!-- <table id="cphMainContent_dgvUsers" class="table table-hover table-striped"
-                        cellspacing="0" style="border-collapse:collapse;">-->
-                <tbody>
-                    <tr class="center-block">
-                        <th scope="col">Course</th>
-                        <th scope="col">Long Title</th>
-                        <th scope="col">Credits</th>
-                        <th scope="col">EnrolledSemester</th>
-                        <th scope="col">Grade</th>
-                    </tr>
-                    @if (Model.FoundationClassesList != null)
-                    {
-                        for (int i = 0; i < Model.FoundationClassesList.Count(); i++)
-                        {
+            
 
-                            <tr class="cursor-pointer">
-                                <td>@Model.FoundationClassesList[i].CourseShortName</td>
-                                <td>@Model.FoundationClassesList[i].CourseFullName</td>
-                                <td>@Model.FoundationClassesList[i].CreditHrs</td>
-                                <td>@Model.FoundationClassesList[i].EnrolledSemester</td>
-                                <td>@Model.FoundationClassesList[i].GradesRecieved</td>
+            <div class="row">
+                <div class="col-xs-10">
+                    <table class="table" style="margin: 0;">
+
+                        <tbody>
+                            <tr><th>Foundation Courses:</th></tr>
+                            <tr>
+                                <th scope="col">Course</th>
+                                <th scope="col">Long Title</th>
+                                <th scope="col">Credits</th>
+                                <th scope="col">EnrolledSemester</th>
+                                <th scope="col">Grade</th>
+                            </tr>
+                            @if (Model.FoundationClassesList != null)
+                            {
+                                for (int i = 0; i < Model.FoundationClassesList.Count(); i++)
+                                {
+
+                                    <tr class="cursor-pointer">
+                                        <td>@Model.FoundationClassesList[i].CourseShortName</td>
+                                        <td>@Model.FoundationClassesList[i].CourseFullName</td>
+                                        <td>@Model.FoundationClassesList[i].CreditHrs</td>
+                                        <td>@Model.FoundationClassesList[i].EnrolledSemester</td>
+                                        <td>@Model.FoundationClassesList[i].GradesRecieved</td>
+                                    </tr>
+
+                                }
+                            }
+                            <tr><th>Core Courses:</th></tr>
+                            @for (int i = 0; i < Model.CoreClassesList.Count(); i++)
+                            {
+                                <tr class="cursor-pointer">
+                                    <td>@Model.CoreClassesList[i].CourseShortName </td>
+                                    <td>@Model.CoreClassesList[i].CourseFullName</td>
+                                    <td>@Model.CoreClassesList[i].CreditHrs</td>
+                                    <td>@Model.CoreClassesList[i].EnrolledSemester</td>
+                                    <td>@Model.CoreClassesList[i].GradesRecieved</td>
+
+                                </tr>
+                            }
+
+                            <tr>
+
+                                <td>   @Html.LabelFor(model => model.programCompletionOption, new { @class = "control-label col-md-2" })</td> 
+
+                                <td>@Html.TextBoxFor(model => model.programCompletionOption, new { @class = "form-control", @readonly = "readonly" })</td>
+
                             </tr>
 
-                        }
-                    }
-                </tbody>
-            </table>
+                            @if (Model.ElectiveClassesList != null)
+                            {
+                                <tr><th>Elective Courses:</th></tr>
+                                for (int i = 0; i < Model.ElectiveClassesList.Count(); i++)
+                                {
+                                    <tr class="cursor-pointer">
+                                        <td>@Model.ElectiveClassesList[i].CourseShortName </td>
+                                        <td>@Model.ElectiveClassesList[i].CourseFullName</td>
+
+                                        <!-- <td>@Model.ElectiveClassesList[i].CourseSubjectWithRubric</td>-->
+                                        <td>@Model.ElectiveClassesList[i].CreditHrs</td>
+                                        <td>@Model.ElectiveClassesList[i].EnrolledSemester</td>
+                                        <td>@Model.ElectiveClassesList[i].GradesRecieved</td>
+
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
-    </div>
-             </div>
-                <div style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">
-                    <h4>Core Courses:</h4>
-                    <div class="row">
-                        <div class="col-xs-10">
-                            <table class="table" style="margin: 0;">
-                                <!--
-                <table id="cphMainContent_dgvUsers" class="table table-hover table-striped"
-                       cellspacing="0" style="border-collapse:collapse;">-->
-                                <tbody>
-                                    <tr>
-                                        <th scope="col">Course</th>
-                                        <th scope="col">Long Title</th>
-                                        <th scope="col">Credits</th>
-                                        <th scope="col">EnrolledSemester</th>
-                                        <th scope="col">Grade</th>
-                                        @for (int i = 0; i < Model.CoreClassesList.Count(); i++)
-                                        {
-                                        <tr class="cursor-pointer">
-                                            <td>@Model.CoreClassesList[i].CourseShortName </td>
-                                            <td>@Model.CoreClassesList[i].CourseFullName</td>
-                                            <td>@Model.CoreClassesList[i].CreditHrs</td>
-                                            <td>@Model.CoreClassesList[i].EnrolledSemester</td>
-                                            <td>@Model.CoreClassesList[i].GradesRecieved</td>
-
-                                        </tr>
-                                        }
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                    <div style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">
-                        <h4>Elective Courses:</h4>
-                        <div class="form-group" style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">
-                            @Html.LabelFor(model => model.programCompletionOption, new { @class = "control-label col-md-2" })
-                            <div class="col-md-8">
-                                @Html.TextBoxFor(model => model.programCompletionOption, new { @class = "form-control", @readonly = "readonly" })
-                            </div>
-                        </div>
-                        <!--Div 1 for Capstone-->
-                        <div id="capston">
-                            <table id="cphMainContent_dgvUsers" class="table table-hover table-striped"
-                                   cellspacing="0" style="border-collapse:collapse;">
-                                <tbody>
-                                    <tr>
-                                        <th scope="col">Course</th>
-                                        <th scope="col">Long Title</th>
-                                        <!-- <th scope="col">Subject And Level</th>-->
-                                        <th scope="col">Credits</th>
-                                        <th scope="col">EnrolledSemester</th>
-                                        <th scope="col">Grade</th>
-                                        @if (Model.ElectiveClassesList != null)
-                                        {
-                                            for (int i = 0; i < Model.ElectiveClassesList.Count(); i++)
-                                            {
-                                            <tr class="cursor-pointer">
-                                                <td>@Model.ElectiveClassesList[i].CourseShortName </td>
-                                                <td>@Model.ElectiveClassesList[i].CourseFullName</td>
-                                                <!-- <td>@Model.ElectiveClassesList[i].CourseSubjectWithRubric</td>-->
-                                                <td>@Model.ElectiveClassesList[i].CreditHrs</td>
-                                                <td>@Model.ElectiveClassesList[i].EnrolledSemester</td>
-                                                <td>@Model.ElectiveClassesList[i].GradesRecieved</td>
-
-                                            </tr>
-                                            }
-                                        }
-                                    </tbody>
-                                </table>
                                 <div>
-                                    <!--<capston></capston>-->
+                                    @Html.LabelFor(model => model.assignedFaculty, new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.TextBoxFor(model => model.assignedFaculty, new { @class = "form-control", @readonly = "readonly" })
+                                    </div>
                                 </div>
 
-                            </div>
+                              
+                                <div class="hidden-print">
+                                    @Html.ActionLink("Back to List", "StudentList")
+                                    <a href="javascript:window.print()" class="btn btn-info ">
+                                        <span class="glyphicon glyphicon-print"></span> Print
+                                    </a>
+                                </div>
 
-                            <!--Div 2 for Thesis-->
-                            <div id="thesis">
-                                <table></table>
-                                <!--<Thesis></Thesis>-->
-                            </div>
-
-                        </div>
-
-                        <div>
-                            @Html.LabelFor(model => model.assignedFaculty, new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                @Html.TextBoxFor(model => model.assignedFaculty, new { @class = "form-control", @readonly = "readonly" })
-                            </div>
-                        </div>
-
-
-                        <div class="hidden-print">
-                            @Html.ActionLink("Back to List", "StudentList")
-                            <a href="javascript:window.print()" class="btn btn-success ">
-                                <span class="glyphicon glyphicon-print"></span> Print
-                            </a>
-                        </div>
-
-                        }
+}
 
 
 
