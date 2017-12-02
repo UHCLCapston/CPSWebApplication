@@ -28,21 +28,32 @@
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                     @if (Session["UserName"] != null)
                     {
-                        <li></li>
-                        <li>
-                            <a>@Html.Label("Hello " + Session["UserName"].ToString() + " !")</a>
-                        </li>
-                        <li></li>
-                        <li>@Html.ActionLink("LogOut", "LogOut", "Account")</li>
+                       <!-- <li><a>@Html.Label("Hello " + Session["UserName"].ToString() + " !")</a></li>-->
 
-                }-->
-                            <li>@Html.ActionLink("Log Out", "LogOut", "Account")</li>
-                        }
-                        else
+                        if (Session["Role"].Equals("Student"))
                         {
-                            <li>@Html.ActionLink("Log In", "LogIn", "Account")</li>
+                            <li>@Html.ActionLink("Hello " + Session["UserName"].ToString() + " !", "Student", "Home", new { id = Convert.ToInt32(Session["UserID"].ToString()) },null)</li>
+                        }
+                        else if (Session["Role"].Equals("AcademicAdvisor"))
+                        {
+                            <li>@Html.ActionLink("Hello " + Session["UserName"].ToString() + " !", "AcademicAdvisor", "Home", new { id = Convert.ToInt32(Session["UserID"].ToString()) },null)</li>
+
+                        }
+                        else if (Session["Role"].Equals("FacultyAdvisor"))
+                        {
+                            <li>@Html.ActionLink("Hello " + Session["UserName"].ToString() + " !", "Faculty", "Home", new { id = Convert.ToInt32(Session["UserID"].ToString()) }, null)</li>
+                        }
+                        else if (Session["Role"].Equals("Secretary"))
+                        {
+                            <li>@Html.ActionLink("Hello " + Session["UserName"].ToString() + " !", "Secretory", "Home",new {id=Convert.ToInt32(Session["UserID"].ToString()) },null)</li>
                         }
 
+                        <li>@Html.ActionLink("LogOut", "LogOut", "Account")</li>
+                    }
+                    else
+                    {
+                            <li>@Html.ActionLink("Log In", "LogIn", "Account")</li>
+                    }
                     </ul>
                 </div>
         </div>

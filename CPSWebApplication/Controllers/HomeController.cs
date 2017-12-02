@@ -14,25 +14,42 @@ namespace CPSWebApplication.Controllers
         UserManager userManager = new UserManager();
        public ActionResult Index()
         {
+            if (Session["UserID"] != null)
+            {
+                string userID = Session["UserID"].ToString();
+            }
             return View();
         }
        
         public ActionResult Welcome()
         {
+            if (Session["UserID"] != null)
+            {
+                string userID = Session["UserID"].ToString();
+            }
             return View();
         }
 
         public ActionResult About()
         {
+            if (Session["UserID"] != null)
+            {
+                string userID = Session["UserID"].ToString();
+            }
             return View();
         }
+
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            if (Session["UserID"] != null)
+            {
+                string userID = Session["UserID"].ToString();
+            }
+                ViewBag.Message = "Your contact page.";
 
             return View();
         }
-
+        
         public ActionResult AcademicAdvisor(int id)
         {
             if (Session["UserID"] != null)
@@ -46,12 +63,22 @@ namespace CPSWebApplication.Controllers
 
         public ActionResult Faculty(int id)
         {
+            if (Session["UserID"] != null)
+            {
+                UserModel user1 = userManager.GetUserNameByID(id);
+                return View(user1);
+            }
             UserModel user = userManager.GetUserNameByID(id);
             return View(user);
         }
 
         public ActionResult Student(int id)
         {
+            if (Session["UserID"] != null)
+            {
+                UserModel user1 = userManager.GetUserNameByID(id);
+                return View(user1);
+            }
             UserModel user = userManager.GetUserNameByID(id);
             return View(user);
             
@@ -59,6 +86,11 @@ namespace CPSWebApplication.Controllers
 
         public ActionResult Secretary(int id)
         {
+            if (Session["UserID"] != null)
+            {
+                UserModel user1 = userManager.GetUserNameByID(id);
+                return View(user1);
+            }
             UserModel user = userManager.GetUserNameByID(id);
             return View(user);
 
