@@ -1,105 +1,158 @@
-﻿@model CPSWebApplication.Models.DB.CPS
+﻿@model CPSWebApplication.Models.ViewModel.DesignCPSViewModel
 
 @{
     ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
+<h2>CPS</h2>
+<p class="text-hide">@Session["UserName"].ToString() Want to see Draft CPS</p>
+@using (Html.BeginForm("", ""))
+{
+    <div class="row">
+        <div class="col-xs-10">
+            <table class="table" style="margin: 0;">
+                    <tbody>
+                        <tr>
+                            <td>
+                                @Html.LabelFor(model => model.academicYear, new { @class = "control-label col-md-2" })
+                            </td>
+                            <td>
+                                
+                                    @Html.TextBoxFor(model => model.academicYear, new { @class = "form-control", @readonly = "readonly" })
+                               
+                            </td>
+                            <td>
+                                @Html.LabelFor(model => model.majorName, new { @class = "control-label col-md-2" })
+                            </td>
+                            <td>
+                                
+                                    @Html.TextBoxFor(model => model.majorName, new { @class = "form-control", @readonly = "readonly" })
+                               
+                            </td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.LabelFor(model => model.lastName, new { @class = "control-label col-md-2" })
+                            </td>
+                            <td>
+                                
+                                    @Html.TextBoxFor(model => model.lastName, new { @class = "form-control", @readonly = "readonly" })
+                                
+                            </td>
+                            <td>
+                                @Html.LabelFor(model => model.firstName, new { @class = "control-label col-md-2" })
+                            </td>
+                            <td>
+                                
+                                    @Html.TextBoxFor(model => model.firstName, new { @class = "form-control", @readonly = "readonly" })
+                                
+                            </td>
+                            <td>
+                                @Html.LabelFor(model => model.searchId, new { @class = "control-label col-md-2" })
+                            </td>
+                            <td>
+                                
+                                    @Html.TextBoxFor(model => model.searchId, new { @class = "form-control", @readonly = "readonly" })
+                               
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="form-group" style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">
+            
 
-<div>
-    <h4>CPS</h4>
-    <hr />
-    <dl class="dl-horizontal ">
-        <dt>
-            @Html.DisplayNameFor(model => model.FirstName)
-        </dt>
+            <div class="row">
+                <div class="col-xs-10">
+                    <table class="table" style="margin: 0;">
 
-        <dd>
-            @Html.DisplayFor(model => model.FirstName)
-        </dd>
+                        <tbody>
+                            <tr><th>Foundation Courses:</th></tr>
+                            <tr>
+                                <th scope="col">Course</th>
+                                <th scope="col">Long Title</th>
+                                <th scope="col">Credits</th>
+                                <th scope="col">EnrolledSemester</th>
+                                <th scope="col">Grade</th>
+                            </tr>
+                            @if (Model.FoundationClassesList != null)
+                            {
+                                for (int i = 0; i < Model.FoundationClassesList.Count(); i++)
+                                {
 
-        <dt>
-            @Html.DisplayNameFor(model => model.LastName)
-        </dt>
+                                    <tr class="cursor-pointer">
+                                        <td>@Model.FoundationClassesList[i].CourseShortName</td>
+                                        <td>@Model.FoundationClassesList[i].CourseFullName</td>
+                                        <td>@Model.FoundationClassesList[i].CreditHrs</td>
+                                        <td>@Model.FoundationClassesList[i].EnrolledSemester</td>
+                                        <td>@Model.FoundationClassesList[i].GradesRecieved</td>
+                                    </tr>
 
-        <dd>
-            @Html.DisplayFor(model => model.LastName)
-        </dd>
+                                }
+                            }
+                            <tr><th>Core Courses:</th></tr>
+                            @for (int i = 0; i < Model.CoreClassesList.Count(); i++)
+                            {
+                                <tr class="cursor-pointer">
+                                    <td>@Model.CoreClassesList[i].CourseShortName </td>
+                                    <td>@Model.CoreClassesList[i].CourseFullName</td>
+                                    <td>@Model.CoreClassesList[i].CreditHrs</td>
+                                    <td>@Model.CoreClassesList[i].EnrolledSemester</td>
+                                    <td>@Model.CoreClassesList[i].GradesRecieved</td>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Academic_Year)
-        </dt>
+                                </tr>
+                            }
 
-        <dd>
-            @Html.DisplayFor(model => model.Academic_Year)
-        </dd>
+                            <tr>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Major)
-        </dt>
+                                <td>   @Html.LabelFor(model => model.programCompletionOption, new { @class = "control-label col-md-2" })</td> 
 
-        <dd>
-            @Html.DisplayFor(model => model.Major)
-        </dd>
+                                <td>@Html.TextBoxFor(model => model.programCompletionOption, new { @class = "form-control", @readonly = "readonly" })</td>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.CoreCourseDetails)
-        </dt>
+                            </tr>
 
-        <dd>
-            @Html.DisplayFor(model => model.CoreCourseDetails)
-        </dd>
+                            @if (Model.ElectiveClassesList != null)
+                            {
+                                <tr><th>Elective Courses:</th></tr>
+                                for (int i = 0; i < Model.ElectiveClassesList.Count(); i++)
+                                {
+                                    <tr class="cursor-pointer">
+                                        <td>@Model.ElectiveClassesList[i].CourseShortName </td>
+                                        <td>@Model.ElectiveClassesList[i].CourseFullName</td>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ElectiveCourseDetails)
-        </dt>
+                                        <!-- <td>@Model.ElectiveClassesList[i].CourseSubjectWithRubric</td>-->
+                                        <td>@Model.ElectiveClassesList[i].CreditHrs</td>
+                                        <td>@Model.ElectiveClassesList[i].EnrolledSemester</td>
+                                        <td>@Model.ElectiveClassesList[i].GradesRecieved</td>
 
-        <dd>
-            @Html.DisplayFor(model => model.ElectiveCourseDetails)
-        </dd>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+                                <div>
+                                    @Html.LabelFor(model => model.assignedFaculty, new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.TextBoxFor(model => model.assignedFaculty, new { @class = "form-control", @readonly = "readonly" })
+                                    </div>
+                                </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ProgramCompletionType)
-        </dt>
+                              
+                                <div class="hidden-print">
+                                    @Html.ActionLink("Back to List", "StudentList")
+                                    <a href="javascript:window.print()" class="btn btn-info ">
+                                        <span class="glyphicon glyphicon-print"></span> Print
+                                    </a>
+                                </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.ProgramCompletionType)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.AssignedFacultyAdvisor)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.AssignedFacultyAdvisor)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.AssignedAcademicAdvisor)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.AssignedAcademicAdvisor)
-        </dd>
-
-
-        <dt>
-            @Html.DisplayNameFor(model => model.FoundationCourseDeatils)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.FoundationCourseDeatils)
-        </dd>
+}
 
 
-
-    </dl>
-</div>
-<p>
-
-    @Html.ActionLink("Back to List", "StudentList")
-    <a href="javascript:window.print()" class="btn btn-success ">
-        <span class="glyphicon glyphicon-print"></span> Print
-    </a>
-</p>
 

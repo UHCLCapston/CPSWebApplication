@@ -4,27 +4,23 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <h2>@Model.FirstName</h2>
-+<h2 class="text-hide">@Model.FirstName</h2>
-
 <h2>Welcome to Faculty Portal</h2>
 
 @using (Html.BeginForm("Create", "AcadAdv"))
 {
     <div>
         <div>
-            <button type="button" class="btn btn-default" onclick="window.location = ('@Url.Action("ViewBlanckCPS","FacultyAdvisor")')">View Blank CPS</button>
-        </div>
-        <br /><br />
-        <div>
-            <button type="button" class="btn btn-default" onclick="window.location = ('@Url.Action("CreateDraftCPS","FacultyAdvisor")')">Create Draft CPS</button>
-        </div>
-        <br /><br />
-        <div>
-            <button type="button" class="btn btn-default" onclick="window.location = ('@Url.Action("ViewDraftCPS","FacultyAdvisor")')">View Draft CPS</button>
-        </div>
-        <br /><br />
-        <div>
-            <button type="button" class="btn btn-default" onclick="window.location = ('@Url.Action("ViewFinalCPS","FacultyAdvisor")')">View Fianl CPS</button>
+            <div>
+                <button type="button" class="btn btn-default" onclick="window.location = ('@Url.Action("ViewBlanckCPS","FacultyAdvisor")')"><img src="https://newcdn.iconfinder.com/data/icons/startup-management/325/Project_management_Lessons_Report-256.png" class="img-responsive" width="140" />View Blank CPS</button>
+
+                &nbsp;&nbsp;<button type="button" class="btn btn-default" onclick="window.location = ('@Url.Action("CreateDraftCPS","FacultyAdvisor")')"><img src="https://newcdn.iconfinder.com/data/icons/startup-management/325/Project_management_Project_Mandate-256.png" class="img-responsive" width="140" />Create Draft CPS</button>
+                <br /><br />
+            </div>
+            <div>
+                <!--<button type="button" class="btn btn-default" onclick="window.location = ('@Url.Action("ViewDraftCps","FacultyAdvisor")')">View Draft CPS</button>
+
+                <button type="button" class="btn btn-default" onclick="window.location = ('@Url.Action("ViewFinalCPS","FacultyAdvisor")')">View Final CPS</button>-->
+            </div>
         </div>
     </div>
 }

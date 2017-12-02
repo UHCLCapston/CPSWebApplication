@@ -1,18 +1,15 @@
 ﻿@model CPSWebApplication.Models.ViewModel.DesignCPSViewModel
 
 @{
-    ViewBag.Title = "DesignCPS";
+    ViewBag.Title = "Design CPS";
     Layout = "~/Views/Shared/_Layout.cshtml";
 
 }
 
-<h2>DesignCPS</h2>
+<h2>Design CPS</h2>
 <br />
-<br />
-
 <p> @Session["UserName"].ToString() Let's Start design</p>
     
-
 @if (TempData["Message"] != null)
 {<div style="color: #1e83ca;">@TempData["Message"]</div>}
 
@@ -29,5 +26,6 @@
         </div>
         </div>
 }
+
 <button type="button" class="btn btn-default" onclick="window.location = ('@Url.Action("AcademicAdvisor", "Home", new { id = Convert.ToInt32(@Session["UserID"]) })')">BACK TO HOME </button>
 

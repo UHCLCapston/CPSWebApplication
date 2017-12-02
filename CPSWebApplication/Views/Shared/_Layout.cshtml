@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title - CPS Portal</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     <script src="~/Scripts/jquery-1.8.2.min.js"></script>
@@ -32,40 +32,26 @@
                         <li>
                             <a>@Html.Label("Hello " + Session["UserName"].ToString() + " !")</a>
                         </li>
-                        <!--switch (Session["Role"])
-                        {
-                            case "AcademicAdvisor":
-                                <li>@Html.ActionLink("Home", "AcademicAdvisor", "Home")</li>
-                                break;
-                            case "FacultyAdvisor":
-                                <li>@Html.ActionLink("Home", "Faculty", "Home")</li>
-                                break;
-                            case "Student":
-                                <li>@Html.ActionLink("Home", "Student", "Home")</li>
-                                break;
-                            case "Secretary":
-                                <li>@Html.ActionLink("Home", "Secretary", "Home")</li>
-                                break;
-
-                        }-->
                         <li></li>
                         <li>@Html.ActionLink("LogOut", "LogOut", "Account")</li>
 
-                    }
-                    else
-                    {
-                        <li>@Html.ActionLink("LogIn", "LogIn", "Account")</li>
-                    }
+                }-->
+                            <li>@Html.ActionLink("Log Out", "LogOut", "Account")</li>
+                        }
+                        else
+                        {
+                            <li>@Html.ActionLink("Log In", "LogIn", "Account")</li>
+                        }
 
-                </ul>
-            </div>
+                    </ul>
+                </div>
         </div>
     </div>
     <div class="container body-content">
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; @DateTime.Now.Year - Techie Hawks</p>
         </footer>
     </div>
 
