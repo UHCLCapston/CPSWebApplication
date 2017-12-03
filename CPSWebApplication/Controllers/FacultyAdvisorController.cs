@@ -18,6 +18,11 @@ namespace CPSWebApplication.Controllers
             {
                 id = Session["UserName"].ToString();
             }
+            else
+            {
+                return RedirectToAction("LogIn", "Account");
+
+            }
 
             return View();
         }
@@ -33,10 +38,16 @@ namespace CPSWebApplication.Controllers
         public ActionResult CreateDraftCPS()
         {
             string id;
-            string userId = Session["UserID"].ToString();
+            string userId = "";
             if (Session["UserID"] != null)
             {
                 id = Session["UserName"].ToString();
+                userId = Session["UserID"].ToString();
+            }
+            else
+            {
+                return RedirectToAction("LogIn", "Account");
+
             }
             CPSDraftToFinalManager mgr = new CPSDraftToFinalManager();
             DesignCPSViewModel mdl = new DesignCPSViewModel();
@@ -84,6 +95,11 @@ namespace CPSWebApplication.Controllers
             {
                 flag = true;
             }
+            else
+            {
+                return RedirectToAction("LogIn", "Account");
+
+            }
 
             return View(vm);
         }
@@ -94,6 +110,11 @@ namespace CPSWebApplication.Controllers
             if (Session["UserID"] != null)
             {
                 id = Session["UserName"].ToString();
+            }
+            else
+            {
+                return RedirectToAction("LogIn", "Account");
+
             }
             return View();
         }

@@ -604,7 +604,6 @@
     <Folder Include="Views\Default\" />
     <Folder Include="Views\FinalCPS\" />
     <Folder Include="Views\GenerateCPS\" />
-    <Folder Include="Views\Secretory\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

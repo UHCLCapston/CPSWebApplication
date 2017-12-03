@@ -36,6 +36,7 @@ namespace CPSWebApplication.Controllers
             {
                 string userID = Session["UserID"].ToString();
             }
+            
             return View();
         }
 
@@ -45,7 +46,8 @@ namespace CPSWebApplication.Controllers
             {
                 string userID = Session["UserID"].ToString();
             }
-                ViewBag.Message = "Your contact page.";
+            
+            ViewBag.Message = "Your contact page.";
 
             return View();
         }
@@ -56,6 +58,11 @@ namespace CPSWebApplication.Controllers
             {
                 UserModel user1 = userManager.GetUserNameByID(id);
                 return View(user1);
+            }
+            else
+            {
+                return RedirectToAction("LogIn", "Account");
+
             }
             UserModel user = userManager.GetUserNameByID(id);
             return View(user);
@@ -68,6 +75,11 @@ namespace CPSWebApplication.Controllers
                 UserModel user1 = userManager.GetUserNameByID(id);
                 return View(user1);
             }
+            else
+            {
+                return RedirectToAction("LogIn", "Account");
+
+            }
             UserModel user = userManager.GetUserNameByID(id);
             return View(user);
         }
@@ -78,6 +90,11 @@ namespace CPSWebApplication.Controllers
             {
                 UserModel user1 = userManager.GetUserNameByID(id);
                 return View(user1);
+            }
+            else
+            {
+                return RedirectToAction("LogIn", "Account");
+
             }
             UserModel user = userManager.GetUserNameByID(id);
             return View(user);
@@ -90,6 +107,11 @@ namespace CPSWebApplication.Controllers
             {
                 UserModel user1 = userManager.GetUserNameByID(id);
                 return View(user1);
+            }
+            else
+            {
+                return RedirectToAction("LogIn", "Account");
+
             }
             UserModel user = userManager.GetUserNameByID(id);
             return View(user);

@@ -36,6 +36,11 @@ namespace CPSWebApplication.Controllers
             {
                 flag = true;
             }
+            else
+            {
+                return RedirectToAction("LogIn", "Account");
+
+            }
 
             return View(vm);
         }

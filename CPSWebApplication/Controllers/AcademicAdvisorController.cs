@@ -18,6 +18,11 @@ namespace CPSWebApplication.Controllers
             {
                 id = Session["UserName"].ToString();
             }
+            else
+            {
+                return RedirectToAction("LogIn", "Account");
+
+            }
 
             return View();
         }
@@ -39,6 +44,11 @@ namespace CPSWebApplication.Controllers
             if (Session["UserID"] != null)
             {
                 id = Session["UserName"].ToString();
+            }
+            else
+            {
+                return RedirectToAction("LogIn", "Account");
+
             }
 
             return View();
@@ -69,6 +79,11 @@ namespace CPSWebApplication.Controllers
             {
                 flag = true;
             }
+            else
+            {
+                return RedirectToAction("LogIn", "Account");
+
+            }
 
             return View(vm);
         }
@@ -90,6 +105,11 @@ namespace CPSWebApplication.Controllers
             {
                 id = Session["UserName"].ToString();
             }
+            else
+            {
+                return RedirectToAction("LogIn", "Account");
+
+            }
 
             return View();
         }
@@ -106,6 +126,11 @@ namespace CPSWebApplication.Controllers
             {
                 flag = true;
             }
+            else
+            {
+                return RedirectToAction("LogIn", "Account");
+
+            }
 
             return View(vm);
         }
@@ -120,6 +145,11 @@ namespace CPSWebApplication.Controllers
             if (Session["UserID"] != null)
             {
                 id = Session["UserName"].ToString();
+            }
+            else
+            {
+                return RedirectToAction("LogIn", "Account");
+
             }
             return View();
         }

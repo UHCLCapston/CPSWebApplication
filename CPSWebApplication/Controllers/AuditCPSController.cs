@@ -21,6 +21,11 @@ namespace CPSWebApplication.Controllers
             {
                 userName = Session["UserName"].ToString();
             }
+            else
+            {
+                return RedirectToAction("LogIn", "Account");
+
+            }
             if (mgr.AuditingNeeded(id.ToString().Trim()))
             {
                 model = mgr.getAlreadyCreatedDraftCPSToShow(id.ToString());
@@ -45,6 +50,11 @@ namespace CPSWebApplication.Controllers
             {
                 userName = Session["UserName"].ToString();
             }
+            else
+            {
+                return RedirectToAction("LogIn", "Account");
+
+            }
             return View();
         }
 
@@ -55,6 +65,11 @@ namespace CPSWebApplication.Controllers
             if (Session["UserID"] != null)
             {
                 userName = Session["UserName"].ToString();
+            }
+            else
+            {
+                return RedirectToAction("LogIn", "Account");
+
             }
             switch (action)
             {

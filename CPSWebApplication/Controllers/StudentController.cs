@@ -19,6 +19,11 @@ namespace CPSWebApplication.Controllers
             {
                 username = Session["UserName"].ToString();
             }
+            else
+            {
+                return RedirectToAction("LogIn", "Account");
+
+            }
             string id = Session["UserId"].ToString();
             CPSDraftToFinalManager mgr = new CPSDraftToFinalManager();
             DesignCPSViewModel vm = mgr.getBlanckCPSToViewFromCPS(id);
@@ -33,6 +38,9 @@ namespace CPSWebApplication.Controllers
             {
                 id = Session["UserID"].ToString();
             }
+            else {
+                return RedirectToAction("LogIn", "Account");
+            }
             id = Session["UserID"].ToString();
             CPSDraftToFinalManager mgr = new CPSDraftToFinalManager();
             DesignCPSViewModel vm = mgr.getModelForGenerateDraftCPS(id);
@@ -45,6 +53,11 @@ namespace CPSWebApplication.Controllers
             if (Session["UserID"] != null)
             {
                 id = Session["UserName"].ToString();
+            }
+            else
+            {
+                return RedirectToAction("LogIn", "Account");
+
             }
             return View();
         }

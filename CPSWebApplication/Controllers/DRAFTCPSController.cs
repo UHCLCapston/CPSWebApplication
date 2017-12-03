@@ -19,6 +19,11 @@ namespace CPSWebApplication.Controllers
             {
                 userName = Session["UserName"].ToString();
             }
+            else
+            {
+                return RedirectToAction("LogIn", "Account");
+
+            }
             return View();
         }
 
@@ -31,6 +36,11 @@ namespace CPSWebApplication.Controllers
             if (Session["UserID"] != null)
             {
                 userName = Session["UserName"].ToString();
+            }
+            else
+            {
+                return RedirectToAction("LogIn", "Account");
+
             }
             if (!mgr.DraftCPSExists(id.ToString().Trim()))
             {
@@ -57,6 +67,11 @@ namespace CPSWebApplication.Controllers
             if (Session["UserID"] != null)
             {
                 userName = Session["UserName"].ToString();
+            }
+            else
+            {
+                return RedirectToAction("LogIn", "Account");
+
             }
             DesignCPSViewModel tempDataModel = (DesignCPSViewModel)TempData["Model"];
             DesignCPSViewModel draftModel = new DesignCPSViewModel();

@@ -28,8 +28,6 @@
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                     @if (Session["UserName"] != null)
                     {
-                       <!-- <li><a>@Html.Label("Hello " + Session["UserName"].ToString() + " !")</a></li>-->
-
                         if (Session["Role"].Equals("Student"))
                         {
                             <li>@Html.ActionLink("Hello " + Session["UserName"].ToString() + " !", "Student", "Home", new { id = Convert.ToInt32(Session["UserID"].ToString()) },null)</li>
