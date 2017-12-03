@@ -45,8 +45,6 @@ namespace CPSWebApplication.Controllers
                         Session["UserName"] = fullName.ToString();
                         Session["Role"] = role.ToString();
 
-
-
                         if (role.Equals("Student"))
                         { 
                             return RedirectToAction("Student", "Home", new {id = uhclId});

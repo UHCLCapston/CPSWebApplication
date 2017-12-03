@@ -184,16 +184,6 @@ namespace CPSWebApplication.Controllers
                 cnt++;
             }
             cnt = 0;
-            /*foreach (Course c in ec)
-            {
-                string cname = c.CourseWholeName;
-                ecNewCourse = getCourseByWholeName(cname, ecSn);
-                ecNewCourse.EnrolledSemester = c.EnrolledSemester;
-                ecNewCourse.CourseSubjectWithRubric = c.CourseSubjectWithRubric;
-                ecNewList.Add(ecNewCourse);
-            }*/
-            //
-
             draftModel.ThesisCourse = thNewList;
             draftModel.FoundationClassesList = fcNewList;
             draftModel.CoreClassesList = ccNewList;
