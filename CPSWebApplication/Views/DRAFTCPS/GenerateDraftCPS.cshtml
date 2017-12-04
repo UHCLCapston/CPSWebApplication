@@ -7,7 +7,7 @@
 <script src="~/Scripts/jquery-3.2.1.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
 
-<h2>GenerateDraftCPS</h2>
+<h2>Generate Draft CPS</h2>
 @if (TempData["Message"] != null)
 {<div style="color: #1e83ca;">@TempData["Message"]</div>}
 
@@ -21,7 +21,7 @@
                     @Html.LabelFor(model => model.academicYear, new { @class = "control-label col-md-2" })
                 </td>
                 <td>
-                    <div class="col-md-20">
+                    <div class="col-md-12">
                         @Html.TextBoxFor(model => model.academicYear, new { @class = "form-control", @readonly = "readonly" })
                     </div>
                 </td>
@@ -29,17 +29,19 @@
                     @Html.LabelFor(model => model.majorName, new { @class = "control-label col-md-2" })
                 </td>
                 <td>
-                    <div class="col-md-15">
+                    <div class="col-md-12">
                         @Html.TextBoxFor(model => model.majorName, new { @class = "form-control", @readonly = "readonly" })
                     </div>
                 </td>
+                <td></td>
+                <td></td>
             </tr>
             <tr>  
                 <td>
                     @Html.LabelFor(model => model.lastName, new { @class = "control-label col-md-2" })
                 </td>
                 <td>
-                    <div class="col-md-10">
+                    <div class="col-md-12">
                         @Html.TextBoxFor(model => model.lastName, new { @class = "form-control", @readonly = "readonly" })
                     </div>
                 </td>
@@ -47,7 +49,7 @@
                     @Html.LabelFor(model => model.firstName, new { @class = "control-label col-md-2" })
                 </td>
                 <td>
-                    <div class="col-md-10">
+                    <div class="col-md-12">
                         @Html.TextBoxFor(model => model.firstName, new { @class = "form-control", @readonly = "readonly" })
                     </div>
                 </td>
@@ -55,7 +57,7 @@
                     @Html.LabelFor(model => model.searchId, new { @class = "control-label col-md-2" })
                 </td>
                 <td>
-                    <div class="col-md-10">
+                    <div class="col-md-12">
                         @Html.TextBoxFor(model => model.searchId, new { @class = "form-control", @readonly = "readonly" })
                     </div>
                 </td>
@@ -86,21 +88,7 @@
                                 </tr>
                   }
               }
-                    </tbody>
-                </table>
-            </div>
-            <div style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">
-                <h4>Core Courses:</h4>
-                <table id="cphMainContent_dgvUsers" class="table table-hover table-striped"
-                       cellspacing="0" style="border-collapse:collapse;">
-                    <tbody>
-                        <tr>
-                            <th scope="col">Course</th>
-                            <th scope="col">Long Title</th>
-                            <th scope="col">Credits</th>
-                            <th scope="col">Enrolling Semester</th>
-                            <th scope="col">Grade</th>
-                        </tr>
+              <tr><th class="h4">Core Courses:</th></tr>
                         @for (int i = 0; i < Model.CoreClassesList.Count(); i++)
                         {
                             <tr class="cursor-pointer">
@@ -112,9 +100,25 @@
                         }
                     </tbody>
                 </table>
+            </div>
+         <!--  <div style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">
+                <h4>Core Courses:</h4>
+                <table id="cphMainContent_dgvUsers" class="table table-hover table-striped"
+                       cellspacing="0" style="border-collapse:collapse;">
+                    <tbody>
+                        <tr>
+                            <th scope="col">Course</th>
+                            <th scope="col">Long Title</th>
+                            <th scope="col">Credits</th>
+                            <th scope="col">Enrolling Semester</th>
+                            <th scope="col">Grade</th>
+                        </tr>
+                       
+                    </tbody>
+                </table>
                 <br />
             </div>
-
+--> 
 
             <div style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">
                 <h4>Elective Courses:</h4>
@@ -329,17 +333,18 @@
                     @Html.LabelFor(model => model.assignedFaculty, new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
                         @Html.TextBoxFor(model => model.assignedFaculty, new { @class = "form-control", @readonly = "readonly" })
+                        <br />
                     </div>
                 </div>
                 <br />
-
+                <button name="action" value="back" type="submit" class="btn btn-default" onclick="window.location = ('@Url.Action("","")')">Back To Home</button>
                 <button name="action" value="saveDraft" type="submit" formmethod="post" class="btn btn-success" onclick="window.location = ('@Url.Action("Save","DraftCPS")')">Save</button>
 
                 <button name="action" value="save" type="submit" formmethod="post" class="btn btn-success" onclick="window.location = ('@Url.Action("SaveGeneratedDraftCPS","DraftCPS")')">Submit</button>
 
-                <button name="action" value="back" type="submit" class="btn btn-success" onclick="window.location = ('@Url.Action("","")')">Back To Home</button>
+                
 
-                <a href="javascript:window.print()" class="btn btn-success btn-lg">
+                <a href="javascript:window.print()" class="btn btn-success ">
                     <span class="glyphicon glyphicon-print"></span> Print
                 </a>
   }

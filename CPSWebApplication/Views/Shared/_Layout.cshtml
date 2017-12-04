@@ -26,6 +26,8 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    </ul>
+                <ul class="nav navbar-nav pull-right">
                     @if (Session["UserName"] != null)
                     {
                         if (Session["Role"].Equals("Student"))
