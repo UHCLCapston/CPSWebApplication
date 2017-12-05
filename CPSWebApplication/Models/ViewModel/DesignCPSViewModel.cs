@@ -100,8 +100,16 @@ namespace CPSWebApplication.Models.ViewModel
 
         [Required]
         [Display(Name = "Specialization")]
-        public bool SpecializationSelected { get; set; } 
+        public bool SpecializationSelected { get; set; }
         //To show studentList with cps
+        [Required]
+        [Display(Name = "Academic Advisor")]
+        public string SignatureAcademicAdvisor { get; set; }
+
+        [Display(Name = "Signed Date")]
+        [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime SignedDate { get; set; }
+
         public List<CPS> cpsList { get; set; }
 
         public DesignCPSViewModel()

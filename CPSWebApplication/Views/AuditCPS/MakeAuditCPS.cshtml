@@ -6,8 +6,15 @@
 }
 
 <h2>MakeAuditCPS</h2>
-<script src="~/Scripts/jquery-3.2.1.min.js"></script>
+<link href="@Url.Content("~/Content/themes/base/minified/jquery-ui.min.css")" rel="stylesheet" />
+<!-- Required jQuery and jQuery UI Javascript references -->
+
+<script src="~/Scripts/jquery-3.1.1.min.js"></script>
+<script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+
+
+
 @if (TempData["Message"] != null)
 {<div style="color: #1e83ca;">@TempData["Message"]</div>}
 
@@ -161,6 +168,12 @@
                     $('#Thesis').hide();
                 }
 
+            </script>
+            <script type="text/javascript">
+                $(function () {
+                    // This will make every element with the class "date-picker" into a DatePicker element
+                    $('.date-picker').datepicker();
+                })
             </script>
 
             <script language="javascript" type="text/javascript">
@@ -333,21 +346,33 @@
                     </div>
                 </div>
 
-
-
                 <div>
                     @Html.LabelFor(model => model.assignedFaculty, new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
                         @Html.TextBoxFor(model => model.assignedFaculty, new { @class = "form-control", @readonly = "readonly" })
                     </div>
                 </div>
-
                 <br />
+                <br />
+                <div>
+                    @Html.LabelFor(model => model.SignatureAcademicAdvisor, new { @class = "control-label col-md-2" })
+                    @Html.EditorFor(model => model.SignatureAcademicAdvisor, new { @class = "form-control" })
+                </div>
+                <br/>
+                <br/>
+                <div>
+                    @Html.LabelFor(model => model.SignedDate, new { @class = "control-label col-md-2" })
+                  <!-- @Html.EditorFor(model => model.SignedDate, new { htmlAttributes = new { Value = Model.SignedDate.ToString("dd-MMM-yyyy"), @class = "form-control date-picker", onkeydown = "return false", onpaste = "return false" } }) -->                              
+                <input class="date-picker" />
+                 @Html.TextBoxFor(model => model.SignedDate, "", new { @class = "date-picker" })
+                </div>
+                <br/>
+                <br/>
+                <br/>
 
-                <button name="action" value="saveDraft" type="submit" formmethod="post" class="btn btn-success" onclick="window.location = ('@Url.Action("Save","DraftCPS")')">Save</button>
-
-                <button name="action" value="save" type="submit" formmethod="post" class="btn btn-success" onclick="window.location = ('@Url.Action("SaveGeneratedDraftCPS","DraftCPS")')">Submit to Finalize</button>
-
+                <button name="action" value="saveDraft" type="submit" formmethod="post" class="btn btn-success" onclick="window.location = ('@Url.Action("","AuditCPS")')">Save</button>
+                <button name="action" value="sendToModify" type="submit" formmethod="post" class="btn btn-success" onclick="window.location = ('@Url.Action("","AuditCPS")')">Send to Modify</button>
+                <button name="action" value="saveToFinal" type="submit" formmethod="post" class="btn btn-success" onclick="window.location = ('@Url.Action("","AuditCPS")')">Submit to Finalize</button>
                 <button name="action" value="back" type="submit" class="btn btn-success" onclick="window.location = ('@Url.Action("","")')">Back To Home</button>
 
                 <a href="javascript:window.print()" class="btn btn-success btn-lg">
