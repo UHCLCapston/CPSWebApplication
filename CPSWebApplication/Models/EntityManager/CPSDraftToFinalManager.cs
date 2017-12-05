@@ -546,7 +546,7 @@ namespace CPSWebApplication.Models.EntityManager
                 if (result != null)
                 {
                     string str = result.NeedAudit;
-                    if (str.Equals("Yes"))
+                    if ( str != null && str.Equals("Yes"))
                     {
                         return true;
                     }

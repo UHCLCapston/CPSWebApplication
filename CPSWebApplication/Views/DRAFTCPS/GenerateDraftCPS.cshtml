@@ -477,11 +477,11 @@
 
                 <div>
                     @Html.LabelFor(model => model.assignedFaculty, new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.TextBoxFor(model => model.assignedFaculty, new { @class = "form-control", @readonly = "readonly" })
-                    </div>
+                    @Html.TextBoxFor(model => model.assignedFaculty, new { @class = "form-control", @readonly = "readonly" })
                 </div>
-                <br />
+                <br/>
+                <br/>
+                <br/>
 
                 <button name="action" value="saveDraft" type="submit" formmethod="post" class="btn btn-success" onclick="window.location = ('@Url.Action("Save","DraftCPS")')">Save</button>
 
