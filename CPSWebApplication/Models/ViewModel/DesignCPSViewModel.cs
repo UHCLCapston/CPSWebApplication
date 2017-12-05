@@ -40,6 +40,10 @@ namespace CPSWebApplication.Models.ViewModel
 
         public List<Course> ThesisElectiveClassesList { get; set; }
 
+        public List<Course> CapstonElectiveSpecialClassesList { get; set; }
+
+        public List<Course> ThesisElectiveSpecialClassesList { get; set; }
+
 
         [Required]
         [Display(Name = "Faculty Advisor" )]
@@ -88,7 +92,15 @@ namespace CPSWebApplication.Models.ViewModel
         public List<RubricClasses> ClassesForThesisNormal { get; set; }
         public List<RubricClasses> ClassesForCapstonSpecial { get; set; }
         public List<RubricClasses> ClassesForThesisSpecial { get; set; }
+     
+        public List<string> ListSpecializationOption { get; set; }
+        [Required]
+        [Display(Name = "Choose Specialization")]
+        public string SpecializationType { get; set; }
 
+        [Required]
+        [Display(Name = "Specialization")]
+        public bool SpecializationSelected { get; set; } 
         //To show studentList with cps
         public List<CPS> cpsList { get; set; }
 

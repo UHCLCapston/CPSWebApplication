@@ -10,6 +10,25 @@ namespace CPSWebApplication.Models.EntityManager
 {
     public class CPSDesignManager
     {
+        public  bool alreadyDesignedCPS(string studentId)
+        {
+            using (capf17gswen4Entities db = new capf17gswen4Entities())
+            {
+                var cps = db.CPS.Where(o => o.StudentID.ToLower().Equals(studentId));
+                if (cps.Any())
+                {
+                    if (cps.FirstOrDefault().IsBlankCreated.Equals("Yes"))
+                    {
+                        return true;
+                    }
+                    else { return false; }
+
+                }
+
+            }
+            return false;
+        }
+
         public bool isTheStudentNew(string studentId)
         {
             bool flag = false;
@@ -50,6 +69,8 @@ namespace CPSWebApplication.Models.EntityManager
             }
             return flag;
         }
+
+
         public string catalogNeedsTofollow(string studentId) {
             string strCatalog = "";
             using (CPSCreationEntities db = new CPSCreationEntities())
@@ -671,7 +692,6 @@ namespace CPSWebApplication.Models.EntityManager
             CPSDesignManager mg = new CPSDesignManager();
             string mjr = mg.getStudentMajor(id.ToString());
             string ctlg = mg.catalogNeedsTofollow(id.ToString());
-
             string lastName = mg.getStudentLastName(id.ToString());
 
             DesignCPSViewModel v = new DesignCPSViewModel();
@@ -691,9 +711,8 @@ namespace CPSWebApplication.Models.EntityManager
             return v;
         }
 
-        internal List<Course> getThesisCourse(string mjr, string ctlg)
-        {
-            throw new NotImplementedException();
-        }
+
+       
+
     }
 }

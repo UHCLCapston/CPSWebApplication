@@ -18,6 +18,7 @@
           <Property Name="TotalCredits" Type="varchar" MaxLength="10" />
           <Property Name="ElectiveSubjectWithLevelOptions" Type="varchar" MaxLength="700" />
           <Property Name="ElectiveSubjectWithLevelSpecialOptions" Type="varchar" MaxLength="700" />
+          <Property Name="SpecializationListOptions" Type="varchar" MaxLength="700" />
         </EntityType>
         <EntityContainer Name="capf17gswen41ModelStoreContainer">
           <EntitySet Name="SWENCompletion" EntityType="Self.SWENCompletion" Schema="dbo" store:Type="Tables" />
@@ -39,6 +40,7 @@
           <Property Name="TotalCredits" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="ElectiveSubjectWithLevelOptions" Type="String" MaxLength="700" FixedLength="false" Unicode="false" />
           <Property Name="ElectiveSubjectWithLevelSpecialOptions" Type="String" MaxLength="700" FixedLength="false" Unicode="false" />
+          <Property Name="SpecializationListOptions" Type="String" MaxLength="700" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityContainer Name="capf17gswen41Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="SWENCompletions" EntityType="Self.SWENCompletion" />
@@ -52,6 +54,7 @@
           <EntitySetMapping Name="SWENCompletions">
             <EntityTypeMapping TypeName="capf17gswen41Model.SWENCompletion">
               <MappingFragment StoreEntitySet="SWENCompletion">
+                <ScalarProperty Name="SpecializationListOptions" ColumnName="SpecializationListOptions" />
                 <ScalarProperty Name="ElectiveSubjectWithLevelSpecialOptions" ColumnName="ElectiveSubjectWithLevelSpecialOptions" />
                 <ScalarProperty Name="ElectiveSubjectWithLevelOptions" ColumnName="ElectiveSubjectWithLevelOptions" />
                 <ScalarProperty Name="CompletionType" ColumnName="CompletionType" />

@@ -40,15 +40,23 @@ namespace CPSWebApplication.Controllers
             else
             {
                 return RedirectToAction("LogIn", "Account");
-
             }
-            if (!mgr.DraftCPSExists(id.ToString().Trim()))
+            bool flag1 = mgr.doesBlankMatchDraft(id.ToString().Trim());
+            bool flag2 = mgr.DraftCPSExists(id.ToString().Trim());
+            bool flag3 = false;
+            if(TempData["Alert"] !=null)
             {
-                 model = mgr.getDraftCPSModelToShow(id.ToString().Trim());
+                flag3 = true;
+            }
+
+
+            if ( (flag1 && flag2) || flag3)
+            {
+                model = mgr.getAlreadyCreatedDraftCPSToShow(id.ToString());
             }
             else
             {
-                model = mgr.getAlreadyCreatedDraftCPSToShow(id.ToString());
+                model = mgr.getDraftCPSModelToShow(id.ToString().Trim());
             }
             TempData["Model"] = model;
             return View(model);
@@ -208,6 +216,7 @@ namespace CPSWebApplication.Controllers
                 case "saveDraft":
                     cpsmgr.insertUpdateNewDraftCPSToCPSDB(draftModel,false);
                     TempData["Message"] = "CPS Draft Saved Successfully";
+                    TempData["Alert"] = "Save Draft";
                     return RedirectToAction("GenerateDraftCPS", "DraftCPS", new { id = Convert.ToInt32(draftModel.searchId) });
 
                 case "back":

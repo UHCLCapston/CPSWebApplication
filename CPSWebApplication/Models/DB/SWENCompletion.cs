@@ -23,5 +23,6 @@ namespace CPSWebApplication.Models.DB
         public string TotalCredits { get; set; }
         public string ElectiveSubjectWithLevelOptions { get; set; }
         public string ElectiveSubjectWithLevelSpecialOptions { get; set; }
+        public string SpecializationListOptions { get; set; }
     }
 }

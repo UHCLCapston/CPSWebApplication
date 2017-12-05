@@ -433,6 +433,9 @@ namespace CPSWebApplication.Models.EntityManager
             credithrsOption = getOptions("creditHrs");
             gradeOptions = getOptions("gradesOption");
             prgCompletionType = getOptions("programComptionType");
+            prgCompletionType.Add("Capstone With Specialization");
+            prgCompletionType.Add("Thesis With Specialization");
+
             levelGroupOption = getOptions("courseLevelGroup");
 
             lists.Add(levelOption);
@@ -488,6 +491,7 @@ namespace CPSWebApplication.Models.EntityManager
             }
             return null;
         }
+
         public DesignCPSViewModel getBlanckCPSToViewFromCPS(string id)
         {
             DesignCPSViewModel mdl = new DesignCPSViewModel();
@@ -558,13 +562,70 @@ namespace CPSWebApplication.Models.EntityManager
                 }
             }
         }
+
+        public bool doesBlankMatchDraft(string id)
+        {
+            ViewModel.CPS draft = new ViewModel.CPS();
+            ViewModel.CPS blanckChange = new ViewModel.CPS();
+            CPSDesignManager dmgr = new CPSDesignManager();
+            GenerateCPSManager gmgr = new GenerateCPSManager();
+
+            string changeDetailFacultyAdvisor = "";
+            string changeDetailAssignedFoundationCourse = "";
+            string draftDetailFacultyAdvisor = "";
+            string draftDetailAssignedFoundationCourse = "";
+            if (dmgr.alreadyDesignedCPS(id))
+            {
+                using (capf17gswen4Entities db = new capf17gswen4Entities())
+                {
+                    var changeDetails = db.CPS.SingleOrDefault(b => b.StudentID == id);
+                   
+                    if (changeDetails != null)
+                    {
+                        changeDetailFacultyAdvisor = changeDetails.AssignedFacultyAdvisor;
+                        changeDetailAssignedFoundationCourse = changeDetails.FoundationCourseDeatils;
+                    }
+                    var result = db.DraftCPS.SingleOrDefault(b => b.StudentID == id);
+                    if (result != null)
+                    {
+                        draftDetailFacultyAdvisor = result.AssignedFacultyAdvisor;
+                        draftDetailAssignedFoundationCourse = result.FoundationCourseDeatils;
+                    }
+                    else
+                    {
+                        draft = null;
+                    }
+                }
+            }
+
+            List<string> list1=changeDetailAssignedFoundationCourse.Split(',').ToList<string>();
+            List<string> list2 = draftDetailAssignedFoundationCourse.Split(':').ToList<string>();
+            int count = 0;
+            foreach(string str in list1)
+            {
+                int i = list1.IndexOf(str);
+                if (str.Contains(list1[i])) {
+                    count++;
+                }
+            }
+
+            if (changeDetailFacultyAdvisor.Equals(draftDetailFacultyAdvisor) && count.Equals(list1.Count()))
+            {
+                return true;
+            }
+            return false;
+        }
+
         public DesignCPSViewModel getAlreadyCreatedDraftCPSToShow(string id)
         {
             const string CAPSTONE = "Capston";
             ViewModel.CPS draft = new ViewModel.CPS();
+            ViewModel.CPS blanckChange = new ViewModel.CPS();
             DesignCPSViewModel model = new DesignCPSViewModel();
             CPSDesignManager dmgr = new CPSDesignManager();
             GenerateCPSManager gmgr = new GenerateCPSManager();
+            
+
             using (capf17gswen4Entities db = new capf17gswen4Entities())
             {
                 var result = db.DraftCPS.SingleOrDefault(b => b.StudentID == id);
@@ -577,6 +638,8 @@ namespace CPSWebApplication.Models.EntityManager
                     draft = null;
                 }
             }
+            
+
             model.searchId = draft.StudentID;
             model.firstName = draft.FirstName;
             model.lastName = draft.LastName;
@@ -623,6 +686,10 @@ namespace CPSWebApplication.Models.EntityManager
             model.ClassesForCapstonNormal = getClassesForCapstonNormal(mjr, ctlg, model.countElectivesCapston);
             model.ClassesForThesisNormal = getClassesForThesisNormal(mjr, ctlg, model.countElectivesThesis);
 
+            model.ListSpecializationOption = getListOfSpecialization(mjr);
+            model.ListSpecializationOption.Insert(0, "---Select---");
+            model.ClassesForThesisSpecial = getClassesForThesisSpecial(mjr, ctlg, model.countElectivesThesis);
+            model.ClassesForCapstonSpecial = getClassesForCapstonSpecial(mjr, ctlg, model.countElectivesCapston);
 
             return model;
         }
@@ -683,15 +750,33 @@ namespace CPSWebApplication.Models.EntityManager
 
             mdl.ThesisCourse = getThesisCourse(mjr, ctlg);
             mdl.CapstonCourse = getCapstonCourse(mjr, ctlg);
+            mdl.ListSpecializationOption = getListOfSpecialization(mjr);
+            mdl.ListSpecializationOption.Insert(0, "---Select---");
+
 
             mdl.ClassesForCapstonNormal = getClassesForCapstonNormal(mjr, ctlg, mdl.countElectivesCapston); 
             mdl.ClassesForThesisNormal = getClassesForThesisNormal(mjr, ctlg, mdl.countElectivesThesis);
 
             mdl.ClassesForThesisSpecial = getClassesForThesisSpecial(mjr, ctlg, mdl.countElectivesThesis);
-            // mdl.ClassesForCapstonSpecial = getClassesForCapstonSpecial(mjr, ctlg, mdl.countElectivesCapston);
+            mdl.ClassesForCapstonSpecial = getClassesForCapstonSpecial(mjr, ctlg, mdl.countElectivesCapston);
+
+
             return mdl; 
         }
-       
+
+        private List<string> getListOfSpecialization(string mjr)
+        {
+            if (mjr.Equals("SWEN"))
+            {
+                using (capf17gswen41Entities db = new capf17gswen41Entities())
+                {
+                    var results = db.SWENCompletions.Select(c => c.SpecializationListOptions).Distinct().ToList<string>();
+                   return  results[0].Split(',').ToList<string>();
+                }
+            }
+            return null;
+        }
+
         private List<RubricClasses> getClassesForThesisSpecial(string mjr, string ctlg, int count)
         {
             List<RubricClasses> list = new List<RubricClasses>();
@@ -738,7 +823,7 @@ namespace CPSWebApplication.Models.EntityManager
         private List<RubricClasses> getClassesForCapstonSpecial(string mjr, string ctlg,int count)
         {
             List<RubricClasses> list = new List<RubricClasses>();
-            List<string> rubricList = getCourseRubricCreatedOptions(mjr, "Capston ", "Normal");
+            List<string> rubricList = getCourseRubricCreatedOptions(mjr, "Capston ", "Special");
 
             foreach (string r in rubricList)
             {

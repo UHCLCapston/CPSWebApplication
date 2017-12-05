@@ -22,12 +22,8 @@ namespace CPSWebApplication.Controllers
         {
             bool flag = false;
             CPSDesignManager mg = new CPSDesignManager();
-            DesignCPSViewModel viewM=  mg.getModelForDesignCPSToView(id);
-            TempData["StudentID"] = id.ToString().Trim();
-            TempData["foundationList"] = viewM.FoundationClassesList;
-            TempData["AcademicYear"] = viewM.academicYear;
-            TempData["CoreCourses"] = viewM.CoreClassesList;
-            TempData["ElectiveCourses"] = viewM.ElectiveClassesList;
+            GenerateCPSManager gmgr = new GenerateCPSManager();
+            DesignCPSViewModel viewM=  mg.getModelForDesignCPSToView(id);           
             if(Session["UserID"] != null)
             {
                 flag = true;
@@ -35,8 +31,32 @@ namespace CPSWebApplication.Controllers
             else
             {
                 return RedirectToAction("LogIn", "Account");
-
             }
+            TempData["StudentID"] = id.ToString().Trim();
+            TempData["AcademicYear"] = viewM.academicYear;
+            TempData["CoreCourses"] = viewM.CoreClassesList;
+            TempData["ElectiveCourses"] = viewM.ElectiveClassesList;
+            List<Course> listAll = viewM.FoundationClassesList;
+            TempData["foundationList"] = listAll;
+            if (mg.alreadyDesignedCPS(id.ToString().Trim()))
+            {
+               DesignCPSViewModel model = gmgr.getModelForGenerateCPS(id.ToString().Trim());
+                List<Course> listAssigned = model.FoundationClassesList;
+                foreach(Course c in listAll){
+                    foreach(Course cAsg in listAssigned)
+                    {
+                        if (cAsg.CourseShortName.Equals(c.CourseShortName))
+                        {
+                            c.IsSelected = true;
+                        }
+
+                    }
+                }
+                viewM.FoundationClassesList = listAll;
+                TempData["foundationList"] = listAll;
+                return View(viewM);
+            }
+           
             return View(viewM);
         }
 
@@ -101,10 +121,11 @@ namespace CPSWebApplication.Controllers
                     if (saveOnChanges)
                     {
                         mgr.updateStudentDetails(stId, assignedCourses, facultyName);
+                        cpsmgr.insertNewBlanckCPSToCPSDB(stId, ccList, ecList, acYear);
                     }
                     TempData["Message"] = "Blank CPS saved successfully";
 
-                    return RedirectToAction("StudentCPSDesign", "DesignCPS",Convert.ToInt32(stId));
+                    return RedirectToAction("StudentCPSDesign", "DesignCPS", new { id = Convert.ToInt32(stId) });
 
                 case "back":
                     return RedirectToAction("AcademicAdvisor", "Home", new { id =Convert.ToInt32(Session["UserID"]) });

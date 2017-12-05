@@ -27,7 +27,7 @@ namespace CPSWebApplication.Models.EntityManager
                
             }
 
-            if(! result.Contains("None") && !result.Contains("")) { 
+            if(! result.Equals("None") && !result.Equals("")) { 
             List<string> str = result.Split(',').ToList();
             foreach(string c in str)
             {
