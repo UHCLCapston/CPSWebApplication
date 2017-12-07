@@ -79,6 +79,17 @@ namespace CPSWebApplication.Models.EntityManager
             }
 
         }
+
+        internal bool AuditingOnModifiedCPS(string v)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal bool AuditingOnSavedCPS(string v)
+        {
+            throw new NotImplementedException();
+        }
+
         public ViewModel.CPS getStudentDraftCPS(string studentId)
         {
             ViewModel.CPS cps;

@@ -50,6 +50,9 @@
           <Property Name="CoreCourseDetails" Type="nvarchar(max)" />
           <Property Name="ElectiveCourseDetails" Type="nvarchar(max)" />
           <Property Name="ProgramCompletionType" Type="nvarchar" MaxLength="50" />
+          <Property Name="CompletionCourseDetails" Type="nvarchar(max)" />
+          <Property Name="IsSpecialization" Type="nvarchar" MaxLength="10" />
+          <Property Name="SpecializationUnder" Type="nvarchar" MaxLength="200" />
           <Property Name="AssignedFacultyAdvisor" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="AssignedAcademicAdvisor" Type="nvarchar" MaxLength="50" />
           <Property Name="IsDraft" Type="nvarchar" MaxLength="50" />
@@ -57,6 +60,8 @@
           <Property Name="IsActive" Type="nvarchar" MaxLength="50" />
           <Property Name="NeedAudit" Type="nvarchar" MaxLength="50" />
           <Property Name="IsAudited" Type="nvarchar" MaxLength="50" />
+          <Property Name="NeedModificationForFinal" Type="nvarchar" MaxLength="50" />
+          <Property Name="NeedAuditingAfterModification" Type="nvarchar" MaxLength="20" />
           <Property Name="LastFinalizeDate" Type="nvarchar" MaxLength="50" />
           <Property Name="LastDraftDate" Type="nvarchar" MaxLength="50" />
           <Property Name="IsBlankCreated" Type="nvarchar" MaxLength="50" />
@@ -132,6 +137,11 @@
           <Property Name="IsBlankCreated" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="BlankCreatedDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="NeedAudit" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CompletionCourseDetails" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsSpecialization" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="SpecializationUnder" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="NeedModificationForFinal" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NeedAuditingAfterModification" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -176,6 +186,11 @@
           <EntitySetMapping Name="DraftCPS">
             <EntityTypeMapping TypeName="cpsFinalEntities.DraftCPS">
               <MappingFragment StoreEntitySet="DraftCPS">
+                <ScalarProperty Name="NeedAuditingAfterModification" ColumnName="NeedAuditingAfterModification" />
+                <ScalarProperty Name="NeedModificationForFinal" ColumnName="NeedModificationForFinal" />
+                <ScalarProperty Name="SpecializationUnder" ColumnName="SpecializationUnder" />
+                <ScalarProperty Name="IsSpecialization" ColumnName="IsSpecialization" />
+                <ScalarProperty Name="CompletionCourseDetails" ColumnName="CompletionCourseDetails" />
                 <ScalarProperty Name="NeedAudit" ColumnName="NeedAudit" />
                 <ScalarProperty Name="BlankCreatedDate" ColumnName="BlankCreatedDate" />
                 <ScalarProperty Name="IsBlankCreated" ColumnName="IsBlankCreated" />

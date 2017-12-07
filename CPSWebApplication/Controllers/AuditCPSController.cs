@@ -29,16 +29,18 @@ namespace CPSWebApplication.Controllers
             if (mgr.AuditingNeeded(id.ToString().Trim()))
             {
                 model = mgr.getAlreadyCreatedDraftCPSToShow(id.ToString());
-
                 //new if else needed for new and prev audit
+            }
+            else if (mgr.AuditingOnSavedCPS(id.ToString().Trim())){
+
+            }else if (mgr.AuditingOnModifiedCPS(id.ToString().Trim())){
+
             }
             else
             {
                 TempData["Message"] = "Student Draft CPS is not yet ready to Audit";
-
                 return RedirectToAction("AduitCPS", "AcademicAdvisor");
-            }
-           
+            }           
             TempData["Model"] = model;
             return View(model);
         }
@@ -53,7 +55,6 @@ namespace CPSWebApplication.Controllers
             else
             {
                 return RedirectToAction("LogIn", "Account");
-
             }
             return View();
         }
@@ -69,7 +70,6 @@ namespace CPSWebApplication.Controllers
             else
             {
                 return RedirectToAction("LogIn", "Account");
-
             }
             switch (action)
             {
