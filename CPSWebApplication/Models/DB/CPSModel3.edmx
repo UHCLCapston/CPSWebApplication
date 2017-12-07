@@ -66,6 +66,7 @@
           <Property Name="LastDraftDate" Type="nvarchar" MaxLength="50" />
           <Property Name="IsBlankCreated" Type="nvarchar" MaxLength="50" />
           <Property Name="BlankCreatedDate" Type="nvarchar" MaxLength="50" />
+          <Property Name="AcademicAdvisorSignature" Type="nvarchar(max)" />
         </EntityType>
         <EntityContainer Name="cpsFinalEntitiesStoreContainer">
           <EntitySet Name="CPS" EntityType="Self.CPS" Schema="dbo" store:Type="Tables" />
@@ -142,6 +143,7 @@
           <Property Name="SpecializationUnder" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="NeedModificationForFinal" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="NeedAuditingAfterModification" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="AcademicAdvisorSignature" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -186,6 +188,7 @@
           <EntitySetMapping Name="DraftCPS">
             <EntityTypeMapping TypeName="cpsFinalEntities.DraftCPS">
               <MappingFragment StoreEntitySet="DraftCPS">
+                <ScalarProperty Name="AcademicAdvisorSignature" ColumnName="AcademicAdvisorSignature" />
                 <ScalarProperty Name="NeedAuditingAfterModification" ColumnName="NeedAuditingAfterModification" />
                 <ScalarProperty Name="NeedModificationForFinal" ColumnName="NeedModificationForFinal" />
                 <ScalarProperty Name="SpecializationUnder" ColumnName="SpecializationUnder" />

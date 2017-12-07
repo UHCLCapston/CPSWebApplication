@@ -39,5 +39,6 @@ namespace CPSWebApplication.Models.DB
         public string SpecializationUnder { get; set; }
         public string NeedModificationForFinal { get; set; }
         public string NeedAuditingAfterModification { get; set; }
+        public string AcademicAdvisorSignature { get; set; }
     }
 }

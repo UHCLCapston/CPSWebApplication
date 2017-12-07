@@ -93,12 +93,17 @@ namespace CPSWebApplication.Controllers
             draftModel.ClassesForCapstonNormal = tempDataModel.ClassesForCapstonNormal;
             draftModel.ClassesForThesisNormal = tempDataModel.ClassesForThesisNormal;
             draftModel.CapstonCourse = tempDataModel.CapstonCourse;
-            
+            draftModel.ClassesForCapstonSpecial = tempDataModel.ClassesForCapstonSpecial;
+            draftModel.ClassesForThesisSpecial = tempDataModel.ClassesForThesisSpecial;
+
             List<Course> thesisShown = tempDataModel.ThesisCourse;
             List<Course> fcShown = tempDataModel.FoundationClassesList;
             List<Course> ccShown = tempDataModel.CoreClassesList;
             List<RubricClasses> ecCapShown = tempDataModel.ClassesForCapstonNormal;
             List<RubricClasses> ecThShown = tempDataModel.ClassesForThesisNormal;
+            List<RubricClasses> ecCapSPLShown = tempDataModel.ClassesForCapstonSpecial;
+            List<RubricClasses> ecThSPLShown = tempDataModel.ClassesForThesisSpecial;
+
             List<Course> ecAllList = tempDataModel.ElectiveClassesList;
             
             //List<String> ecShown = tempDataModel.CourseWholeNameListForElective;
@@ -111,7 +116,8 @@ namespace CPSWebApplication.Controllers
             List<Course> th = mdl.ThesisCourse;
             List<Course> ecTh = mdl.ThesisElectiveClassesList;
             List<Course> ecCap = mdl.CapstonElectiveClassesList;
-
+            List<Course> ecThSpl = mdl.ThesisElectiveSpecialClassesList;
+            List<Course> ecCapSpl = mdl.CapstonElectiveSpecialClassesList;
             //List<Course> ec = mdl.ElectiveClassesList;
 
             // List<Course> ecNewList = new List<Course>();
@@ -124,6 +130,9 @@ namespace CPSWebApplication.Controllers
             List<Course> thNewList = new List<Course>();
             List<Course> ecCAPNewList = new List<Course>();
             List<Course> ecTHSNewList = new List<Course>();
+
+            List<Course> ecCAPNewSPLList = new List<Course>();
+            List<Course> ecTHSNewSPLList = new List<Course>();
 
             CPSDraftToFinalManager cpsmgr = new CPSDraftToFinalManager();
             int num = 0;
@@ -152,6 +161,37 @@ namespace CPSWebApplication.Controllers
                     crs.EnrolledSemester = c.EnrolledSemester;
                     crs.CourseSubjectWithRubric = ecThShown[num].rubric;
                     ecTHSNewList.Add(crs);
+                }
+                num++;
+            }
+            num = 0;
+            foreach (Course c in ecThSpl)
+            {
+                int index = th.IndexOf(c);
+                string cname = c.CourseWholeName.Trim();
+                Course crs = new Course();
+                if (!cname.Equals("---Select---"))
+                {
+                    crs = getCourseByWholeName(cname, ecAllList);
+                    crs.EnrolledSemester = c.EnrolledSemester;
+                    crs.CourseSubjectWithRubric = ecThSPLShown[num].rubric;
+                    ecTHSNewSPLList.Add(crs);
+                }
+                num++;
+            }
+
+            num = 0;
+            foreach (Course c in ecCapSpl)
+            {
+                int index = th.IndexOf(c);
+                string cname = c.CourseWholeName.Trim();
+                Course crs = new Course();
+                if (!cname.Equals("---Select---"))
+                {
+                    crs = getCourseByWholeName(cname, ecAllList);
+                    crs.EnrolledSemester = c.EnrolledSemester;
+                    crs.CourseSubjectWithRubric = ecCapSPLShown[num].rubric;
+                    ecCAPNewSPLList.Add(crs);
                 }
                 num++;
             }
@@ -197,13 +237,30 @@ namespace CPSWebApplication.Controllers
             draftModel.CoreClassesList = ccNewList;
             draftModel.CapstonElectiveClassesList = ecCAPNewList;
             draftModel.ThesisElectiveClassesList = ecTHSNewList;
-
+            draftModel.CapstonElectiveSpecialClassesList = ecCAPNewSPLList;
+            draftModel.ThesisElectiveSpecialClassesList = ecTHSNewSPLList;
             if (draftModel.programCompletionOption.Equals("Thesis"))
             {
-                draftModel.ElectiveClassesList = ecTHSNewList;
+                draftModel.ElectiveClassesList = ecTHSNewList;              
+                draftModel.SpecializationSelected = false;
             }
-            else {
+            else if(draftModel.programCompletionOption.Equals("Capstone")){
                 draftModel.ElectiveClassesList = ecCAPNewList;
+                draftModel.SpecializationSelected = false;
+            }
+            else if (draftModel.programCompletionOption.Trim().Equals("Thesis With Specialization"))
+            {
+                draftModel.ElectiveClassesList = ecTHSNewSPLList;
+                draftModel.programCompletionOption = "Thesis";
+                draftModel.SpecializationSelected = true;
+                draftModel.SpecializationType = mdl.SpecializationType;
+            }
+            else if (draftModel.programCompletionOption.Trim().Equals("Capstone With Specialization"))
+            {
+                draftModel.ElectiveClassesList = ecCAPNewSPLList;
+                draftModel.programCompletionOption = "Capstone";
+                draftModel.SpecializationSelected = true;
+                draftModel.SpecializationType = mdl.SpecializationType;
             }
             switch (action)
             {

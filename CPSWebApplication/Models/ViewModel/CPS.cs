@@ -32,6 +32,11 @@ namespace CPSWebApplication.Models.ViewModel
         public string IsBlankCreated { get; set; }
         public string BlankCreatedDate{ get; set; }
 
+        public string IsSpecialize { get; set; }
+        public string SpecializaionUnder { get; set; }
+
+        public string AcademicAdvisorSignature { get; set; }
+
         public CPS() {
         }
 
@@ -79,6 +84,14 @@ namespace CPSWebApplication.Models.ViewModel
             AssignedFacultyAdvioser = assignedFacultyAdvisor;
             ProgramCompletionType = programCompletionType;
             LastDraftDate = lastDraftDate;
+        }
+
+        public CPS(string firstName, string lastName, string studentID, string academicYear, string major, string coreCourseDetails, string electiveCourseDetails, string programCompletionType, string assignedFoundationCourseDetails, string assignedFacultyAdvioser, string lastFinalizeDate,string lastDraftDate, string isSpecialize, string specializaionUnder, string academicAdvisorSignature) : this(firstName, lastName, studentID, academicYear, major, coreCourseDetails, electiveCourseDetails, programCompletionType, assignedFoundationCourseDetails, assignedFacultyAdvioser, lastDraftDate)
+        {
+            LastFinalizeDate = lastFinalizeDate;
+            IsSpecialize = isSpecialize;
+            SpecializaionUnder = specializaionUnder;
+            AcademicAdvisorSignature = academicAdvisorSignature;
         }
     }
 }

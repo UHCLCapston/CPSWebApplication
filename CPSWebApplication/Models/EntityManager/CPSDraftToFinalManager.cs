@@ -279,14 +279,27 @@ namespace CPSWebApplication.Models.EntityManager
 
             var time = DateTime.Now;
             string dateTime = time.ToString("yyyy, MM, dd, hh, mm, ss");
-
-            using (capf17gswen4Entities db = new capf17gswen4Entities())
+            string isSpecial = "";
+            string specialization = "";
+            if (draftModel.SpecializationSelected)
             {
-                var result = db.DraftCPS;
-                if (result != null)
-                {
-
-                    var info = result.SingleOrDefault(b => b.StudentID == draftModel.searchId);
+                isSpecial = "Yes";
+                specialization = draftModel.SpecializationType;
+            }
+            else
+            {
+                isSpecial = "No";
+            }
+            string aaSignature= "";
+            string finalDate="";
+            if (draftModel.SignatureAcademicAdvisor != null)
+            {
+                aaSignature= draftModel.SignatureAcademicAdvisor;
+                finalDate = dateTime;
+            }
+            using (capf17gswen4Entities db = new capf17gswen4Entities())
+            {              
+                    var info = db.DraftCPS.SingleOrDefault(b => b.StudentID == draftModel.searchId);
                     if (info != null)
                     {
                         info.StudentID = draftModel.searchId;
@@ -310,7 +323,20 @@ namespace CPSWebApplication.Models.EntityManager
                         info.IsActive = "Yes";
                         info.IsBlankCreated = "Yes";
                         info.LastDraftDate = dateTime;
-                        info.LastFinalizeDate = dateTime;
+                        if (draftModel.SpecializationSelected) {
+                            info.IsSpecialization = "Yes";
+                            info.SpecializationUnder = draftModel.SpecializationType;
+                        }
+                        else
+                        {
+                            info.IsSpecialization = "No";
+                        }
+
+                        if (draftModel.SignatureAcademicAdvisor != null)
+                        {
+                            info.AcademicAdvisorSignature = draftModel.SignatureAcademicAdvisor;
+                            info.LastFinalizeDate = dateTime;
+                        }
 
                         db.SaveChanges();
 
@@ -330,7 +356,7 @@ namespace CPSWebApplication.Models.EntityManager
                         cps.ElectiveCourseDetails = ecListStr;
                         cps.CoreCourseDetails = ccListStr;
 
-                        info.NeedAudit = draftModel.AllowAcademic;
+                        cps.NeedAudit = draftModel.AllowAcademic;
                         cps.IsAudited = draftModel.SaveCPSAcademic;
                         cps.NeedModificationForFinal = draftModel.NeedModificationFromFaculty;
                         cps.IsFinalised = draftModel.FinalizeCPSAllow;
@@ -339,14 +365,17 @@ namespace CPSWebApplication.Models.EntityManager
                         cps.IsActive = "Yes";                       
                         cps.IsBlankCreated = "Yes";
                         cps.LastDraftDate = dateTime;
-                        info.LastFinalizeDate = dateTime;
-
+                        cps.IsSpecialization = isSpecial;
+                        cps.SpecializationUnder = specialization;
+                        cps.AcademicAdvisorSignature = aaSignature;
+                        cps.LastFinalizeDate = finalDate;
+                    
                         db.DraftCPS.Add(cps);
                     }
                     db.SaveChanges();
                 }
 
-            }
+            
         }
         public List<ViewModel.CPS> getListBlackCPSUnderFacultyAdvioser(string id)
         {
@@ -636,7 +665,22 @@ namespace CPSWebApplication.Models.EntityManager
                 var result = db.DraftCPS.SingleOrDefault(b => b.StudentID == id);
                 if (result != null)
                 {
-                    draft = new ViewModel.CPS(result.FirstName,result.LastName, result.StudentID, result.Academic_Year, result.Major, result.CoreCourseDetails, result.ElectiveCourseDetails, result.FoundationCourseDeatils, result.AssignedFacultyAdvisor,result.ProgramCompletionType,result.LastDraftDate);
+                    //draft = new ViewModel.CPS(result.FirstName,result.LastName, result.StudentID, result.Academic_Year, result.Major, result.CoreCourseDetails, result.ElectiveCourseDetails, result.ProgramCompletionType,result.FoundationCourseDeatils, result.AssignedFacultyAdvisor,result.LastFinalizeDate,result.LastDraftDate,result.IsSpecialization,result.SpecializationUnder,result.AcademicAdvisorSignature);
+                    draft.FirstName = result.FirstName;
+                    draft.LastName = result.LastName;
+                    draft.StudentID = result.StudentID;
+                    draft.AcademicYear = result.Academic_Year;
+                    draft.AssignedFacultyAdvioser = result.AssignedFacultyAdvisor;
+                    draft.Major = result.Major;
+                    draft.ProgramCompletionType = result.ProgramCompletionType;
+                    draft.IsSpecialize = result.IsSpecialization;
+                    draft.SpecializaionUnder = result.SpecializationUnder;
+                    draft.AssignedFoundationCourseDetails = result.FoundationCourseDeatils;
+                    draft.CoreCourseDetails = result.CoreCourseDetails;
+                    draft.ElectiveCourseDetails = result.ElectiveCourseDetails;
+                    draft.LastFinalizeDate = result.LastFinalizeDate;
+                    draft.AcademicAdvisorSignature = result.AcademicAdvisorSignature;
+
                 }
                 else
                 {
@@ -669,11 +713,29 @@ namespace CPSWebApplication.Models.EntityManager
 
             if (model.programCompletionOption.Equals("Thesis"))
             {
-                model.ThesisElectiveClassesList = ecList;
+                if(draft.IsSpecialize !=null && draft.SpecializaionUnder != null)
+                {
+                    model.ThesisElectiveSpecialClassesList = ecList;
+                    model.SpecializationType = draft.SpecializaionUnder;
+                    model.programCompletionOption = "Thesis With Specialization";
+                }
+                else
+                {
+                    model.ThesisElectiveClassesList = ecList;
+                }
             }
-            else
+            else if (model.programCompletionOption.Equals("Capstone"))
             {
-                model.CapstonElectiveClassesList = ecList;
+               if (draft.IsSpecialize.Equals("Yes"))
+                {
+                    model.CapstonElectiveSpecialClassesList = ecList;
+                    model.SpecializationType = draft.SpecializaionUnder;
+                    model.programCompletionOption = "Capstone With Specialization";
+                }
+                else
+                {
+                    model.CapstonElectiveClassesList = ecList;
+                }
             }
 
             model.ElectiveCreditHrs = "3";
