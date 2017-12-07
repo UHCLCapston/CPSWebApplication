@@ -212,7 +212,7 @@ namespace CPSWebApplication.Controllers
                     draftModel.NeedModificationFromFaculty = "Yes";
                     draftModel.AllowAcademic = "Yes";
                     cpsmgr.insertUpdateNewDraftCPSToCPSDB(draftModel);
-                    TempData["Message"] = "CPS is Visible For all ";
+                    TempData["Message"] = "CPS is send to modification from faculty";
                     return RedirectToAction("MakeAuditCPS", "AuditCPS", new { id = Convert.ToInt32(draftModel.searchId) });
 
                 case "saveToFinal":
@@ -222,7 +222,7 @@ namespace CPSWebApplication.Controllers
                     draftModel.AllowAcademic = "Yes";
                     draftModel.SignatureAcademicAdvisor = draftModel.SignatureAcademicAdvisor;
                     cpsmgr.insertUpdateNewDraftCPSToCPSDB(draftModel);
-                    TempData["Message"] = "CPS is Visible For all ";
+                    TempData["Message"] = "CPS is finalized, start with another ";
                     return RedirectToAction("AuditCPS", "AcademicAdvisor");
 
                 case "saveDraft":

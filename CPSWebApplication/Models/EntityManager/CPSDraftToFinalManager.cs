@@ -635,11 +635,21 @@ namespace CPSWebApplication.Models.EntityManager
             List<string> list1=changeDetailAssignedFoundationCourse.Split(',').ToList<string>();
             List<string> list2 = draftDetailAssignedFoundationCourse.Split(':').ToList<string>();
             int count = 0;
-            foreach(string str in list1)
+
+            if (list1.Count.Equals(1) && list2.Count.Equals(1))
             {
-                int i = list1.IndexOf(str);
-                if (str.Contains(list1[i])) {
-                    count++;
+                if (list1[0].Equals(list2[0]) && changeDetailFacultyAdvisor.Equals(draftDetailFacultyAdvisor))
+                {
+                    return true;
+                }
+            }
+            if (list1.Count.Equals(list2.Count)) { 
+                foreach(string str in list1)
+                {
+                    int i = list1.IndexOf(str);
+                    if ((!list1[i].Equals("")) && str.Contains(list1[i])) {
+                        count++;
+                    }
                 }
             }
 
@@ -713,7 +723,7 @@ namespace CPSWebApplication.Models.EntityManager
 
             if (model.programCompletionOption.Equals("Thesis"))
             {
-                if(draft.IsSpecialize !=null && draft.SpecializaionUnder != null)
+                if(draft.IsSpecialize !=null && draft.IsSpecialize.Equals("Yes"))
                 {
                     model.ThesisElectiveSpecialClassesList = ecList;
                     model.SpecializationType = draft.SpecializaionUnder;
@@ -726,7 +736,7 @@ namespace CPSWebApplication.Models.EntityManager
             }
             else if (model.programCompletionOption.Equals("Capstone"))
             {
-               if (draft.IsSpecialize.Equals("Yes"))
+               if (draft.IsSpecialize != null && draft.IsSpecialize.Equals("Yes"))
                 {
                     model.CapstonElectiveSpecialClassesList = ecList;
                     model.SpecializationType = draft.SpecializaionUnder;
