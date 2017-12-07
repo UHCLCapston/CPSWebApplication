@@ -107,10 +107,15 @@ namespace CPSWebApplication.Models.ViewModel
         public string SignatureAcademicAdvisor { get; set; }
 
         [Display(Name = "Signed Date")]
-        [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime SignedDate { get; set; }
 
         public List<CPS> cpsList { get; set; }
+
+        public string AllowAcademic { get; set; }
+        public string NeedModificationFromFaculty { get; set; }
+        public string SaveCPSAcademic { get; set; }
+        public string FinalizeCPSAllow { get; set; }
 
         public DesignCPSViewModel()
         {

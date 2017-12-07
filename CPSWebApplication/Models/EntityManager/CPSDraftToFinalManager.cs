@@ -80,14 +80,14 @@ namespace CPSWebApplication.Models.EntityManager
 
         }
 
-        internal bool AuditingOnModifiedCPS(string v)
+        public bool AuditingOnModifiedCPS(string v)
         {
-            throw new NotImplementedException();
+            return false;
         }
 
-        internal bool AuditingOnSavedCPS(string v)
+        public bool AuditingOnSavedCPS(string v)
         {
-            throw new NotImplementedException();
+            return false;
         }
 
         public ViewModel.CPS getStudentDraftCPS(string studentId)
@@ -136,9 +136,9 @@ namespace CPSWebApplication.Models.EntityManager
                     foreach (String str in deatillist)
                 {
                     courseDeatilList = str.Split(',').ToList<String>();
-                    if(courseDeatilList.Count > 0 && minCount.Equals(4))
+                    if(courseDeatilList.Count > 0)
                     {
-                        if(courseDeatilList.Count.Equals(3))
+                        if(courseDeatilList.Count.Equals(4))
                         {
                             string csName = courseDeatilList[0];
                             string rubric = courseDeatilList[1];
@@ -149,7 +149,7 @@ namespace CPSWebApplication.Models.EntityManager
                             course.CourseSubjectWithRubric = rubric;
                             course.GradesRecieved = grade;
                         }
-                        else if(courseDeatilList.Count.Equals(2))
+                        else if(courseDeatilList.Count.Equals(3))
                         {
                             string csName = courseDeatilList[0];
                             string semester = courseDeatilList[1];
@@ -159,7 +159,7 @@ namespace CPSWebApplication.Models.EntityManager
                             course.GradesRecieved = grade;
                         }
                           
-                    }else if(courseDeatilList.Count > 0)
+                    }else
                         {
                             if (courseDeatilList.Count.Equals(3))
                             {
@@ -239,7 +239,7 @@ namespace CPSWebApplication.Models.EntityManager
 
                 return null;
         }
-        public void insertUpdateNewDraftCPSToCPSDB(DesignCPSViewModel draftModel, bool AllowAcademic)
+        public void insertUpdateNewDraftCPSToCPSDB(DesignCPSViewModel draftModel)
         {
             string str = "";
             List<Course> fc = draftModel.FoundationClassesList;
@@ -256,7 +256,7 @@ namespace CPSWebApplication.Models.EntityManager
             if(fc.Count> 0 || fc != null) { 
                 foreach (Course c in fc)
                 {
-                    str = c.CourseShortName + "," + c.EnrolledSemester;
+                    str = c.CourseShortName + "," + c.EnrolledSemester+","+c.GradesRecieved;
                     fcstr.Add(str);
 
                 }
@@ -264,13 +264,13 @@ namespace CPSWebApplication.Models.EntityManager
             }
             foreach (Course c in ec)
             {
-                str= c.CourseShortName + "," + c.CourseSubjectWithRubric + "," + c.EnrolledSemester;
+                str= c.CourseShortName + "," + c.CourseSubjectWithRubric + "," + c.EnrolledSemester+","+c.GradesRecieved;
                 ecstr.Add(str);
             }
          
             foreach(Course c in cc)
             {
-                str = c.CourseShortName + "," + c.EnrolledSemester;
+                str = c.CourseShortName + "," + c.EnrolledSemester+","+c.GradesRecieved;
                 ccstr.Add(str);
             }
 
@@ -300,20 +300,18 @@ namespace CPSWebApplication.Models.EntityManager
                         info.FoundationCourseDeatils = fcListStr;
                         info.ElectiveCourseDetails = ecListStr;
                         info.CoreCourseDetails = ccListStr;
-                       
+
+                        info.NeedAudit = draftModel.AllowAcademic;
+                        info.IsAudited = draftModel.SaveCPSAcademic;
+                        info.NeedModificationForFinal = draftModel.NeedModificationFromFaculty;
+                        info.IsFinalised = draftModel.FinalizeCPSAllow;
+
                         info.IsDraft = "Yes";
                         info.IsActive = "Yes";
-                        info.IsAudited = "No";
-                        if (AllowAcademic)
-                        {
-                            info.NeedAudit = "Yes";
-                        }
-                        else {
-                            info.NeedAudit = "No";
-                        }
                         info.IsBlankCreated = "Yes";
-                        info.IsFinalised = "No";
                         info.LastDraftDate = dateTime;
+                        info.LastFinalizeDate = dateTime;
+
                         db.SaveChanges();
 
                     }
@@ -332,20 +330,16 @@ namespace CPSWebApplication.Models.EntityManager
                         cps.ElectiveCourseDetails = ecListStr;
                         cps.CoreCourseDetails = ccListStr;
 
+                        info.NeedAudit = draftModel.AllowAcademic;
+                        cps.IsAudited = draftModel.SaveCPSAcademic;
+                        cps.NeedModificationForFinal = draftModel.NeedModificationFromFaculty;
+                        cps.IsFinalised = draftModel.FinalizeCPSAllow;
+
                         cps.IsDraft = "Yes";
-                        cps.IsActive = "Yes";
-                        cps.IsAudited = "No";
+                        cps.IsActive = "Yes";                       
                         cps.IsBlankCreated = "Yes";
-                        cps.IsFinalised = "No";
                         cps.LastDraftDate = dateTime;
-                        if (AllowAcademic)
-                        {
-                            info.NeedAudit = "Yes";
-                        }
-                        else
-                        {
-                            info.NeedAudit = "No";
-                        }
+                        info.LastFinalizeDate = dateTime;
 
                         db.DraftCPS.Add(cps);
                     }
@@ -702,9 +696,23 @@ namespace CPSWebApplication.Models.EntityManager
             model.ClassesForThesisSpecial = getClassesForThesisSpecial(mjr, ctlg, model.countElectivesThesis);
             model.ClassesForCapstonSpecial = getClassesForCapstonSpecial(mjr, ctlg, model.countElectivesCapston);
 
+            var time = DateTime.Now;
+            string dateTime = time.ToString("yyyy, MM, dd, hh, mm, ss");
+            model.SignedDate = DateTime.Now;
+
             return model;
         }
-
+        public Course getCourseByWholeName(string wholename, List<Course> ECList)
+        {
+            foreach (Course c in ECList)
+            {
+                if (wholename.Equals(c.CourseWholeName))
+                {
+                    return c;
+                }
+            }
+            return null;
+        }
         public DesignCPSViewModel getDraftCPSModelToShow(string id)
         {
             DesignCPSViewModel mdl = new DesignCPSViewModel();

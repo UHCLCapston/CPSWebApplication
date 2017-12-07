@@ -208,13 +208,21 @@ namespace CPSWebApplication.Controllers
             switch (action)
             {
                 case "save":
-                    cpsmgr.insertUpdateNewDraftCPSToCPSDB(draftModel,true);
+                    draftModel.AllowAcademic = "Yes";
+                    draftModel.SaveCPSAcademic = "No";
+                    draftModel.FinalizeCPSAllow = "No";
+                    draftModel.NeedModificationFromFaculty = "No";
+                    cpsmgr.insertUpdateNewDraftCPSToCPSDB(draftModel);
                     TempData["Message"] = "Draft CPS submitted Successfully, Start with another.";
 
                     return RedirectToAction("CreateDraftCPS", "FacultyAdvisor");
 
                 case "saveDraft":
-                    cpsmgr.insertUpdateNewDraftCPSToCPSDB(draftModel,false);
+                    draftModel.AllowAcademic = "No";
+                    draftModel.SaveCPSAcademic = "No";
+                    draftModel.FinalizeCPSAllow = "No";
+                    draftModel.NeedModificationFromFaculty = "No";
+                    cpsmgr.insertUpdateNewDraftCPSToCPSDB(draftModel);
                     TempData["Message"] = "CPS Draft Saved Successfully";
                     TempData["Alert"] = "Save Draft";
                     return RedirectToAction("GenerateDraftCPS", "DraftCPS", new { id = Convert.ToInt32(draftModel.searchId) });

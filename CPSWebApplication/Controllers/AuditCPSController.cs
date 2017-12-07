@@ -71,13 +71,169 @@ namespace CPSWebApplication.Controllers
             {
                 return RedirectToAction("LogIn", "Account");
             }
+            DesignCPSViewModel tempDataModel = (DesignCPSViewModel)TempData["Model"];
+            DesignCPSViewModel draftModel = new DesignCPSViewModel();
+            CPSDraftToFinalManager mgr = new CPSDraftToFinalManager();
+
+            draftModel.academicYear = tempDataModel.academicYear;
+            draftModel.searchId = tempDataModel.searchId;
+            draftModel.firstName = tempDataModel.firstName;
+            draftModel.lastName = tempDataModel.lastName;
+            draftModel.majorName = tempDataModel.majorName;
+            draftModel.assignedFaculty = tempDataModel.assignedFaculty;
+            draftModel.ClassesForCapstonNormal = tempDataModel.ClassesForCapstonNormal;
+            draftModel.ClassesForThesisNormal = tempDataModel.ClassesForThesisNormal;
+            draftModel.CapstonCourse = tempDataModel.CapstonCourse;
+
+            List<Course> thesisShown = tempDataModel.ThesisCourse;
+            List<Course> fcShown = tempDataModel.FoundationClassesList;
+            List<Course> ccShown = tempDataModel.CoreClassesList;
+            List<RubricClasses> ecCapShown = tempDataModel.ClassesForCapstonNormal;
+            List<RubricClasses> ecThShown = tempDataModel.ClassesForThesisNormal;
+            List<Course> ecAllList = tempDataModel.ElectiveClassesList;
+
+            //List<String> ecShown = tempDataModel.CourseWholeNameListForElective;
+
+            draftModel.programCompletionOption = mdl.programCompletionOption;
+            draftModel.CapstonCourse.EnrolledSemester = mdl.CapstonCourse.EnrolledSemester;
+
+            List<Course> fc = mdl.FoundationClassesList;
+            List<Course> cc = mdl.CoreClassesList;
+            List<Course> th = mdl.ThesisCourse;
+            List<Course> ecTh = mdl.ThesisElectiveClassesList;
+            List<Course> ecCap = mdl.CapstonElectiveClassesList;
+
+            //List<Course> ec = mdl.ElectiveClassesList;
+
+            // List<Course> ecNewList = new List<Course>();
+            //Course ecNewCourse = new Course();
+
+            List<Course> ccNewList = new List<Course>();
+            Course ccNewCourse = new Course();
+            List<Course> fcNewList = new List<Course>();
+            Course fcNewCourse = new Course();
+            List<Course> thNewList = new List<Course>();
+            List<Course> ecCAPNewList = new List<Course>();
+            List<Course> ecTHSNewList = new List<Course>();
+
+            CPSDraftToFinalManager cpsmgr = new CPSDraftToFinalManager();
+            int num = 0;
+            foreach (Course c in ecCap)
+            {
+                int index = th.IndexOf(c);
+                string cname = c.CourseWholeName.Trim();
+                if (!cname.Equals("---Select---"))
+                {
+                    Course ecNewCourse = mgr.getCourseByWholeName(cname, ecAllList);
+                    ecNewCourse.EnrolledSemester = c.EnrolledSemester;
+                    ecNewCourse.GradesRecieved = c.GradesRecieved;
+                    ecNewCourse.CourseSubjectWithRubric = ecCapShown[num].rubric;
+                    ecCAPNewList.Add(ecNewCourse);
+                }
+                num++;
+            }
+            num = 0;
+            foreach (Course c in ecTh)
+            {
+                int index = th.IndexOf(c);
+                string cname = c.CourseWholeName.Trim();
+                Course crs = new Course();
+                if (!cname.Equals("---Select---"))
+                {
+                    crs = mgr.getCourseByWholeName(cname, ecAllList);
+                    crs.EnrolledSemester = c.EnrolledSemester;
+                    crs.GradesRecieved = c.GradesRecieved;
+                    crs.CourseSubjectWithRubric = ecThShown[num].rubric;
+                    ecTHSNewList.Add(crs);
+                }
+                num++;
+            }
+            num = 0;
+            foreach (Course c in th)
+            {
+                int index = th.IndexOf(c);
+                Course cname = thesisShown[num];
+                if (!cname.Equals("---Select---"))
+                {
+                    cname.EnrolledSemester = c.EnrolledSemester;
+                    cname.GradesRecieved = c.GradesRecieved;
+                    thNewList.Add(cname);
+                }
+                num++;
+            }
+            num = 0;
+            if (fcShown.Count > 0)
+            {
+                int count = 0;
+                foreach (Course c in fc)
+                {
+                    int i = fc.IndexOf(c);
+                    fcNewCourse = fcShown[count];
+                    fcNewCourse.EnrolledSemester = c.EnrolledSemester;
+                    fcNewCourse.GradesRecieved = c.GradesRecieved;
+                    fcNewList.Add(fcNewCourse);
+                    count++;
+                }
+                count = 0;
+            }
+            int cnt = 0;
+            foreach (Course c in cc)
+            {
+
+                int j = cc.IndexOf(c);
+                ccNewCourse = ccShown[cnt];
+                ccNewCourse.EnrolledSemester = c.EnrolledSemester;
+                ccNewCourse.GradesRecieved = c.GradesRecieved;
+                ccNewList.Add(ccNewCourse);
+                cnt++;
+            }
+            cnt = 0;
+            draftModel.ThesisCourse = thNewList;
+            draftModel.FoundationClassesList = fcNewList;
+            draftModel.CoreClassesList = ccNewList;
+            draftModel.CapstonElectiveClassesList = ecCAPNewList;
+            draftModel.ThesisElectiveClassesList = ecTHSNewList;
+
+            if (draftModel.programCompletionOption.Equals("Thesis"))
+            {
+                draftModel.ElectiveClassesList = ecTHSNewList;
+            }
+            else
+            {
+                draftModel.ElectiveClassesList = ecCAPNewList;
+            }
+
+
             switch (action)
             {
-                case "save":
-                    
+                case "sendToModify":
+                    draftModel.SaveCPSAcademic = "Yes";
+                    draftModel.FinalizeCPSAllow = "No";
+                    draftModel.NeedModificationFromFaculty = "Yes";
+                    draftModel.AllowAcademic = "Yes";
+                    cpsmgr.insertUpdateNewDraftCPSToCPSDB(draftModel);
+                    TempData["Message"] = "CPS is Visible For all ";
+                    return RedirectToAction("MakeAuditCPS", "AuditCPS", new { id = Convert.ToInt32(draftModel.searchId) });
+
+                case "saveToFinal":
+                    draftModel.SaveCPSAcademic = "Yes";
+                    draftModel.FinalizeCPSAllow = "Yes";
+                    draftModel.NeedModificationFromFaculty = "No";
+                    draftModel.AllowAcademic = "Yes";
+                    draftModel.SignatureAcademicAdvisor = draftModel.SignatureAcademicAdvisor;
+                    cpsmgr.insertUpdateNewDraftCPSToCPSDB(draftModel);
+                    TempData["Message"] = "CPS is Visible For all ";
+                    return RedirectToAction("AuditCPS", "AcademicAdvisor");
 
                 case "saveDraft":
-                   
+                    draftModel.SaveCPSAcademic = "Yes";
+                    draftModel.FinalizeCPSAllow = "No";
+                    draftModel.NeedModificationFromFaculty = "No";
+                    draftModel.AllowAcademic = "Yes";
+                    cpsmgr.insertUpdateNewDraftCPSToCPSDB(draftModel);
+                    TempData["Message"] = "CPS Saved Successfully";
+                    return RedirectToAction("MakeAuditCPS", "AuditCPS", new { id = Convert.ToInt32(draftModel.searchId) });
+
                 case "back":
                     return RedirectToAction("AcademicAdvisor", "Home", new { id = Convert.ToInt32(Session["UserID"]) });
             }
