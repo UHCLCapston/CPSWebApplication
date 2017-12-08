@@ -48,7 +48,7 @@
                         }
                         else if (Session["Role"].Equals("Secretary"))
                         {
-                            <li>@Html.ActionLink("Hello " + Session["UserName"].ToString() + " !", "Secretory", "Home",new {id=Convert.ToInt32(Session["UserID"].ToString()) },null)</li>
+                            <li>@Html.ActionLink("Hello " + Session["UserName"].ToString() + " !", "Secretary", "Home",new {id=Convert.ToInt32(Session["UserID"].ToString()) },null)</li>
                         }
 
                         <li>@Html.ActionLink("Log Out", "LogOut", "Account")</li>
