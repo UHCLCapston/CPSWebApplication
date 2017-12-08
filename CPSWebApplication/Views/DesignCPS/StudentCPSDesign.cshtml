@@ -64,7 +64,6 @@
         </tbody>
     </table>
     <br/>
-
     <div class="form-group" style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">
         <h4>Assign Faculty Advisor to Student:</h4>
         @Html.LabelFor(model => model.assignedFaculty, new { @class = "control-label col-md-2" })
@@ -73,15 +72,14 @@
          </div>
      </div>
     <br/>
-
     <div class="form-group" style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">
-        <h4>Foundation Courses:</h4>
         <table id="cphMainContent_dgvUsers" class="table table-hover table-striped"
                cellspacing="0" style="border-collapse:collapse;">
             <tbody>
+                <tr><th class="h4">Foundation Courses:</th></tr>
                 <tr>
                     <th scope="col">Course</th>
-                    <th scope="col">Long Title</th>
+                    <th scope="col">Course Title</th>
                     <th scope="col">Credits</th>
                 </tr>
                 @for (int i = 0; i < Model.FoundationClassesList.Count(); i++)
@@ -100,34 +98,15 @@
                     @for (int i = 0; i < Model.CoreClassesList.Count(); i++)
                     {
                         <tr class="cursor-pointer">
-                            <td>
-
-                                @Model.CoreClassesList[i].CourseShortName
-                            </td>
+                            <td> @Model.CoreClassesList[i].CourseShortName</td>
                             <td>@Model.CoreClassesList[i].CourseFullName</td>
                             <td>@Model.CoreClassesList[i].CreditHrs</td>
                         </tr>
-
 
                     }
             </tbody>
         </table>
     </div>
- <!--   <div style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">
-        <h4>Core Courses:</h4>
-        <table id="cphMainContent_dgvUsers" class="table table-hover table-striped"
-               cellspacing="0" style="border-collapse:collapse;">
-            <tbody>
-                <tr>
-                    <th scope="col">Course</th>
-                    <th scope="col">Long Title</th>
-                    <th scope="col">Credits</th>
-                    
-                    }
-                </tbody>
-            </table>
-            <br />
-        <div>-->
     <div>
         @if (TempData["Message"] != null)
         {<div style="color: #1e83ca;">@TempData["Message"]</div>}
