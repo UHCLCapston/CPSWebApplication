@@ -59,15 +59,16 @@
             </tbody>
         </table>
         <div class="form-group" style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">
+            <h4>Foundation Courses:</h4>
+
             <table id="cphMainContent_dgvUsers" class="table table-hover table-striped"
                    cellspacing="0" style="border-collapse:collapse;">
                 <tbody>
-                    <tr><th class="h4">Foundation Courses:</th></tr>
                     <tr>
                         <th scope="col">Course</th>
-                        <th scope="col">Course Title</th>
+                        <th scope="col">Long Title</th>
                         <th scope="col">Credits</th>
-                        <th scope="col">Semester</th>
+                        <th scope="col">EnrolledSemester</th>
                         <th scope="col">Grade</th>
                     </tr>
                     @if (Model.FoundationClassesList != null)
@@ -79,8 +80,6 @@
                                 <td>@Model.FoundationClassesList[i].CourseShortName</td>
                                 <td>@Model.FoundationClassesList[i].CourseFullName</td>
                                 <td>@Model.FoundationClassesList[i].CreditHrs</td>
-                                <td></td>
-                                <td></td>
                             </tr>
 
                         }
@@ -114,7 +113,57 @@
                     }
                 </tbody>
             </table>
+
+
         </div>
+  <!--      <div style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">
+            <h4>Core Courses:</h4>
+            <table id="cphMainContent_dgvUsers" class="table table-hover table-striped"
+                   cellspacing="0" style="border-collapse:collapse;">
+                <tbody>
+                    <tr>
+                        <th scope="col">Course</th>
+                        <th scope="col">Long Title</th>
+                        <th scope="col">Credits</th>
+                        <th scope="col">EnrolledSemester</th>
+                        <th scope="col">Grade</th>
+                        
+                        }
+                    </tbody>
+                </table>
+                <br />
+            </div>
+      
+            <div style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">
+                <h4>Elective Courses:</h4>
+                <table id="cphMainContent_dgvUsers" class="table table-hover table-striped"
+                       cellspacing="0" style="border-collapse:collapse;">
+                    <tbody>
+                        <tr>
+                            <th scope="col">Course</th>
+                            <th scope="col">Long Title</th>
+                            <th scope="col">Credits</th>
+                            <th scope="col">EnrolledSemester</th>
+                            <th scope="col">Grade</th>
+                            @if (Model.ElectiveClassesList != null)
+                            {
+                                for (int i = 0; i < Model.ElectiveClassesList.Count(); i++)
+                                {
+                                <tr class="cursor-pointer">
+                                    <td>@Model.ElectiveClassesList[i].CourseShortName </td>
+                                    <td>@Model.ElectiveClassesList[i].CourseFullName</td>
+                                    <td>@Model.ElectiveClassesList[i].CreditHrs</td>
+                                    <td>@Model.ElectiveClassesList[i].EnrolledSemester</td>
+                                    <td>@Model.ElectiveClassesList[i].GradesRecieved</td>
+
+                                </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                    <br />
+                </div>
+      -->
                 <div>
                     <button type="button" class="btn btn-default hidden-print" onclick="window.location = ('@Url.Action("AcademicAdvisor", "Home", new { id = Convert.ToInt32(@Session["UserID"]) })')">BACK TO HOME </button>
                     <a href="javascript:window.print()" class="btn btn-success hidden-print ">

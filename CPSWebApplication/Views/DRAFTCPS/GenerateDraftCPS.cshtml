@@ -67,15 +67,15 @@
         </tbody>
     </table>
              <div class="form-group" style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">
+                <h4>Foundation Courses:</h4>
                 <table id="cphMainContent_dgvUsers" class="table table-hover table-striped"
                        cellspacing="0" style="border-collapse:collapse;">
                     <tbody>
-                        <tr><th class="h4">Foundation Courses:</th></tr>
                         <tr>
                             <th scope="col">Course</th>
-                            <th scope="col">Course Title</th>
+                            <th scope="col">Long Title</th>
                             <th scope="col">Credits</th>
-                            <th scope="col">Semester</th>
+                            <th scope="col">Enrolling Semester</th>
                             <th scope="col">Grade</th>
                         </tr>
               @if (Model.FoundationClassesList.Count > 0)
@@ -103,11 +103,30 @@
                     </tbody>
                 </table>
             </div>
-            <div style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">              
+         <!--  <div style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">
+                <h4>Core Courses:</h4>
+                <table id="cphMainContent_dgvUsers" class="table table-hover table-striped"
+                       cellspacing="0" style="border-collapse:collapse;">
+                    <tbody>
+                        <tr>
+                            <th scope="col">Course</th>
+                            <th scope="col">Long Title</th>
+                            <th scope="col">Credits</th>
+                            <th scope="col">Enrolling Semester</th>
+                            <th scope="col">Grade</th>
+                        </tr>
+                       
+                    </tbody>
+                </table>
+                <br />
+            </div>
+--> 
+
+            <div style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">
+                <h4>Elective Courses:</h4>
              <div class="form-group" style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">
                   <table>
                     <tbody>
-                        <tr><th class="h4">Elective Courses:</th></tr>
                        <tr>
                            <td>
                                @Html.LabelFor(model => model.programCompletionOption, new { @class = "control-label col-md-2" })  <text>&nbsp;&nbsp;</text>
@@ -230,16 +249,18 @@
                 });
                 </script>
                 /////
+             
 
+                   
                 <div id="Capston" style="display: none;" >
                     <div id="CapstonNormal" style="display: none;">
                         <table class="table table-hover table-striped" cellspacing="0" style="border-collapse:collapse;">
                             <tbody>
                                 <tr>                                  
-                                    <th scope="col">Course Title</th>
+                                    <th scope="col">Course Whole Name</th>
                                     <th scope="col">Course Subject and Level</th>
                                     <th scope="col">Credits</th>
-                                    <th scope="col">Semester</th>
+                                    <th scope="col">Enrolling Semester</th>
                                     <th scope="col">Grade</th>
                                 </tr>
                                 @for (int i = 0; i < Model.countElectivesCapston; i++)
@@ -275,10 +296,10 @@
                         <table class="table table-hover table-striped" cellspacing="0" style="border-collapse:collapse;">
                             <tbody>
                                 <tr>
-                                    <th scope="col">Course Title</th>
+                                    <th scope="col">Course Whole Name</th>
                                     <th scope="col">Course Subject and Level</th>
                                     <th scope="col">Credits</th>
-                                    <th scope="col">Semester</th>
+                                    <th scope="col">Enrolling Semester</th>
                                     <th scope="col">Grade</th>
                                 </tr>
                                 @for (int i = 0; i < Model.countElectivesCapston; i++)
@@ -338,10 +359,10 @@
                         <table class="table table-hover table-striped" cellspacing="0" style="border-collapse:collapse;">
                             <tbody>
                                 <tr>
-                                    <th scope="col">Course Title</th>
+                                    <th scope="col">Course Whole Name</th>
                                     <th scope="col">CourseSubject And Level</th>
                                     <th scope="col">Credits</th>
-                                    <th scope="col">Semester</th>
+                                    <th scope="col">EnrollingSemester</th>
                                     <th scope="col">Grade</th>
                                 </tr>
                                 @for (int i = 0; i < Model.countElectivesThesis; i++)
@@ -378,10 +399,10 @@
                         <table class="table table-hover table-striped" cellspacing="0" style="border-collapse:collapse;">
                             <tbody>
                                 <tr>
-                                    <th scope="col">Course Title</th>
+                                    <th scope="col">Course Whole Name</th>
                                     <th scope="col">CourseSubject And Level</th>
                                     <th scope="col">Credits</th>
-                                    <th scope="col">Semester</th>
+                                    <th scope="col">EnrollingSemester</th>
                                     <th scope="col">Grade</th>
                                 </tr>
                                 @for (int i = 0; i < Model.countElectivesThesis; i++)
@@ -451,11 +472,14 @@
                 <br/>
                 <br/>
                 <br/>
-                <button name="action" value="back" type="submit" class="btn btn-default hidden-print" onclick="window.location = ('@Url.Action("","")')">Back To Home</button>
-                <button name="action" value="saveDraft" type="submit" formmethod="post" class="btn btn-success hidden-print" onclick="window.location = ('@Url.Action("Save","DraftCPS")')">Save</button>
 
-                <button name="action" value="save" type="submit" formmethod="post" class="btn btn-success hidden-print" onclick="window.location = ('@Url.Action("SaveGeneratedDraftCPS","DraftCPS")')">Submit</button>
-                <a href="javascript:window.print()" class="btn btn-success hidden-print">
+                <button name="action" value="saveDraft" type="submit" formmethod="post" class="btn btn-success" onclick="window.location = ('@Url.Action("Save","DraftCPS")')">Save</button>
+
+                <button name="action" value="save" type="submit" formmethod="post" class="btn btn-success" onclick="window.location = ('@Url.Action("SaveGeneratedDraftCPS","DraftCPS")')">Submit</button>
+
+                <button name="action" value="back" type="submit" class="btn btn-success" onclick="window.location = ('@Url.Action("","")')">Back To Home</button>
+
+                <a href="javascript:window.print()" class="btn btn-success btn-lg">
                     <span class="glyphicon glyphicon-print"></span> Print
                 </a>
   }
