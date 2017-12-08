@@ -4,11 +4,8 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Generate CPS View</h2>
-<p class="hidden-print">@Session["UserName"].ToString() Want to see Blank CPS</p>
-
-
-    @using (Html.BeginForm("GenerateCPSView", "AcademicAdvisor"))
+<h3>Initial CPS</h3>
+   @using (Html.BeginForm("GenerateCPSView", "AcademicAdvisor"))
     {
         <table id="cphMainContent_dgvUsers" class="table table-hover table-striped"
                cellspacing="0" style="border-collapse:collapse;">
@@ -88,17 +85,17 @@
                         }
                     }
                     <tr><th class="h4">Core Courses:</th></tr>
-@for (int i = 0; i < Model.CoreClassesList.Count(); i++)
-{
-    <tr class="cursor-pointer">
-        <td>@Model.CoreClassesList[i].CourseShortName </td>
-        <td>@Model.CoreClassesList[i].CourseFullName</td>
-        <td>@Model.CoreClassesList[i].CreditHrs</td>
-        <td>@Model.CoreClassesList[i].EnrolledSemester</td>
-        <td>@Model.CoreClassesList[i].GradesRecieved</td>
+                        @for (int i = 0; i < Model.CoreClassesList.Count(); i++)
+                        {
+                            <tr class="cursor-pointer">
+                                <td>@Model.CoreClassesList[i].CourseShortName </td>
+                                <td>@Model.CoreClassesList[i].CourseFullName</td>
+                                <td>@Model.CoreClassesList[i].CreditHrs</td>
+                                <td>@Model.CoreClassesList[i].EnrolledSemester</td>
+                                <td>@Model.CoreClassesList[i].GradesRecieved</td>
 
-    </tr>
-}
+                            </tr>
+                        }
                     <tr><th class="h4">Elective Courses:</th></tr>
                     @if (Model.ElectiveClassesList != null)
                     {

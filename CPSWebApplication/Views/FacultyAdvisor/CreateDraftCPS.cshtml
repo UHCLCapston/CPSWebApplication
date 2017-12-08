@@ -8,10 +8,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
-<h2>Create Draft CPS</h2>
-<p> @Session["UserName"].ToString() Let's Start Creating Draft CPS</p>
-
-
 
 @if (TempData["Message"] != null)
 {<div style="color: #1e83ca;">@TempData["Message"]</div>}
@@ -26,10 +22,7 @@
             <br />
             <button type="submit" class="btn btn-success form-inline" onclick="window.location = ('@Url.Action("", "")')">Submit </button>
             <br />
-            
-            
-            
-        </div>
+    </div>
     </div>
     <br>
     <table class="table">
@@ -54,15 +47,12 @@
                 <td>@Model.cpsList[i].FirstName </td>
                 <td>@Model.cpsList[i].LastName</td>
                 <td>
-
                     @Html.ActionLink("Create Draft CPS", "GenerateDraftCPS","DraftCPS" ,new { id = Model.cpsList[i].StudentID },null)
-
                 </td>
 
             </tr>
         </tbody>
-    }
-    
+    } 
         </table>
 
 <script>

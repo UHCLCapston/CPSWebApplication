@@ -5,10 +5,6 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>GenerateCPS</h2>
-<p> @Session["UserName"].ToString() Want to see Blanck CPS</p>
-
-
 @using (Html.BeginForm("GenerateCPS", "AcademicAdvisor", FormMethod.Post))
 {
 
@@ -23,4 +19,4 @@
         </div>
     </div>
 }
-<button type="button" class="btn btn-default" onclick="window.location = ('@Url.Action("AcademicAdvisor", "Home", new { id = Convert.ToInt32(@Session["UserID"]) })')">BACK TO HOME </button>
+<!--<button type="button" class="btn btn-default" onclick="window.location = ('@Url.Action("AcademicAdvisor", "Home", new { id = Convert.ToInt32(@Session["UserID"]) })')">BACK TO HOME </button>-->

@@ -5,13 +5,8 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>ViewDraftCPS</h2>
-<p> @Session["UserName"].ToString() Want to see Draft CPS</p>
-
-
 @using (Html.BeginForm("ViewDraftCPS", "AcademicAdvisor", FormMethod.Post))
 {
-
     <div class="form-group">
         @Html.LabelFor(model => model.searchId, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
@@ -23,5 +18,5 @@
         </div>
     </div>
 }
-<button type="button" class="btn btn-default" onclick="window.location = ('@Url.Action("AcademicAdvisor", "Home", new { id = Convert.ToInt32(@Session["UserID"]) })')">BACK TO HOME </button>
+<!--<button type="button" class="btn btn-default" onclick="window.location = ('@Url.Action("AcademicAdvisor", "Home", new { id = Convert.ToInt32(@Session["UserID"]) })')">BACK TO HOME </button>-->
 

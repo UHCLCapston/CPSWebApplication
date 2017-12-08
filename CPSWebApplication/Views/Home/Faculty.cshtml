@@ -3,15 +3,13 @@
     ViewBag.Title = "Faculty";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<h2>@Model.FirstName</h2>
-<h2>Welcome to Faculty Portal</h2>
-
-@using (Html.BeginForm("Create", "AcadAdv"))
+<h2>Welcome to Faculty CPS Portal</h2>
+@using (Html.BeginForm("", ""))
 {
     <div>
         <div>
             <div>
-                <button type="button" class="btn btn-default" onclick="window.location = ('@Url.Action("ViewBlanckCPS","FacultyAdvisor")')"><img src="https://newcdn.iconfinder.com/data/icons/startup-management/325/Project_management_Lessons_Report-256.png" class="img-responsive" width="140" />View Blank CPS</button>
+                <button type="button" class="btn btn-default" onclick="window.location = ('@Url.Action("ViewBlanckCPS","FacultyAdvisor")')"><img src="https://newcdn.iconfinder.com/data/icons/startup-management/325/Project_management_Lessons_Report-256.png" class="img-responsive" width="140" />View Initial CPS</button>
 
                 &nbsp;&nbsp;<button type="button" class="btn btn-default" onclick="window.location = ('@Url.Action("CreateDraftCPS","FacultyAdvisor")')"><img src="https://newcdn.iconfinder.com/data/icons/startup-management/325/Project_management_Project_Mandate-256.png" class="img-responsive" width="140" />Create Draft CPS</button>
                 <br /><br />

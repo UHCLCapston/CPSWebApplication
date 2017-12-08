@@ -6,10 +6,6 @@
 
 }
 
-<h2>Design CPS</h2>
-<br />
-<p> @Session["UserName"].ToString() Let's Start design</p>
-    
 @if (TempData["Message"] != null)
 {<div style="color: #1e83ca;">@TempData["Message"]</div>}
 
@@ -27,5 +23,5 @@
         </div>
 }
 
-<button type="button" class="btn btn-default" onclick="window.location = ('@Url.Action("AcademicAdvisor", "Home", new { id = Convert.ToInt32(@Session["UserID"]) })')">BACK TO HOME </button>
+<!--<button type="button" class="btn btn-default" onclick="window.location = ('@Url.Action("AcademicAdvisor", "Home", new { id = Convert.ToInt32(@Session["UserID"]) })')">BACK TO HOME </button>-->
 

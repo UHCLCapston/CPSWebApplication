@@ -5,11 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>GenerateViewDraftCPS</h2>
-
-p>@Session["UserName"].ToString() Want to see Draft CPS</p>
-
-
+<h3>Draft CPS</h3>
 @using (Html.BeginForm("GenerateViewDraftCPS", "AcademicAdvisor"))
 {
     <table id="cphMainContent_dgvUsers" class="table table-hover table-striped"
