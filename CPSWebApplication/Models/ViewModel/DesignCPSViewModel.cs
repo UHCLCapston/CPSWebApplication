@@ -70,6 +70,8 @@ namespace CPSWebApplication.Models.ViewModel
 
         public List<String> CourseSubjectLevelRubricSelectionOption { get; set; }
 
+        [Required]
+        [Display(Name = "Program Completion Options")]
         public string programCompletionOption { get; set; }
 
         public string ElectiveSubject { get; set; }

@@ -4,21 +4,24 @@
     ViewBag.Title = "AcademicAdvisor";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<h2>Welcome to Academic Advisor CPS Portal </h2>
+<h3 style="color:blue">Welcome to Academic Advisor CPS Portal </h3>
 
 @using (Html.BeginForm("Create", "AcadAdv"))
 {
-    <div>
-        <div>
+    <div style="background-color:blue; align-content:inherit">
+        <div style="align-content:center; padding-top:20px; padding-bottom:20px ;padding-left:100px; background-color:chartreuse">
             <button type="button" class="btn btn-default" onclick="window.location = ('@Url.Action("DesignCPS","AcademicAdvisor")')"><img src="https://newcdn.iconfinder.com/data/icons/startup-management/325/Project_management_Project_Brief-256.png" class="img-responsive" width="140" />Generate CPS</button>
             &nbsp;&nbsp;<button type="button" class="btn btn-default" onclick="window.location = ('@Url.Action("GenerateCPS","AcademicAdvisor")')"><img src="https://newcdn.iconfinder.com/data/icons/startup-management/325/Project_management_Daily_Log-256.png" class="img-responsive" width="140" />View Initial CPS</button>
             &nbsp;&nbsp;<button type="button" class="btn btn-default" onclick="window.location = ('@Url.Action("AuditCPS","AcademicAdvisor")')"><img src="https://cdn2.iconfinder.com/data/icons/startup-management/325/Project_management_Project_Mandate-512.png" class="img-responsive" width="140" />Audit CPS</button>
+            &nbsp;&nbsp;<button type="button" class="btn btn-default" onclick="window.location = ('@Url.Action("FinalizeCPS","AcademicAdvisor")')"><img src="https://newcdn.iconfinder.com/data/icons/startup-management/325/Project_management_Work_Package-256.png" class="img-responsive" width="140" />Finalize CPS</button>
+
         </div>
-        <br /><br />
+        <br/>
+        <!--
         <div>
             <button type="button" class="btn btn-default" onclick="window.location = ('@Url.Action("FinalizeCPS","AcademicAdvisor")')"><img src="https://newcdn.iconfinder.com/data/icons/startup-management/325/Project_management_Work_Package-256.png" class="img-responsive" width="140" />Finalize CPS</button>
             &nbsp;&nbsp;<button type="button" class="btn btn-default" onclick="window.location = ('@Url.Action("GenerateCatalog","AcademicAdvisor")')"><img src="https://newcdn.iconfinder.com/data/icons/startup-management/325/Project_management_Management_Strategy-256.png" class="img-responsive" width="140" />Design New Catalog</button>
-        </div>
+        </div>-->
 
     </div>
 }
