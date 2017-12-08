@@ -1,0 +1,334 @@
+﻿@model CPSWebApplication.Models.ViewModel.DesignCPSViewModel
+
+@{
+    ViewBag.Title = "FinalizeCPSView";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>Final CPS</h3>
+
+<link href="@Url.Content("~/Content/themes/base/minified/jquery-ui.min.css")" rel="stylesheet" />
+<script src="~/Scripts/jquery-3.1.1.min.js"></script>
+<script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+
+@using (Html.BeginForm("FinalizeCPSView", "AcademicAdvisor"))
+{
+    <table id="cphMainContent_dgvUsers" class="table table-hover table-striped"
+           cellspacing="0" style="border-collapse:collapse;">
+        <tbody>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.academicYear, new { @class = "control-label col-md-2" })
+                </td>
+                <td>
+                    <div class="col-md-20">
+                        @Html.TextBoxFor(model => model.academicYear, new { @class = "form-control", @readonly = "readonly" })
+                    </div>
+                </td>
+                <td>
+                    @Html.LabelFor(model => model.majorName, new { @class = "control-label col-md-2" })
+                </td>
+                <td>
+                    <div class="col-md-15">
+                        @Html.TextBoxFor(model => model.majorName, new { @class = "form-control", @readonly = "readonly" })
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.lastName, new { @class = "control-label col-md-2" })
+                </td>
+                <td>
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.lastName, new { @class = "form-control", @readonly = "readonly" })
+                    </div>
+                </td>
+                <td>
+                    @Html.LabelFor(model => model.firstName, new { @class = "control-label col-md-2" })
+                </td>
+                <td>
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.firstName, new { @class = "form-control", @readonly = "readonly" })
+                    </div>
+                </td>
+                <td>
+                    @Html.LabelFor(model => model.searchId, new { @class = "control-label col-md-2" })
+                </td>
+                <td>
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.searchId, new { @class = "form-control", @readonly = "readonly" })
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+        <div class="form-group" style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">
+            <h4>Foundation Courses:</h4>
+            <table id="cphMainContent_dgvUsers" class="table table-hover table-striped"
+                   cellspacing="0" style="border-collapse:collapse;">
+                <tbody>
+                    <tr>
+                        <th scope="col">Course</th>
+                        <th scope="col">Long Title</th>
+                        <th scope="col">Credits</th>
+                        <th scope="col">Enrolling Semester</th>
+                        <th scope="col">Grade</th>
+                    </tr>
+                    @if (Model.FoundationClassesList.Count > 0)
+                    {
+                    for (int i = 0; i < Model.FoundationClassesList.Count(); i++)
+                     {
+                            <tr class="cursor-pointer">
+                                <td>@Model.FoundationClassesList[i].CourseShortName</td>
+                                <td>@Model.FoundationClassesList[i].CourseFullName</td>
+                                <td>@Model.FoundationClassesList[i].CreditHrs</td>
+                                <td>@Model.FoundationClassesList[i].EnrolledSemester</td>
+                                <td>@Model.FoundationClassesList[i].GradesRecieved</td>
+                            </tr>
+                     }
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">
+            <h4>Core Courses:</h4>
+            <table id="cphMainContent_dgvUsers" class="table table-hover table-striped"
+                   cellspacing="0" style="border-collapse:collapse;">
+                <tbody>
+                    <tr>
+                        <th scope="col">Course</th>
+                        <th scope="col">Long Title</th>
+                        <th scope="col">Credits</th>
+                        <th scope="col">Enrolling Semester</th>
+                        <th scope="col">Grade</th>
+                    </tr>
+                    @for (int i = 0; i < Model.CoreClassesList.Count(); i++)
+                    {
+                        <tr class="cursor-pointer">
+                            <td>@Model.CoreClassesList[i].CourseShortName </td>
+                            <td>@Model.CoreClassesList[i].CourseFullName</td>
+                            <td>@Model.CoreClassesList[i].CreditHrs</td>
+                            <td>@Model.CoreClassesList[i].EnrolledSemester</td>
+                            <td>@Model.CoreClassesList[i].GradesRecieved</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <br/>
+        </div>
+        <div style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">
+            <h4>Elective Courses:</h4>
+            <div class="form-group" style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>
+                                @Html.LabelFor(model => model.programCompletionOption, new { @class = "control-label col-md-2" })
+                            </td>
+                            <td>
+                                @Model.programCompletionOption
+                            </td>
+                            @if(Model.SpecializationType !=null){
+                            <td>
+                                @Html.LabelFor(model => model.SpecializationType)
+                            </td>
+                            <td>
+                                @Model.SpecializationType
+                            </td>
+                            }
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+            <div id="Capston" style="display: none;">
+                <div id="CapstonNormal" style="display: none;">
+                    <table class="table table-hover table-striped" cellspacing="0" style="border-collapse:collapse;">
+                        <tbody>
+                            <tr>
+                                <th scope="col">Course</th>
+                                <th scope="col">Course Long Title</th>
+                                <th scope="col">Course Subject and Level</th>
+                                <th scope="col">Credit Hrs</th>
+                                <th scope="col">Enrolling Semester</th>
+                                <th scope="col">Grade</th>
+                            </tr>
+                            @for (int i = 0; i < Model.countElectivesCapston; i++)
+                            {
+                                <tr class="cursor-pointer">
+                                    @if (Model.ClassesForCapstonNormal.Count > 0)
+                                    {                                      
+                                     <td>@Model.CapstonElectiveClassesList[i].CourseShortName</td>
+                                     <td>@Model.CapstonElectiveClassesList[i].CourseFullName</td>
+                                     <td>@Model.CapstonElectiveClassesList[i].CourseSubjectWithRubric</td>
+                                     <td>@Model.CapstonElectiveClassesList[i].CreditHrs</td>
+                                     <td>@Model.CapstonElectiveClassesList[i].EnrolledSemester</td>
+                                     <td>@Model.CapstonElectiveClassesList[i].GradesRecieved</td>
+                                    }
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <div id="CapstonSpecial" style="display: none;">
+                    <table class="table table-hover table-striped" cellspacing="0" style="border-collapse:collapse;">
+                        <tbody>
+                            <tr>
+                                <th scope="col">Course</th>
+                                <th scope="col">Course Long Title</th>
+                                <th scope="col">Course Subject and Level</th>
+                                <th scope="col">Credit Hrs</th>
+                                <th scope="col">Enrolling Semester</th>
+                                <th scope="col">Grade</th>
+                            </tr>
+                            @for (int i = 0; i < Model.countElectivesCapston; i++)
+                            {
+                                <tr class="cursor-pointer">
+                                    @if (Model.ClassesForCapstonSpecial.Count > 0)
+                                    {
+                                     <td>@Model.CapstonElectiveSpecialClassesList[i].CourseShortName</td>
+                                     <td>@Model.CapstonElectiveSpecialClassesList[i].CourseFullName</td>
+                                     <td>@Model.CapstonElectiveSpecialClassesList[i].CourseSubjectWithRubric</td>
+                                     <td>@Model.CapstonElectiveSpecialClassesList[i].CreditHrs</td>
+                                     <td>@Model.CapstonElectiveSpecialClassesList[i].EnrolledSemester</td>
+                                     <td>@Model.CapstonElectiveSpecialClassesList[i].GradesRecieved</td>
+                                    }                                   
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
+                <div>
+                    <!-- Capston -->
+                    <table class="table table-hover table-striped" cellspacing="0" style="border-collapse:collapse;">
+                        <tbody>
+                            <tr>
+                                <th scope="col"></th>
+                                <th scope="col"></th>
+                                <th scope="col"></th>
+                                <th scope="col"></th>
+                                <th scope="col"></th>
+                            </tr>
+                            <tr>
+                                <td>@Model.CapstonCourse.CourseShortName</td>
+                                <td>@Model.CapstonCourse.CourseFullName</td>
+                                <td>@Model.CapstonCourse.CreditHrs</td>
+                                <td>@Model.CourseSemesterList</td>
+                                <td>@Model.CapstonCourse.GradesRecieved</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="Thesis" style="display: none;">
+                <div id="ThesisNormal" style="display: none;">
+                    <table class="table table-hover table-striped" cellspacing="0" style="border-collapse:collapse;">
+                        <tbody>
+                            <tr>
+                                <th scope="col">Course</th>
+                                <th scope="col">Course Long Title</th>
+                                <th scope="col">Course Subject and Level</th>
+                                <th scope="col">Credit Hrs</th>
+                                <th scope="col">Enrolling Semester</th>
+                                <th scope="col">Grade</th>
+                            </tr>
+                            @for (int i = 0; i < Model.countElectivesThesis; i++)
+                            {
+                                <tr class="cursor-pointer">
+                                    @if (Model.ClassesForThesisNormal.Count > 0)
+                                    {
+                                       
+                                    }  
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <div id="ThesisSpecial" style="display: none;">
+                    <table class="table table-hover table-striped" cellspacing="0" style="border-collapse:collapse;">
+                        <tbody>
+                            <tr>
+                                <th scope="col">Course</th>
+                                <th scope="col">Course Long Title</th>
+                                <th scope="col">Course Subject and Level</th>
+                                <th scope="col">Credit Hrs</th>
+                                <th scope="col">Enrolling Semester</th>
+                                <th scope="col">Grade</th>
+                            </tr>
+                            @for (int i = 0; i < Model.countElectivesThesis; i++)
+                            {
+                                <tr class="cursor-pointer">
+                                    @if (Model.ClassesForThesisSpecial.Count > 0)
+                                    {
+                                    }
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+
+                </div>
+
+                <div>
+                    <!-- Thesis -->
+                    <table class="table table-hover table-striped" cellspacing="0" style="border-collapse:collapse;">
+                        <tbody>
+                            <tr>
+                                <th scope="col"></th>
+                                <th scope="col"></th>
+                                <th scope="col"></th>
+                                <th scope="col"></th>
+                                <th scope="col"></th>
+                            </tr>
+                            @for (int i = 0; i < Model.ThesisCourse.Count; i++)
+                            {
+                                <tr>
+                                    <td>@Model.ThesisCourse[i].CourseShortName</td>
+                                    <td>@Model.ThesisCourse[i].CourseFullName</td>
+                                    <td>@Model.ThesisCourse[i].CreditHrs</td>
+                                    <td>@Model.ThesisCourse[i].EnrolledSemester</td>
+                                    <td>@Model.ThesisCourse[i].GradesRecieved</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <br />
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>
+                                @Html.LabelFor(model => model.assignedFaculty, new { @class = "control-label col-md-20" })
+                            </td>
+                            <td>
+                                @Html.TextBoxFor(model => model.assignedFaculty, new { @readonly = "readonly" })
+                            </td>
+                        </tr>
+                        <tr>&nbsp;</tr>
+                        <tr>
+                            <td>
+                                @Html.LabelFor(model => model.SignatureAcademicAdvisor, new { @class = "control-label col-md-20" })
+                            </td>
+                            <td>
+                                @Html.EditorFor(model => model.SignatureAcademicAdvisor, new { @class = "form-control" })
+                            </td>
+                            <td>
+                                @Html.LabelFor(model => model.SignedDate, new { @class = "control-label col-md-20" })
+                            </td>
+                            <td>
+                                @Html.EditorFor(model => model.SignedDate, new { @class = "form-control" })
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <br />                
+                <button name="action" value="back" type="submit" class="btn btn-success" onclick="window.location = ('@Url.Action("","")')">Back To Home</button>
+                <a href="javascript:window.print()" class="btn btn-success btn-lg">
+                    <span class="glyphicon glyphicon-print"></span> Print
+                </a>
+}

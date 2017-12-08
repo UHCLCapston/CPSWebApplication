@@ -162,10 +162,56 @@ namespace CPSWebApplication.Controllers
 
             return RedirectToAction("MakeAuditCPS", "AuditCPS", new { id = Convert.ToInt32(studentId) });
         }
+
         public ActionResult FinalizeCPS()
         {
+            string id;
+            if (Session["UserID"] != null)
+            {
+                id = Session["UserName"].ToString();
+            }
+            else
+            {
+                return RedirectToAction("LogIn", "Account");
+            }
             return View();
         }
+
+        [HttpPost]
+        public ActionResult FinalizeCPS(DesignCPSViewModel mdl)
+        {
+            string studentId = mdl.searchId;
+            return RedirectToAction("FinalizeCPSView", "AcademicAdvisor", new { id = Convert.ToInt32(studentId) });
+        }
+
+        [HttpGet]
+        public ActionResult FinalizeCPSView(int id)
+        {   
+            bool flag = false;
+            string studentId = id.ToString();
+            if (Session["UserID"] != null)
+            {
+                flag = true;
+            }
+            else
+            {
+                return RedirectToAction("LogIn", "Account");
+            }
+            CPSDraftToFinalManager mgr = new CPSDraftToFinalManager();
+            
+            DesignCPSViewModel vm = mgr.getAlreadyCreatedDraftCPSToShow(studentId);
+            if(vm.FinalizeCPSAllow !=null && vm.FinalizeCPSAllow.Equals("Yes"))
+            {
+                return View(vm);
+            }
+            else
+            {
+                TempData["Message"] = "Final CPS is not Ready. Search For another Student.";
+                return RedirectToAction("FinalizeCPS", "AcademicAdvisor");
+            }
+
+        }
+
 
     }
 }
