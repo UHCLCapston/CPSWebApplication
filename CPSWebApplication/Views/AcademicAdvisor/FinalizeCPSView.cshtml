@@ -9,11 +9,11 @@
 @using (Html.BeginForm("FinalizeCPSView", "AcademicAdvisor"))
 {
     <table id="cphMainContent_dgvUsers" class="table table-hover table-striped"
-           cellspacing="0" style="border-collapse:collapse;">
+           cellspacing="10" style="border-collapse:collapse;">
         <tbody>
             <tr>
                 <td>
-                    @Html.LabelFor(model => model.academicYear, new { @class = "control-label col-md-2" })
+                    @Html.LabelFor(model => model.academicYear, new { @class = "control-label col-md-20" })
                 </td>
                 <td>
                     <div class="col-md-20">
@@ -21,70 +21,75 @@
                     </div>
                 </td>
                 <td>
-                    @Html.LabelFor(model => model.majorName, new { @class = "control-label col-md-2" })
+                    @Html.LabelFor(model => model.majorName, new { @class = "control-label col-md-20" })
                 </td>
                 <td>
-                    <div class="col-md-15">
+                    <div class="col-md-20">
                         @Html.TextBoxFor(model => model.majorName, new { @class = "form-control", @readonly = "readonly" })
                     </div>
                 </td>
             </tr>
             <tr>
                 <td>
-                    @Html.LabelFor(model => model.lastName, new { @class = "control-label col-md-2" })
+                    @Html.LabelFor(model => model.lastName, new { @class = "control-label col-md-20" })
                 </td>
                 <td>
-                    <div class="col-md-10">
+                    <div class="col-md-20">
                         @Html.TextBoxFor(model => model.lastName, new { @class = "form-control", @readonly = "readonly" })
                     </div>
                 </td>
                 <td>
-                    @Html.LabelFor(model => model.firstName, new { @class = "control-label col-md-2" })
+                    @Html.LabelFor(model => model.firstName, new { @class = "control-label col-md-20" })
                 </td>
                 <td>
-                    <div class="col-md-10">
+                    <div class="col-md-20">
                         @Html.TextBoxFor(model => model.firstName, new { @class = "form-control", @readonly = "readonly" })
                     </div>
                 </td>
                 <td>
-                    @Html.LabelFor(model => model.searchId, new { @class = "control-label col-md-2" })
+                    @Html.LabelFor(model => model.searchId, new { @class = "control-label col-md-20" })
                 </td>
                 <td>
-                    <div class="col-md-10">
+                    <div class="col-md-20">
                         @Html.TextBoxFor(model => model.searchId, new { @class = "form-control", @readonly = "readonly" })
                     </div>
                 </td>
             </tr>
         </tbody>
     </table>
-        <div class="form-group">
-            <h4>Foundation Courses:</h4>
-            <table id="cphMainContent_dgvUsers" class="table table-hover table-striped"
-                   cellspacing="0" style="border-collapse:collapse;">
-                <tbody>
-                    <tr>
-                        <th scope="col">Course</th>
-                        <th scope="col">Long Title</th>
-                        <th scope="col">Credits</th>
-                        <th scope="col">Enrolling Semester</th>
-                        <th scope="col">Grade</th>
-                    </tr>
-                    @if (Model.FoundationClassesList.Count > 0)
+     
+     if (Model.FoundationClassesList.Count > 0)
+       {
+          <div class="form-group">
+             <h4>Foundation Courses:</h4>
+             <table id="cphMainContent_dgvUsers" class="table table-hover table-striped"
+               cellspacing="0" style="border-collapse:collapse;">
+             <tbody>
+                <tr>
+                    <th scope="col">Course</th>
+                    <th scope="col">Long Title</th>
+                    <th scope="col">Credits</th>
+                    <th scope="col">Enrolling Semester</th>
+                    <th scope="col">Grade</th>
+                </tr>
+                @if (Model.FoundationClassesList.Count > 0)
                     {
-                    for (int i = 0; i < Model.FoundationClassesList.Count(); i++)
-                     {
-                            <tr class="cursor-pointer">
-                                <td>@Model.FoundationClassesList[i].CourseShortName</td>
-                                <td>@Model.FoundationClassesList[i].CourseFullName</td>
-                                <td>@Model.FoundationClassesList[i].CreditHrs</td>
-                                <td>@Model.FoundationClassesList[i].EnrolledSemester</td>
-                                <td>@Model.FoundationClassesList[i].GradesRecieved</td>
-                            </tr>
-                     }
+                        for (int i = 0; i < Model.FoundationClassesList.Count(); i++)
+                        {
+                        <tr class="cursor-pointer">
+                            <td>@Model.FoundationClassesList[i].CourseShortName</td>
+                            <td>@Model.FoundationClassesList[i].CourseFullName</td>
+                            <td>@Model.FoundationClassesList[i].CreditHrs</td>
+                            <td>@Model.FoundationClassesList[i].EnrolledSemester</td>
+                            <td>@Model.FoundationClassesList[i].GradesRecieved</td>
+                        </tr>
                     }
-                </tbody>
-            </table>
-        </div>
+                }
+                  </tbody>
+               </table>
+           </div>
+        }
+
         <div>
             <h4>Core Courses:</h4>
             <table id="cphMainContent_dgvUsers" class="table table-hover table-striped"
@@ -227,7 +232,7 @@
          }
             </div>
 
-            <div id="Thesis" style="display: none;">
+            <div id="Thesis">
              @if (Model.programCompletionOption.Equals("Thesis"))
               {
                 <div id="ThesisNormal">

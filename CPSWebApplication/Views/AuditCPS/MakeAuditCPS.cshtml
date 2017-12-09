@@ -22,7 +22,7 @@
             <tbody>
                 <tr>
                     <td>
-                        @Html.LabelFor(model => model.academicYear, new { @class = "control-label col-md-2" })
+                        @Html.LabelFor(model => model.academicYear, new { @class = "control-label col-md-20" })
                     </td>
                     <td>
                         <div class="col-md-20">
@@ -30,7 +30,7 @@
                         </div>
                     </td>
                     <td>
-                        @Html.LabelFor(model => model.majorName, new { @class = "control-label col-md-2" })
+                        @Html.LabelFor(model => model.majorName, new { @class = "control-label col-md-20" })
                     </td>
                     <td>
                         <div class="col-md-15">
@@ -40,7 +40,7 @@
                 </tr>
                 <tr>
                     <td>
-                        @Html.LabelFor(model => model.lastName, new { @class = "control-label col-md-2" })
+                        @Html.LabelFor(model => model.lastName, new { @class = "control-label col-md-20" })
                     </td>
                     <td>
                         <div class="col-md-10">
@@ -48,7 +48,7 @@
                         </div>
                     </td>
                     <td>
-                        @Html.LabelFor(model => model.firstName, new { @class = "control-label col-md-2" })
+                        @Html.LabelFor(model => model.firstName, new { @class = "control-label col-md-20" })
                     </td>
                     <td>
                         <div class="col-md-10">
@@ -56,7 +56,7 @@
                         </div>
                     </td>
                     <td>
-                        @Html.LabelFor(model => model.searchId, new { @class = "control-label col-md-2" })
+                        @Html.LabelFor(model => model.searchId, new { @class = "control-label col-md-20" })
                     </td>
                     <td>
                         <div class="col-md-10">
@@ -129,7 +129,7 @@
                     <tbody>
                         <tr>
                             <td>
-                                @Html.LabelFor(model => model.programCompletionOption, new { @class = "control-label col-md-2" })  <text>&nbsp;&nbsp;</text>
+                                @Html.LabelFor(model => model.programCompletionOption, new { @class = "control-label col-md-20" })  <text>&nbsp;&nbsp;</text>
                             </td>
                             <td>
                                 @Html.RadioButtonFor(s => s.programCompletionOption, "Capstone", new { onCLick = "ShowOption(this)" })@Model.ProgramCompletionOptionList[0] &nbsp;
@@ -148,7 +148,7 @@
                 </table>
             </div>
         </div>
-        <!--<div id="SpecializationCheck">@Html.LabelFor(model => model.SpecializationSelected, new { @class = "control-label col-md-2" })
+        <!--<div id="SpecializationCheck">@Html.LabelFor(model => model.SpecializationSelected, new { @class = "control-label col-md-20" })
         @Html.CheckBoxFor(s => s.SpecializationSelected, new { @id= "checkSpecial" })</div>-->
         <div id="drpdwnSplOptions">
             @Html.LabelFor(model => model.SpecializationType)&nbsp;@Html.DropDownListFor(m => m.SpecializationType, new SelectList(Model.ListSpecializationOption))
@@ -282,7 +282,14 @@
                                     {
                                         <td>@Html.DropDownListFor(m => m.CapstonElectiveClassesList[i].EnrolledSemester, new SelectList(Model.CourseSemesterList), new { @class = "form-control" })</td>
                                     }
-                                    <td>@Html.DropDownListFor(m => m.CapstonElectiveClassesList[i].GradesRecieved, new SelectList(Model.CourseGradeList, Model.CapstonElectiveClassesList[i].GradesRecieved), new { @class = "form-control" })</td>
+                                    @if (Model.CapstonElectiveClassesList != null)
+                                    {
+                                        <td>@Html.DropDownListFor(m => m.CapstonElectiveClassesList[i].GradesRecieved, new SelectList(Model.CourseGradeList, Model.CapstonElectiveClassesList[i].GradesRecieved), new { @class = "form-control" })</td>
+                                    }
+                                    else
+                                    {
+                                        <td>@Html.DropDownListFor(m => m.CapstonElectiveClassesList[i].GradesRecieved, new SelectList(Model.CourseGradeList), new { @class = "form-control" })</td>
+                                    }
                                 </tr>
                             }
                         </tbody>
