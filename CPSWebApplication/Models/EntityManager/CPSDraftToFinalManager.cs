@@ -377,6 +377,79 @@ namespace CPSWebApplication.Models.EntityManager
 
             
         }
+
+
+        public List<StudentDetails> getListOfAllStudentToDesignCPS()
+        {
+            UserManager mgr = new UserManager();
+\            using (CPSCreationEntities db = new CPSCreationEntities())
+            {
+                var results = db.StudentDetails.Select(p => new ViewModel.StudentDetails
+                {
+                    FirstName = p.firstName,
+                    LastName = p.lastName,
+                    StudentID = p.studentID,
+                }).ToList();
+                return results;
+            }
+
+        }
+
+        public List<ViewModel.CPS> getListOfAllBlankCPSGenerated()
+        {
+            using (capf17gswen4Entities db = new capf17gswen4Entities())
+            {
+                var results = db.CPS.Select(p => new ViewModel.CPS
+                {
+                    FirstName = p.FirstName,
+                    LastName = p.LastName,
+                    StudentID = p.StudentID,
+                    BlankCreatedDate = p.BlankCreatedDate,
+                    LastDraftDate = p.LastDraftDate
+
+                }).ToList();
+                return results;
+            }
+
+        }
+
+        public List<ViewModel.CPS> getListOfAllDraftCPSGeneratedForAudit()
+        {
+            using (capf17gswen4Entities db = new capf17gswen4Entities())
+            {
+                var results = db.DraftCPS.Where(p=>p.NeedAudit.Equals("Yes")).Select(p => new ViewModel.CPS
+                {
+                    FirstName = p.FirstName,
+                    LastName = p.LastName,
+                    StudentID = p.StudentID,
+                    BlankCreatedDate = p.BlankCreatedDate,
+                    LastDraftDate = p.LastDraftDate
+
+                }).ToList();
+
+                return results;
+            }
+
+        }
+
+        public List<ViewModel.CPS> getListOfAllFinalCPSGeneratedToView()
+        {
+            using (capf17gswen4Entities db = new capf17gswen4Entities())
+            {
+                var results = db.DraftCPS.Where(p => p.IsFinalised.Equals("Yes")).Select(p => new ViewModel.CPS
+                {
+                    FirstName = p.FirstName,
+                    LastName = p.LastName,
+                    StudentID = p.StudentID,
+                    BlankCreatedDate = p.BlankCreatedDate,
+                    LastDraftDate = p.LastDraftDate
+
+                }).ToList();
+
+                return results;
+            }
+        }
+
         public List<ViewModel.CPS> getListBlackCPSUnderFacultyAdvioser(string id)
         {
             UserManager mgr = new UserManager();

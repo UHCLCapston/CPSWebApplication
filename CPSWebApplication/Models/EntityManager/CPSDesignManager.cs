@@ -93,7 +93,7 @@ namespace CPSWebApplication.Models.EntityManager
             return strCatalog;
         }
 
-
+     
         public List<string> getElectiveSubjectForMajor(string major, string catalog)
         {
             List<string> list = new List<string>();
