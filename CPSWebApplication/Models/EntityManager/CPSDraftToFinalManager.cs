@@ -332,11 +332,11 @@ namespace CPSWebApplication.Models.EntityManager
                             info.IsSpecialization = "No";
                         }
 
-                        if (draftModel.SignatureAcademicAdvisor != null)
-                        {
-                            info.AcademicAdvisorSignature = draftModel.SignatureAcademicAdvisor;
-                            info.LastFinalizeDate = dateTime;
-                        }
+                    if (draftModel.SignatureAcademicAdvisor != null)
+                    {
+                        info.AcademicAdvisorSignature = aaSignature;
+                        info.LastFinalizeDate = dateTime;
+                    }
 
                         db.SaveChanges();
 
@@ -689,6 +689,7 @@ namespace CPSWebApplication.Models.EntityManager
                     draft.CoreCourseDetails = result.CoreCourseDetails;
                     draft.ElectiveCourseDetails = result.ElectiveCourseDetails;
                     draft.LastFinalizeDate = result.LastFinalizeDate;
+                    draft.IsFinalised = result.IsFinalised;
                     draft.AcademicAdvisorSignature = result.AcademicAdvisorSignature;
 
                 }
@@ -706,6 +707,9 @@ namespace CPSWebApplication.Models.EntityManager
             model.majorName = draft.Major;
             model.programCompletionOption = draft.ProgramCompletionType;
             model.assignedFaculty = draft.AssignedFacultyAdvioser;
+            model.FinalizeCPSAllow = draft.IsFinalised;           
+            model.SignatureAcademicAdvisor = draft.AcademicAdvisorSignature;
+           // model.SignedDate = draft.LastFinalizeDate;
 
             string ctlg = draft.AcademicYear.Replace("Academic Year", "Catalog").Trim();
             string mjr = draft.Major.Trim();
@@ -767,9 +771,10 @@ namespace CPSWebApplication.Models.EntityManager
             model.ListSpecializationOption.Insert(0, "---Select---");
             model.ClassesForThesisSpecial = getClassesForThesisSpecial(mjr, ctlg, model.countElectivesThesis);
             model.ClassesForCapstonSpecial = getClassesForCapstonSpecial(mjr, ctlg, model.countElectivesCapston);
-
             var time = DateTime.Now;
             string dateTime = time.ToString("yyyy, MM, dd, hh, mm, ss");
+
+            
             model.SignedDate = DateTime.Now;
 
             return model;

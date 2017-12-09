@@ -24,7 +24,6 @@ namespace CPSWebApplication.Controllers
             else
             {
                 return RedirectToAction("LogIn", "Account");
-
             }
             if (mgr.AuditingNeeded(id.ToString().Trim()))
             {
@@ -220,7 +219,7 @@ namespace CPSWebApplication.Controllers
                     draftModel.FinalizeCPSAllow = "Yes";
                     draftModel.NeedModificationFromFaculty = "No";
                     draftModel.AllowAcademic = "Yes";
-                    draftModel.SignatureAcademicAdvisor = draftModel.SignatureAcademicAdvisor;
+                    draftModel.SignatureAcademicAdvisor = mdl.SignatureAcademicAdvisor;
                     cpsmgr.insertUpdateNewDraftCPSToCPSDB(draftModel);
                     TempData["Message"] = "CPS is finalized, start with another ";
                     return RedirectToAction("AuditCPS", "AcademicAdvisor");
