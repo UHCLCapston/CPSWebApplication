@@ -14,17 +14,25 @@ namespace CPSWebApplication.Controllers
         public ActionResult ViewBlanckCPS()
         {
             string id;
+            string userId = "";
             if (Session["UserID"] != null)
             {
                 id = Session["UserName"].ToString();
+                userId = Session["UserID"].ToString();
             }
             else
             {
                 return RedirectToAction("LogIn", "Account");
 
             }
+            CPSDraftToFinalManager mgr = new CPSDraftToFinalManager();
+            DesignCPSViewModel mdl = new DesignCPSViewModel();
 
-            return View();
+            List<CPS> listStudentCPSWork = mgr.getListBlackCPSUnderFacultyAdvioser(userId);
+            mdl.cpsList = listStudentCPSWork;
+            TempData["StudentList"] = listStudentCPSWork;
+
+            return View(mdl);
         }
 
         [HttpPost]

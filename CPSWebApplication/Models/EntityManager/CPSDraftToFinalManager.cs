@@ -395,6 +395,32 @@ namespace CPSWebApplication.Models.EntityManager
 
         }
 
+        public List<StudentDetails> getListOfAllNewStudent()
+        {
+            UserManager mgr = new UserManager();
+            var list1 = getListOfAllStudentToDesignCPS();
+            List<ViewModel.CPS> list2 = getListOfAllBlankCPSGenerated();
+            var newlist2 = new List<StudentDetails>();
+
+            List<StudentDetails> newStudentList = new List<StudentDetails>();
+            List<int> temp = new List<int>();
+                       
+                foreach(ViewModel.CPS cs in list2)
+                {
+                  StudentDetails st = new StudentDetails();                 
+                  st.FirstName = cs.FirstName;
+                  st.LastName = cs.LastName;
+                  st.StudentID = cs.StudentID;
+                newlist2.Add(st);                   
+                }
+
+            newStudentList = (from lst1 in list1
+                              where !newlist2.Any(x => x.StudentID == lst1.StudentID && x.FirstName == lst1.FirstName)
+                              select lst1).ToList();
+            
+            return newStudentList;
+        }
+
         public List<ViewModel.CPS> getListOfAllBlankCPSGenerated()
         {
             using (capf17gswen4Entities db = new capf17gswen4Entities())

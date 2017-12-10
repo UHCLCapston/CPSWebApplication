@@ -118,6 +118,7 @@ namespace CPSWebApplication.Models.ViewModel
         public string NeedModificationFromFaculty { get; set; }
         public string SaveCPSAcademic { get; set; }
         public string FinalizeCPSAllow { get; set; }
+        public List<StudentDetails> listNewStudent { get; set; }
 
         public DesignCPSViewModel()
         {

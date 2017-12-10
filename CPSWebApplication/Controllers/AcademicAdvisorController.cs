@@ -14,6 +14,7 @@ namespace CPSWebApplication.Controllers
         public ActionResult DesignCPS()
         {
             string id;
+
             if (Session["UserID"] != null)
             {
                 id = Session["UserName"].ToString();
@@ -23,8 +24,14 @@ namespace CPSWebApplication.Controllers
                 return RedirectToAction("LogIn", "Account");
 
             }
+            CPSDraftToFinalManager mgr = new CPSDraftToFinalManager();
+            DesignCPSViewModel mdl = new DesignCPSViewModel();
 
-            return View();
+            List<StudentDetails> listStudentCPSWork = mgr.getListOfAllStudentToDesignCPS();
+            mdl.listNewStudent = listStudentCPSWork;
+            TempData["StudentList"] = listStudentCPSWork;
+
+            return View(mdl);
         }
 
         [HttpPost]
@@ -41,6 +48,7 @@ namespace CPSWebApplication.Controllers
         public ActionResult GenerateCPS()
         {
             string id;
+
             if (Session["UserID"] != null)
             {
                 id = Session["UserName"].ToString();
@@ -50,8 +58,14 @@ namespace CPSWebApplication.Controllers
                 return RedirectToAction("LogIn", "Account");
 
             }
+            CPSDraftToFinalManager mgr = new CPSDraftToFinalManager();
+            DesignCPSViewModel mdl = new DesignCPSViewModel();
 
-            return View();
+            List<CPS> listStudentCPSWork = mgr.getListOfAllBlankCPSGenerated();
+            mdl.cpsList = listStudentCPSWork;
+            TempData["StudentList"] = listStudentCPSWork;
+
+            return View(mdl);
         }
 
         [HttpPost]
@@ -142,6 +156,7 @@ namespace CPSWebApplication.Controllers
         public ActionResult AuditCPS()
         {
             string id;
+
             if (Session["UserID"] != null)
             {
                 id = Session["UserName"].ToString();
@@ -151,7 +166,14 @@ namespace CPSWebApplication.Controllers
                 return RedirectToAction("LogIn", "Account");
 
             }
-            return View();
+            CPSDraftToFinalManager mgr = new CPSDraftToFinalManager();
+            DesignCPSViewModel mdl = new DesignCPSViewModel();
+
+            List<CPS> listStudentCPSWork = mgr.getListOfAllDraftCPSGeneratedForAudit();
+            mdl.cpsList = listStudentCPSWork;
+            TempData["StudentList"] = listStudentCPSWork;
+
+            return View(mdl);
         }
         [HttpPost]
         public ActionResult AuditCPS(DesignCPSViewModel mdl)
@@ -166,6 +188,7 @@ namespace CPSWebApplication.Controllers
         public ActionResult FinalizeCPS()
         {
             string id;
+
             if (Session["UserID"] != null)
             {
                 id = Session["UserName"].ToString();
@@ -173,8 +196,16 @@ namespace CPSWebApplication.Controllers
             else
             {
                 return RedirectToAction("LogIn", "Account");
+
             }
-            return View();
+            CPSDraftToFinalManager mgr = new CPSDraftToFinalManager();
+            DesignCPSViewModel mdl = new DesignCPSViewModel();
+
+            List<CPS> listStudentCPSWork = mgr.getListOfAllFinalCPSGeneratedToView();
+            mdl.cpsList = listStudentCPSWork;
+            TempData["StudentList"] = listStudentCPSWork;
+
+            return View(mdl);
         }
 
         [HttpPost]
