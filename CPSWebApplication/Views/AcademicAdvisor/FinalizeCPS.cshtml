@@ -4,18 +4,60 @@
     ViewBag.Title = "FinalizeCPS";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
 @using (Html.BeginForm("FinalizeCPS", "AcademicAdvisor", FormMethod.Post))
 {
-
     <div class="form-group">
         @Html.LabelFor(model => model.searchId, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.searchId, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.EditorFor(model => model.searchId, new { htmlAttributes = new { @class = "form-control", @id = "myInput" } })
             @Html.ValidationMessageFor(model => model.searchId, "", new { @class = "text-danger" })
-            <br />
-            <button type="submit" name="action" value="ProcessForm1" class="btn btn-info" onclick="window.location = ('@Url.Action("FinalizeCPSView","AcademicAdvisor")')">Submit </button>
-            <br />
+
         </div>
     </div>
+    <br>
+    <table class="table">
+        <tr>
+            <th>
+                StudentID
+            </th>
+            <th>
+                FirstName
+            </th>
+            <th>
+                LastName
+            </th>
+
+        </tr>
+
+        @for (int i = 0; i < Model.cpsList.Count(); i++)
+        {
+            <tbody id="myTable">
+                <tr>
+
+                    <td>@Model.cpsList[i].StudentID </td>
+                    <td>@Model.cpsList[i].FirstName </td>
+                    <td>@Model.cpsList[i].LastName</td>
+
+                    <td>
+                        @Html.ActionLink("Final CPS", "FinalizeCPSView", "AcademicAdvisor", new { id = Model.cpsList[i].StudentID }, null)
+                    </td>
+
+                </tr>
+            </tbody>
+        }
+    </table>
+    <script>
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+    </script>
 }
