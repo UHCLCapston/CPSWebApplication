@@ -382,7 +382,7 @@ namespace CPSWebApplication.Models.EntityManager
         public List<StudentDetails> getListOfAllStudentToDesignCPS()
         {
             UserManager mgr = new UserManager();
-\            using (CPSCreationEntities db = new CPSCreationEntities())
+          using (CPSCreationEntities db = new CPSCreationEntities())
             {
                 var results = db.StudentDetails.Select(p => new ViewModel.StudentDetails
                 {
