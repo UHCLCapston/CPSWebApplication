@@ -10,6 +10,8 @@
 
 @using (Html.BeginForm("AuditCPS", "AcademicAdvisor", FormMethod.Post))
 {
+    if (TempData["Message"] != null)
+    {<div class="alert alert-dismissable alert-success">@TempData["Message"]</div>}
 
     <div class="form-group">
         @Html.LabelFor(model => model.searchId, htmlAttributes: new { @class = "control-label col-md-2" })
