@@ -8,15 +8,13 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 
-@if (TempData["Message"] != null)
-{<div style="color: #1e83ca;">@TempData["Message"]</div>}
-
-@using (Html.BeginForm())
+@using (Html.BeginForm("AuditCPS", "AcademicAdvisor", FormMethod.Post))
 {
+
     <div class="form-group">
         @Html.LabelFor(model => model.searchId, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.searchId, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.EditorFor(model => model.searchId, new { htmlAttributes = new { @class = "form-control", @id = "myInput" } })
             @Html.ValidationMessageFor(model => model.searchId, "", new { @class = "text-danger" })
         </div>
     </div>

@@ -14,7 +14,6 @@ namespace CPSWebApplication.Controllers
         public ActionResult DesignCPS()
         {
             string id;
-
             if (Session["UserID"] != null)
             {
                 id = Session["UserName"].ToString();
@@ -48,7 +47,6 @@ namespace CPSWebApplication.Controllers
         public ActionResult GenerateCPS()
         {
             string id;
-
             if (Session["UserID"] != null)
             {
                 id = Session["UserName"].ToString();
@@ -156,7 +154,6 @@ namespace CPSWebApplication.Controllers
         public ActionResult AuditCPS()
         {
             string id;
-
             if (Session["UserID"] != null)
             {
                 id = Session["UserName"].ToString();
@@ -188,7 +185,6 @@ namespace CPSWebApplication.Controllers
         public ActionResult FinalizeCPS()
         {
             string id;
-
             if (Session["UserID"] != null)
             {
                 id = Session["UserName"].ToString();
