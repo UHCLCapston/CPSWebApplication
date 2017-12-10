@@ -33,33 +33,53 @@ namespace CPSWebApplication.Controllers
         [HttpGet]
         public ActionResult ViewDraftCPS()
         {
-            string id;
+            string uname;
+            string uid;
             if (Session["UserID"] != null)
             {
-                id = Session["UserID"].ToString();
+                uname = Session["UserName"].ToString();
+                uid = Session["UserID"].ToString();
             }
             else {
                 return RedirectToAction("LogIn", "Account");
             }
-            id = Session["UserID"].ToString();
             CPSDraftToFinalManager mgr = new CPSDraftToFinalManager();
-            DesignCPSViewModel vm = mgr.getModelForGenerateDraftCPS(id);
-            return View(vm);
+            DesignCPSViewModel vm = mgr.getAlreadyCreatedDraftCPSToShow(uid);
+            if ((vm.FinalizeCPSAllow == null && vm.FinalizeCPSAllow.Equals("No")) || (vm.FinalizeCPSAllow != null && vm.FinalizeCPSAllow.Equals("Yes")))
+            {
+                return View(vm);
+            }
+            else
+            {
+                TempData["Message"] = "Draft CPS is not Ready for " + uname + ".";
+                return RedirectToAction("Student", "Home", new { id = Convert.ToInt32(uid) });
+            }
         }
 
         public ActionResult ViewfinalCPS()
         {
-            string id;
+            string uname;
+            string uid;
             if (Session["UserID"] != null)
             {
-                id = Session["UserName"].ToString();
+                uname = Session["UserName"].ToString();
+                uid = Session["UserID"].ToString();
             }
             else
             {
                 return RedirectToAction("LogIn", "Account");
-
             }
-            return View();
+            CPSDraftToFinalManager mgr = new CPSDraftToFinalManager();
+            DesignCPSViewModel vm = mgr.getAlreadyCreatedDraftCPSToShow(uid);
+            if (vm.FinalizeCPSAllow != null && vm.FinalizeCPSAllow.Equals("Yes"))
+            {
+                return View(vm);
+            }
+            else
+            {
+                TempData["Message"] = "Final CPS is not Ready for " + uname + ".";
+                return RedirectToAction("Student", "Home", new { id = Convert.ToInt32(uid) });
+            }
         }
 
     }
