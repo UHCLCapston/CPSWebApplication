@@ -10,6 +10,8 @@
 {  
     <br/>
     <br/>
+    if (TempData["Message"] != null)
+    {<div style="color: #1e83ca;">@TempData["Message"]</div>}
     <fieldset>
         <legend style="color:blue; text-align:Left">Please, use your UHCL email credentials to login</legend>
         @Html.AntiForgeryToken()     

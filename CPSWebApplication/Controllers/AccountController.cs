@@ -77,9 +77,12 @@ namespace CPSWebApplication.Controllers
         }
 
         [HttpPost]
-        public ActionResult forgotPassword(UserModel user)
+        public ActionResult forgotPassword(UserLoginView user)
         {
-            return View();
+            UserManager mgr = new UserManager();
+            mgr.updateUserDetails(user.UHCLEmail, user.confirmPassword);
+            TempData["Message"] = "Password updated successfully.";
+            return RedirectToAction("LogIn", "Account");
         }
 
         public ActionResult HomePage(int id)

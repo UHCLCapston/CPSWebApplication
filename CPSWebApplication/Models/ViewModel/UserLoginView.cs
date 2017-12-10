@@ -17,7 +17,6 @@ namespace CPSWebApplication.Models.ViewModel
         [DataType(DataType.Password)]
         public string UHCLEmailPassword { get; set; }
 
-        [Required(ErrorMessage = "*")]
         [Display(Name = "Confirm Password")]
         [DataType(DataType.Password)]
         public string confirmPassword { get; set; }
