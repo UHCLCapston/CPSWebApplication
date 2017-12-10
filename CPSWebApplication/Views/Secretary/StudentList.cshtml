@@ -9,6 +9,9 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <h3>List of students</h3>
+ @if (TempData["Message"] != null)
+    {<div style="color: white;" class="alert alert-dismissable alert-warning" >@TempData["Message"]</div>}
+
 <input class="form-control" id="myInput" type="text" placeholder="Search..">
 <br>
 

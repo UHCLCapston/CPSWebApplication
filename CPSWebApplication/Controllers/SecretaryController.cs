@@ -28,10 +28,7 @@ namespace CPSWebApplication.Controllers
         {
             bool flag = false;
             string studentId = id.ToString();
-
-            CPSDraftToFinalManager mgr = new CPSDraftToFinalManager();
-            DesignCPSViewModel vm = mgr.getModelForGenerateDraftCPS(studentId);
-
+            int userId = Convert.ToInt32(Session["UserID"].ToString());
             if (Session["UserID"] != null)
             {
                 flag = true;
@@ -39,10 +36,19 @@ namespace CPSWebApplication.Controllers
             else
             {
                 return RedirectToAction("LogIn", "Account");
-
             }
-
-            return View(vm);
+            CPSDraftToFinalManager mgr = new CPSDraftToFinalManager();
+            DesignCPSViewModel vm = mgr.getAlreadyCreatedDraftCPSToShow(studentId);
+            if (vm.FinalizeCPSAllow != null && vm.FinalizeCPSAllow.Equals("Yes"))
+            {
+                return View(vm);
+            }
+            else
+            {
+                TempData["Message"] = "Final CPS is not Ready for " + studentId +". Search For another Student.";
+                return RedirectToAction("StudentList", "Secretary");
+            }
+            
         }
         [HttpPost]
         public ActionResult Details()
