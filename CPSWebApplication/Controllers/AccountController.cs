@@ -70,6 +70,17 @@ namespace CPSWebApplication.Controllers
             return View(uLV);
         }//
 
+        public ActionResult forgotPassword(string username)
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult forgotPassword(UserModel user)
+        {
+            return View();
+        }
+
         public ActionResult HomePage(int id)
         {
             UserManager userManager = new UserManager();

@@ -11,7 +11,6 @@ namespace CPSWebApplication.Models.EntityManager
 {
     public class UserManager
     {
-
         public bool IsLoginUserExist(string username)
         {
             using(EserviceDBEntities db = new EserviceDBEntities())
@@ -20,7 +19,6 @@ namespace CPSWebApplication.Models.EntityManager
                 return db.APPUsers.Where(o => o.UHCLEmail.Equals(username)).Any();
             }
         }
-
         public string getUserRole (string username)
         {
             using (EserviceDBEntities db = new EserviceDBEntities())
@@ -72,7 +70,6 @@ namespace CPSWebApplication.Models.EntityManager
                     return String.Empty;
             }
         }
-
         public string GetUserFullNamebyId(int id)
         {
             using (EserviceDBEntities db = new EserviceDBEntities())
@@ -98,7 +95,6 @@ namespace CPSWebApplication.Models.EntityManager
                     return String.Empty;
             }
         }
-
         public int GetUserUHCLID(string username)
         {
             using (EserviceDBEntities db = new EserviceDBEntities())
@@ -112,7 +108,6 @@ namespace CPSWebApplication.Models.EntityManager
                     return 0;
             }
         }
-
         public UserModel GetUserNameByID(int uid)
         {
             using (EserviceDBEntities db = new EserviceDBEntities())
@@ -127,9 +122,6 @@ namespace CPSWebApplication.Models.EntityManager
                     return null;
             }
         }
-
-
-
         public string GetFacultyNameByID(string id)
         {
             using (CPSCreationEntities db = new CPSCreationEntities())
@@ -143,8 +135,6 @@ namespace CPSWebApplication.Models.EntityManager
                     return null;
             }
         }
-
-
         public string getUserPassword(string username)
         {
             using (EserviceDBEntities db = new EserviceDBEntities())
@@ -161,6 +151,41 @@ namespace CPSWebApplication.Models.EntityManager
 
             }   //end of using
         }
+
+        public string updateUserDetails(string username, string newPassword)
+        {
+            using (EserviceDBEntities db = new EserviceDBEntities())
+            {
+                var user = db.APPUsers.Where(o => o.UHCLEmail.ToLower().Equals(username)).FirstOrDefault();
+                if (user != null)
+                {
+                    user.UHCLEmail = username;
+                    user.UHCLEmailPassword = newPassword;                  
+                    db.SaveChanges();
+                }
+                else
+                {
+                    return "fails";
+                }
+
+                var userProfile = db.APPUserProfiles.Where(o => o.UHCLEmail.ToLower().Equals(username)).FirstOrDefault();
+                if (userProfile != null)
+                {
+                    userProfile.UHCLEmail = username;
+                    userProfile.UHCLEmailPassword = newPassword;
+                    db.SaveChanges();
+                    return "success";
+                }
+                else
+                {
+                    return "fails";
+                }
+            }
+
+        }
+
+
+
     }
 }
 

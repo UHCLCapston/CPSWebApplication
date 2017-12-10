@@ -631,6 +631,7 @@
     <Content Include="Views\Student\ViewDraftCPS.cshtml" />
     <Content Include="Views\AuditCPS\MakeAuditCPS.cshtml" />
     <Content Include="Views\AcademicAdvisor\FinalizeCPSView.cshtml" />
+    <Content Include="Views\Account\forgotPassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
