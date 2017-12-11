@@ -59,9 +59,9 @@
             </tr>
         </tbody>
     </table>
-     
-     if (Model.FoundationClassesList.Count > 0)
-       {
+
+    if (Model.FoundationClassesList.Count > 0)
+    {
           <div class="form-group">
              
              <table id="cphMainContent_dgvUsers" class="table table-hover table-striped"
@@ -76,9 +76,9 @@
                     <th scope="col">Grade</th>
                 </tr>
                 @if (Model.FoundationClassesList.Count > 0)
+                {
+                    for (int i = 0; i < Model.FoundationClassesList.Count(); i++)
                     {
-                        for (int i = 0; i < Model.FoundationClassesList.Count(); i++)
-                        {
                         <tr class="cursor-pointer">
                             <td>@Model.FoundationClassesList[i].CourseShortName</td>
                             <td>@Model.FoundationClassesList[i].CourseFullName</td>
@@ -90,7 +90,7 @@
                 }
                  <tr><th class="h4">Core Courses:</th></tr>
                  @for (int i = 0; i < Model.CoreClassesList.Count(); i++)
-                    {
+                 {
                      <tr class="cursor-pointer">
                          <td>@Model.CoreClassesList[i].CourseShortName </td>
                          <td>@Model.CoreClassesList[i].CourseFullName</td>
@@ -102,9 +102,35 @@
                   </tbody>
                </table>
            </div>
-        }
+    }
+    else {   <div class="form-group">
 
-       
+        <table id="cphMainContent_dgvUsers" class="table table-hover table-striped"
+               cellspacing="0" style="border-collapse:collapse;">
+            <tbody>
+                <tr><th class="h4">Core Courses:</th></tr>
+                <tr>
+                    <th scope="col">Course</th>
+                    <th scope="col">Course Name</th>
+                    <th scope="col">Credits</th>
+                    <th scope="col">Enrolling Semester</th>
+                    <th scope="col">Grade</th>
+                </tr>
+               
+                @for (int i = 0; i < Model.CoreClassesList.Count(); i++)
+                {
+                    <tr class="cursor-pointer">
+                        <td>@Model.CoreClassesList[i].CourseShortName </td>
+                        <td>@Model.CoreClassesList[i].CourseFullName</td>
+                        <td>@Model.CoreClassesList[i].CreditHrs</td>
+                        <td>@Model.CoreClassesList[i].EnrolledSemester</td>
+                        <td>@Model.CoreClassesList[i].GradesRecieved</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    }
         <div>
             <h4>Elective Courses:</h4>
             <div class="form-group" >
