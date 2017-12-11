@@ -122,19 +122,20 @@
                 <table>
                     <tbody>
                         <tr>
-                            <td style="padding-right:5em; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif" >
+                            <td style="padding-right:2em; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">
                                 @Html.LabelFor(model => model.programCompletionOption):
                             </td>
-                            <td style="padding-right:5em;">
+                            <td style="padding-right:2em">
                                 @Model.programCompletionOption
                             </td>
-                            @if(Model.SpecializationType !=null){
-                            <td style="padding-right:5em; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">
-                                Specialiazation Under:
-                            </td>
-                            <td>
-                                @Model.SpecializationType
-                            </td>
+                            @if (Model.SpecializationType != null)
+                            {
+                                <td style="padding-right:2em; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">
+                                    Specialization Under:
+                                </td>
+                                <td>
+                                    @Model.SpecializationType
+                                </td>
                             }
                         </tr>
                     </tbody>
