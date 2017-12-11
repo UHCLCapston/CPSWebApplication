@@ -9,87 +9,109 @@
 @using (Html.BeginForm())
 {  
     <br/>
-    <br/>
+  
     if (TempData["Message"] != null)
     {<div class="alert alert-dismissable alert-success">@TempData["Message"]</div>}
     <fieldset>
-        <legend style="color:blue; text-align:Left">Please, use your UHCL email credentials to login</legend>
-        @Html.AntiForgeryToken()     
-        <div class="form-horizontal" style="background-color:blue">
-            <br/>
-            <table class="table table-hover table-striped chartreuse"
-               cellspacing="10" style="border:1px solid lightgrey;background-color:chartreuse; align-content:inherit">
+        <legend style="color: #06b759 ; text-align:Left">Please, use your UHCL email credentials to log in</legend>
+        @Html.AntiForgeryToken()
+        <div class="form-horizontal" style="background-color:#0a67b0">
+            <br />
+            <table class="table table-hover table-striped "
+                   cellspacing="10" style="border:1px solid lightgrey; align-content:inherit">
                 <tbody>
                     <tr>
-                        <td style="background-color:chartreuse">
-                            <table style="background-color:chartreuse">
+                        <td>
+                            <table>
                                 <tbody>
                                     <tr>
                                         <td class="col-md-20" style="padding-left:2px;padding-top:5px; color:black">
                                             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                                             @Html.LabelFor(model => model.UHCLEmail, htmlAttributes: new { @class = "control-label col-md-20" })
-                                          </td>
-                                          <td class="col-md-20" style="padding-left:4px; padding-top:5px;color:black">
+                                        </td>
+                                        <td class="col-md-20" style="padding-left:4px; padding-top:5px;color:black">
                                             @Html.EditorFor(model => model.UHCLEmail, new { htmlAttributes = new { @class = "form-control" } })
                                             @Html.ValidationMessageFor(model => model.UHCLEmail, "", new { @class = "text-danger" })
                                         </td>
-                                        <tr/>
-                                        <tr>
-                                            <td class="col-md-20" style="padding-Left:2px;padding-top:5px;padding-bottom:5px; color:black">
-                                                @Html.LabelFor(model => model.UHCLEmailPassword, htmlAttributes: new { @class = "control-label col-md-20" })
-                                            </td>
-                                            <td class="col-md-20" style="padding-Left:4px; padding-top:5px; padding-bottom:5px; color:black">
-                                                @Html.EditorFor(model => model.UHCLEmailPassword, new { htmlAttributes = new { @class = "form-control" } })
-                                                @Html.ValidationMessageFor(model => model.UHCLEmailPassword, "", new { @class = "text-danger" })
-                                            </td>
+                                    <tr />
+                                    <tr>
+                                        <td class="col-md-20" style="padding-Left:2px;padding-top:5px;padding-bottom:5px; color:black">
+                                            @Html.LabelFor(model => model.UHCLEmailPassword, htmlAttributes: new { @class = "control-label col-md-20" })
+                                        </td>
+                                        <td class="col-md-20" style="padding-Left:4px; padding-top:5px; padding-bottom:5px; color:black">
+                                            @Html.EditorFor(model => model.UHCLEmailPassword, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.UHCLEmailPassword, "", new { @class = "text-danger" })
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td style="padding-left:30px; padding-top:20px; padding-bottom:2px">
-                                            <div class="form-group" >
+                                            <div class="form-group">
                                                 <div class="col-md-offset-2 col-md-20">
                                                     <input type="submit" value="Log In" class="btn btn-primary" onclick="window.location =('@Url.Action("Welcome","Home")')">
                                                 </div>
-                                            </div>    
+                                            </div>
                                         </td>
                                         <td style="padding-left:30px; padding-top:20px; padding-bottom:2px">
                                             <div class="form-group">
                                                 <div class="col-md-offset-2 col-md-20">
-                                                    <button type="button" class="btn btn-danger" onclick="window.location = ('@Url.Action("forgotPassword","Account")')">Forgot Password</button>
+                                                    <button type="button" class="btn btn-link" onclick="window.location = ('@Url.Action("forgotPassword","Account")')">Forgot Password?</button>
                                                 </div>
                                             </div>
                                         </td>
                                     </tr>
                                 </tbody>
                             </table>
-                          <!--  @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.UHCLEmail, htmlAttributes: new { @class = "control-label col-md-2" })
-                                <div class="col-md-20">
-                                    @Html.EditorFor(model => model.UHCLEmail, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.UHCLEmail, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.UHCLEmailPassword, htmlAttributes: new { @class = "control-label col-md-2" })
-                                <div class="col-md-20">
-                                    @Html.EditorFor(model => model.UHCLEmailPassword, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.UHCLEmailPassword, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-md-offset-2 col-md-20">
-                                    <input type="submit" value="Log In" class="btn btn-default" onclick="window.location =('@Url.Action("Welcome","Home")')">
-                                </div>
-                            </div>  -->                         
                         </td>
-                        <td style="background-color:chartreuse">
-                            <div class="item" style="align-content:inherit" >
-                                <img src="https://www.uhcl.edu/images/student-advisor.jpg" style="height:250px; width:inherit">
-                            </div>                        </td>
+                        <td>
+                            <div class="container-fluid">
+                                <!--<h2>Carousel Example</h2>-->
+                                <div id="myCarousel" class="carousel slide " data-ride="carousel">
+                                    <!-- Indicators -->
+                                    <ol class="carousel-indicators">
+                                        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                                        <li data-target="#myCarousel" data-slide-to="1"></li>
+                                        <li data-target="#myCarousel" data-slide-to="2"></li>
+
+                                    </ol>
+
+                                    <!-- Wrapper for slides -->
+                                    <div class="carousel-inner">
+                                        <!-- <div class="item active">
+                                             <img src="https://www.uhcl.edu/images/student-advisor.jpg" alt="Los Angeles" style="width:100%; height:100%;">
+                                         </div>-->
+
+                                        <div class="item active">
+                                            <img class="img-responsive" src="https://www.uhcl.edu/ldp/.private_ldp/a1587/production/master/f867f17b-0e6d-4613-85f5-1766984a14ee.jpg">
+                                        </div>
+
+                                        <div class="item">
+                                            <img class="img-responsive" src="https://www.uhcl.edu/ldp/.private_ldp/a1587/production/master/405ac576-d9e9-4b6f-8d07-ef92cc02f25e.jpg">
+                                        </div>
+                                        <div class="item">
+                                            <img class="img-responsive" src="https://www.uhcl.edu/ldp/.private_ldp/a1587/production/master/a852a19a-b9b6-4b53-96f3-cbf5254af344.jpg">
+                                        </div>
+
+                                    </div>
+
+                                    <!-- Left and right controls -->
+                                    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                                        <span class="glyphicon glyphicon-chevron-left"></span>
+                                        <span class="sr-only">Previous</span>
+                                    </a>
+                                    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                                        <span class="glyphicon glyphicon-chevron-right"></span>
+                                        <span class="sr-only">Next</span>
+                                    </a>
+                                </div>
+                            </div>
+                            <!-- <div class="item" style="align-content:inherit">
+                                 <img src="https://www.uhcl.edu/images/student-advisor.jpg" style="height:250px; width:inherit">
+                             </div>  -->
+                        </td>
                     </tr>
                 </tbody>
             </table>
-           
+
         </div>
-        </fieldset>
-  }
+    </fieldset>
+}

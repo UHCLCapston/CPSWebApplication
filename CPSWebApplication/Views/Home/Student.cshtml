@@ -4,12 +4,12 @@
     ViewBag.Title = "Student";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<h3 style="color:blue">Welcome to Student CPS Portal</h3>
+<h3 style="color: #06b759">Welcome to Student CPS Portal</h3>
 @if (TempData["Message"] != null)
     {<div class="alert alert-dismissable alert-info">@TempData["Message"]</div>}
 
-<div style="background-color:blue; align-content:inherit">
-    <div style="align-content:center; padding-top:20px; padding-bottom:20px ;padding-left:100px; background-color:chartreuse">
+<div style="background-color: #0a67b0; align-content:inherit">
+    <div style="align-content:center; padding-top:20px; padding-bottom:20px ;padding-left:50px;">
         <button type="button" class="btn btn-default" onclick="window.location = ('@Url.Action("ViewBlankCPS","Student")')"><img src="https://cdn2.iconfinder.com/data/icons/startup-management/325/Project_management_Lessons_Log-256.png" class="img-responsive" width="140" />View Blank CPS</button>
     
         &nbsp;&nbsp;<button type="button" class="btn btn-default" onclick="window.location = ('@Url.Action("ViewDraftCPS","Student")')"><img src="https://cdn2.iconfinder.com/data/icons/startup-management/325/Project_management_Project_Brief-256.png" class="img-responsive" width="140" />View Draft CPS</button>

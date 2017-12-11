@@ -11,7 +11,7 @@
 
 <h2>Generate Draft CPS</h2>
 @if (TempData["Message"] != null)
-{<div style="color: #1e83ca;">@TempData["Message"]</div>}
+{<div div class="alert alert-dismissable alert-success">@TempData["Message"]</div>}
 
 @using (Html.BeginForm("SaveGeneratedDraftCPS", "DraftCPS"))
 {
@@ -73,7 +73,7 @@
                     <tbody>
                         <tr>
                             <th scope="col">Course</th>
-                            <th scope="col">Long Title</th>
+                            <th scope="col">Course Name</th>
                             <th scope="col">Credits</th>
                             <th scope="col">Enrolling Semester</th>
                             <th scope="col">Grade</th>
@@ -257,7 +257,7 @@
                         <table class="table table-hover table-striped" cellspacing="0" style="border-collapse:collapse;">
                             <tbody>
                                 <tr>                                  
-                                    <th scope="col">Course Whole Name</th>
+                                    <th scope="col">Course Name</th>
                                     <th scope="col">Course Subject and Level</th>
                                     <th scope="col">Credits</th>
                                     <th scope="col">Enrolling Semester</th>
@@ -296,7 +296,7 @@
                         <table class="table table-hover table-striped" cellspacing="0" style="border-collapse:collapse;">
                             <tbody>
                                 <tr>
-                                    <th scope="col">Course Whole Name</th>
+                                    <th scope="col">Course Name</th>
                                     <th scope="col">Course Subject and Level</th>
                                     <th scope="col">Credits</th>
                                     <th scope="col">Enrolling Semester</th>
@@ -359,7 +359,7 @@
                         <table class="table table-hover table-striped" cellspacing="0" style="border-collapse:collapse;">
                             <tbody>
                                 <tr>
-                                    <th scope="col">Course Whole Name</th>
+                                    <th scope="col">Course Name</th>
                                     <th scope="col">CourseSubject And Level</th>
                                     <th scope="col">Credits</th>
                                     <th scope="col">EnrollingSemester</th>
@@ -399,7 +399,7 @@
                         <table class="table table-hover table-striped" cellspacing="0" style="border-collapse:collapse;">
                             <tbody>
                                 <tr>
-                                    <th scope="col">Course Whole Name</th>
+                                    <th scope="col">Course Name</th>
                                     <th scope="col">CourseSubject And Level</th>
                                     <th scope="col">Credits</th>
                                     <th scope="col">EnrollingSemester</th>
@@ -472,14 +472,14 @@
                 <br/>
                 <br/>
                 <br/>
+                <button name="action" value="back" type="submit" class="btn btn-default hidden-print" onclick="window.location = ('@Url.Action("","")')">Back To Home</button>
+                <button name="action" value="saveDraft" type="submit" formmethod="post" class="btn btn-success hidden-print" onclick="window.location = ('@Url.Action("Save","DraftCPS")')">Save</button>
 
-                <button name="action" value="saveDraft" type="submit" formmethod="post" class="btn btn-success" onclick="window.location = ('@Url.Action("Save","DraftCPS")')">Save</button>
+                <button name="action" value="save" type="submit" formmethod="post" class="btn btn-success hidden-print" onclick="window.location = ('@Url.Action("SaveGeneratedDraftCPS","DraftCPS")')">Submit</button>
 
-                <button name="action" value="save" type="submit" formmethod="post" class="btn btn-success" onclick="window.location = ('@Url.Action("SaveGeneratedDraftCPS","DraftCPS")')">Submit</button>
+                
 
-                <button name="action" value="back" type="submit" class="btn btn-success" onclick="window.location = ('@Url.Action("","")')">Back To Home</button>
-
-                <a href="javascript:window.print()" class="btn btn-success btn-lg">
+                <a href="javascript:window.print()" class="btn btn-info hidden-print ">
                     <span class="glyphicon glyphicon-print"></span> Print
                 </a>
   }

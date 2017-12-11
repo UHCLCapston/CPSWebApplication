@@ -12,7 +12,7 @@
 
 
 @if (TempData["Message"] != null)
-{<div style="color: #1e83ca;">@TempData["Message"]</div>}
+{<div div class="alert alert-dismissable alert-success">@TempData["Message"]</div>}
 
 @using (Html.BeginForm())
 {
@@ -27,13 +27,13 @@
         <table class="table">
             <tr>
                 <th>
-                    StudentID
+                    Student ID
                 </th>
                 <th>
-                    FirstName
+                    First Name
                 </th>
                 <th>
-                    LastName
+                    Last Name
                 </th>
 
             </tr>

@@ -16,7 +16,7 @@
                     @Html.LabelFor(model => model.academicYear, new { @class = "control-label col-md-20" })
                 </td>
                 <td>
-                    <div class="col-md-20">
+                    <div class="col-md-12">
                         @Html.TextBoxFor(model => model.academicYear, new { @class = "form-control", @readonly = "readonly" })
                     </div>
                 </td>
@@ -24,17 +24,19 @@
                     @Html.LabelFor(model => model.majorName, new { @class = "control-label col-md-20" })
                 </td>
                 <td>
-                    <div class="col-md-20">
+                    <div class="col-md-12">
                         @Html.TextBoxFor(model => model.majorName, new { @class = "form-control", @readonly = "readonly" })
                     </div>
                 </td>
+                <td></td>
+                <td></td>
             </tr>
             <tr>
                 <td>
                     @Html.LabelFor(model => model.lastName, new { @class = "control-label col-md-20" })
                 </td>
                 <td>
-                    <div class="col-md-20">
+                    <div class="col-md-12">
                         @Html.TextBoxFor(model => model.lastName, new { @class = "form-control", @readonly = "readonly" })
                     </div>
                 </td>
@@ -42,7 +44,7 @@
                     @Html.LabelFor(model => model.firstName, new { @class = "control-label col-md-20" })
                 </td>
                 <td>
-                    <div class="col-md-20">
+                    <div class="col-md-12">
                         @Html.TextBoxFor(model => model.firstName, new { @class = "form-control", @readonly = "readonly" })
                     </div>
                 </td>
@@ -50,7 +52,7 @@
                     @Html.LabelFor(model => model.searchId, new { @class = "control-label col-md-20" })
                 </td>
                 <td>
-                    <div class="col-md-20">
+                    <div class="col-md-12">
                         @Html.TextBoxFor(model => model.searchId, new { @class = "form-control", @readonly = "readonly" })
                     </div>
                 </td>
@@ -61,13 +63,14 @@
      if (Model.FoundationClassesList.Count > 0)
        {
           <div class="form-group">
-             <h4>Foundation Courses:</h4>
+             
              <table id="cphMainContent_dgvUsers" class="table table-hover table-striped"
                cellspacing="0" style="border-collapse:collapse;">
              <tbody>
+                 <tr><th class="h4">Foundation Courses:</th></tr>
                 <tr>
                     <th scope="col">Course</th>
-                    <th scope="col">Long Title</th>
+                    <th scope="col">Course Name</th>
                     <th scope="col">Credits</th>
                     <th scope="col">Enrolling Semester</th>
                     <th scope="col">Grade</th>
@@ -85,37 +88,23 @@
                         </tr>
                     }
                 }
+                 <tr><th class="h4">Core Courses:</th></tr>
+                 @for (int i = 0; i < Model.CoreClassesList.Count(); i++)
+                    {
+                     <tr class="cursor-pointer">
+                         <td>@Model.CoreClassesList[i].CourseShortName </td>
+                         <td>@Model.CoreClassesList[i].CourseFullName</td>
+                         <td>@Model.CoreClassesList[i].CreditHrs</td>
+                         <td>@Model.CoreClassesList[i].EnrolledSemester</td>
+                         <td>@Model.CoreClassesList[i].GradesRecieved</td>
+                     </tr>
+                 }
                   </tbody>
                </table>
            </div>
         }
 
-        <div>
-            <h4>Core Courses:</h4>
-            <table id="cphMainContent_dgvUsers" class="table table-hover table-striped"
-                   cellspacing="0" style="border-collapse:collapse;">
-                <tbody>
-                    <tr>
-                        <th scope="col">Course</th>
-                        <th scope="col">Long Title</th>
-                        <th scope="col">Credits</th>
-                        <th scope="col">Enrolling Semester</th>
-                        <th scope="col">Grade</th>
-                    </tr>
-                    @for (int i = 0; i < Model.CoreClassesList.Count(); i++)
-                    {
-                        <tr class="cursor-pointer">
-                            <td>@Model.CoreClassesList[i].CourseShortName </td>
-                            <td>@Model.CoreClassesList[i].CourseFullName</td>
-                            <td>@Model.CoreClassesList[i].CreditHrs</td>
-                            <td>@Model.CoreClassesList[i].EnrolledSemester</td>
-                            <td>@Model.CoreClassesList[i].GradesRecieved</td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-            <br/>
-        </div>
+       
         <div>
             <h4>Elective Courses:</h4>
             <div class="form-group" >
@@ -152,7 +141,7 @@
                         <tbody>
                             <tr>
                                 <th scope="col">Course</th>
-                                <th scope="col">Course Long Title</th>
+                                <th scope="col">Course Name</th>
                                 <th scope="col">Course Subject and Level</th>
                                 <th scope="col">Credit Hrs</th>
                                 <th scope="col">Enrolling Semester</th>
@@ -183,7 +172,7 @@
                         <tbody>
                             <tr>
                                 <th scope="col">Course</th>
-                                <th scope="col">Course Long Title</th>
+                                <th scope="col">Course Name</th>
                                 <th scope="col">Course Subject and Level</th>
                                 <th scope="col">Credit Hrs</th>
                                 <th scope="col">Enrolling Semester</th>
@@ -243,7 +232,7 @@
                         <tbody>
                             <tr>
                                 <th scope="col">Course</th>
-                                <th scope="col">Course Long Title</th>
+                                <th scope="col">Course Name</th>
                                 <th scope="col">Course Subject and Level</th>
                                 <th scope="col">Credit Hrs</th>
                                 <th scope="col">Enrolling Semester</th>
@@ -274,7 +263,7 @@
                         <tbody>
                             <tr>
                                 <th scope="col">Course</th>
-                                <th scope="col">Course Long Title</th>
+                                <th scope="col">Course Name</th>
                                 <th scope="col">Course Subject and Level</th>
                                 <th scope="col">Credit Hrs</th>
                                 <th scope="col">Enrolling Semester</th>
@@ -380,7 +369,7 @@
 
                 <br />
                 <button type="button" class="btn btn-default hidden-print" onclick="window.location = ('@Url.Action("AcademicAdvisor", "Home", new { id = Convert.ToInt32(@Session["UserID"]) })')">BACK TO HOME </button>
-                <a href="javascript:window.print()" class="btn btn-success hidden-print ">
+                <a href="javascript:window.print()" class="btn btn-info hidden-print ">
                     <span class="glyphicon glyphicon-print"></span> Print
                 </a>
 }

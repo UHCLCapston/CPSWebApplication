@@ -24,13 +24,13 @@
     <table class="table">
         <tr>
             <th>
-                StudentID
+                Student ID
             </th>
             <th>
-                FirstName
+                First Name
             </th>
             <th>
-                LastName
+                Last Name
             </th>
 
         </tr>
@@ -45,7 +45,7 @@
                     <td>@Model.cpsList[i].LastName</td>
 
                     <td>
-                        @Html.ActionLink("Aduit CPS", "MakeAuditCPS", "AuditCPS", new { id = Model.cpsList[i].StudentID }, null)
+                        @Html.ActionLink("Audit CPS", "MakeAuditCPS", "AuditCPS", new { id = Model.cpsList[i].StudentID }, null)
                     </td>
 
                 </tr>
