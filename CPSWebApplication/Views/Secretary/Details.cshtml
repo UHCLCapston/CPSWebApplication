@@ -334,25 +334,45 @@
             <table>
                 <tbody>
                     <tr>
-                        <td>
-                            @Html.LabelFor(model => model.assignedFaculty, new { @class = "control-label col-md-20" })
+                        <td style="padding-bottom:2em; padding-right:2em">
+                            @Html.LabelFor(model => model.assignedFaculty)
                         </td>
-                        <td>
+                        <td style="padding-bottom:2em;padding-right:2em">
                             @Html.TextBoxFor(model => model.assignedFaculty, new { @readonly = "readonly" })
+                        </td>
+                        <td style="padding-bottom:2em; padding-right:2em">
+                            @Html.LabelFor(model => model.FacultySignature)
+                        </td>
+                        <td style="padding-bottom:2em; padding-right:2em">
+                            @Html.TextBoxFor(model => model.FacultySignature)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding-bottom:2em; padding-right:2em">
+                            @Html.LabelFor(model => model.StudentName)
+                        </td>
+                        <td style="padding-bottom:2em;padding-right:2em ">
+                            @Html.TextBoxFor(model => model.StudentName)
+                        </td>
+                        <td style="padding-bottom:2em;padding-right:2em ">
+                            @Html.LabelFor(model => model.StudentSignature)
+                        </td>
+                        <td style="padding-bottom:2em;padding-right:2em ">
+                            @Html.TextBoxFor(model => model.StudentSignature)
                         </td>
                     </tr>
                     <tr>&nbsp;</tr>
                     <tr>
-                        <td>
-                            @Html.LabelFor(model => model.SignatureAcademicAdvisor, new { @class = "control-label col-md-20" })
+                        <td style="padding-bottom:2em;padding-right:2em ">
+                            @Html.LabelFor(model => model.SignatureAcademicAdvisor)
                         </td>
-                        <td>
+                        <td style="padding-bottom:2em;padding-right:2em ">
                             @Html.TextBoxFor(model => model.SignatureAcademicAdvisor, new { @readonly = "readonly" })
                         </td>
-                        <td>
-                            @Html.LabelFor(model => model.SignedDate, new { @class = "control-label col-md-20" })
+                        <td style="padding-bottom:2em;padding-right:2em ">
+                            @Html.LabelFor(model => model.SignedDate)
                         </td>
-                        <td>
+                        <td style="padding-bottom:2em;padding-right:2em ">
                             @Html.TextBoxFor(model => model.SignedDate, new { @readonly = "readonly" })
                         </td>
                     </tr>

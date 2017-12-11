@@ -119,6 +119,15 @@ namespace CPSWebApplication.Models.ViewModel
         public string SaveCPSAcademic { get; set; }
         public string FinalizeCPSAllow { get; set; }
         public List<StudentDetails> listNewStudent { get; set; }
+        [Display(Name = "Student Full Name")]
+        public string StudentName { get; set; }
+
+        [Display(Name = "Student Signature")]
+        public string StudentSignature { get; set; }
+
+        [Display(Name = "Faculty Signature")]
+        public string FacultySignature { get; set; }
+
         public DesignCPSViewModel()
         {
         }
