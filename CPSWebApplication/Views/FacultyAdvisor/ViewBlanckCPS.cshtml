@@ -41,7 +41,7 @@
                     <td>@Model.cpsList[i].LastName</td>
 
                     <td>
-                        @Html.ActionLink("View Initial CPS", "GenerateCPSView", "AcademicAdvisor", new { id = Model.cpsList[i].StudentID }, null)
+                        @Html.ActionLink("View Initial CPS", "GenerateBlanckCPSView", "FacultyAdvisor", new { id = Model.cpsList[i].StudentID }, null)
                     </td>
 
                 </tr>
