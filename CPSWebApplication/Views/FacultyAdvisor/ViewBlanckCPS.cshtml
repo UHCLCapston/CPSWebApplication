@@ -13,12 +13,50 @@
     <div class="form-group">
         @Html.LabelFor(model => model.searchId, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.searchId, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.EditorFor(model => model.searchId, new { htmlAttributes = new { @class = "form-control", @id = "myInput" } })
             @Html.ValidationMessageFor(model => model.searchId, "", new { @class = "text-danger" })
-            <br />
-            <button type="submit" name="action" value="ProcessForm1" class="btn btn-default" onclick="window.location = ('@Url.Action("GenerateBlanckCPSView","FacultyAdvisor")')">Submit </button>
-            <br />
         </div>
     </div>
+    <table class="table">
+        <tr>
+            <th>
+                StudentID
+            </th>
+            <th>
+                FirstName
+            </th>
+            <th>
+                LastName
+            </th>
+
+        </tr>
+
+        @for (int i = 0; i < Model.cpsList.Count(); i++)
+        {
+            <tbody id="myTable">
+                <tr>
+
+                    <td>@Model.cpsList[i].StudentID </td>
+                    <td>@Model.cpsList[i].FirstName </td>
+                    <td>@Model.cpsList[i].LastName</td>
+
+                    <td>
+                        @Html.ActionLink("View Initial CPS", "GenerateCPSView", "AcademicAdvisor", new { id = Model.cpsList[i].StudentID }, null)
+                    </td>
+
+                </tr>
+            </tbody>
+        }
+    </table>
+    <script>
+        $(document).ready(function () {
+            $("#myInput").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("#myTable tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
 }
 <!--<button type="button" class="btn btn-default" onclick="window.location = ('@Url.Action("Faculty", "Home", new { id = Convert.ToInt32(@Session["UserID"]) })')">BACK TO HOME </button>-->

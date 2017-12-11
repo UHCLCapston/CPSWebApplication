@@ -19,9 +19,6 @@
         <div class="col-md-10">
             @Html.EditorFor(model => model.searchId, new { htmlAttributes = new { @class = "form-control", @id = "myInput" } })
             @Html.ValidationMessageFor(model => model.searchId, "", new { @class = "text-danger" })
-            <br />
-            <button type="submit" class="btn btn-success form-inline" onclick="window.location = ('@Url.Action("", "")')">Submit </button>
-            <br />
     </div>
     </div>
     <br>
