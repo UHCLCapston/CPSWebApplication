@@ -7,42 +7,44 @@ https://github.com/jadhavKumudini/CPSWebApplication
 
 Database 1-
 SQL Server Name:
-dcm.uhcl.edu
-SQL Server Username:
-prakhyan
-SQL Server Password:
-1452186
-SQL Server Database Name:
+dcm.uhcl.edu 
+  SQL Server Username:
+prakhyan 
+
+  SQL Server Password:
+1452186 
+
+  SQL Server Database Name:
 c533317sp04prakhyan
 
 Database 2-
-SQL Server Name:
+  SQL Server Name:
 dcm.uhcl.edu
-SQL Server Username:
+  SQL Server Username:
 capf17gswen4
-SQL Server Password:
+  SQL Server Password:
 1411403
-SQL Server Database Name:
+  SQL Server Database Name:
 capf17gswen4
 
 Database 3-
-SQL Server Name:
+  SQL Server Name:
 dcm.uhcl.edu
-SQL Server Username:
+  SQL Server Username:
 capf17gswen41
-SQL Server Password:
+  SQL Server Password:
 5195583
-SQL Server Database Name:
+  SQL Server Database Name:
 capf17gswen41
 
 Database 4-
-SQL Server Name:
+  SQL Server Name:
 dcm.uhcl.edu
-SQL Server Username:
+  SQL Server Username:
 capf17gswen42
-SQL Server Password:
+  SQL Server Password:
 2186143
-SQL Server Database Name:
+  SQL Server Database Name:
 capf17gswen42
 
 3.	Once connection is completed. Open your solution explorer for project. Run the project on Google chrome browser. 
