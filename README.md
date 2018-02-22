@@ -51,3 +51,15 @@ capf17gswen42
                    
 Note: CPS web application already on dcm server. If you want to run application without source code, please use following URL.
 http://dcm.uhcl.edu/capf17gswen4
+Login for few users details:
+Academic Advisor Role -   
+LoginId: Richard@uhcl.edu
+Password: temp#
+Faculty Advisor Role -
+LoginId: findlerm@uhcl.edu
+Password: temp#
+Student Role -
+LoginId: jadhavk@uhcl.edu
+Password: temp#
+
+Note: You can find more user details through database for all user roles.
