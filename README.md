@@ -55,11 +55,13 @@ Login for few users details:
 Academic Advisor Role -   
 LoginId: Richard@uhcl.edu
 Password: temp#
+, 
 Faculty Advisor Role -
 LoginId: findlerm@uhcl.edu
 Password: temp#
+,
 Student Role -
 LoginId: jadhavk@uhcl.edu
 Password: temp#
-
+.
 Note: You can find more user details through database for all user roles.
